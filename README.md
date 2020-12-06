@@ -32,16 +32,16 @@ On on Linux you can install it via terminal:
 sudo apt-get update && sudo apt-get install -y build-essential libsdl2-dev
 ```
 
-### Install Eclipse CDT
-Download and install Eclipse CDT from  http://www.eclipse.org/cdt/
+### Install ~~Eclipse CDT~~ Jetbrains CLion
+Download and install Jetbrains CLion from https://www.jetbrains.com/clion/
 
 ### Import the PC simulator project
-1. Open Eclipse CDT
-2. Click **File->Import** and choose **General->Existing project into Workspace**
-3. Browse the root directory of the project and click Finish
+1. Open Jetbrains CLion
+2. Click **Open** from **Welcome to CLion** dialog
+3. Browse the root directory of the project and click **Ok**
 4. Build your project and run it
 
-## Docker
+## Docker (I don't know if this works yet)
 1. Build the docker container
 ```
 docker build -t lvgl_simulator .
