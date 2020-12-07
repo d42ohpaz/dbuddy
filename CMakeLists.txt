@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.17)
-project(obdii-copilot)
+project(obdii-copilot C)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)#C17
@@ -11,12 +11,16 @@ file(GLOB_RECURSE INCLUDES "lv_drivers/*.h" "lvgl/*.h"  "./*.h" )
 file(GLOB_RECURSE SOURCES  "lv_drivers/*.c" "lvgl/*.c" )
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
-set(MACOS_HOMEBREW_INCLUDE_PATH "/usr/local/include")
-set(MACOS_HOMEBREW_LIBRARY "/usr/local/lib")
 
 find_package(SDL2 REQUIRED)
-include_directories(${SDL2_INCLUDE_DIR} ${MACOS_HOMEBREW_INCLUDE_PATH})
+include_directories(${SDL2_INCLUDE_DIR} "/usr/local/include")
 
 add_executable(obdii-copilot main.c mouse_cursor_icon.c ${SOURCES} ${INCLUDES})
-target_link_libraries(obdii-copilot ${SDL2_LIBRARY} ${MACOS_HOMEBREW_LIBRARY}/libSDL2.dylib)
+
+if(APPLE)
+    target_link_libraries(obdii-copilot PRIVATE SDL2::SDL2)
+else()
+    target_link_libraries(obdii-copilot PRIVATE SDL2)
+endif()
+
 add_custom_target (run COMMAND ${EXECUTABLE_OUTPUT_PATH}/obdii-copilot)
