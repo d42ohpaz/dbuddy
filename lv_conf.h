@@ -379,37 +379,37 @@ typedef void * lv_indev_drv_user_data_t;            /*Type of user data in the i
 
 /* Montserrat fonts with bpp = 4
  * https://fonts.google.com/specimen/Montserrat  */
-#define LV_FONT_MONTSERRAT_8     0
-#define LV_FONT_MONTSERRAT_10    0
-#define LV_FONT_MONTSERRAT_12 1
-#define LV_FONT_MONTSERRAT_14 1
-#define LV_FONT_MONTSERRAT_16 1
-#define LV_FONT_MONTSERRAT_18 1
-#define LV_FONT_MONTSERRAT_20 1
-#define LV_FONT_MONTSERRAT_22 1
-#define LV_FONT_MONTSERRAT_24 1
-#define LV_FONT_MONTSERRAT_26 1
-#define LV_FONT_MONTSERRAT_28 1
-#define LV_FONT_MONTSERRAT_30 1
-#define LV_FONT_MONTSERRAT_32 1
-#define LV_FONT_MONTSERRAT_34 1
-#define LV_FONT_MONTSERRAT_36 1
-#define LV_FONT_MONTSERRAT_38 1
-#define LV_FONT_MONTSERRAT_40 1
-#define LV_FONT_MONTSERRAT_42 1
-#define LV_FONT_MONTSERRAT_44 1
-#define LV_FONT_MONTSERRAT_46 1
-#define LV_FONT_MONTSERRAT_48 1
+#define LV_FONT_MONTSERRAT_8 0
+#define LV_FONT_MONTSERRAT_10 0
+#define LV_FONT_MONTSERRAT_12 0
+#define LV_FONT_MONTSERRAT_14 0
+#define LV_FONT_MONTSERRAT_16 0
+#define LV_FONT_MONTSERRAT_18 0
+#define LV_FONT_MONTSERRAT_20 0
+#define LV_FONT_MONTSERRAT_22 0
+#define LV_FONT_MONTSERRAT_24 0
+#define LV_FONT_MONTSERRAT_26 0
+#define LV_FONT_MONTSERRAT_28 0
+#define LV_FONT_MONTSERRAT_30 0
+#define LV_FONT_MONTSERRAT_32 0
+#define LV_FONT_MONTSERRAT_34 0
+#define LV_FONT_MONTSERRAT_36 0
+#define LV_FONT_MONTSERRAT_38 0
+#define LV_FONT_MONTSERRAT_40 0
+#define LV_FONT_MONTSERRAT_42 0
+#define LV_FONT_MONTSERRAT_44 0
+#define LV_FONT_MONTSERRAT_46 0
+#define LV_FONT_MONTSERRAT_48 0
 
 /* Demonstrate special features */
-#define LV_FONT_MONTSERRAT_12_SUBPX 1
-#define LV_FONT_MONTSERRAT_28_COMPRESSED 1
-#define LV_FONT_DEJAVU_16_PERSIAN_HEBREW 1
-#define LV_FONT_SIMSUN_16_CJK 1
+#define LV_FONT_MONTSERRAT_12_SUBPX 0
+#define LV_FONT_MONTSERRAT_28_COMPRESSED 0
+#define LV_FONT_DEJAVU_16_PERSIAN_HEBREW 0
+#define LV_FONT_SIMSUN_16_CJK 0
 
 /*Pixel perfect monospace font
  * http://pelulamu.net/unscii/ */
-#define LV_FONT_UNSCII_8 1
+#define LV_FONT_UNSCII_8 0
 
 /* Optionally declare your custom fonts here.
  * You can use these fonts as default font too
@@ -503,10 +503,10 @@ typedef void * lv_font_user_data_t;
 #define LV_THEME_DEFAULT_COLOR_PRIMARY      lv_color_hex(0x01a2b1)
 #define LV_THEME_DEFAULT_COLOR_SECONDARY    lv_color_hex(0x44d1b6)
 #define LV_THEME_DEFAULT_FLAG               LV_THEME_MATERIAL_FLAG_DARK
-#define LV_THEME_DEFAULT_FONT_SMALL &lv_font_montserrat_12
-#define LV_THEME_DEFAULT_FONT_NORMAL &lv_font_montserrat_14
-#define LV_THEME_DEFAULT_FONT_SUBTITLE &lv_font_montserrat_16
-#define LV_THEME_DEFAULT_FONT_TITLE &lv_font_montserrat_18
+#define LV_THEME_DEFAULT_FONT_SMALL &roboto_regular_12
+#define LV_THEME_DEFAULT_FONT_NORMAL &roboto_regular_14
+#define LV_THEME_DEFAULT_FONT_SUBTITLE &roboto_regular_16
+#define LV_THEME_DEFAULT_FONT_TITLE &roboto_regular_18
 
 /*=================
  *  Text settings
