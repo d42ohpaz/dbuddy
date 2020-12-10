@@ -15,12 +15,16 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIR} "/usr/local/include")
 
-add_executable(dbuddy main.c hal.c hal.h assets/mouse_cursor_icon.c ${SOURCES} ${INCLUDES})
+add_executable( dbuddy
+                main.c
+                hal.c hal.h
+                assets/mouse_cursor_icon.c
+                ${SOURCES} ${INCLUDES})
 
-if(APPLE)
+if (APPLE)
     target_link_libraries(dbuddy PRIVATE SDL2::SDL2)
-else()
+else ()
     target_link_libraries(dbuddy PRIVATE SDL2)
-endif()
+endif ()
 
 add_custom_target(run COMMAND ${EXECUTABLE_OUTPUT_PATH}/dbuddy)
