@@ -19,6 +19,7 @@ add_executable( dbuddy
                 main.c
                 hal.c hal.h
                 assets/mouse_cursor_icon.c
+                assets/tft_background_art.c
                 assets/fonts/roboto_regular_10.c
                 assets/fonts/roboto_regular_12.c
                 assets/fonts/roboto_regular_14.c
