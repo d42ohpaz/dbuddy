@@ -15,7 +15,7 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIR} "/usr/local/include")
 
-add_executable(obdii-copilot main.c mouse_cursor_icon.c ${SOURCES} ${INCLUDES})
+add_executable(obdii-copilot main.c assets/mouse_cursor_icon.c ${SOURCES} ${INCLUDES})
 
 if(APPLE)
     target_link_libraries(obdii-copilot PRIVATE SDL2::SDL2)
