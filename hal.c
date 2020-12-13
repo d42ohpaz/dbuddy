@@ -14,7 +14,7 @@ static void memory_monitor(lv_task_t *param);
  * Initialize the Hardware Abstraction Layer (HAL) for the Littlev graphics
  * library
  */
-extern void hal_init(void) {
+void hal_init(void) {
   /* Use the 'monitor' driver which creates window on PC's monitor to simulate a display*/
   monitor_init();
 
