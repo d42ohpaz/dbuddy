@@ -18,6 +18,7 @@ include_directories(${SDL2_INCLUDE_DIR} "/usr/local/include")
 add_executable( dbuddy
                 main.c
                 hal.c hal.h
+                ui.c ui.h
                 assets/mouse_cursor_icon.c
                 assets/tft_background_art.c
                 assets/fonts/roboto_regular_10.c
