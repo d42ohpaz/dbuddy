@@ -425,7 +425,6 @@ typedef void * lv_indev_drv_user_data_t;            /*Type of user data in the i
                                 LV_FONT_DECLARE(roboto_regular_24) \
                                 LV_FONT_DECLARE(roboto_regular_48) \
                                 LV_FONT_DECLARE(roboto_regular_96) \
-                                LV_FONT_DECLARE(roboto_regular_120) \
                                 LV_FONT_DECLARE(roboto_light_10) \
                                 LV_FONT_DECLARE(roboto_light_12) \
                                 LV_FONT_DECLARE(roboto_light_14) \
@@ -434,7 +433,6 @@ typedef void * lv_indev_drv_user_data_t;            /*Type of user data in the i
                                 LV_FONT_DECLARE(roboto_light_24) \
                                 LV_FONT_DECLARE(roboto_light_48) \
                                 LV_FONT_DECLARE(roboto_light_96) \
-                                LV_FONT_DECLARE(roboto_light_120) \
                                 LV_FONT_DECLARE(roboto_black_10) \
                                 LV_FONT_DECLARE(roboto_black_12) \
                                 LV_FONT_DECLARE(roboto_black_14) \
@@ -442,8 +440,7 @@ typedef void * lv_indev_drv_user_data_t;            /*Type of user data in the i
                                 LV_FONT_DECLARE(roboto_black_18) \
                                 LV_FONT_DECLARE(roboto_black_24) \
                                 LV_FONT_DECLARE(roboto_black_48) \
-                                LV_FONT_DECLARE(roboto_black_96) \
-                                LV_FONT_DECLARE(roboto_black_120)
+                                LV_FONT_DECLARE(roboto_black_96)
 
 /* Enable it if you have fonts with a lot of characters.
  * The limit depends on the font size, font face and bpp

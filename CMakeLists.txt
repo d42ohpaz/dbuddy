@@ -28,7 +28,6 @@ add_executable( dbuddy
                 assets/fonts/roboto_regular_24.c
                 assets/fonts/roboto_regular_48.c
                 assets/fonts/roboto_regular_96.c
-                assets/fonts/roboto_regular_120.c
                 assets/fonts/roboto_light_10.c
                 assets/fonts/roboto_light_12.c
                 assets/fonts/roboto_light_14.c
@@ -37,7 +36,6 @@ add_executable( dbuddy
                 assets/fonts/roboto_light_24.c
                 assets/fonts/roboto_light_48.c
                 assets/fonts/roboto_light_96.c
-                assets/fonts/roboto_light_120.c
                 assets/fonts/roboto_black_10.c
                 assets/fonts/roboto_black_12.c
                 assets/fonts/roboto_black_14.c
@@ -46,7 +44,6 @@ add_executable( dbuddy
                 assets/fonts/roboto_black_24.c
                 assets/fonts/roboto_black_48.c
                 assets/fonts/roboto_black_96.c
-                assets/fonts/roboto_black_120.c
                 ${SOURCES} ${INCLUDES})
 
 if (APPLE)
