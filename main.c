@@ -19,12 +19,18 @@ int main(int argc, char **argv) {
     /*Initialize the UI*/
     ui_init();
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "EndlessLoop"
     while (true) {
         /* Periodically call the lv_task handler.
          * It could be done in a timer interrupt or an OS task too.*/
         lv_task_handler();
         usleep(1000);
     }
+#pragma clang diagnostic pop
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "UnreachableCode"
     return 0;
+#pragma clang diagnostic pop
 }
