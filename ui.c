@@ -1,5 +1,4 @@
 #include <time.h>
-#include "lvgl/lvgl.h"
 #include "ui.h"
 
 #define DEFAULT_PADDING 16
@@ -7,16 +6,6 @@
 
 LV_IMG_DECLARE(tft_background_art)
 static bool ui_initialized = false;
-
-typedef struct ui_date_labels_t {
-    lv_obj_t *month;
-    lv_obj_t *day;
-    lv_obj_t *year;
-
-    lv_obj_t *calendar;
-
-    lv_obj_t *parent;
-} ui_date_labels_t;
 
 void updateCalendarCb(lv_task_t *task);
 
@@ -34,35 +23,18 @@ static lv_style_t mdDayFont;
 static lv_style_t lgDayFont;
 static lv_style_t bgBlendMode;
 
-static lv_obj_t *scr;
-static lv_obj_t *page;
-static lv_obj_t *topLeftPage;
-static lv_obj_t *botLeftPage;
-static lv_obj_t *topLeftPageDay;
-static lv_obj_t *botLeftPageItinerary;
-static lv_obj_t *topLeftPageMonthLabel;
-static lv_obj_t *topLeftPageDayLabel;
-static lv_obj_t *topLeftPageYearLabel;
-static lv_obj_t *leftPage;
-static lv_obj_t *rightPage;
-static lv_obj_t *calendar;
+Ui * ui_init(void) {
+    static Ui ui;
 
-static ui_date_labels_t uiDateLabels = {
-        .day = NULL,
-        .month = NULL,
-        .year = NULL,
-        .calendar = NULL,
-        .parent = NULL
-};
-
-void ui_init(void) {
     if (ui_initialized) {
         LV_LOG_WARN("ui_init: already inited");
-        return;
+        return &ui;
     }
 
-    lv_disp_t *display = lv_disp_get_default();
-    lv_disp_set_bg_image(display, &tft_background_art);
+    ui.display = lv_disp_get_default();
+    ui.screen = lv_scr_act();
+
+    lv_disp_set_bg_image(ui.display, &tft_background_art);
 
     /**************************************************************************/
 
@@ -113,79 +85,78 @@ void ui_init(void) {
 
     /**************************************************************************/
 
-    scr = lv_scr_act();
-    lv_obj_add_style(scr, LV_OBJMASK_PART_MAIN, &transBackground);
+    lv_obj_add_style(ui.screen, LV_OBJMASK_PART_MAIN, &transBackground);
 
-    page = lv_page_create(scr, NULL);
-    lv_obj_set_size(page, LV_HOR_RES, LV_VER_RES);
-    lv_obj_set_click(page, false);
-    lv_obj_add_style(page, LV_PAGE_PART_BG, &nBorder);
-    lv_obj_add_style(page, LV_PAGE_PART_BG, &nPadding);
-    lv_obj_add_style(page, LV_PAGE_PART_BG, &transBackground);
+    ui.page.main = lv_page_create(ui.screen, NULL);
+    lv_obj_set_size(ui.page.main, LV_HOR_RES, LV_VER_RES);
+    lv_obj_set_click(ui.page.main, false);
+    lv_obj_add_style(ui.page.main, LV_PAGE_PART_BG, &nBorder);
+    lv_obj_add_style(ui.page.main, LV_PAGE_PART_BG, &nPadding);
+    lv_obj_add_style(ui.page.main, LV_PAGE_PART_BG, &transBackground);
 
-    leftPage = lv_obj_create(page, NULL);
-    lv_obj_set_size(leftPage, (LV_HOR_RES * 1 / 3), LV_VER_RES);
-    lv_obj_set_click(leftPage, false);
-    lv_obj_add_style(leftPage, LV_OBJ_PART_MAIN, &nBorder);
-    lv_obj_add_style(leftPage, LV_OBJ_PART_MAIN, &transBackground);
+    ui.page.left.main = lv_obj_create(ui.page.main, NULL);
+    lv_obj_set_size(ui.page.left.main, (LV_HOR_RES * 1 / 3), LV_VER_RES);
+    lv_obj_set_click(ui.page.left.main, false);
+    lv_obj_add_style(ui.page.left.main, LV_OBJ_PART_MAIN, &nBorder);
+    lv_obj_add_style(ui.page.left.main, LV_OBJ_PART_MAIN, &transBackground);
 
-    rightPage = lv_obj_create(page, leftPage);
-    lv_obj_set_click(rightPage, false);
-    lv_obj_set_size(rightPage, (LV_HOR_RES * 2 / 3), LV_VER_RES);
-    lv_obj_set_pos(rightPage, lv_obj_get_width(leftPage), 0);
-    lv_obj_add_style(rightPage, LV_PAGE_PART_BG, &padding);
+    ui.page.left.top.main = lv_page_create(ui.page.left.main, NULL);
+    lv_obj_set_click(ui.page.left.top.main, false);
+    lv_obj_set_size(ui.page.left.top.main, lv_obj_get_width(ui.page.left.main), lv_obj_get_width(ui.page.left.main) * 2 / 3);
+    lv_obj_add_style(ui.page.left.top.main, LV_STATE_DEFAULT, &nBorder);
+    lv_obj_add_style(ui.page.left.top.main, LV_PAGE_PART_BG, &transBackground);
+    lv_obj_add_style(ui.page.left.top.main, LV_PAGE_PART_BG, &padding);
 
-    topLeftPage = lv_page_create(leftPage, NULL);
-    lv_obj_set_click(topLeftPage, false);
-    lv_obj_set_size(topLeftPage, lv_obj_get_width(leftPage), lv_obj_get_width(leftPage) * 2 / 3);
-    lv_obj_add_style(topLeftPage, LV_STATE_DEFAULT, &nBorder);
-    lv_obj_add_style(topLeftPage, LV_PAGE_PART_BG, &transBackground);
-    lv_obj_add_style(topLeftPage, LV_PAGE_PART_BG, &padding);
+    ui.page.left.bottom.main = lv_page_create(ui.page.left.main, NULL);
+    lv_obj_set_click(ui.page.left.bottom.main, false);
+    lv_obj_set_pos(ui.page.left.bottom.main, 0, lv_obj_get_height(ui.page.left.top.main));
+    lv_obj_set_size(ui.page.left.bottom.main, lv_obj_get_width(ui.page.left.main), lv_obj_get_height(ui.page.left.main) - lv_obj_get_height(ui.page.left.top.main));
+    lv_obj_set_style_local_pad_top(ui.page.left.bottom.main, LV_PAGE_PART_BG, LV_STATE_DEFAULT, 0);
+    lv_obj_add_style(ui.page.left.bottom.main, LV_STATE_DEFAULT, &nBorder);
+    lv_obj_add_style(ui.page.left.bottom.main, LV_PAGE_PART_BG, &transBackground);
+    lv_obj_add_style(ui.page.left.bottom.main, LV_PAGE_PART_BG, &padding);
 
-    botLeftPage = lv_page_create(leftPage, NULL);
-    lv_obj_set_click(botLeftPage, false);
-    lv_obj_set_pos(botLeftPage, 0, lv_obj_get_height(topLeftPage));
-    lv_obj_set_size(botLeftPage, lv_obj_get_width(leftPage), lv_obj_get_height(leftPage) - lv_obj_get_height(topLeftPage));
-    lv_obj_set_style_local_pad_top(botLeftPage, LV_PAGE_PART_BG, LV_STATE_DEFAULT, 0);
-    lv_obj_add_style(botLeftPage, LV_STATE_DEFAULT, &nBorder);
-    lv_obj_add_style(botLeftPage, LV_PAGE_PART_BG, &transBackground);
-    lv_obj_add_style(botLeftPage, LV_PAGE_PART_BG, &padding);
+    ui.page.left.top.container = lv_obj_create(ui.page.left.top.main, NULL);
+    lv_obj_set_click(ui.page.left.top.container, false);
+    lv_obj_set_size(ui.page.left.top.container, lv_page_get_width_fit(ui.page.left.top.main), lv_page_get_height_fit(ui.page.left.top.main));
+    lv_obj_add_style(ui.page.left.top.container, LV_CALENDAR_PART_BG, &blkBackground);
+    lv_obj_add_style(ui.page.left.top.container, LV_PAGE_PART_BG, &bgBlendMode);
 
-    topLeftPageDay = lv_obj_create(topLeftPage, NULL);
-    lv_obj_set_click(topLeftPageDay, false);
-    lv_obj_set_size(topLeftPageDay, lv_page_get_width_fit(topLeftPage), lv_page_get_height_fit(topLeftPage));
-    lv_obj_add_style(topLeftPageDay, LV_CALENDAR_PART_BG, &blkBackground);
-    lv_obj_add_style(topLeftPageDay, LV_PAGE_PART_BG, &bgBlendMode);
+    ui.page.left.bottom.itinerary = lv_obj_create(ui.page.left.bottom.main, NULL);
+    lv_obj_set_click(ui.page.left.bottom.itinerary, false);
+    lv_obj_set_size(ui.page.left.bottom.itinerary, lv_page_get_width_fit(ui.page.left.bottom.main), lv_page_get_height_fit(ui.page.left.bottom.main));
+    lv_obj_add_style(ui.page.left.bottom.itinerary, LV_CALENDAR_PART_BG, &blkBackground);
+    lv_obj_add_style(ui.page.left.bottom.itinerary, LV_PAGE_PART_BG, &bgBlendMode);
 
-    botLeftPageItinerary = lv_obj_create(botLeftPage, NULL);
-    lv_obj_set_click(botLeftPageItinerary, false);
-    lv_obj_set_size(botLeftPageItinerary, lv_page_get_width_fit(botLeftPage), lv_page_get_height_fit(botLeftPage));
-    lv_obj_add_style(botLeftPageItinerary, LV_CALENDAR_PART_BG, &blkBackground);
-    lv_obj_add_style(botLeftPageItinerary, LV_PAGE_PART_BG, &bgBlendMode);
+    ui.page.left.top.label_day = lv_label_create(ui.page.left.top.container, NULL);
+    lv_label_set_text(ui.page.left.top.label_day, "");
+    lv_obj_add_style(ui.page.left.top.label_day, LV_LABEL_PART_MAIN, &lgDayFont);
 
-    /**************************************************************************/
+    ui.page.left.top.label_month = lv_label_create(ui.page.left.top.container, NULL);
+    lv_label_set_text(ui.page.left.top.label_month, "");
+    lv_obj_add_style(ui.page.left.top.label_month, LV_LABEL_PART_MAIN, &mdDayFont);
 
-    topLeftPageMonthLabel = lv_label_create(topLeftPageDay, NULL);
-    lv_label_set_text(topLeftPageMonthLabel, "");
-    lv_obj_add_style(topLeftPageMonthLabel, LV_LABEL_PART_MAIN, &mdDayFont);
+    ui.page.left.top.label_year = lv_label_create(ui.page.left.top.container, NULL);
+    lv_label_set_text(ui.page.left.top.label_year, "");
+    lv_obj_add_style(ui.page.left.top.label_year, LV_LABEL_PART_MAIN, &mdDayFont);
 
-    topLeftPageDayLabel = lv_label_create(topLeftPageDay, NULL);
-    lv_label_set_text(topLeftPageDayLabel, "");
-    lv_obj_add_style(topLeftPageDayLabel, LV_LABEL_PART_MAIN, &lgDayFont);
+    ui.page.right.main = lv_obj_create(ui.page.main, NULL);
+    lv_obj_set_click(ui.page.right.main, false);
+    lv_obj_set_size(ui.page.right.main, (LV_HOR_RES * 2 / 3), LV_VER_RES);
+    lv_obj_set_pos(ui.page.right.main, lv_obj_get_width(ui.page.left.main), 0);
+    lv_obj_add_style(ui.page.right.main, LV_PAGE_PART_BG, &padding);
+    lv_obj_add_style(ui.page.right.main, LV_OBJ_PART_MAIN, &nBorder);
+    lv_obj_add_style(ui.page.right.main, LV_OBJ_PART_MAIN, &transBackground);
 
-    topLeftPageYearLabel = lv_label_create(topLeftPageDay, NULL);
-    lv_label_set_text(topLeftPageYearLabel, "");
-    lv_obj_add_style(topLeftPageYearLabel, LV_LABEL_PART_MAIN, &mdDayFont);
-
-    calendar = lv_calendar_create(rightPage, NULL);
-    lv_obj_set_click(calendar, false);
-    lv_obj_set_size(calendar, lv_obj_get_width_fit(rightPage), lv_obj_get_height_fit(rightPage));
-    lv_obj_align(calendar, rightPage, LV_ALIGN_CENTER, 0, 0);
-    lv_obj_add_style(calendar, LV_CALENDAR_PART_BG, &blkBackground);
-    lv_obj_add_style(calendar, LV_CALENDAR_PART_BG, &bgBlendMode);
-    lv_obj_set_style_local_text_font(calendar, LV_CALENDAR_PART_HEADER, LV_STATE_DEFAULT, &roboto_black_24);
-    lv_obj_set_style_local_text_font(calendar, LV_CALENDAR_PART_DAY_NAMES, LV_STATE_DEFAULT, &roboto_black_16);
-    lv_obj_set_style_local_text_font(calendar, LV_CALENDAR_PART_BG, LV_STATE_DEFAULT, &roboto_regular_12);
+    ui.page.right.calendar = lv_calendar_create(ui.page.right.main, NULL);
+    lv_obj_set_click(ui.page.right.calendar, false);
+    lv_obj_set_size(ui.page.right.calendar, lv_obj_get_width_fit(ui.page.right.main), lv_obj_get_height_fit(ui.page.right.main));
+    lv_obj_align(ui.page.right.calendar, ui.page.right.main, LV_ALIGN_CENTER, 0, 0);
+    lv_obj_add_style(ui.page.right.calendar, LV_CALENDAR_PART_BG, &blkBackground);
+    lv_obj_add_style(ui.page.right.calendar, LV_CALENDAR_PART_BG, &bgBlendMode);
+    lv_obj_set_style_local_text_font(ui.page.right.calendar, LV_CALENDAR_PART_HEADER, LV_STATE_DEFAULT, &roboto_black_24);
+    lv_obj_set_style_local_text_font(ui.page.right.calendar, LV_CALENDAR_PART_DAY_NAMES, LV_STATE_DEFAULT, &roboto_black_16);
+    lv_obj_set_style_local_text_font(ui.page.right.calendar, LV_CALENDAR_PART_BG, LV_STATE_DEFAULT, &roboto_regular_12);
 
     static lv_calendar_date_t highlighted[3];
     highlighted[0].year = 2020;
@@ -200,25 +171,21 @@ void ui_init(void) {
     highlighted[2].month = 12;
     highlighted[2].day = 21;
 
-    lv_calendar_set_highlighted_dates(calendar, highlighted, sizeof(highlighted));
+    lv_calendar_set_highlighted_dates(ui.page.right.calendar, highlighted, sizeof(highlighted));
 
-    uiDateLabels.day = topLeftPageDayLabel;
-    uiDateLabels.month = topLeftPageMonthLabel;
-    uiDateLabels.year = topLeftPageYearLabel;
-    uiDateLabels.calendar = calendar;
-    uiDateLabels.parent = topLeftPageDay;
-
-    lv_task_create(updateCalendarCb, 750, LV_TASK_PRIO_HIGH, &uiDateLabels);
+    lv_task_create(updateCalendarCb, 750, LV_TASK_PRIO_HIGH, &ui);
 
     ui_initialized = true;
     LV_LOG_INFO("ui_init ready");
+
+    return &ui;
 }
 
 void updateCalendarCb(lv_task_t *task) {
     // https://docs.lvgl.io/latest/en/html/overview/task.html#create-a-task
     // Set up a "user_data" struct containing the labels (and shadows) for the
     // date stuff needing updating.
-    ui_date_labels_t *dateLabels = task->user_data;
+    Ui ui = *(Ui *)task->user_data;
 
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
@@ -232,14 +199,14 @@ void updateCalendarCb(lv_task_t *task) {
     today.day = tm.tm_mday;
     today.month = tm.tm_mon + 1;
 
-    lv_calendar_set_today_date(dateLabels->calendar, &today);
-    lv_calendar_set_showed_date(dateLabels->calendar, &today);
+    lv_calendar_set_today_date(ui.page.right.calendar, &today);
+    lv_calendar_set_showed_date(ui.page.right.calendar, &today);
 
-    lv_label_set_text_fmt(dateLabels->month, "%s", bufMonth);
-    lv_label_set_text_fmt(dateLabels->day, "%02d", tm.tm_mday);
-    lv_label_set_text_fmt(dateLabels->year, "%s", bufYear);
+    lv_label_set_text_fmt(ui.page.left.top.label_month, "%s", bufMonth);
+    lv_label_set_text_fmt(ui.page.left.top.label_day, "%02d", tm.tm_mday);
+    lv_label_set_text_fmt(ui.page.left.top.label_year, "%s", bufYear);
 
-    lv_obj_align(dateLabels->month, dateLabels->parent, LV_ALIGN_IN_TOP_MID, 0, DEFAULT_BORDER);
-    lv_obj_align(dateLabels->day, dateLabels->parent, LV_ALIGN_CENTER, 0, DEFAULT_BORDER);
-    lv_obj_align(dateLabels->year, dateLabels->parent, LV_ALIGN_IN_BOTTOM_MID, 0, 0);
+    lv_obj_align(ui.page.left.top.label_month, ui.page.left.top.container, LV_ALIGN_IN_TOP_MID, 0, DEFAULT_BORDER);
+    lv_obj_align(ui.page.left.top.label_day, ui.page.left.top.container, LV_ALIGN_CENTER, 0, DEFAULT_BORDER);
+    lv_obj_align(ui.page.left.top.label_year, ui.page.left.top.container, LV_ALIGN_IN_BOTTOM_MID, 0, 0);
 }
