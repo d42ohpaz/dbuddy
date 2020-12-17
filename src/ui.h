@@ -43,6 +43,8 @@ struct RightPageUi {
     lv_obj_t * main;
 
     lv_obj_t * calendar;
+
+    lv_calendar_date_t current;
 };
 
 struct PageUi {

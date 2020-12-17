@@ -11,6 +11,8 @@ void cb_update_calendar_day_task(lv_task_t *task);
 
 void update_calendar_day(Ui ui);
 
+static Ui * p_Ui = NULL;
+
 Ui *ui_init(void) {
     static Ui ui;
     static bool ui_initialized = false;
@@ -21,6 +23,9 @@ Ui *ui_init(void) {
     }
 
     styles_init();
+
+    p_Ui = lv_mem_alloc(sizeof(Ui));
+    p_Ui = &ui;
 
     ui.display = lv_disp_get_default();
     lv_disp_set_bg_image(ui.display, &tft_background_art);
@@ -114,7 +119,9 @@ void cb_calendar_event_handler(lv_obj_t *obj, lv_event_t event) {
         lv_calendar_date_t *date = lv_calendar_get_pressed_date(obj);
 
         if (date) {
-            printf("Clicked date: %02d.%02d.%d\n", date->day, date->month, date->year);
+            p_Ui->page.right.current.month = date->month;
+            p_Ui->page.right.current.day = date->day;
+            p_Ui->page.right.current.year = date->year;
         }
     }
 }
