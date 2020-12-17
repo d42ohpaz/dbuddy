@@ -1,13 +1,17 @@
+#include <stdio.h>
 #include <time.h>
 #include "ui.h"
 #include "styles.h"
 
 LV_IMG_DECLARE(tft_background_art)
 
+void cb_calendar_event_handler(lv_obj_t *obj, lv_event_t event);
+
 void cb_update_calendar_day_task(lv_task_t *task);
+
 void update_calendar_day(Ui ui);
 
-Ui * ui_init(void) {
+Ui *ui_init(void) {
     static Ui ui;
     static bool ui_initialized = false;
 
@@ -98,10 +102,22 @@ Ui * ui_init(void) {
     update_calendar_day(ui);
     lv_task_create(cb_update_calendar_day_task, 750, LV_TASK_PRIO_HIGH, &ui);
 
+    lv_obj_set_event_cb(ui.page.right.calendar, cb_calendar_event_handler);
+
     ui_initialized = true;
     LV_LOG_INFO("ui_init ready");
 
     return &ui;
+}
+
+void cb_calendar_event_handler(lv_obj_t *obj, lv_event_t event) {
+    if (event == LV_EVENT_CLICKED) {
+        lv_calendar_date_t *date = lv_calendar_get_pressed_date(obj);
+
+        if (date) {
+            printf("Clicked date: %02d.%02d.%d\n", date->day, date->month, date->year);
+        }
+    }
 }
 
 void cb_update_calendar_day_task(lv_task_t *task) {
