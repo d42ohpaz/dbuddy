@@ -95,6 +95,7 @@ Ui * ui_init(void) {
     lv_obj_set_style_local_text_font(ui.page.right.calendar, LV_CALENDAR_PART_DAY_NAMES, LV_STATE_DEFAULT, &roboto_black_16);
     lv_obj_set_style_local_text_font(ui.page.right.calendar, LV_CALENDAR_PART_BG, LV_STATE_DEFAULT, &roboto_regular_12);
 
+    update_calendar_day(ui);
     lv_task_create(cb_update_calendar_day_task, 750, LV_TASK_PRIO_HIGH, &ui);
 
     ui_initialized = true;
