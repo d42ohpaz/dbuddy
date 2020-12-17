@@ -3,8 +3,8 @@
 #include <unistd.h>
 
 #include "lvgl/lvgl.h"
-#include "hal.h"
-#include "ui.h"
+#include "src/hal.h"
+#include "src/ui.h"
 
 int main(int argc, char **argv) {
     (void) argc; /*Unused*/
