@@ -3,47 +3,61 @@
 
 #include "lvgl/lvgl.h"
 
-typedef struct {
+struct BottomLeftPageUi;
+struct LeftPageUi;
+struct PageUi;
+struct RightPageUi;
+struct TopLeftPageUi;
+struct Ui;
+
+typedef struct BottomLeftPageUi BottomLeftPageUi;
+typedef struct LeftPageUi LeftPageUi;
+typedef struct PageUi PageUi;
+typedef struct RightPageUi RightPageUi;
+typedef struct TopLeftPageUi TopLeftPageUi;
+typedef struct Ui Ui;
+
+struct TopLeftPageUi {
     lv_obj_t * main;
     lv_obj_t * container;
 
     lv_obj_t * label_day;
     lv_obj_t * label_month;
     lv_obj_t * label_year;
-} TopLeftPageUi;
+};
 
-typedef struct {
+struct BottomLeftPageUi {
     lv_obj_t * main;
 
     lv_obj_t * itinerary;
-} BottomLeftPageUi;
+};
 
-typedef struct {
+struct LeftPageUi {
     lv_obj_t * main;
 
     TopLeftPageUi top;
     BottomLeftPageUi bottom;
-} LeftPageUi;
+};
 
-typedef struct {
+struct RightPageUi {
     lv_obj_t * main;
 
     lv_obj_t * calendar;
-} RightPageUi;
+};
 
-typedef struct {
+struct PageUi {
     lv_obj_t * main;
 
     LeftPageUi left;
     RightPageUi right;
-} PageUi;
+};
 
-typedef struct {
+struct Ui {
     lv_disp_t * display;
     lv_obj_t * screen;
 
     PageUi page;
-} Ui;
+};
 
 Ui * ui_init(void);
 
