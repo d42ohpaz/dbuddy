@@ -94,21 +94,6 @@ Ui * ui_init(void) {
     lv_obj_set_style_local_text_font(ui.page.right.calendar, LV_CALENDAR_PART_DAY_NAMES, LV_STATE_DEFAULT, &roboto_black_16);
     lv_obj_set_style_local_text_font(ui.page.right.calendar, LV_CALENDAR_PART_BG, LV_STATE_DEFAULT, &roboto_regular_12);
 
-    static lv_calendar_date_t highlighted[3];
-    highlighted[0].year = 2020;
-    highlighted[0].month = 12;
-    highlighted[0].day = 25;
-
-    highlighted[1].year = 2020;
-    highlighted[1].month = 12;
-    highlighted[1].day = 24;
-
-    highlighted[2].year = 2020;
-    highlighted[2].month = 12;
-    highlighted[2].day = 21;
-
-    lv_calendar_set_highlighted_dates(ui.page.right.calendar, highlighted, sizeof(highlighted));
-
     lv_task_create(updateCalendarCb, 750, LV_TASK_PRIO_HIGH, &ui);
 
     ui_initialized = true;
