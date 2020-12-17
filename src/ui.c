@@ -5,6 +5,7 @@
 LV_IMG_DECLARE(tft_background_art)
 
 void cb_update_calendar_day_task(lv_task_t *task);
+void update_calendar_day(Ui ui);
 
 Ui * ui_init(void) {
     static Ui ui;
@@ -104,10 +105,10 @@ Ui * ui_init(void) {
 
 void cb_update_calendar_day_task(lv_task_t *task) {
     // https://docs.lvgl.io/latest/en/html/overview/task.html#create-a-task
-    // Set up a "user_data" struct containing the labels (and shadows) for the
-    // date stuff needing updating.
-    Ui ui = *(Ui *)task->user_data;
+    update_calendar_day(*(Ui *) task->user_data);
+}
 
+void update_calendar_day(Ui ui) {
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
     char bufMonth[4], bufYear[5];
