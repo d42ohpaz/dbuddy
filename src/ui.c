@@ -4,7 +4,7 @@
 
 LV_IMG_DECLARE(tft_background_art)
 
-void updateCalendarCb(lv_task_t *task);
+void cb_update_calendar_day_task(lv_task_t *task);
 
 Ui * ui_init(void) {
     static Ui ui;
@@ -94,7 +94,7 @@ Ui * ui_init(void) {
     lv_obj_set_style_local_text_font(ui.page.right.calendar, LV_CALENDAR_PART_DAY_NAMES, LV_STATE_DEFAULT, &roboto_black_16);
     lv_obj_set_style_local_text_font(ui.page.right.calendar, LV_CALENDAR_PART_BG, LV_STATE_DEFAULT, &roboto_regular_12);
 
-    lv_task_create(updateCalendarCb, 750, LV_TASK_PRIO_HIGH, &ui);
+    lv_task_create(cb_update_calendar_day_task, 750, LV_TASK_PRIO_HIGH, &ui);
 
     ui_initialized = true;
     LV_LOG_INFO("ui_init ready");
@@ -102,7 +102,7 @@ Ui * ui_init(void) {
     return &ui;
 }
 
-void updateCalendarCb(lv_task_t *task) {
+void cb_update_calendar_day_task(lv_task_t *task) {
     // https://docs.lvgl.io/latest/en/html/overview/task.html#create-a-task
     // Set up a "user_data" struct containing the labels (and shadows) for the
     // date stuff needing updating.
