@@ -7,46 +7,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include_directories(${PROJECT_SOURCE_DIR})
 
-file(GLOB_RECURSE INCLUDES "lv_drivers/*.h" "lvgl/*.h" "./*.h")
-file(GLOB_RECURSE SOURCES "lv_drivers/*.c" "lvgl/*.c")
+file(GLOB_RECURSE INCLUDES "lv_drivers/*.h" "lvgl/*.h" "assets/*.h" "src/*.h")
+file(GLOB_RECURSE SOURCES "lv_drivers/*.c" "lvgl/*.c" "assets/*.c" "src/*.c")
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIR} "/usr/local/include")
 
-add_executable( dbuddy
-                main.c
-                src/hal.c src/hal.h
-                src/ui.c src/ui.h
-                src/styles.c src/styles.h
-                assets/mouse_cursor_icon.c
-                assets/tft_background_art.c
-                assets/fonts/roboto_regular_10.c
-                assets/fonts/roboto_regular_12.c
-                assets/fonts/roboto_regular_14.c
-                assets/fonts/roboto_regular_16.c
-                assets/fonts/roboto_regular_18.c
-                assets/fonts/roboto_regular_24.c
-                assets/fonts/roboto_regular_48.c
-                assets/fonts/roboto_regular_96.c
-                assets/fonts/roboto_light_10.c
-                assets/fonts/roboto_light_12.c
-                assets/fonts/roboto_light_14.c
-                assets/fonts/roboto_light_16.c
-                assets/fonts/roboto_light_18.c
-                assets/fonts/roboto_light_24.c
-                assets/fonts/roboto_light_48.c
-                assets/fonts/roboto_light_96.c
-                assets/fonts/roboto_black_10.c
-                assets/fonts/roboto_black_12.c
-                assets/fonts/roboto_black_14.c
-                assets/fonts/roboto_black_16.c
-                assets/fonts/roboto_black_18.c
-                assets/fonts/roboto_black_24.c
-                assets/fonts/roboto_black_48.c
-                assets/fonts/roboto_black_96.c
-                ${SOURCES} ${INCLUDES})
+add_executable(dbuddy main.c ${SOURCES} ${INCLUDES})
 
 if (APPLE)
     target_link_libraries(dbuddy PRIVATE SDL2::SDL2)
