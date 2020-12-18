@@ -100,12 +100,13 @@ Ui *ui_init(void) {
     lv_obj_add_style(ui.page.right.calendar, LV_CALENDAR_PART_BG, &style_default_background_color_black);
     lv_obj_add_style(ui.page.right.calendar, LV_CALENDAR_PART_BG, &style_default_background_overlay_color_black);
     lv_obj_add_style(ui.page.right.calendar, LV_CALENDAR_PART_BG, &style_default_border_none);
+    lv_obj_add_style(ui.page.right.calendar, LV_CALENDAR_PART_DATE, &style_focused_background_blend_mode_additive);
+    lv_obj_add_style(ui.page.right.calendar, LV_CALENDAR_PART_DATE, &style_focused_background_color_purple);
+    lv_obj_add_style(ui.page.right.calendar, LV_CALENDAR_PART_DATE, &style_focused_text_color_black);
+
     lv_obj_set_style_local_text_font(ui.page.right.calendar, LV_CALENDAR_PART_HEADER, LV_STATE_DEFAULT, &roboto_black_24);
     lv_obj_set_style_local_text_font(ui.page.right.calendar, LV_CALENDAR_PART_DAY_NAMES, LV_STATE_DEFAULT, &roboto_black_16);
     lv_obj_set_style_local_text_font(ui.page.right.calendar, LV_CALENDAR_PART_BG, LV_STATE_DEFAULT, &roboto_regular_12);
-    lv_obj_set_style_local_bg_color(ui.page.right.calendar, LV_CALENDAR_PART_DATE, LV_STATE_FOCUSED, LV_COLOR_PURPLE);
-    lv_obj_set_style_local_text_color(ui.page.right.calendar, LV_CALENDAR_PART_DATE, LV_STATE_FOCUSED, LV_COLOR_BLACK);
-    lv_obj_set_style_local_bg_blend_mode(ui.page.right.calendar, LV_CALENDAR_PART_DATE, LV_STATE_FOCUSED, LV_BLEND_MODE_ADDITIVE);
 
     update_calendar_day(ui);
     lv_obj_set_event_cb(ui.page.right.calendar, cb_calendar_event_handler);

@@ -20,6 +20,10 @@ extern lv_style_t style_default_padding_default;
 extern lv_style_t style_default_padding_none;
 extern lv_style_t style_default_text_color_black;
 
+extern lv_style_t style_focused_background_blend_mode_additive;
+extern lv_style_t style_focused_background_color_purple;
+extern lv_style_t style_focused_text_color_black;
+
 void styles_init(void);
 
 #endif //DBUDDY_STYLES_H
