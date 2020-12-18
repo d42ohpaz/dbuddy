@@ -7,8 +7,6 @@ LV_IMG_DECLARE(tft_background_art)
 
 void cb_calendar_event_handler(lv_obj_t *obj, lv_event_t event);
 
-void cb_update_calendar_day_task(lv_task_t *task);
-
 void update_calendar_day(Ui ui);
 
 static Ui * p_Ui = NULL;
@@ -104,8 +102,6 @@ Ui *ui_init(void) {
     lv_obj_set_style_local_text_font(ui.page.right.calendar, LV_CALENDAR_PART_BG, LV_STATE_DEFAULT, &roboto_regular_12);
 
     update_calendar_day(ui);
-    lv_task_create(cb_update_calendar_day_task, 750, LV_TASK_PRIO_HIGH, &ui);
-
     lv_obj_set_event_cb(ui.page.right.calendar, cb_calendar_event_handler);
 
     ui_initialized = true;
@@ -124,11 +120,6 @@ void cb_calendar_event_handler(lv_obj_t *obj, lv_event_t event) {
             p_Ui->page.right.current.year = date->year;
         }
     }
-}
-
-void cb_update_calendar_day_task(lv_task_t *task) {
-    // https://docs.lvgl.io/latest/en/html/overview/task.html#create-a-task
-    update_calendar_day(*(Ui *) task->user_data);
 }
 
 void update_calendar_day(Ui ui) {
