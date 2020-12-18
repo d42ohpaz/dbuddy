@@ -23,6 +23,7 @@ extern lv_style_t style_default_font_black_small;
 extern lv_style_t style_default_padding_default;
 extern lv_style_t style_default_padding_left_none;
 extern lv_style_t style_default_padding_none;
+extern lv_style_t style_default_radius_none;
 extern lv_style_t style_default_text_color_black;
 
 extern lv_style_t style_focused_background_blend_mode_additive;
