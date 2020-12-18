@@ -9,7 +9,10 @@ lv_style_t style_default_border_color_white;
 lv_style_t style_default_border_none;
 lv_style_t style_default_border_sides_right_none;
 lv_style_t style_default_font_black_large;
+lv_style_t style_default_font_black_large_48;
+lv_style_t style_default_font_black_large_72;
 lv_style_t style_default_font_black_medium;
+lv_style_t style_default_font_black_small;
 lv_style_t style_default_padding_default;
 lv_style_t style_default_padding_left_none;
 lv_style_t style_default_padding_none;
@@ -69,15 +72,29 @@ void styles_init(void) {
     lv_style_set_value_align(&style_default_font_black_medium, LV_STATE_DEFAULT, LV_ALIGN_IN_TOP_MID);
     lv_style_set_value_font(&style_default_font_black_medium, LV_STATE_DEFAULT, &roboto_black_24);
 
+    lv_style_init(&style_default_font_black_small);
+    lv_style_set_text_font(&style_default_font_black_small, LV_STATE_DEFAULT, &roboto_black_16);
+    lv_style_set_value_align(&style_default_font_black_small, LV_STATE_DEFAULT, LV_ALIGN_IN_TOP_MID);
+    lv_style_set_value_font(&style_default_font_black_small, LV_STATE_DEFAULT, &roboto_black_16);
+
     lv_style_init(&style_default_font_black_large);
     lv_style_set_text_font(&style_default_font_black_large, LV_STATE_DEFAULT, &roboto_black_96);
     lv_style_set_value_align(&style_default_font_black_large, LV_STATE_DEFAULT, LV_ALIGN_CENTER);
     lv_style_set_value_font(&style_default_font_black_large, LV_STATE_DEFAULT, &roboto_black_96);
 
+    lv_style_init(&style_default_font_black_large_48);
+    lv_style_set_text_font(&style_default_font_black_large_48, LV_STATE_DEFAULT, &roboto_black_48);
+    lv_style_set_value_align(&style_default_font_black_large_48, LV_STATE_DEFAULT, LV_ALIGN_CENTER);
+    lv_style_set_value_font(&style_default_font_black_large_48, LV_STATE_DEFAULT, &roboto_black_48);
+
+    lv_style_init(&style_default_font_black_large_72);
+    lv_style_set_text_font(&style_default_font_black_large_72, LV_STATE_DEFAULT, &roboto_black_72);
+    lv_style_set_value_align(&style_default_font_black_large_72, LV_STATE_DEFAULT, LV_ALIGN_CENTER);
+    lv_style_set_value_font(&style_default_font_black_large_72, LV_STATE_DEFAULT, &roboto_black_72);
+
     lv_style_init(&style_default_background_overlay_color_black);
     lv_style_copy(&style_default_background_overlay_color_black, &style_default_background_color_black);
     lv_style_copy(&style_default_background_overlay_color_black, &style_default_background_transparent_half);
-
 
     lv_style_init(&style_focused_background_blend_mode_additive);
     lv_style_set_bg_blend_mode(&style_focused_background_blend_mode_additive, LV_STATE_FOCUSED, LV_BLEND_MODE_ADDITIVE);
