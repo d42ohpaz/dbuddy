@@ -123,20 +123,29 @@ void cb_calendar_event_handler(lv_obj_t *obj, lv_event_t event) {
 }
 
 void update_calendar_day(Ui ui) {
-    time_t t = time(NULL);
-    struct tm tm = *localtime(&t);
+    lv_calendar_date_t current = ui.page.right.current;
+
+    if (current.year == 0 && current.month == 0 && current.day == 0) {
+        time_t t = time(NULL);
+        struct tm tm = *localtime(&t);
+
+        current.year = tm.tm_year + 1900;
+        current.day = tm.tm_mday;
+        current.month = tm.tm_mon + 1;
+    }
+
+    lv_calendar_set_today_date(ui.page.right.calendar, &current);
+    lv_calendar_set_showed_date(ui.page.right.calendar, &current);
+
+    struct tm tm;
     char bufMonth[4], bufYear[5];
-    lv_calendar_date_t today;
+
+    tm.tm_mon = current.month - 1;
+    tm.tm_mday = current.day + 0;
+    tm.tm_year = current.year - 1900;
 
     strftime(bufMonth, sizeof(bufMonth), "%b", &tm);
     strftime(bufYear, sizeof(bufYear), "%EY", &tm);
-
-    today.year = tm.tm_year + 1900;
-    today.day = tm.tm_mday;
-    today.month = tm.tm_mon + 1;
-
-    lv_calendar_set_today_date(ui.page.right.calendar, &today);
-    lv_calendar_set_showed_date(ui.page.right.calendar, &today);
 
     lv_label_set_text_fmt(ui.page.left.top.label_month, "%s", bufMonth);
     lv_label_set_text_fmt(ui.page.left.top.label_day, "%02d", tm.tm_mday);
