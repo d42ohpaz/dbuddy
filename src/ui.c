@@ -118,6 +118,8 @@ void cb_calendar_event_handler(lv_obj_t *obj, lv_event_t event) {
             p_Ui->page.right.current.month = date->month;
             p_Ui->page.right.current.day = date->day;
             p_Ui->page.right.current.year = date->year;
+
+            update_calendar_day(*p_Ui);
         }
     }
 }
