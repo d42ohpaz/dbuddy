@@ -38,46 +38,33 @@ Ui *ui_init(void) {
     lv_obj_add_style(ui.page.main, LV_PAGE_PART_BG, &style_default_padding_none);
     lv_obj_add_style(ui.page.main, LV_PAGE_PART_BG, &style_default_background_transparent_full);
 
-    ui.page.left.main = lv_obj_create(ui.page.main, NULL);
-    lv_obj_set_size(ui.page.left.main, (LV_HOR_RES * 1 / 3), LV_VER_RES);
-    lv_obj_set_click(ui.page.left.main, false);
-    lv_obj_add_style(ui.page.left.main, LV_OBJ_PART_MAIN, &style_default_border_none);
-    lv_obj_add_style(ui.page.left.main, LV_OBJ_PART_MAIN, &style_default_background_transparent_full);
-    lv_obj_add_style(ui.page.left.main, LV_PAGE_PART_BG, &style_default_padding_none);
+    ui.page.left.main = lv_obj_create(ui.page.main, ui.page.main);
+    lv_obj_set_size(ui.page.left.main, (LV_HOR_RES * 1 / 3), LV_VER_RES - lv_obj_get_height(ui.page.top.main));
+    lv_obj_align(ui.page.left.main, ui.page.main, LV_ALIGN_IN_BOTTOM_LEFT, 0, 0);
 
-    ui.page.left.top.main = lv_page_create(ui.page.left.main, NULL);
-    lv_obj_set_click(ui.page.left.top.main, false);
     ui.page.right.main = lv_obj_create(ui.page.main, ui.page.main);
     lv_obj_set_size(ui.page.right.main, (LV_HOR_RES * 2 / 3), LV_VER_RES - lv_obj_get_height(ui.page.top.main));
     lv_obj_align(ui.page.right.main, ui.page.main, LV_ALIGN_IN_BOTTOM_RIGHT, 0, 0);
 
+    ui.page.left.top.main = lv_page_create(ui.page.left.main, ui.page.main);
     lv_obj_set_size(ui.page.left.top.main, lv_obj_get_width(ui.page.left.main), lv_obj_get_width(ui.page.left.main) * 2 / 3);
-    lv_obj_add_style(ui.page.left.top.main, LV_STATE_DEFAULT, &style_default_border_none);
-    lv_obj_add_style(ui.page.left.top.main, LV_PAGE_PART_BG, &style_default_background_transparent_full);
     lv_obj_add_style(ui.page.left.top.main, LV_PAGE_PART_BG, &style_default_padding_default);
 
-    ui.page.left.bottom.main = lv_page_create(ui.page.left.main, NULL);
-    lv_obj_set_click(ui.page.left.bottom.main, false);
+    ui.page.left.bottom.main = lv_page_create(ui.page.left.main, ui.page.main);
     lv_obj_set_pos(ui.page.left.bottom.main, 0, lv_obj_get_height(ui.page.left.top.main));
     lv_obj_set_size(ui.page.left.bottom.main, lv_obj_get_width(ui.page.left.main), lv_obj_get_height(ui.page.left.main) - lv_obj_get_height(ui.page.left.top.main));
     lv_obj_set_style_local_pad_top(ui.page.left.bottom.main, LV_PAGE_PART_BG, LV_STATE_DEFAULT, 0);
-    lv_obj_add_style(ui.page.left.bottom.main, LV_STATE_DEFAULT, &style_default_border_none);
-    lv_obj_add_style(ui.page.left.bottom.main, LV_PAGE_PART_BG, &style_default_background_transparent_full);
     lv_obj_add_style(ui.page.left.bottom.main, LV_PAGE_PART_BG, &style_default_padding_default);
 
-    ui.page.left.top.container = lv_obj_create(ui.page.left.top.main, NULL);
-    lv_obj_set_click(ui.page.left.top.container, false);
+    ui.page.left.top.container = lv_obj_create(ui.page.left.top.main, ui.page.main);
     lv_obj_set_size(ui.page.left.top.container, lv_page_get_width_fit(ui.page.left.top.main), lv_page_get_height_fit(ui.page.left.top.main));
     lv_obj_add_style(ui.page.left.top.container, LV_CALENDAR_PART_BG, &style_default_background_color_black);
     lv_obj_add_style(ui.page.left.top.container, LV_PAGE_PART_BG, &style_default_background_overlay_color_black);
-    lv_obj_add_style(ui.page.left.top.container, LV_CALENDAR_PART_BG, &style_default_border_none);
 
-    ui.page.left.bottom.itinerary = lv_obj_create(ui.page.left.bottom.main, NULL);
-    lv_obj_set_click(ui.page.left.bottom.itinerary, false);
+    ui.page.left.bottom.itinerary = lv_obj_create(ui.page.left.bottom.main, ui.page.main);
     lv_obj_set_size(ui.page.left.bottom.itinerary, lv_page_get_width_fit(ui.page.left.bottom.main), lv_page_get_height_fit(ui.page.left.bottom.main));
     lv_obj_add_style(ui.page.left.bottom.itinerary, LV_CALENDAR_PART_BG, &style_default_background_color_black);
     lv_obj_add_style(ui.page.left.bottom.itinerary, LV_PAGE_PART_BG, &style_default_background_overlay_color_black);
-    lv_obj_add_style(ui.page.left.bottom.itinerary, LV_CALENDAR_PART_BG, &style_default_border_none);
 
     ui.page.left.top.label_day = lv_label_create(ui.page.left.top.container, NULL);
     lv_label_set_text(ui.page.left.top.label_day, "");
