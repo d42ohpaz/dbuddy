@@ -87,8 +87,12 @@ Ui *ui_init(void) {
     lv_label_set_text(ui.page.left.top.label_year, "");
     lv_obj_add_style(ui.page.left.top.label_year, LV_LABEL_PART_MAIN, &style_default_font_black_medium);
 
-    ui.page.right.calendar = lv_calendar_create(ui.page.right.main, NULL);
-    lv_obj_set_size(ui.page.right.calendar, lv_obj_get_width_fit(ui.page.right.main), lv_obj_get_height_fit(ui.page.right.main));
+    ui.page.right.container = lv_obj_create(ui.page.right.main, ui.page.main);
+    lv_obj_set_size(ui.page.right.container, lv_obj_get_width_fit(ui.page.right.main), lv_obj_get_height_fit(ui.page.right.main));
+    lv_obj_add_style(ui.page.right.container, LV_PAGE_PART_BG, &style_default_padding_left_none);
+
+    ui.page.right.calendar = lv_calendar_create(ui.page.right.container, NULL);
+    lv_obj_set_size(ui.page.right.calendar, lv_obj_get_width_fit(ui.page.right.container), lv_obj_get_height_fit(ui.page.right.container));
     lv_obj_align(ui.page.right.calendar, ui.page.right.main, LV_ALIGN_IN_LEFT_MID, 0, 0);
     lv_obj_add_style(ui.page.right.calendar, LV_CALENDAR_PART_BG, &style_default_background_color_black);
     lv_obj_add_style(ui.page.right.calendar, LV_CALENDAR_PART_BG, &style_default_background_overlay_color_black);

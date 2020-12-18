@@ -48,6 +48,7 @@ struct LeftPageUi {
 
 struct RightPageUi {
     lv_obj_t * main;
+    lv_obj_t * container;
 
     lv_obj_t * calendar;
 
