@@ -38,6 +38,15 @@ Ui *ui_init(void) {
     lv_obj_add_style(ui.page.main, LV_PAGE_PART_BG, &style_default_padding_none);
     lv_obj_add_style(ui.page.main, LV_PAGE_PART_BG, &style_default_background_transparent_full);
 
+    ui.page.top.main = lv_obj_create(ui.page.main, ui.page.main);
+    lv_obj_set_size(ui.page.top.main, LV_HOR_RES, 24);
+
+    ui.page.top.container = lv_obj_create(ui.page.top.main, ui.page.main);
+    lv_obj_set_size(ui.page.top.main, lv_obj_get_width_fit(ui.page.top.main), lv_obj_get_height_fit(ui.page.top.main));
+    lv_obj_add_style(ui.page.top.main, LV_CALENDAR_PART_BG, &style_default_background_color_black);
+    lv_obj_add_style(ui.page.top.main, LV_PAGE_PART_BG, &style_default_background_overlay_color_black);
+    lv_obj_add_style(ui.page.top.main, LV_PAGE_PART_BG, &style_default_radius_none);
+
     ui.page.left.main = lv_obj_create(ui.page.main, ui.page.main);
     lv_obj_set_size(ui.page.left.main, (LV_HOR_RES * 1 / 3), LV_VER_RES - lv_obj_get_height(ui.page.top.main));
     lv_obj_align(ui.page.left.main, ui.page.main, LV_ALIGN_IN_BOTTOM_LEFT, 0, 0);

@@ -8,6 +8,7 @@ struct LeftPageUi;
 struct PageUi;
 struct RightPageUi;
 struct TopLeftPageUi;
+struct TopPageUi;
 struct Ui;
 
 typedef struct BottomLeftPageUi BottomLeftPageUi;
@@ -15,6 +16,7 @@ typedef struct LeftPageUi LeftPageUi;
 typedef struct PageUi PageUi;
 typedef struct RightPageUi RightPageUi;
 typedef struct TopLeftPageUi TopLeftPageUi;
+typedef struct TopPageUi TopPageUi;
 typedef struct Ui Ui;
 
 struct TopLeftPageUi {
@@ -30,6 +32,11 @@ struct BottomLeftPageUi {
     lv_obj_t * main;
 
     lv_obj_t * itinerary;
+};
+
+struct TopPageUi {
+    lv_obj_t * main;
+    lv_obj_t * container;
 };
 
 struct LeftPageUi {
@@ -50,6 +57,7 @@ struct RightPageUi {
 struct PageUi {
     lv_obj_t * main;
 
+    TopPageUi top;
     LeftPageUi left;
     RightPageUi right;
 };
