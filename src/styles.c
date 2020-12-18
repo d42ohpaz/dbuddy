@@ -1,18 +1,18 @@
 #include "styles.h"
 
+lv_style_t style_background_color_black;
+lv_style_t style_background_color_blue;
+lv_style_t style_background_overlay_color_black;
 lv_style_t style_background_transparent_full;
 lv_style_t style_background_transparent_half;
-lv_style_t style_padding_default;
-lv_style_t style_padding_none;
-lv_style_t style_text_color_black;
 lv_style_t style_border_color_white;
 lv_style_t style_border_none;
 lv_style_t style_border_sides_right_none;
-lv_style_t style_background_color_black;
-lv_style_t style_background_color_blue;
-lv_style_t style_font_black_medium;
 lv_style_t style_font_black_large;
-lv_style_t style_background_overlay_color_black;
+lv_style_t style_font_black_medium;
+lv_style_t style_padding_default;
+lv_style_t style_padding_none;
+lv_style_t style_text_color_black;
 
 void styles_init(void) {
     static bool initialized = false;
