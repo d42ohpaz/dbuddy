@@ -97,7 +97,7 @@ Ui *ui_init(void) {
 
     ui.page.right.calendar = lv_calendar_create(ui.page.right.main, NULL);
     lv_obj_set_size(ui.page.right.calendar, lv_obj_get_width_fit(ui.page.right.main), lv_obj_get_height_fit(ui.page.right.main));
-    lv_obj_align(ui.page.right.calendar, ui.page.right.main, LV_ALIGN_CENTER, 0, 0);
+    lv_obj_align(ui.page.right.calendar, ui.page.right.main, LV_ALIGN_IN_LEFT_MID, 0, 0);
     lv_obj_add_style(ui.page.right.calendar, LV_CALENDAR_PART_BG, &style_default_background_color_black);
     lv_obj_add_style(ui.page.right.calendar, LV_CALENDAR_PART_BG, &style_default_background_overlay_color_black);
     lv_obj_add_style(ui.page.right.calendar, LV_CALENDAR_PART_BG, &style_default_border_none);
