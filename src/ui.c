@@ -77,7 +77,7 @@ Ui *ui_init(void) {
 
     ui.page.left.top.label_day = lv_label_create(ui.page.left.top.container, NULL);
     lv_label_set_text(ui.page.left.top.label_day, "");
-    lv_obj_add_style(ui.page.left.top.label_day, LV_LABEL_PART_MAIN, &style_default_font_black_large);
+    lv_obj_add_style(ui.page.left.top.label_day, LV_LABEL_PART_MAIN, &style_default_font_black_large_72);
 
     ui.page.left.top.label_month = lv_label_create(ui.page.left.top.container, NULL);
     lv_label_set_text(ui.page.left.top.label_month, "");
