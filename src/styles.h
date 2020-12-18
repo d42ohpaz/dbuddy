@@ -11,6 +11,7 @@ extern lv_style_t style_default_background_color_blue;
 extern lv_style_t style_default_background_overlay_color_black;
 extern lv_style_t style_default_background_transparent_full;
 extern lv_style_t style_default_background_transparent_half;
+extern lv_style_t style_default_background_transparent_cover;
 extern lv_style_t style_default_border_color_white;
 extern lv_style_t style_default_border_none;
 extern lv_style_t style_default_border_sides_right_none;

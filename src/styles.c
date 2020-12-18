@@ -5,6 +5,7 @@ lv_style_t style_default_background_color_blue;
 lv_style_t style_default_background_overlay_color_black;
 lv_style_t style_default_background_transparent_full;
 lv_style_t style_default_background_transparent_half;
+lv_style_t style_default_background_transparent_cover;
 lv_style_t style_default_border_color_white;
 lv_style_t style_default_border_none;
 lv_style_t style_default_border_sides_right_none;
@@ -35,6 +36,9 @@ void styles_init(void) {
 
     lv_style_init(&style_default_background_transparent_half);
     lv_style_set_bg_opa(&style_default_background_transparent_half, LV_STATE_DEFAULT, LV_OPA_50);
+
+    lv_style_init(&style_default_background_transparent_cover);
+    lv_style_set_bg_opa(&style_default_background_transparent_cover, LV_STATE_DEFAULT, LV_OPA_COVER);
 
     lv_style_init(&style_default_padding_default);
     lv_style_set_pad_all(&style_default_padding_default, LV_STATE_DEFAULT, DEFAULT_PADDING);
