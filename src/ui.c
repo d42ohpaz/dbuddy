@@ -65,12 +65,14 @@ Ui *ui_init(void) {
     lv_obj_set_size(ui.page.left.top.container, lv_page_get_width_fit(ui.page.left.top.main), lv_page_get_height_fit(ui.page.left.top.main));
     lv_obj_add_style(ui.page.left.top.container, LV_CALENDAR_PART_BG, &style_background_color_black);
     lv_obj_add_style(ui.page.left.top.container, LV_PAGE_PART_BG, &style_background_overlay_color_black);
+    lv_obj_add_style(ui.page.left.top.container, LV_CALENDAR_PART_BG, &style_border_none);
 
     ui.page.left.bottom.itinerary = lv_obj_create(ui.page.left.bottom.main, NULL);
     lv_obj_set_click(ui.page.left.bottom.itinerary, false);
     lv_obj_set_size(ui.page.left.bottom.itinerary, lv_page_get_width_fit(ui.page.left.bottom.main), lv_page_get_height_fit(ui.page.left.bottom.main));
     lv_obj_add_style(ui.page.left.bottom.itinerary, LV_CALENDAR_PART_BG, &style_background_color_black);
     lv_obj_add_style(ui.page.left.bottom.itinerary, LV_PAGE_PART_BG, &style_background_overlay_color_black);
+    lv_obj_add_style(ui.page.left.bottom.itinerary, LV_CALENDAR_PART_BG, &style_border_none);
 
     ui.page.left.top.label_day = lv_label_create(ui.page.left.top.container, NULL);
     lv_label_set_text(ui.page.left.top.label_day, "");
@@ -97,6 +99,7 @@ Ui *ui_init(void) {
     lv_obj_align(ui.page.right.calendar, ui.page.right.main, LV_ALIGN_CENTER, 0, 0);
     lv_obj_add_style(ui.page.right.calendar, LV_CALENDAR_PART_BG, &style_background_color_black);
     lv_obj_add_style(ui.page.right.calendar, LV_CALENDAR_PART_BG, &style_background_overlay_color_black);
+    lv_obj_add_style(ui.page.right.calendar, LV_CALENDAR_PART_BG, &style_border_none);
     lv_obj_set_style_local_text_font(ui.page.right.calendar, LV_CALENDAR_PART_HEADER, LV_STATE_DEFAULT, &roboto_black_24);
     lv_obj_set_style_local_text_font(ui.page.right.calendar, LV_CALENDAR_PART_DAY_NAMES, LV_STATE_DEFAULT, &roboto_black_16);
     lv_obj_set_style_local_text_font(ui.page.right.calendar, LV_CALENDAR_PART_BG, LV_STATE_DEFAULT, &roboto_regular_12);
