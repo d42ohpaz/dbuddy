@@ -47,6 +47,10 @@ Ui *ui_init(void) {
 
     ui.page.left.top.main = lv_page_create(ui.page.left.main, NULL);
     lv_obj_set_click(ui.page.left.top.main, false);
+    ui.page.right.main = lv_obj_create(ui.page.main, ui.page.main);
+    lv_obj_set_size(ui.page.right.main, (LV_HOR_RES * 2 / 3), LV_VER_RES - lv_obj_get_height(ui.page.top.main));
+    lv_obj_align(ui.page.right.main, ui.page.main, LV_ALIGN_IN_BOTTOM_RIGHT, 0, 0);
+
     lv_obj_set_size(ui.page.left.top.main, lv_obj_get_width(ui.page.left.main), lv_obj_get_width(ui.page.left.main) * 2 / 3);
     lv_obj_add_style(ui.page.left.top.main, LV_STATE_DEFAULT, &style_default_border_none);
     lv_obj_add_style(ui.page.left.top.main, LV_PAGE_PART_BG, &style_default_background_transparent_full);
@@ -86,14 +90,6 @@ Ui *ui_init(void) {
     ui.page.left.top.label_year = lv_label_create(ui.page.left.top.container, NULL);
     lv_label_set_text(ui.page.left.top.label_year, "");
     lv_obj_add_style(ui.page.left.top.label_year, LV_LABEL_PART_MAIN, &style_default_font_black_medium);
-
-    ui.page.right.main = lv_obj_create(ui.page.main, NULL);
-    lv_obj_set_click(ui.page.right.main, false);
-    lv_obj_set_size(ui.page.right.main, (LV_HOR_RES * 2 / 3), LV_VER_RES);
-    lv_obj_set_pos(ui.page.right.main, lv_obj_get_width(ui.page.left.main), 0);
-    lv_obj_add_style(ui.page.right.main, LV_PAGE_PART_BG, &style_default_padding_left_none);
-    lv_obj_add_style(ui.page.right.main, LV_OBJ_PART_MAIN, &style_default_border_none);
-    lv_obj_add_style(ui.page.right.main, LV_OBJ_PART_MAIN, &style_default_background_transparent_full);
 
     ui.page.right.calendar = lv_calendar_create(ui.page.right.main, NULL);
     lv_obj_set_size(ui.page.right.calendar, lv_obj_get_width_fit(ui.page.right.main), lv_obj_get_height_fit(ui.page.right.main));
