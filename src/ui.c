@@ -56,7 +56,7 @@ Ui *ui_init(void) {
     lv_obj_align(ui.page.right.main, ui.page.main, LV_ALIGN_IN_BOTTOM_RIGHT, 0, 0);
 
     ui.page.left.top.main = lv_page_create(ui.page.left.main, ui.page.main);
-    lv_obj_set_size(ui.page.left.top.main, lv_obj_get_width(ui.page.left.main), lv_obj_get_width(ui.page.left.main) * 2 / 3);
+    lv_obj_set_size(ui.page.left.top.main, lv_obj_get_width(ui.page.left.main), (lv_obj_get_width(ui.page.left.main) * 2 / 3) - DEFAULT_PADDING * 2);
     lv_obj_add_style(ui.page.left.top.main, LV_PAGE_PART_BG, &style_default_padding_default);
 
     ui.page.left.bottom.main = lv_page_create(ui.page.left.main, ui.page.main);
