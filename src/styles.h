@@ -17,6 +17,7 @@ extern lv_style_t style_default_border_sides_right_none;
 extern lv_style_t style_default_font_black_large;
 extern lv_style_t style_default_font_black_medium;
 extern lv_style_t style_default_padding_default;
+extern lv_style_t style_default_padding_left_none;
 extern lv_style_t style_default_padding_none;
 extern lv_style_t style_default_text_color_black;
 

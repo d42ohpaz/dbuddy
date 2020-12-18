@@ -11,6 +11,7 @@ lv_style_t style_default_border_sides_right_none;
 lv_style_t style_default_font_black_large;
 lv_style_t style_default_font_black_medium;
 lv_style_t style_default_padding_default;
+lv_style_t style_default_padding_left_none;
 lv_style_t style_default_padding_none;
 lv_style_t style_default_text_color_black;
 
@@ -34,6 +35,12 @@ void styles_init(void) {
 
     lv_style_init(&style_default_padding_default);
     lv_style_set_pad_all(&style_default_padding_default, LV_STATE_DEFAULT, DEFAULT_PADDING);
+
+    lv_style_init(&style_default_padding_left_none);
+    lv_style_set_pad_top(&style_default_padding_left_none, LV_STATE_DEFAULT, DEFAULT_PADDING);
+    lv_style_set_pad_left(&style_default_padding_left_none, LV_STATE_DEFAULT, 0);
+    lv_style_set_pad_right(&style_default_padding_left_none, LV_STATE_DEFAULT, DEFAULT_PADDING);
+    lv_style_set_pad_bottom(&style_default_padding_left_none, LV_STATE_DEFAULT, DEFAULT_PADDING);
 
     lv_style_init(&style_default_padding_none);
     lv_style_set_pad_all(&style_default_padding_none, LV_STATE_DEFAULT, 0);

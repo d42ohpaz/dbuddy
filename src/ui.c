@@ -43,6 +43,7 @@ Ui *ui_init(void) {
     lv_obj_set_click(ui.page.left.main, false);
     lv_obj_add_style(ui.page.left.main, LV_OBJ_PART_MAIN, &style_default_border_none);
     lv_obj_add_style(ui.page.left.main, LV_OBJ_PART_MAIN, &style_default_background_transparent_full);
+    lv_obj_add_style(ui.page.left.main, LV_PAGE_PART_BG, &style_default_padding_none);
 
     ui.page.left.top.main = lv_page_create(ui.page.left.main, NULL);
     lv_obj_set_click(ui.page.left.top.main, false);
@@ -90,7 +91,7 @@ Ui *ui_init(void) {
     lv_obj_set_click(ui.page.right.main, false);
     lv_obj_set_size(ui.page.right.main, (LV_HOR_RES * 2 / 3), LV_VER_RES);
     lv_obj_set_pos(ui.page.right.main, lv_obj_get_width(ui.page.left.main), 0);
-    lv_obj_add_style(ui.page.right.main, LV_PAGE_PART_BG, &style_default_padding_default);
+    lv_obj_add_style(ui.page.right.main, LV_PAGE_PART_BG, &style_default_padding_left_none);
     lv_obj_add_style(ui.page.right.main, LV_OBJ_PART_MAIN, &style_default_border_none);
     lv_obj_add_style(ui.page.right.main, LV_OBJ_PART_MAIN, &style_default_background_transparent_full);
 
