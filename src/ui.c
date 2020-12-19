@@ -59,33 +59,44 @@ Ui *ui_init(void) {
     lv_obj_set_size(ui.page.left.top.main, lv_obj_get_width(ui.page.left.main), (lv_obj_get_width(ui.page.left.main) * 2 / 3) - DEFAULT_PADDING * 2);
     lv_obj_add_style(ui.page.left.top.main, LV_PAGE_PART_BG, &style_default_padding_default);
 
+    ui.page.left.top.container = lv_obj_create(ui.page.left.top.main, ui.page.main);
+    lv_obj_set_size(ui.page.left.top.container, lv_page_get_width_fit(ui.page.left.top.main), lv_page_get_height_fit(ui.page.left.top.main));
+    lv_obj_add_style(ui.page.left.top.container, LV_CALENDAR_PART_BG, &style_default_background_color_black);
+    lv_obj_add_style(ui.page.left.top.container, LV_PAGE_PART_BG, &style_default_background_overlay_color_black);
+
+    ui.page.left.top.container_month = lv_obj_create(ui.page.left.top.container, ui.page.main);
+    lv_obj_set_size(ui.page.left.top.container_month, lv_obj_get_width_fit(ui.page.left.top.container), lv_obj_get_height_fit(ui.page.left.top.container));
+
+    ui.page.left.top.label_month = lv_label_create(ui.page.left.top.container_month, NULL);
+    lv_label_set_text(ui.page.left.top.label_month, "");
+    lv_obj_add_style(ui.page.left.top.label_month, LV_LABEL_PART_MAIN, &style_default_font_black_medium);
+
+    ui.page.left.top.container_day = lv_obj_create(ui.page.left.top.container, ui.page.main);
+    lv_obj_set_pos(ui.page.left.top.container_day, 0, lv_obj_get_height_fit(ui.page.left.top.container) / 4);
+    lv_obj_set_size(ui.page.left.top.container_day, lv_obj_get_width_fit(ui.page.left.top.container), lv_obj_get_height_fit(ui.page.left.top.container) / 2);
+
+    ui.page.left.top.label_day = lv_label_create(ui.page.left.top.container_day, NULL);
+    lv_label_set_text(ui.page.left.top.label_day, "");
+    lv_obj_add_style(ui.page.left.top.label_day, LV_LABEL_PART_MAIN, &style_default_font_black_large_72);
+
+    ui.page.left.top.container_year = lv_obj_create(ui.page.left.top.container, ui.page.main);
+    lv_obj_set_pos(ui.page.left.top.container_year, 0, lv_obj_get_height_fit(ui.page.left.top.container) / 4 + lv_obj_get_height_fit(ui.page.left.top.container_day));
+    lv_obj_set_size(ui.page.left.top.container_year, lv_obj_get_width_fit(ui.page.left.top.container), lv_obj_get_height_fit(ui.page.left.top.container) / 4);
+
+    ui.page.left.top.label_year = lv_label_create(ui.page.left.top.container_year, NULL);
+    lv_label_set_text(ui.page.left.top.label_year, "");
+    lv_obj_add_style(ui.page.left.top.label_year, LV_LABEL_PART_MAIN, &style_default_font_black_medium);
+
     ui.page.left.bottom.main = lv_page_create(ui.page.left.main, ui.page.main);
     lv_obj_set_pos(ui.page.left.bottom.main, 0, lv_obj_get_height(ui.page.left.top.main));
     lv_obj_set_size(ui.page.left.bottom.main, lv_obj_get_width(ui.page.left.main), lv_obj_get_height(ui.page.left.main) - lv_obj_get_height(ui.page.left.top.main));
     lv_obj_set_style_local_pad_top(ui.page.left.bottom.main, LV_PAGE_PART_BG, LV_STATE_DEFAULT, 0);
     lv_obj_add_style(ui.page.left.bottom.main, LV_PAGE_PART_BG, &style_default_padding_default);
 
-    ui.page.left.top.container = lv_obj_create(ui.page.left.top.main, ui.page.main);
-    lv_obj_set_size(ui.page.left.top.container, lv_page_get_width_fit(ui.page.left.top.main), lv_page_get_height_fit(ui.page.left.top.main));
-    lv_obj_add_style(ui.page.left.top.container, LV_CALENDAR_PART_BG, &style_default_background_color_black);
-    lv_obj_add_style(ui.page.left.top.container, LV_PAGE_PART_BG, &style_default_background_overlay_color_black);
-
     ui.page.left.bottom.itinerary = lv_obj_create(ui.page.left.bottom.main, ui.page.main);
     lv_obj_set_size(ui.page.left.bottom.itinerary, lv_page_get_width_fit(ui.page.left.bottom.main), lv_page_get_height_fit(ui.page.left.bottom.main));
     lv_obj_add_style(ui.page.left.bottom.itinerary, LV_CALENDAR_PART_BG, &style_default_background_color_black);
     lv_obj_add_style(ui.page.left.bottom.itinerary, LV_PAGE_PART_BG, &style_default_background_overlay_color_black);
-
-    ui.page.left.top.label_day = lv_label_create(ui.page.left.top.container, NULL);
-    lv_label_set_text(ui.page.left.top.label_day, "");
-    lv_obj_add_style(ui.page.left.top.label_day, LV_LABEL_PART_MAIN, &style_default_font_black_large_72);
-
-    ui.page.left.top.label_month = lv_label_create(ui.page.left.top.container, NULL);
-    lv_label_set_text(ui.page.left.top.label_month, "");
-    lv_obj_add_style(ui.page.left.top.label_month, LV_LABEL_PART_MAIN, &style_default_font_black_medium);
-
-    ui.page.left.top.label_year = lv_label_create(ui.page.left.top.container, NULL);
-    lv_label_set_text(ui.page.left.top.label_year, "");
-    lv_obj_add_style(ui.page.left.top.label_year, LV_LABEL_PART_MAIN, &style_default_font_black_medium);
 
     ui.page.right.container = lv_obj_create(ui.page.right.main, ui.page.main);
     lv_obj_set_size(ui.page.right.container, lv_obj_get_width_fit(ui.page.right.main), lv_obj_get_height_fit(ui.page.right.main));

@@ -23,6 +23,10 @@ struct TopLeftPageUi {
     lv_obj_t * main;
     lv_obj_t * container;
 
+    lv_obj_t * container_month;
+    lv_obj_t * container_day;
+    lv_obj_t * container_year;
+
     lv_obj_t * label_day;
     lv_obj_t * label_month;
     lv_obj_t * label_year;
