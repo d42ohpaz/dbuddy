@@ -95,7 +95,7 @@ void create_obj_left_top_container_day(void) {
 
 void create_obj_left_top_container_month(void) {
     p_Ui->page.left.top.container_month = lv_obj_create(p_Ui->page.left.top.container, p_Ui->page.main);
-    lv_obj_set_size(p_Ui->page.left.top.container_month, lv_obj_get_width_fit(p_Ui->page.left.top.container), lv_obj_get_height_fit(p_Ui->page.left.top.container));
+    lv_obj_set_size(p_Ui->page.left.top.container_month, lv_obj_get_width_fit(p_Ui->page.left.top.container), lv_obj_get_height_fit(p_Ui->page.left.top.container) / 4);
 
     p_Ui->page.left.top.label_month = lv_label_create(p_Ui->page.left.top.container_month, NULL);
     lv_label_set_text(p_Ui->page.left.top.label_month, "");
