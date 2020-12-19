@@ -88,6 +88,7 @@ void create_obj_left_top_container_day(void) {
 
     p_Ui->page.left.top.label_day = lv_label_create(p_Ui->page.left.top.container_day, NULL);
     lv_label_set_text(p_Ui->page.left.top.label_day, "");
+    lv_obj_align(p_Ui->page.left.top.label_day, p_Ui->page.left.top.container_day, LV_ALIGN_CENTER, 0, 0);
     lv_obj_add_style(p_Ui->page.left.top.label_day, LV_LABEL_PART_MAIN, &style_default_font_black_large_72);
 }
 
@@ -97,6 +98,7 @@ void create_obj_left_top_container_month(void) {
 
     p_Ui->page.left.top.label_month = lv_label_create(p_Ui->page.left.top.container_month, NULL);
     lv_label_set_text(p_Ui->page.left.top.label_month, "");
+    lv_obj_align(p_Ui->page.left.top.label_month, p_Ui->page.left.top.container_month, LV_ALIGN_CENTER, 0, 0);
     lv_obj_add_style(p_Ui->page.left.top.label_month, LV_LABEL_PART_MAIN, &style_default_font_black_medium);
 }
 
@@ -107,6 +109,7 @@ void create_obj_left_top_container_year(void) {
 
     p_Ui->page.left.top.label_year = lv_label_create(p_Ui->page.left.top.container_year, NULL);
     lv_label_set_text(p_Ui->page.left.top.label_year, "");
+    lv_obj_align(p_Ui->page.left.top.label_year, p_Ui->page.left.top.container_year, LV_ALIGN_CENTER, 0, 0);
     lv_obj_add_style(p_Ui->page.left.top.label_year, LV_LABEL_PART_MAIN, &style_default_font_black_medium);
 }
 
@@ -238,8 +241,4 @@ void update_calendar_day(Ui ui) {
     lv_label_set_text_fmt(ui.page.left.top.label_month, "%s", bufMonth);
     lv_label_set_text_fmt(ui.page.left.top.label_day, "%02d", tm.tm_mday);
     lv_label_set_text_fmt(ui.page.left.top.label_year, "%s", bufYear);
-
-    lv_obj_align(ui.page.left.top.label_month, ui.page.left.top.container, LV_ALIGN_IN_TOP_MID, 0, DEFAULT_BORDER);
-    lv_obj_align(ui.page.left.top.label_day, ui.page.left.top.container, LV_ALIGN_CENTER, 0, DEFAULT_BORDER);
-    lv_obj_align(ui.page.left.top.label_year, ui.page.left.top.container, LV_ALIGN_IN_BOTTOM_MID, 0, 0);
 }
