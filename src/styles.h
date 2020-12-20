@@ -5,6 +5,7 @@
 
 #define DEFAULT_PADDING 16
 #define DEFAULT_BORDER 5
+#define DEFAULT_MENU_HEIGHT 24
 
 extern lv_style_t style_default_background_color_black;
 extern lv_style_t style_default_background_color_blue;

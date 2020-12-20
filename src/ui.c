@@ -249,7 +249,7 @@ void create_page_top_container(void) {
 void create_page_top_main(void) {
     p_Ui->page.top.main = lv_obj_create(p_Ui->page.main, p_Ui->page.main);
 
-    lv_obj_set_size(p_Ui->page.top.main, LV_HOR_RES, 18);
+    lv_obj_set_size(p_Ui->page.top.main, LV_HOR_RES, DEFAULT_MENU_HEIGHT);
     lv_obj_add_style(p_Ui->page.top.main, LV_PAGE_PART_BG, &style_default_background_overlay_color_black);
     lv_obj_add_style(p_Ui->page.top.main, LV_PAGE_PART_BG, &style_default_radius_none);
 }
