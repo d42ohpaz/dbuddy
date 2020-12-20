@@ -83,8 +83,8 @@ void create_display(void) {
 
 void create_obj_left_top_container_day(void) {
     p_Ui->page.left.top.container_day = lv_obj_create(p_Ui->page.left.top.container, p_Ui->page.main);
-    lv_obj_set_pos(p_Ui->page.left.top.container_day, 0, lv_obj_get_height_fit(p_Ui->page.left.top.container) / 4);
-    lv_obj_set_size(p_Ui->page.left.top.container_day, lv_obj_get_width_fit(p_Ui->page.left.top.container), lv_obj_get_height_fit(p_Ui->page.left.top.container) / 2);
+    lv_obj_set_size(p_Ui->page.left.top.container_day, lv_obj_get_width_fit(p_Ui->page.left.top.container) / 3, lv_obj_get_height_fit(p_Ui->page.left.top.container));
+    lv_obj_set_pos(p_Ui->page.left.top.container_day, lv_obj_get_width_fit(p_Ui->page.left.top.container_month), 0);
 
     p_Ui->page.left.top.label_day = lv_label_create(p_Ui->page.left.top.container_day, NULL);
     lv_label_set_text(p_Ui->page.left.top.label_day, "");
@@ -95,7 +95,7 @@ void create_obj_left_top_container_day(void) {
 
 void create_obj_left_top_container_month(void) {
     p_Ui->page.left.top.container_month = lv_obj_create(p_Ui->page.left.top.container, p_Ui->page.main);
-    lv_obj_set_size(p_Ui->page.left.top.container_month, lv_obj_get_width_fit(p_Ui->page.left.top.container), lv_obj_get_height_fit(p_Ui->page.left.top.container) / 4);
+    lv_obj_set_size(p_Ui->page.left.top.container_month, lv_obj_get_width_fit(p_Ui->page.left.top.container) / 3, lv_obj_get_height_fit(p_Ui->page.left.top.container));
 
     p_Ui->page.left.top.label_month = lv_label_create(p_Ui->page.left.top.container_month, NULL);
     lv_label_set_text(p_Ui->page.left.top.label_month, "");
@@ -106,12 +106,15 @@ void create_obj_left_top_container_month(void) {
 
 void create_obj_left_top_container_year(void) {
     p_Ui->page.left.top.container_year = lv_obj_create(p_Ui->page.left.top.container, p_Ui->page.main);
-    lv_obj_set_pos(p_Ui->page.left.top.container_year, 0, lv_obj_get_height_fit(p_Ui->page.left.top.container) / 4 + lv_obj_get_height_fit(p_Ui->page.left.top.container_day));
-    lv_obj_set_size(p_Ui->page.left.top.container_year, lv_obj_get_width_fit(p_Ui->page.left.top.container), lv_obj_get_height_fit(p_Ui->page.left.top.container) / 4);
+    lv_obj_set_size(p_Ui->page.left.top.container_year, lv_obj_get_width_fit(p_Ui->page.left.top.container) / 3, lv_obj_get_height_fit(p_Ui->page.left.top.container));
+    lv_obj_set_pos(p_Ui->page.left.top.container_year, lv_obj_get_width_fit(p_Ui->page.left.top.container_month) + lv_obj_get_width_fit(p_Ui->page.left.top.container_day), 0);
 
     p_Ui->page.left.top.label_year = lv_label_create(p_Ui->page.left.top.container_year, NULL);
     lv_label_set_text(p_Ui->page.left.top.label_year, "");
     lv_obj_set_auto_realign(p_Ui->page.left.top.label_year, true);
+    lv_label_set_long_mode(p_Ui->page.left.top.label_year, LV_LABEL_LONG_BREAK);
+    lv_obj_set_size(p_Ui->page.left.top.label_year, lv_obj_get_width_fit(p_Ui->page.left.top.container_year), lv_obj_get_height(p_Ui->page.left.top.container_year));
+    lv_label_set_align(p_Ui->page.left.top.label_year, LV_LABEL_ALIGN_CENTER);
     lv_obj_align(p_Ui->page.left.top.label_year, p_Ui->page.left.top.container_year, LV_ALIGN_CENTER, 0, 0);
     lv_obj_add_style(p_Ui->page.left.top.label_year, LV_LABEL_PART_MAIN, &style_default_font_black_medium);
 }
