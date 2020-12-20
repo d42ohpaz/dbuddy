@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <time.h>
 #include "ui.h"
 #include "styles.h"
@@ -235,16 +236,17 @@ void update_calendar_day(Ui ui) {
     lv_calendar_set_showed_date(ui.page.right.calendar, &current);
 
     struct tm tm;
-    char bufMonth[4], bufYear[5];
+    char bufDay[4], bufMonth[4], bufYear[3], bufCentury[3], selected[11];
 
-    tm.tm_mon = current.month - 1;
-    tm.tm_mday = current.day + 0;
-    tm.tm_year = current.year - 1900;
+    sprintf(selected, "%d-%d-%d", current.year, current.month, current.day);
+    strptime(selected, "%Y-%m-%d", &tm);
 
+    strftime(bufDay, sizeof(bufDay), "%a", &tm);
     strftime(bufMonth, sizeof(bufMonth), "%b", &tm);
-    strftime(bufYear, sizeof(bufYear), "%EY", &tm);
+    strftime(bufYear, sizeof(bufYear), "%y", &tm);
+    strftime(bufCentury, sizeof(bufCentury), "%C", &tm);
 
-    lv_label_set_text_fmt(ui.page.left.top.label_month, "%s", bufMonth);
+    lv_label_set_text_fmt(ui.page.left.top.label_month, "%s\n%s", bufDay, bufMonth);
     lv_label_set_text_fmt(ui.page.left.top.label_day, "%02d", tm.tm_mday);
-    lv_label_set_text_fmt(ui.page.left.top.label_year, "%s", bufYear);
+    lv_label_set_text_fmt(ui.page.left.top.label_year, "%s\n%s", bufCentury, bufYear);
 }
