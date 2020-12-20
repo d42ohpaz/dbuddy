@@ -136,6 +136,19 @@ void create_obj_top_container_actions(void) {
 
     lv_obj_set_size(p_Ui->page.top.container_actions, lv_obj_get_width_fit(p_Ui->page.top.container) / 2, lv_obj_get_height_fit(p_Ui->page.top.main));
     lv_obj_set_pos(p_Ui->page.top.container_actions, lv_obj_get_width(p_Ui->page.top.container_time), 0);
+
+    p_Ui->page.top.btn_action_settings = lv_btn_create(p_Ui->page.top.container_actions, NULL);
+    lv_obj_set_size(p_Ui->page.top.btn_action_settings, lv_obj_get_width_fit(p_Ui->page.top.container_actions) / 12, lv_obj_get_height_fit(p_Ui->page.top.container_actions));
+    lv_obj_align(p_Ui->page.top.btn_action_settings, p_Ui->page.top.container_actions, LV_ALIGN_IN_RIGHT_MID, 0, 0);
+    lv_obj_reset_style_list(p_Ui->page.top.btn_action_settings, LV_BTN_PART_MAIN);
+
+    lv_obj_t * label = lv_label_create(p_Ui->page.top.btn_action_settings, NULL);
+    lv_label_set_text(label, LV_SYMBOL_SETTINGS);
+    lv_obj_set_auto_realign(label, true);
+    lv_obj_align(label, p_Ui->page.top.container_actions, LV_ALIGN_IN_RIGHT_MID, -DEFAULT_PADDING / 2, 0);
+    lv_obj_add_style(label, LV_LABEL_PART_MAIN, &style_default_font_regular_small);
+
+    lv_obj_set_style_local_text_color(p_Ui->page.top.btn_action_settings, LV_LABEL_PART_MAIN, LV_STATE_PRESSED, LV_COLOR_AQUA);
 }
 
 void create_obj_top_container_time(void) {

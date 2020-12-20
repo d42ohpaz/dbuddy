@@ -46,6 +46,7 @@ struct TopPageUi {
     lv_obj_t * container_actions;
 
     lv_obj_t * label_time;
+    lv_obj_t * btn_action_settings;
 };
 
 struct LeftPageUi {
