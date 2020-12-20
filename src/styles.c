@@ -95,8 +95,8 @@ void styles_init(void) {
     lv_style_set_value_font(&style_default_font_black_large_72, LV_STATE_DEFAULT, &roboto_black_72);
 
     lv_style_init(&style_default_background_overlay_color_black);
-    lv_style_copy(&style_default_background_overlay_color_black, &style_default_background_color_black);
-    lv_style_copy(&style_default_background_overlay_color_black, &style_default_background_transparent_half);
+    lv_style_set_bg_color(&style_default_background_overlay_color_black, LV_STATE_DEFAULT, LV_COLOR_BLACK);
+    lv_style_set_bg_opa(&style_default_background_overlay_color_black, LV_STATE_DEFAULT, LV_OPA_50);
 
     lv_style_init(&style_focused_background_blend_mode_additive);
     lv_style_set_bg_blend_mode(&style_focused_background_blend_mode_additive, LV_STATE_FOCUSED, LV_BLEND_MODE_ADDITIVE);
