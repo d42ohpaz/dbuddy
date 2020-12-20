@@ -4,7 +4,15 @@ lv_style_t style_default_background_color_black;
 lv_style_t style_default_background_color_blue;
 lv_style_t style_default_background_overlay_color_black;
 lv_style_t style_default_background_transparent_full;
+lv_style_t style_default_background_transparent_10;
+lv_style_t style_default_background_transparent_20;
+lv_style_t style_default_background_transparent_30;
+lv_style_t style_default_background_transparent_40;
 lv_style_t style_default_background_transparent_half;
+lv_style_t style_default_background_transparent_60;
+lv_style_t style_default_background_transparent_70;
+lv_style_t style_default_background_transparent_80;
+lv_style_t style_default_background_transparent_90;
 lv_style_t style_default_background_transparent_cover;
 lv_style_t style_default_border_color_white;
 lv_style_t style_default_border_none;
@@ -35,8 +43,32 @@ void styles_init(void) {
     lv_style_init(&style_default_background_transparent_full);
     lv_style_set_bg_opa(&style_default_background_transparent_full, LV_STATE_DEFAULT, LV_OPA_TRANSP);
 
+    lv_style_init(&style_default_background_transparent_10);
+    lv_style_set_bg_opa(&style_default_background_transparent_10, LV_STATE_DEFAULT, LV_OPA_10);
+
+    lv_style_init(&style_default_background_transparent_20);
+    lv_style_set_bg_opa(&style_default_background_transparent_20, LV_STATE_DEFAULT, LV_OPA_20);
+
+    lv_style_init(&style_default_background_transparent_30);
+    lv_style_set_bg_opa(&style_default_background_transparent_30, LV_STATE_DEFAULT, LV_OPA_30);
+
+    lv_style_init(&style_default_background_transparent_40);
+    lv_style_set_bg_opa(&style_default_background_transparent_40, LV_STATE_DEFAULT, LV_OPA_40);
+
     lv_style_init(&style_default_background_transparent_half);
     lv_style_set_bg_opa(&style_default_background_transparent_half, LV_STATE_DEFAULT, LV_OPA_50);
+
+    lv_style_init(&style_default_background_transparent_60);
+    lv_style_set_bg_opa(&style_default_background_transparent_60, LV_STATE_DEFAULT, LV_OPA_60);
+
+    lv_style_init(&style_default_background_transparent_70);
+    lv_style_set_bg_opa(&style_default_background_transparent_70, LV_STATE_DEFAULT, LV_OPA_70);
+
+    lv_style_init(&style_default_background_transparent_80);
+    lv_style_set_bg_opa(&style_default_background_transparent_80, LV_STATE_DEFAULT, LV_OPA_80);
+
+    lv_style_init(&style_default_background_transparent_90);
+    lv_style_set_bg_opa(&style_default_background_transparent_90, LV_STATE_DEFAULT, LV_OPA_90);
 
     lv_style_init(&style_default_background_transparent_cover);
     lv_style_set_bg_opa(&style_default_background_transparent_cover, LV_STATE_DEFAULT, LV_OPA_COVER);
