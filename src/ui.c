@@ -262,7 +262,6 @@ void update_calendar(Ui ui) {
     lv_calendar_set_today_date(ui.page.right.calendar, &date);
     lv_calendar_set_showed_date(ui.page.right.calendar, &date);
 
-    struct tm tm;
     char bufDay[4], bufMonth[4], bufYear[3], bufCentury[3], selected[11];
 
     sprintf(selected, "%d-%d-%d", date.year, date.month, date.day);
