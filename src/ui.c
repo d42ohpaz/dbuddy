@@ -124,7 +124,6 @@ void create_page_left_bottom_itinerary(void) {
     p_Ui->page.left.bottom.itinerary = lv_obj_create(p_Ui->page.left.bottom.main, p_Ui->page.main);
 
     lv_obj_set_size(p_Ui->page.left.bottom.itinerary, lv_page_get_width_fit(p_Ui->page.left.bottom.main), lv_page_get_height_fit(p_Ui->page.left.bottom.main));
-    lv_obj_add_style(p_Ui->page.left.bottom.itinerary, LV_CALENDAR_PART_BG, &style_default_background_color_black);
     lv_obj_add_style(p_Ui->page.left.bottom.itinerary, LV_PAGE_PART_BG, &style_default_background_overlay_color_black);
 }
 
@@ -148,7 +147,6 @@ void create_page_left_top_container(void) {
     p_Ui->page.left.top.container = lv_obj_create(p_Ui->page.left.top.main, p_Ui->page.main);
 
     lv_obj_set_size(p_Ui->page.left.top.container, lv_page_get_width_fit(p_Ui->page.left.top.main), lv_page_get_height_fit(p_Ui->page.left.top.main));
-    lv_obj_add_style(p_Ui->page.left.top.container, LV_CALENDAR_PART_BG, &style_default_background_color_black);
     lv_obj_add_style(p_Ui->page.left.top.container, LV_PAGE_PART_BG, &style_default_background_overlay_color_black);
 }
 
@@ -177,7 +175,6 @@ void create_page_right_calendar(void) {
     p_Ui->page.right.calendar = lv_calendar_create(p_Ui->page.right.container, NULL);
     lv_obj_set_size(p_Ui->page.right.calendar, lv_obj_get_width_fit(p_Ui->page.right.container), lv_obj_get_height_fit(p_Ui->page.right.container));
     lv_obj_align(p_Ui->page.right.calendar, p_Ui->page.right.main, LV_ALIGN_IN_LEFT_MID, 0, 0);
-    lv_obj_add_style(p_Ui->page.right.calendar, LV_CALENDAR_PART_BG, &style_default_background_color_black);
     lv_obj_add_style(p_Ui->page.right.calendar, LV_CALENDAR_PART_BG, &style_default_background_overlay_color_black);
     lv_obj_add_style(p_Ui->page.right.calendar, LV_CALENDAR_PART_BG, &style_default_border_none);
     lv_obj_add_style(p_Ui->page.right.calendar, LV_CALENDAR_PART_DATE, &style_focused_background_blend_mode_additive);
@@ -203,7 +200,6 @@ void create_page_top_container(void) {
     p_Ui->page.top.container = lv_obj_create(p_Ui->page.top.main, p_Ui->page.main);
 
     lv_obj_set_size(p_Ui->page.top.main, lv_obj_get_width_fit(p_Ui->page.top.main), lv_obj_get_height_fit(p_Ui->page.top.main));
-    lv_obj_add_style(p_Ui->page.top.main, LV_CALENDAR_PART_BG, &style_default_background_color_black);
     lv_obj_add_style(p_Ui->page.top.main, LV_PAGE_PART_BG, &style_default_background_overlay_color_black);
     lv_obj_add_style(p_Ui->page.top.main, LV_PAGE_PART_BG, &style_default_radius_none);
 }
