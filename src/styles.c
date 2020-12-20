@@ -22,6 +22,11 @@ lv_style_t style_default_font_black_large_48;
 lv_style_t style_default_font_black_large_72;
 lv_style_t style_default_font_black_medium;
 lv_style_t style_default_font_black_small;
+lv_style_t style_default_font_regular_large;
+lv_style_t style_default_font_regular_large_48;
+lv_style_t style_default_font_regular_large_72;
+lv_style_t style_default_font_regular_medium;
+lv_style_t style_default_font_regular_small;
 lv_style_t style_default_padding_default;
 lv_style_t style_default_padding_left_none;
 lv_style_t style_default_padding_none;
@@ -140,6 +145,26 @@ void styles_init(void) {
     lv_style_init(&style_default_font_black_large_72);
     lv_style_set_text_font(&style_default_font_black_large_72, LV_STATE_DEFAULT, &roboto_black_72);
     lv_style_set_value_font(&style_default_font_black_large_72, LV_STATE_DEFAULT, &roboto_black_72);
+
+    lv_style_init(&style_default_font_regular_medium);
+    lv_style_set_text_font(&style_default_font_regular_medium, LV_STATE_DEFAULT, &roboto_regular_24);
+    lv_style_set_value_font(&style_default_font_regular_medium, LV_STATE_DEFAULT, &roboto_regular_24);
+
+    lv_style_init(&style_default_font_regular_small);
+    lv_style_set_text_font(&style_default_font_regular_small, LV_STATE_DEFAULT, &roboto_regular_16);
+    lv_style_set_value_font(&style_default_font_regular_small, LV_STATE_DEFAULT, &roboto_regular_16);
+
+    lv_style_init(&style_default_font_regular_large);
+    lv_style_set_text_font(&style_default_font_regular_large, LV_STATE_DEFAULT, &roboto_regular_96);
+    lv_style_set_value_font(&style_default_font_regular_large, LV_STATE_DEFAULT, &roboto_regular_96);
+
+    lv_style_init(&style_default_font_regular_large_48);
+    lv_style_set_text_font(&style_default_font_regular_large_48, LV_STATE_DEFAULT, &roboto_regular_48);
+    lv_style_set_value_font(&style_default_font_regular_large_48, LV_STATE_DEFAULT, &roboto_regular_48);
+
+    lv_style_init(&style_default_font_regular_large_72);
+    lv_style_set_text_font(&style_default_font_regular_large_72, LV_STATE_DEFAULT, &roboto_regular_72);
+    lv_style_set_value_font(&style_default_font_regular_large_72, LV_STATE_DEFAULT, &roboto_regular_72);
 
     lv_style_init(&style_default_background_overlay_color_black);
     lv_style_set_bg_color(&style_default_background_overlay_color_black, LV_STATE_DEFAULT, LV_COLOR_BLACK);
