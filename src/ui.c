@@ -266,6 +266,6 @@ void update_calendar(Ui ui) {
     strftime(bufCentury, sizeof(bufCentury), "%C", &local);
 
     lv_label_set_text_fmt(ui.page.left.top.label_month, "%s\n%s", bufDay, bufMonth);
-    lv_label_set_text_fmt(ui.page.left.top.label_day, "%02d", local.tm_mday);
+    lv_label_set_text_fmt(ui.page.left.top.label_day, "%02u", local.tm_mday);
     lv_label_set_text_fmt(ui.page.left.top.label_year, "%s\n%s", bufCentury, bufYear);
 }
