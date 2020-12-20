@@ -55,8 +55,6 @@ struct RightPageUi {
     lv_obj_t * container;
 
     lv_obj_t * calendar;
-
-    lv_calendar_date_t current;
 };
 
 struct PageUi {
@@ -72,6 +70,8 @@ struct Ui {
     lv_obj_t * screen;
 
     PageUi page;
+
+    lv_calendar_date_t date;
 };
 
 Ui * ui_init(void);

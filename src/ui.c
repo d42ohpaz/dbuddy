@@ -66,9 +66,9 @@ void cb_calendar_event_handler(lv_obj_t *obj, lv_event_t event) {
         lv_calendar_date_t *date = lv_calendar_get_pressed_date(obj);
 
         if (date) {
-            p_Ui->page.right.current.month = date->month;
-            p_Ui->page.right.current.day = date->day;
-            p_Ui->page.right.current.year = date->year;
+            p_Ui->date.month = date->month;
+            p_Ui->date.day = date->day;
+            p_Ui->date.year = date->year;
 
             update_calendar_day(*p_Ui);
         }
@@ -216,32 +216,31 @@ void create_screen(void) {
 }
 
 void update_calendar_day(Ui ui) {
-    lv_calendar_date_t current = p_Ui->page.right.current;
+    lv_calendar_date_t date = p_Ui->date;
+    time_t t = time(NULL);
+    struct tm local = *localtime(&t);
 
-    if (current.year == 0 && current.month == 0 && current.day == 0) {
-        time_t t = time(NULL);
-        struct tm tm = *localtime(&t);
-
-        current.year = tm.tm_year + 1900;
-        current.day = tm.tm_mday;
-        current.month = tm.tm_mon + 1;
+    if (date.year == 0 && date.month == 0 && date.day == 0) {
+        date.year = local.tm_year + 1900;
+        date.day = local.tm_mday;
+        date.month = local.tm_mon + 1;
     }
 
-    lv_calendar_set_today_date(ui.page.right.calendar, &current);
-    lv_calendar_set_showed_date(ui.page.right.calendar, &current);
+    lv_calendar_set_today_date(ui.page.right.calendar, &date);
+    lv_calendar_set_showed_date(ui.page.right.calendar, &date);
 
     struct tm tm;
     char bufDay[4], bufMonth[4], bufYear[3], bufCentury[3], selected[11];
 
-    sprintf(selected, "%d-%d-%d", current.year, current.month, current.day);
-    strptime(selected, "%Y-%m-%d", &tm);
+    sprintf(selected, "%d-%d-%d", date.year, date.month, date.day);
+    strptime(selected, "%Y-%m-%d", &local);
 
-    strftime(bufDay, sizeof(bufDay), "%a", &tm);
-    strftime(bufMonth, sizeof(bufMonth), "%b", &tm);
-    strftime(bufYear, sizeof(bufYear), "%y", &tm);
-    strftime(bufCentury, sizeof(bufCentury), "%C", &tm);
+    strftime(bufDay, sizeof(bufDay), "%a", &local);
+    strftime(bufMonth, sizeof(bufMonth), "%b", &local);
+    strftime(bufYear, sizeof(bufYear), "%y", &local);
+    strftime(bufCentury, sizeof(bufCentury), "%C", &local);
 
     lv_label_set_text_fmt(ui.page.left.top.label_month, "%s\n%s", bufDay, bufMonth);
-    lv_label_set_text_fmt(ui.page.left.top.label_day, "%02d", tm.tm_mday);
+    lv_label_set_text_fmt(ui.page.left.top.label_day, "%02d", local.tm_mday);
     lv_label_set_text_fmt(ui.page.left.top.label_year, "%s\n%s", bufCentury, bufYear);
 }
