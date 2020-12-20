@@ -25,7 +25,9 @@ void create_page_top_main(void);
 void create_screen(void);
 
 void cb_calendar_event_handler(lv_obj_t *obj, lv_event_t event);
+void cb_time_task_handler(lv_task_t * task);
 void update_calendar(Ui ui);
+void update_time(Ui ui);
 
 static Ui * p_Ui = NULL;
 
@@ -77,6 +79,11 @@ void cb_calendar_event_handler(lv_obj_t *obj, lv_event_t event) {
             update_calendar(*p_Ui);
         }
     }
+}
+
+void cb_time_task_handler(lv_task_t * task) {
+    Ui ui = *(Ui *)(task->user_data);
+    update_time(ui);
 }
 
 void create_display(void) {
@@ -210,6 +217,7 @@ void create_page_right_calendar(void) {
     lv_obj_set_style_local_text_font(p_Ui->page.right.calendar, LV_CALENDAR_PART_BG, LV_STATE_DEFAULT, &roboto_regular_12);
 
     lv_obj_set_event_cb(p_Ui->page.right.calendar, cb_calendar_event_handler);
+
     update_calendar(*p_Ui);
 }
 
@@ -268,4 +276,28 @@ void update_calendar(Ui ui) {
     lv_label_set_text_fmt(ui.page.left.top.label_month, "%s\n%s", bufDay, bufMonth);
     lv_label_set_text_fmt(ui.page.left.top.label_day, "%02u", local.tm_mday);
     lv_label_set_text_fmt(ui.page.left.top.label_year, "%s\n%s", bufCentury, bufYear);
+}
+
+void update_time(Ui ui) {
+    time_t t = time(NULL);
+    struct tm local = *localtime(&t);
+    char bufMeridiem[3];
+    int tmHour = local.tm_hour;
+
+    if (local.tm_hour >= 12) {
+        sprintf(bufMeridiem, "%s", "pm");
+    } else {
+        sprintf(bufMeridiem, "%s", "am");
+    }
+
+    if (tmHour > 12) {
+        tmHour = tmHour - 12;
+    }
+
+    char * colon = strstr(lv_label_get_text(ui.page.top.label_time), ":");
+    if (colon == NULL) {
+        lv_label_set_text_fmt(ui.page.top.label_time, "%02u:%02u %s", tmHour, local.tm_min, bufMeridiem);
+    } else {
+        lv_label_set_text_fmt(ui.page.top.label_time, "%02u %02u %s", tmHour, local.tm_min, bufMeridiem);
+    }
 }
