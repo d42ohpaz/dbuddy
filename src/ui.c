@@ -23,7 +23,7 @@ void create_page_top_main(void);
 void create_screen(void);
 
 void cb_calendar_event_handler(lv_obj_t *obj, lv_event_t event);
-void update_calendar_day(Ui ui);
+void update_calendar(Ui ui);
 
 static Ui * p_Ui = NULL;
 
@@ -70,7 +70,7 @@ void cb_calendar_event_handler(lv_obj_t *obj, lv_event_t event) {
             p_Ui->date.day = date->day;
             p_Ui->date.year = date->year;
 
-            update_calendar_day(*p_Ui);
+            update_calendar(*p_Ui);
         }
     }
 }
@@ -186,7 +186,7 @@ void create_page_right_calendar(void) {
     lv_obj_set_style_local_text_font(p_Ui->page.right.calendar, LV_CALENDAR_PART_BG, LV_STATE_DEFAULT, &roboto_regular_12);
 
     lv_obj_set_event_cb(p_Ui->page.right.calendar, cb_calendar_event_handler);
-    update_calendar_day(*p_Ui);
+    update_calendar(*p_Ui);
 }
 
 void create_page_right_main(void) {
@@ -215,7 +215,7 @@ void create_screen(void) {
     lv_obj_add_style(p_Ui->screen, LV_OBJMASK_PART_MAIN, &style_default_background_transparent_full);
 }
 
-void update_calendar_day(Ui ui) {
+void update_calendar(Ui ui) {
     lv_calendar_date_t date = p_Ui->date;
     time_t t = time(NULL);
     struct tm local = *localtime(&t);
