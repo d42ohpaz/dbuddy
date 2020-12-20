@@ -8,6 +8,8 @@ void create_display(void);
 void create_obj_left_top_container_day(void);
 void create_obj_left_top_container_month(void);
 void create_obj_left_top_container_year(void);
+void create_obj_top_container_actions(void);
+void create_obj_top_container_time(void);
 
 void create_page_left_bottom_itinerary(void);
 void create_page_left_bottom_main(void);
@@ -45,6 +47,8 @@ Ui *ui_init(void) {
     create_page_top_main();
     create_page_right_main();
     create_page_top_container();
+    create_obj_top_container_time();
+    create_obj_top_container_actions();
     create_page_left_main();
     create_page_left_top_main();
     create_page_left_top_container();
@@ -118,6 +122,26 @@ void create_obj_left_top_container_year(void) {
     lv_label_set_align(p_Ui->page.left.top.label_year, LV_LABEL_ALIGN_CENTER);
     lv_obj_align(p_Ui->page.left.top.label_year, p_Ui->page.left.top.container_year, LV_ALIGN_CENTER, 0, 0);
     lv_obj_add_style(p_Ui->page.left.top.label_year, LV_LABEL_PART_MAIN, &style_default_font_black_medium);
+}
+
+void create_obj_top_container_actions(void) {
+    p_Ui->page.top.container_actions = lv_obj_create(p_Ui->page.top.container, p_Ui->page.top.main);
+
+    lv_obj_set_size(p_Ui->page.top.container_actions, lv_obj_get_width_fit(p_Ui->page.top.container) / 2, lv_obj_get_height_fit(p_Ui->page.top.main));
+    lv_obj_set_pos(p_Ui->page.top.container_actions, lv_obj_get_width(p_Ui->page.top.container_time), 0);
+}
+
+void create_obj_top_container_time(void) {
+    p_Ui->page.top.container_time = lv_obj_create(p_Ui->page.top.container, p_Ui->page.top.main);
+    lv_obj_set_size(p_Ui->page.top.container_time, lv_obj_get_width_fit(p_Ui->page.top.main) / 2, lv_obj_get_height_fit(p_Ui->page.top.main));
+
+    p_Ui->page.top.label_time = lv_label_create(p_Ui->page.top.container_time, NULL);
+    lv_label_set_text(p_Ui->page.top.label_time, "");
+    lv_obj_set_auto_realign(p_Ui->page.top.label_time, true);
+    lv_obj_align(p_Ui->page.top.label_time, p_Ui->page.top.container_time, LV_ALIGN_IN_LEFT_MID, DEFAULT_PADDING / 2, 0);
+    lv_obj_add_style(p_Ui->page.top.label_time, LV_LABEL_PART_MAIN, &style_default_font_regular_small);
+
+    lv_task_create(cb_time_task_handler, 500, LV_TASK_PRIO_MID, p_Ui);
 }
 
 void create_page_left_bottom_itinerary(void) {
@@ -200,14 +224,6 @@ void create_page_top_container(void) {
     p_Ui->page.top.container = lv_obj_create(p_Ui->page.top.main, p_Ui->page.main);
 
     lv_obj_set_size(p_Ui->page.top.container, lv_obj_get_width_fit(p_Ui->page.top.main), lv_obj_get_height_fit(p_Ui->page.top.main));
-
-    p_Ui->page.top.container_time = lv_obj_create(p_Ui->page.top.container, p_Ui->page.top.main);
-    lv_obj_set_size(p_Ui->page.top.container_time, lv_obj_get_width_fit(p_Ui->page.top.main) / 2, lv_obj_get_height_fit(p_Ui->page.top.main));
-
-    p_Ui->page.top.container_actions = lv_obj_create(p_Ui->page.top.container, p_Ui->page.top.main);
-    lv_obj_set_size(p_Ui->page.top.container_actions, lv_obj_get_width_fit(p_Ui->page.top.main) / 2, lv_obj_get_height_fit(p_Ui->page.top.main));
-    lv_obj_set_pos(p_Ui->page.top.container_actions, lv_obj_get_width_fit(p_Ui->page.top.container_time), 0);
-    lv_obj_set_style_local_border_width(p_Ui->page.top.container_actions, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, 1);
 }
 
 void create_page_top_main(void) {
