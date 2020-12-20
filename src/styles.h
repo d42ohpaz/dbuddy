@@ -3,7 +3,7 @@
 
 #include "lvgl/lvgl.h"
 
-#define DEFAULT_PADDING 16
+#define DEFAULT_PADDING 12
 #define DEFAULT_BORDER 5
 #define DEFAULT_MENU_HEIGHT 24
 
