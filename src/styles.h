@@ -34,7 +34,10 @@ extern lv_style_t style_default_padding_none;
 extern lv_style_t style_default_radius_none;
 extern lv_style_t style_default_text_color_black;
 
+extern lv_style_t style_default_background_blend_mode_additive;
+extern lv_style_t style_default_background_blend_mode_subtractive;
 extern lv_style_t style_focused_background_blend_mode_additive;
+extern lv_style_t style_focused_background_blend_mode_subtractive;
 extern lv_style_t style_focused_background_color_purple;
 extern lv_style_t style_focused_text_color_black;
 

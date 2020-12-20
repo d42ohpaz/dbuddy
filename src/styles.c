@@ -28,7 +28,10 @@ lv_style_t style_default_padding_none;
 lv_style_t style_default_radius_none;
 lv_style_t style_default_text_color_black;
 
+lv_style_t style_default_background_blend_mode_additive;
+lv_style_t style_default_background_blend_mode_subtractive;
 lv_style_t style_focused_background_blend_mode_additive;
+lv_style_t style_focused_background_blend_mode_subtractive;
 lv_style_t style_focused_background_color_purple;
 lv_style_t style_focused_text_color_black;
 
@@ -39,6 +42,18 @@ void styles_init(void) {
         LV_LOG_WARN("styles_init: already inited");
         return;
     }
+
+    lv_style_init(&style_default_background_blend_mode_additive);
+    lv_style_set_bg_blend_mode(&style_default_background_blend_mode_additive, LV_STATE_DEFAULT, LV_BLEND_MODE_ADDITIVE);
+
+    lv_style_init(&style_default_background_blend_mode_subtractive);
+    lv_style_set_bg_blend_mode(&style_default_background_blend_mode_subtractive, LV_STATE_DEFAULT, LV_BLEND_MODE_SUBTRACTIVE);
+
+    lv_style_init(&style_focused_background_blend_mode_additive);
+    lv_style_set_bg_blend_mode(&style_focused_background_blend_mode_additive, LV_STATE_FOCUSED, LV_BLEND_MODE_ADDITIVE);
+
+    lv_style_init(&style_focused_background_blend_mode_subtractive);
+    lv_style_set_bg_blend_mode(&style_focused_background_blend_mode_subtractive, LV_STATE_FOCUSED, LV_BLEND_MODE_SUBTRACTIVE);
 
     lv_style_init(&style_default_background_transparent_full);
     lv_style_set_bg_opa(&style_default_background_transparent_full, LV_STATE_DEFAULT, LV_OPA_TRANSP);
@@ -130,15 +145,11 @@ void styles_init(void) {
     lv_style_set_bg_color(&style_default_background_overlay_color_black, LV_STATE_DEFAULT, LV_COLOR_BLACK);
     lv_style_set_bg_opa(&style_default_background_overlay_color_black, LV_STATE_DEFAULT, LV_OPA_50);
 
-    lv_style_init(&style_focused_background_blend_mode_additive);
-    lv_style_set_bg_blend_mode(&style_focused_background_blend_mode_additive, LV_STATE_FOCUSED, LV_BLEND_MODE_ADDITIVE);
-
     lv_style_init(&style_focused_background_color_purple);
     lv_style_set_bg_color(&style_focused_background_color_purple, LV_STATE_FOCUSED, LV_COLOR_PURPLE);
 
     lv_style_init(&style_focused_text_color_black);
     lv_style_set_text_color(&style_focused_text_color_black, LV_STATE_FOCUSED, LV_COLOR_BLACK);
-
 
     initialized = true;
     LV_LOG_INFO("styles_init ready");
