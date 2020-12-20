@@ -305,10 +305,19 @@ void update_time(Ui ui) {
         tmHour = tmHour - 12;
     }
 
+    static int count_on = 0, count_off = 0;
     char * colon = strstr(lv_label_get_text(ui.page.top.label_time), ":");
-    if (colon == NULL) {
+
+    if ((count_on % 2) == 0 && colon == NULL) {
         lv_label_set_text_fmt(ui.page.top.label_time, "%02u:%02u %s", tmHour, local.tm_min, bufMeridiem);
-    } else {
+
+        count_on = 0;
+    } else if ((count_off % 2) == 0) {
         lv_label_set_text_fmt(ui.page.top.label_time, "%02u %02u %s", tmHour, local.tm_min, bufMeridiem);
+
+        count_off = 0;
     }
+
+    count_off++;
+    count_on++;
 }
