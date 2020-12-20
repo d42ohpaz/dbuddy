@@ -192,7 +192,6 @@ void create_page_main(void) {
     p_Ui->page.main = lv_page_create(p_Ui->screen, NULL);
 
     lv_obj_set_size(p_Ui->page.main, LV_HOR_RES, LV_VER_RES);
-    lv_obj_set_click(p_Ui->page.main, false);
     lv_obj_add_style(p_Ui->page.main, LV_PAGE_PART_BG, &style_default_border_none);
     lv_obj_add_style(p_Ui->page.main, LV_PAGE_PART_BG, &style_default_padding_none);
     lv_obj_add_style(p_Ui->page.main, LV_PAGE_PART_BG, &style_default_background_transparent_full);
