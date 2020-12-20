@@ -41,6 +41,9 @@ struct BottomLeftPageUi {
 struct TopPageUi {
     lv_obj_t * main;
     lv_obj_t * container;
+
+    lv_obj_t * container_time;
+    lv_obj_t * container_actions;
 };
 
 struct LeftPageUi {
