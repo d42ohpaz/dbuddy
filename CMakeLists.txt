@@ -10,6 +10,11 @@ include_directories(${PROJECT_SOURCE_DIR})
 file(GLOB_RECURSE INCLUDES "lv_drivers/*.h" "lvgl/*.h" "assets/*.h" "src/*.h")
 file(GLOB_RECURSE SOURCES "lv_drivers/*.c" "lvgl/*.c" "assets/*.c" "src/*.c")
 
+list(FILTER SOURCES EXCLUDE REGEX "lvgl/src/lv_font/.*dejavu.*.c")
+list(FILTER SOURCES EXCLUDE REGEX "lvgl/src/lv_font/.*montserrat.*.c")
+list(FILTER SOURCES EXCLUDE REGEX "lvgl/src/lv_font/.*simsun.*.c")
+list(FILTER SOURCES EXCLUDE REGEX "lvgl/src/lv_font/.*unscii.*.c")
+
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 find_package(SDL2 REQUIRED)
