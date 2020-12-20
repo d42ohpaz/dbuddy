@@ -61,7 +61,6 @@ void styles_init(void) {
 
     lv_style_init(&style_default_border_color_white);
     lv_style_set_border_color(&style_default_border_color_white, LV_STATE_DEFAULT, LV_COLOR_WHITE);
-    lv_style_set_border_width(&style_default_border_color_white, LV_STATE_DEFAULT, DEFAULT_BORDER);
 
     lv_style_init(&style_default_border_none);
     lv_style_set_border_width(&style_default_border_none, LV_STATE_DEFAULT, 0);
