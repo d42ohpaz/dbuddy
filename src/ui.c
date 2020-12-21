@@ -89,6 +89,7 @@ void cb_action_settings_event_handler(lv_obj_t *obj, lv_event_t event) {
             lv_obj_add_style(p_Ui->settings.list, LV_LIST_PART_BG, &style_default_border_sides_only_right);
             lv_obj_add_style(p_Ui->settings.list, LV_LIST_PART_BG, &style_default_border_color_white);
             lv_obj_add_style(p_Ui->settings.list, LV_LIST_PART_BG, &style_default_border_thin);
+            lv_obj_add_style(p_Ui->settings.list, LV_LIST_PART_BG, &style_default_radius_none);
             lv_obj_add_style(p_Ui->settings.list, LV_LIST_PART_BG, &style_focused_border_color_white);
 
             lv_obj_t * btn_general = lv_list_add_btn(p_Ui->settings.list, NULL, "General");
