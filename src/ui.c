@@ -24,6 +24,7 @@ void create_page_top_main(void);
 
 void create_screen(void);
 
+void cb_action_settings_event_handler(lv_obj_t *obj, lv_event_t event);
 void cb_calendar_event_handler(lv_obj_t *obj, lv_event_t event);
 void cb_time_task_handler(lv_task_t * task);
 void update_calendar(Ui ui);
@@ -65,6 +66,43 @@ Ui *ui_init(void) {
     LV_LOG_INFO("ui_init ready");
 
     return p_Ui;
+}
+
+void cb_action_settings_event_handler(lv_obj_t *obj, lv_event_t event) {
+    if (event == LV_EVENT_PRESSED) {
+        lv_obj_t * settings = lv_win_create(p_Ui->screen, NULL);
+        lv_obj_set_size(settings, lv_page_get_width_fit(p_Ui->page.main) - DEFAULT_MENU_HEIGHT - DEFAULT_PADDING, lv_page_get_height_fit(p_Ui->page.main) - DEFAULT_MENU_HEIGHT - DEFAULT_PADDING);
+        lv_obj_align(settings, p_Ui->screen, LV_ALIGN_CENTER, 0, 0);
+
+        lv_obj_add_style(settings, LV_WIN_PART_HEADER, &style_default_background_color_black);
+        lv_obj_add_style(settings, LV_WIN_PART_HEADER, &style_default_border_color_white);
+        lv_obj_add_style(settings, LV_WIN_PART_HEADER, &style_default_border_sides_only_bottom);
+        lv_obj_add_style(settings, LV_WIN_PART_HEADER, &style_default_border_thin);
+        lv_obj_add_style(settings, LV_WIN_PART_HEADER, &style_default_font_regular_small);
+        lv_obj_add_style(settings, LV_WIN_PART_HEADER, &style_default_padding_top_none);
+        lv_obj_add_style(settings, LV_WIN_PART_HEADER, &style_default_padding_right_none);
+        lv_obj_add_style(settings, LV_WIN_PART_HEADER, &style_default_padding_bottom_none);
+        lv_obj_add_style(settings, LV_WIN_PART_BG, &style_default_background_color_black);
+        lv_obj_add_style(settings, LV_WIN_PART_BG, &style_default_radius_normal);
+        lv_obj_add_style(settings, LV_WIN_PART_CONTENT_SCROLLABLE, &style_default_padding_none);
+
+        lv_win_set_title(settings, "Settings");
+
+        lv_obj_t * btn_close = lv_win_add_btn(settings, LV_SYMBOL_CLOSE);
+
+        lv_obj_set_event_cb(btn_close, lv_win_close_event_cb);
+
+        // create a list to act like a tabview.
+        // https://docs.lvgl.io/latest/en/html/widgets/list.html
+
+        lv_win_ext_t * win_ext = lv_obj_get_ext_attr(settings);
+        lv_coord_t offset = lv_obj_get_height_fit(win_ext->header);
+
+        lv_obj_t * list = lv_list_create(settings, NULL);
+        lv_obj_set_size(list, 150, lv_obj_get_height_fit(settings) - offset);
+
+
+    }
 }
 
 void cb_calendar_event_handler(lv_obj_t *obj, lv_event_t event) {
@@ -149,6 +187,7 @@ void create_obj_top_container_actions(void) {
     lv_obj_add_style(label, LV_LABEL_PART_MAIN, &style_default_font_regular_small);
 
     lv_obj_set_style_local_text_color(p_Ui->page.top.btn_action_settings, LV_LABEL_PART_MAIN, LV_STATE_PRESSED, LV_COLOR_AQUA);
+    lv_obj_set_event_cb(p_Ui->page.top.btn_action_settings, cb_action_settings_event_handler);
 }
 
 void create_obj_top_container_time(void) {
