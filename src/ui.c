@@ -27,12 +27,12 @@ void create_screen(void);
 void cb_action_settings_event_handler(lv_obj_t *obj, lv_event_t event);
 void cb_calendar_event_handler(lv_obj_t *obj, lv_event_t event);
 void cb_time_task_handler(lv_task_t * task);
-void update_calendar(Ui ui);
-void update_time(Ui ui);
+void update_calendar(ui_t ui);
+void update_time(ui_t ui);
 
-static Ui * p_Ui = NULL;
+static ui_t * p_Ui = NULL;
 
-Ui *ui_init(void) {
+ui_t *ui_init(void) {
     static bool ui_initialized = false;
 
     if (ui_initialized) {
@@ -40,7 +40,7 @@ Ui *ui_init(void) {
         return p_Ui;
     }
 
-    p_Ui = lv_mem_alloc(sizeof(Ui));
+    p_Ui = lv_mem_alloc(sizeof(ui_t));
 
     styles_init();
 
@@ -120,7 +120,7 @@ void cb_calendar_event_handler(lv_obj_t *obj, lv_event_t event) {
 }
 
 void cb_time_task_handler(lv_task_t * task) {
-    Ui ui = *(Ui *)(task->user_data);
+    ui_t ui = *(ui_t *)(task->user_data);
     update_time(ui);
 }
 
@@ -300,7 +300,7 @@ void create_screen(void) {
     lv_obj_add_style(p_Ui->screen, LV_OBJMASK_PART_MAIN, &style_default_background_transparent_full);
 }
 
-void update_calendar(Ui ui) {
+void update_calendar(ui_t ui) {
     lv_calendar_date_t date = p_Ui->date;
     time_t t = time(NULL);
     struct tm local = *localtime(&t);
@@ -329,7 +329,7 @@ void update_calendar(Ui ui) {
     lv_label_set_text_fmt(ui.page.left.top.label_year, "%s\n%s", bufCentury, bufYear);
 }
 
-void update_time(Ui ui) {
+void update_time(ui_t ui) {
     time_t t = time(NULL);
     struct tm local = *localtime(&t);
     char bufMeridiem[3];

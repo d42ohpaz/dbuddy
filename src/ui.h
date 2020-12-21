@@ -3,23 +3,23 @@
 
 #include "lvgl/lvgl.h"
 
-struct BottomLeftPageUi;
-struct LeftPageUi;
-struct PageUi;
-struct RightPageUi;
-struct TopLeftPageUi;
-struct TopPageUi;
-struct Ui;
+struct ui_bottom_left_page_t;
+struct ui_left_page_t;
+struct ui_page_t;
+struct ui_right_page_t;
+struct ui_t;
+struct ui_top_left_page_t;
+struct ui_top_page_t;
 
-typedef struct BottomLeftPageUi BottomLeftPageUi;
-typedef struct LeftPageUi LeftPageUi;
-typedef struct PageUi PageUi;
-typedef struct RightPageUi RightPageUi;
-typedef struct TopLeftPageUi TopLeftPageUi;
-typedef struct TopPageUi TopPageUi;
-typedef struct Ui Ui;
+typedef struct ui_bottom_left_page_t ui_bottom_left_page_t;
+typedef struct ui_left_page_t ui_left_page_t;
+typedef struct ui_page_t ui_page_t;
+typedef struct ui_right_page_t ui_right_page_t;
+typedef struct ui_t ui_t;
+typedef struct ui_top_left_page_t ui_top_left_page_t;
+typedef struct ui_top_page_t ui_top_page_t;
 
-struct TopLeftPageUi {
+struct ui_top_left_page_t {
     lv_obj_t * main;
     lv_obj_t * container;
 
@@ -32,13 +32,13 @@ struct TopLeftPageUi {
     lv_obj_t * label_year;
 };
 
-struct BottomLeftPageUi {
+struct ui_bottom_left_page_t {
     lv_obj_t * main;
 
     lv_obj_t * itinerary;
 };
 
-struct TopPageUi {
+struct ui_top_page_t {
     lv_obj_t * main;
     lv_obj_t * container;
 
@@ -49,37 +49,37 @@ struct TopPageUi {
     lv_obj_t * btn_action_settings;
 };
 
-struct LeftPageUi {
+struct ui_left_page_t {
     lv_obj_t * main;
 
-    TopLeftPageUi top;
-    BottomLeftPageUi bottom;
+    ui_top_left_page_t top;
+    ui_bottom_left_page_t bottom;
 };
 
-struct RightPageUi {
+struct ui_right_page_t {
     lv_obj_t * main;
     lv_obj_t * container;
 
     lv_obj_t * calendar;
 };
 
-struct PageUi {
+struct ui_page_t {
     lv_obj_t * main;
 
-    TopPageUi top;
-    LeftPageUi left;
-    RightPageUi right;
+    ui_top_page_t top;
+    ui_left_page_t left;
+    ui_right_page_t right;
 };
 
-struct Ui {
+struct ui_t {
     lv_disp_t * display;
     lv_obj_t * screen;
 
-    PageUi page;
+    ui_page_t page;
 
     lv_calendar_date_t date;
 };
 
-Ui * ui_init(void);
+ui_t * ui_init(void);
 
 #endif //DBUDDY_UI_H
