@@ -19,6 +19,7 @@ lv_style_t style_default_background_transparent_half;
 lv_style_t style_default_border_color_white;
 lv_style_t style_default_border_none;
 lv_style_t style_default_border_sides_only_bottom;
+lv_style_t style_default_border_sides_only_right;
 lv_style_t style_default_border_sides_right_none;
 lv_style_t style_default_border_thin;
 lv_style_t style_default_font_black_large;
@@ -45,7 +46,11 @@ lv_style_t style_default_text_color_black;
 lv_style_t style_focused_background_blend_mode_additive;
 lv_style_t style_focused_background_blend_mode_subtractive;
 lv_style_t style_focused_background_color_purple;
+lv_style_t style_focused_border_none;
+lv_style_t style_focused_border_sides_only_right;
+lv_style_t style_focused_border_thin;
 lv_style_t style_focused_text_color_black;
+lv_style_t style_focused_border_color_white;
 
 lv_style_t style_pressed_background_color_none;
 
@@ -141,6 +146,9 @@ void styles_init(void) {
     lv_style_init(&style_default_border_sides_only_bottom);
     lv_style_set_border_side(&style_default_border_sides_only_bottom, LV_STATE_DEFAULT, LV_BORDER_SIDE_BOTTOM);
 
+    lv_style_init(&style_default_border_sides_only_right);
+    lv_style_set_border_side(&style_default_border_sides_only_right, LV_STATE_DEFAULT, LV_BORDER_SIDE_RIGHT);
+
     lv_style_init(&style_default_border_sides_right_none);
     lv_style_set_border_side(&style_default_border_sides_right_none, LV_STATE_DEFAULT, LV_BORDER_SIDE_LEFT | LV_BORDER_SIDE_BOTTOM | LV_BORDER_SIDE_TOP);
 
@@ -200,8 +208,20 @@ void styles_init(void) {
     lv_style_init(&style_focused_background_color_purple);
     lv_style_set_bg_color(&style_focused_background_color_purple, LV_STATE_FOCUSED, LV_COLOR_PURPLE);
 
+    lv_style_init(&style_focused_border_none);
+    lv_style_set_border_width(&style_focused_border_none, LV_STATE_FOCUSED, 0);
+
+    lv_style_init(&style_focused_border_sides_only_right);
+    lv_style_set_border_side(&style_focused_border_sides_only_right, LV_STATE_FOCUSED, LV_BORDER_SIDE_RIGHT);
+
+    lv_style_init(&style_focused_border_thin);
+    lv_style_set_border_width(&style_focused_border_thin, LV_STATE_FOCUSED, 1);
+
     lv_style_init(&style_focused_text_color_black);
     lv_style_set_text_color(&style_focused_text_color_black, LV_STATE_FOCUSED, LV_COLOR_BLACK);
+
+    lv_style_init(&style_focused_border_color_white);
+    lv_style_set_border_color(&style_focused_border_color_white, LV_STATE_FOCUSED, LV_COLOR_WHITE);
 
     lv_style_init(&style_pressed_background_color_none);
     lv_style_set_bg_opa(&style_pressed_background_color_none, LV_STATE_PRESSED, LV_OPA_TRANSP);
