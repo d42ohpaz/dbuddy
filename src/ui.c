@@ -100,6 +100,9 @@ void cb_action_settings_event_handler(lv_obj_t *obj, lv_event_t event) {
             lv_obj_add_style(btn_calendars, LV_BTN_PART_MAIN, &style_default_border_none);
             lv_obj_add_style(btn_calendars, LV_BTN_PART_MAIN, &style_default_background_transparent_full);
             lv_obj_set_event_cb(btn_calendars, cb_list_btn_calendars);
+
+            lv_list_focus_btn(p_Ui->settings.list, btn_general);
+            lv_event_send(btn_general, LV_EVENT_PRESSED, NULL);
         }
     }
 }
