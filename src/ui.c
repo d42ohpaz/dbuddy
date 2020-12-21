@@ -213,6 +213,7 @@ void create_page_main(void) {
 void create_page_right_calendar(void) {
     p_Ui->page.right.container = lv_obj_create(p_Ui->page.right.main, p_Ui->page.main);
     lv_obj_set_size(p_Ui->page.right.container, lv_obj_get_width_fit(p_Ui->page.right.main), lv_obj_get_height_fit(p_Ui->page.right.main));
+    lv_obj_add_style(p_Ui->page.right.container, LV_PAGE_PART_BG, &style_default_padding_default);
     lv_obj_add_style(p_Ui->page.right.container, LV_PAGE_PART_BG, &style_default_padding_left_none);
 
     p_Ui->page.right.calendar = lv_calendar_create(p_Ui->page.right.container, NULL);
