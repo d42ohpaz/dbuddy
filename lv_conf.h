@@ -503,10 +503,10 @@ typedef void * lv_font_user_data_t;
 #define LV_THEME_DEFAULT_COLOR_PRIMARY      lv_color_hex(0x01a2b1)
 #define LV_THEME_DEFAULT_COLOR_SECONDARY    lv_color_hex(0x44d1b6)
 #define LV_THEME_DEFAULT_FLAG               LV_THEME_MATERIAL_FLAG_DARK
-#define LV_THEME_DEFAULT_FONT_SMALL &roboto_regular_12
-#define LV_THEME_DEFAULT_FONT_NORMAL &roboto_regular_14
-#define LV_THEME_DEFAULT_FONT_SUBTITLE &roboto_regular_16
-#define LV_THEME_DEFAULT_FONT_TITLE &roboto_regular_18
+#define LV_THEME_DEFAULT_FONT_SMALL         &roboto_regular_12
+#define LV_THEME_DEFAULT_FONT_NORMAL        &roboto_regular_14
+#define LV_THEME_DEFAULT_FONT_SUBTITLE      &roboto_regular_16
+#define LV_THEME_DEFAULT_FONT_TITLE         &roboto_regular_18
 
 /*=================
  *  Text settings
