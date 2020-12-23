@@ -93,12 +93,23 @@ void cb_action_settings_event_handler(lv_obj_t *obj, lv_event_t event) {
             lv_obj_add_style(p_Ui->settings.list, LV_LIST_PART_BG, &style_focused_border_color_white);
 
             lv_obj_t * btn_general = lv_list_add_btn(p_Ui->settings.list, NULL, "General");
+            lv_obj_add_style(btn_general, LV_BTN_PART_MAIN, &style_default_border_none);
             lv_obj_add_style(btn_general, LV_BTN_PART_MAIN, &style_default_background_transparent_full);
+            lv_obj_set_style_local_outline_width(btn_general, LV_BTN_PART_MAIN, LV_STATE_FOCUSED, 0);
+            lv_obj_set_style_local_border_side(btn_general, LV_BTN_PART_MAIN, LV_STATE_FOCUSED, LV_BORDER_SIDE_LEFT);
+            lv_obj_set_style_local_border_color(btn_general, LV_BTN_PART_MAIN, LV_STATE_FOCUSED, LV_COLOR_WHITE);
+            lv_obj_set_style_local_border_width(btn_general, LV_BTN_PART_MAIN, LV_STATE_FOCUSED, DEFAULT_BORDER * 2);
+            lv_obj_set_style_local_pad_ver(btn_general, LV_BTN_PART_MAIN, LV_STATE_DEFAULT, DEFAULT_PADDING * 2);
             lv_obj_set_event_cb(btn_general, cb_list_btn_general);
 
             lv_obj_t * btn_calendars = lv_list_add_btn(p_Ui->settings.list, NULL, "Calendars");
             lv_obj_add_style(btn_calendars, LV_BTN_PART_MAIN, &style_default_border_none);
             lv_obj_add_style(btn_calendars, LV_BTN_PART_MAIN, &style_default_background_transparent_full);
+            lv_obj_set_style_local_outline_width(btn_calendars, LV_BTN_PART_MAIN, LV_STATE_FOCUSED, 0);
+            lv_obj_set_style_local_border_side(btn_calendars, LV_BTN_PART_MAIN, LV_STATE_FOCUSED, LV_BORDER_SIDE_LEFT);
+            lv_obj_set_style_local_border_color(btn_calendars, LV_BTN_PART_MAIN, LV_STATE_FOCUSED, LV_COLOR_WHITE);
+            lv_obj_set_style_local_border_width(btn_calendars, LV_BTN_PART_MAIN, LV_STATE_FOCUSED, DEFAULT_BORDER * 2);
+            lv_obj_set_style_local_pad_ver(btn_calendars, LV_BTN_PART_MAIN, LV_STATE_DEFAULT, DEFAULT_PADDING * 2);
             lv_obj_set_event_cb(btn_calendars, cb_list_btn_calendars);
 
             lv_list_focus_btn(p_Ui->settings.list, btn_general);
