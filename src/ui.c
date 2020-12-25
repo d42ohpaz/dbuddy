@@ -76,6 +76,9 @@ ui_t *ui_init(void) {
 
 void cb_action_settings_event_handler(lv_obj_t *obj, lv_event_t event) {
     if (event == LV_EVENT_PRESSED) {
+        // Copy the global configuration into the local version.
+        p_Ui->settings.config = *p_config;
+
         create_page_settings();
 
         if (p_Ui->settings.main) {

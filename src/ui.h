@@ -2,6 +2,7 @@
 #define DBUDDY_UI_H
 
 #include "lvgl/lvgl.h"
+#include "configuration.h"
 
 struct ui_bottom_left_page_t;
 struct ui_left_page_t;
@@ -67,9 +68,11 @@ struct ui_right_page_t {
 
 struct ui_settings_t {
     lv_obj_t * main;
-    lv_coord_t header_offset;
 
     lv_obj_t * list;
+
+    lv_coord_t header_offset;
+    configuration config;
 
     union {
         lv_obj_t * general;
