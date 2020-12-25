@@ -7,13 +7,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include_directories(${PROJECT_SOURCE_DIR})
 
-file(GLOB_RECURSE INCLUDES "lv_drivers/*.h" "lvgl/*.h" "assets/*.h" "src/*.h")
-file(GLOB_RECURSE SOURCES "lv_drivers/*.c" "lvgl/*.c" "assets/*.c" "src/*.c")
+file(GLOB_RECURSE INCLUDES "lv_drivers/*.h" "lvgl/*.h" "inih/*.h" "assets/*.h" "src/*.h")
+file(GLOB_RECURSE SOURCES "lv_drivers/*.c" "lvgl/*.c" "inih/*.c" "assets/*.c" "src/*.c")
 
 list(FILTER SOURCES EXCLUDE REGEX "lvgl/src/lv_font/.*dejavu.*.c")
 list(FILTER SOURCES EXCLUDE REGEX "lvgl/src/lv_font/.*montserrat.*.c")
 list(FILTER SOURCES EXCLUDE REGEX "lvgl/src/lv_font/.*simsun.*.c")
 list(FILTER SOURCES EXCLUDE REGEX "lvgl/src/lv_font/.*unscii.*.c")
+list(FILTER SOURCES EXCLUDE REGEX "inih/cpp/.*.c")
+list(FILTER SOURCES EXCLUDE REGEX "inih/examples/.*.c")
+list(FILTER SOURCES EXCLUDE REGEX "inih/tests/.*.c")
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 

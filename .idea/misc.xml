@@ -3,6 +3,7 @@
   <component name="CMakeWorkspace" PROJECT_DIR="$PROJECT_DIR$" />
   <component name="CidrRootsConfiguration">
     <excludeRoots>
+      <file path="$PROJECT_DIR$/inih" />
       <file path="$PROJECT_DIR$/lv_drivers" />
       <file path="$PROJECT_DIR$/lvgl" />
     </excludeRoots>

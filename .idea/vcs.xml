@@ -2,6 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/inih" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/lv_drivers" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/lvgl" vcs="Git" />
   </component>
