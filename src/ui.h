@@ -10,6 +10,8 @@ struct ui_page_t;
 struct ui_right_page_t;
 struct ui_t;
 struct ui_settings_t;
+struct ui_settings_general_t;
+struct ui_settings_calendars_t;
 struct ui_top_left_page_t;
 struct ui_top_page_t;
 
@@ -19,6 +21,8 @@ typedef struct ui_page_t ui_page_t;
 typedef struct ui_right_page_t ui_right_page_t;
 typedef struct ui_t ui_t;
 typedef struct ui_settings_t ui_settings_t;
+typedef struct ui_settings_general_t ui_settings_general_t;
+typedef struct ui_settings_calendars_t ui_settings_calendars_t;
 typedef struct ui_top_left_page_t ui_top_left_page_t;
 typedef struct ui_top_page_t ui_top_page_t;
 
@@ -66,17 +70,24 @@ struct ui_right_page_t {
     lv_obj_t * calendar;
 };
 
+struct ui_settings_general_t {
+    lv_obj_t * main;
+};
+
+struct ui_settings_calendars_t {
+    lv_obj_t * main;
+};
+
 struct ui_settings_t {
     lv_obj_t * main;
-
     lv_obj_t * list;
 
     lv_coord_t header_offset;
     configuration config;
 
     union {
-        lv_obj_t * general;
-        lv_obj_t * calendars;
+        ui_settings_general_t general;
+        ui_settings_calendars_t calendars;
     };
 };
 

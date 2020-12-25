@@ -137,20 +137,20 @@ void cb_calendar_event_handler(lv_obj_t *obj, lv_event_t event) {
 
 void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
     if (event == LV_EVENT_PRESSED) {
-        if (p_Ui->settings.calendars && lv_debug_check_obj_valid(p_Ui->settings.calendars)) {
-            lv_obj_del(p_Ui->settings.calendars);
-            p_Ui->settings.calendars = NULL;
+        if (p_Ui->settings.calendars.main && lv_debug_check_obj_valid(p_Ui->settings.calendars.main)) {
+            lv_obj_del(p_Ui->settings.calendars.main);
+            p_Ui->settings.calendars.main = NULL;
         }
 
-        p_Ui->settings.general = lv_page_create(p_Ui->settings.main, NULL);
-        lv_obj_set_size(p_Ui->settings.general, lv_obj_get_width_fit(p_Ui->settings.main) - DEFAULT_LIST_WIDTH, lv_obj_get_height_fit(p_Ui->settings.main) - p_Ui->settings.header_offset);
-        lv_obj_set_pos(p_Ui->settings.general, DEFAULT_LIST_WIDTH, 0);
-        lv_obj_add_style(p_Ui->settings.general, LV_STATE_DEFAULT, &style_default_border_none);
-        lv_obj_add_style(p_Ui->settings.general, LV_STATE_DEFAULT, &style_default_background_transparent_full);
-        lv_obj_add_style(p_Ui->settings.general, LV_STATE_DEFAULT, &style_default_padding_default);
+        p_Ui->settings.general.main = lv_page_create(p_Ui->settings.main, NULL);
+        lv_obj_set_size(p_Ui->settings.general.main, lv_obj_get_width_fit(p_Ui->settings.main) - DEFAULT_LIST_WIDTH, lv_obj_get_height_fit(p_Ui->settings.main) - p_Ui->settings.header_offset);
+        lv_obj_set_pos(p_Ui->settings.general.main, DEFAULT_LIST_WIDTH, 0);
+        lv_obj_add_style(p_Ui->settings.general.main, LV_STATE_DEFAULT, &style_default_border_none);
+        lv_obj_add_style(p_Ui->settings.general.main, LV_STATE_DEFAULT, &style_default_background_transparent_full);
+        lv_obj_add_style(p_Ui->settings.general.main, LV_STATE_DEFAULT, &style_default_padding_default);
 
-        lv_obj_t * heading_time = lv_obj_create(p_Ui->settings.general, NULL);
-        lv_obj_set_width(heading_time, lv_obj_get_width_fit(p_Ui->settings.general));
+        lv_obj_t * heading_time = lv_obj_create(p_Ui->settings.general.main, NULL);
+        lv_obj_set_width(heading_time, lv_obj_get_width_fit(p_Ui->settings.general.main));
         lv_obj_add_style(heading_time, LV_OBJ_PART_MAIN, &style_default_border_sides_only_bottom);
         lv_obj_add_style(heading_time, LV_OBJ_PART_MAIN, &style_default_border_thin);
         lv_obj_add_style(heading_time, LV_OBJ_PART_MAIN, &style_default_radius_none);
@@ -161,71 +161,95 @@ void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
 
         lv_obj_set_height(heading_time, lv_obj_get_height(heading_label));
 
-        lv_obj_t * row_format = lv_label_create(p_Ui->settings.general, NULL);
+        lv_obj_t * row_format = lv_label_create(p_Ui->settings.general.main, NULL);
         lv_label_set_long_mode(row_format, LV_LABEL_LONG_BREAK);
-        lv_obj_set_width(row_format, lv_obj_get_width_fit(p_Ui->settings.general));
+        lv_obj_set_width(row_format, lv_obj_get_width_fit(p_Ui->settings.general.main));
         lv_label_set_text(row_format, "24-hour Formatting (e.g., 16:00)");
         lv_obj_set_pos(row_format, 0, get_next_row_pos(heading_time, DEFAULT_PADDING));
 
-        lv_obj_t * format_toggle = lv_switch_create(p_Ui->settings.general, NULL);
+        lv_obj_t * format_toggle = lv_switch_create(p_Ui->settings.general.main, NULL);
         lv_obj_align(format_toggle, row_format, LV_ALIGN_IN_RIGHT_MID, 0, 0);
 
-        lv_obj_t * row_meridiem = lv_label_create(p_Ui->settings.general, NULL);
+        if (p_Ui->settings.config.time_format24 == 1) {
+            lv_switch_on(format_toggle, false);
+        } else {
+            lv_switch_off(format_toggle, false);
+        }
+
+        lv_obj_t * row_meridiem = lv_label_create(p_Ui->settings.general.main, NULL);
         lv_label_set_long_mode(row_meridiem, LV_LABEL_LONG_BREAK);
-        lv_obj_set_width(row_meridiem, lv_obj_get_width_fit(p_Ui->settings.general));
+        lv_obj_set_width(row_meridiem, lv_obj_get_width_fit(p_Ui->settings.general.main));
         lv_label_set_text(row_meridiem, "Use Meridiem (e.g., am/pm)");
         lv_obj_set_pos(row_meridiem, 0, get_next_row_pos(row_format, DEFAULT_PADDING + DEFAULT_PADDING));
 
-        lv_obj_t * meridiem_toggle = lv_switch_create(p_Ui->settings.general, NULL);
+        lv_obj_t * meridiem_toggle = lv_switch_create(p_Ui->settings.general.main, NULL);
         lv_obj_align(meridiem_toggle, row_meridiem, LV_ALIGN_IN_RIGHT_MID, 0, 0);
 
-        lv_obj_t * row_flash_colon = lv_label_create(p_Ui->settings.general, NULL);
+        if (p_Ui->settings.config.time_meridiem == 1) {
+            lv_switch_on(meridiem_toggle, false);
+        } else {
+            lv_switch_off(meridiem_toggle, false);
+        }
+
+        lv_obj_t * row_flash_colon = lv_label_create(p_Ui->settings.general.main, NULL);
         lv_label_set_long_mode(row_flash_colon, LV_LABEL_LONG_BREAK);
-        lv_obj_set_width(row_flash_colon, lv_obj_get_width_fit(p_Ui->settings.general));
+        lv_obj_set_width(row_flash_colon, lv_obj_get_width_fit(p_Ui->settings.general.main));
         lv_label_set_text(row_flash_colon, "Flash the Time Separators");
         lv_obj_set_pos(row_flash_colon, 0, get_next_row_pos(row_meridiem, DEFAULT_PADDING + DEFAULT_PADDING));
 
-        lv_obj_t * flash_colon_toggle = lv_switch_create(p_Ui->settings.general, NULL);
+        lv_obj_t * flash_colon_toggle = lv_switch_create(p_Ui->settings.general.main, NULL);
         lv_obj_align(flash_colon_toggle, row_flash_colon, LV_ALIGN_IN_RIGHT_MID, 0, 0);
 
-        lv_obj_t * row_screensaver = lv_label_create(p_Ui->settings.general, NULL);
+        if (p_Ui->settings.config.time_flash == 1) {
+            lv_switch_on(flash_colon_toggle, false);
+        } else {
+            lv_switch_off(flash_colon_toggle, false);
+        }
+
+        lv_obj_t * row_screensaver = lv_label_create(p_Ui->settings.general.main, NULL);
         lv_label_set_long_mode(row_screensaver, LV_LABEL_LONG_BREAK);
-        lv_obj_set_width(row_screensaver, lv_obj_get_width_fit(p_Ui->settings.general));
+        lv_obj_set_width(row_screensaver, lv_obj_get_width_fit(p_Ui->settings.general.main));
         lv_label_set_text(row_screensaver, "Time as Screensaver");
         lv_obj_set_pos(row_screensaver, 0, get_next_row_pos(row_flash_colon, DEFAULT_PADDING + DEFAULT_PADDING));
 
-        lv_obj_t * screensaver_toggle = lv_switch_create(p_Ui->settings.general, NULL);
+        lv_obj_t * screensaver_toggle = lv_switch_create(p_Ui->settings.general.main, NULL);
         lv_obj_align(screensaver_toggle, row_screensaver, LV_ALIGN_IN_RIGHT_MID, 0, 0);
+
+        if (p_Ui->settings.config.time_screensaver == 1) {
+            lv_switch_on(screensaver_toggle, false);
+        } else {
+            lv_switch_off(screensaver_toggle, false);
+        }
     }
 }
 
 void cb_list_btn_calendars(lv_obj_t * obj, lv_event_t event) {
     if (event == LV_EVENT_PRESSED) {
-        if (p_Ui->settings.general && lv_debug_check_obj_valid(p_Ui->settings.general)) {
-            lv_obj_del(p_Ui->settings.general);
-            p_Ui->settings.general = NULL;
+        if (p_Ui->settings.general.main && lv_debug_check_obj_valid(p_Ui->settings.general.main)) {
+            lv_obj_del(p_Ui->settings.general.main);
+            p_Ui->settings.general.main = NULL;
         }
 
-        p_Ui->settings.calendars = lv_page_create(p_Ui->settings.main, NULL);
-        lv_obj_set_size(p_Ui->settings.calendars, lv_obj_get_width_fit(p_Ui->settings.main) - DEFAULT_LIST_WIDTH, lv_obj_get_height_fit(p_Ui->settings.main) - p_Ui->settings.header_offset);
-        lv_obj_set_pos(p_Ui->settings.calendars, DEFAULT_LIST_WIDTH, 0);
-        lv_obj_add_style(p_Ui->settings.calendars, LV_STATE_DEFAULT, &style_default_border_none);
-        lv_obj_add_style(p_Ui->settings.calendars, LV_STATE_DEFAULT, &style_default_background_transparent_full);
+        p_Ui->settings.calendars.main = lv_page_create(p_Ui->settings.main, NULL);
+        lv_obj_set_size(p_Ui->settings.calendars.main, lv_obj_get_width_fit(p_Ui->settings.main) - DEFAULT_LIST_WIDTH, lv_obj_get_height_fit(p_Ui->settings.main) - p_Ui->settings.header_offset);
+        lv_obj_set_pos(p_Ui->settings.calendars.main, DEFAULT_LIST_WIDTH, 0);
+        lv_obj_add_style(p_Ui->settings.calendars.main, LV_STATE_DEFAULT, &style_default_border_none);
+        lv_obj_add_style(p_Ui->settings.calendars.main, LV_STATE_DEFAULT, &style_default_background_transparent_full);
     }
 }
 
 void cb_settings_win_close(lv_obj_t * obj, lv_event_t event) {
     if (event == LV_EVENT_RELEASED) {
-        if (p_Ui->settings.general && lv_debug_check_obj_valid(p_Ui->settings.general)) {
-            lv_obj_del(p_Ui->settings.general);
+        if (p_Ui->settings.general.main && lv_debug_check_obj_valid(p_Ui->settings.general.main)) {
+            lv_obj_del(p_Ui->settings.general.main);
         }
 
-        if (p_Ui->settings.calendars && lv_debug_check_obj_valid(p_Ui->settings.calendars)) {
-            lv_obj_del(p_Ui->settings.calendars);
+        if (p_Ui->settings.calendars.main && lv_debug_check_obj_valid(p_Ui->settings.calendars.main)) {
+            lv_obj_del(p_Ui->settings.calendars.main);
         }
 
-        p_Ui->settings.general = NULL;
-        p_Ui->settings.calendars = NULL;
+        p_Ui->settings.general.main = NULL;
+        p_Ui->settings.calendars.main = NULL;
     }
 
     lv_win_close_event_cb(obj, event);
