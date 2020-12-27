@@ -418,7 +418,7 @@ void create_page_right_main(void) {
 
 void create_page_settings(void) {
         p_Ui->settings.main = lv_win_create(p_Ui->screen, NULL);
-        lv_obj_set_size(p_Ui->settings.main, lv_page_get_width_fit(p_Ui->page.main) - DEFAULT_MENU_HEIGHT - DEFAULT_PADDING, lv_page_get_height_fit(p_Ui->page.main) - DEFAULT_MENU_HEIGHT - DEFAULT_PADDING);
+        lv_obj_set_size(p_Ui->settings.main, lv_page_get_width_fit(p_Ui->page.main) - DEFAULT_MENU_HEIGHT - (DEFAULT_PADDING * 2), lv_page_get_height_fit(p_Ui->page.main) - DEFAULT_MENU_HEIGHT - (DEFAULT_PADDING * 2));
         lv_obj_align(p_Ui->settings.main, p_Ui->screen, LV_ALIGN_CENTER, 0, 0);
 
         lv_obj_add_style(p_Ui->settings.main, LV_WIN_PART_HEADER, &style_default_background_color_black);
