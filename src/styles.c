@@ -41,6 +41,7 @@ lv_style_t style_default_padding_bottom_none;
 lv_style_t style_default_padding_none;
 lv_style_t style_default_radius_none;
 lv_style_t style_default_radius_normal;
+lv_style_t style_default_shadow_none;
 lv_style_t style_default_text_color_black;
 
 lv_style_t style_focused_background_blend_mode_additive;
@@ -133,6 +134,9 @@ void styles_init(void) {
 
     lv_style_init(&style_default_radius_normal);
     lv_style_set_radius(&style_default_radius_normal, LV_STATE_DEFAULT, 5);
+
+    lv_style_init(&style_default_shadow_none);
+    lv_style_set_shadow_width(&style_default_shadow_none, LV_STATE_DEFAULT, 0);
 
     lv_style_init(&style_default_text_color_black);
     lv_style_set_text_color(&style_default_text_color_black, LV_STATE_DEFAULT, LV_COLOR_BLACK);
