@@ -50,6 +50,11 @@ typedef struct ui_right_page_t {
 
 typedef struct ui_settings_general_t {
     lv_obj_t * main;
+
+    lv_obj_t * toggle_format;
+    lv_obj_t * toggle_meridiem;
+    lv_obj_t * toggle_flash;
+    lv_obj_t * toggle_screensaver;
 } ui_settings_general_t;
 
 typedef struct ui_settings_calendars_t {

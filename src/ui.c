@@ -167,13 +167,13 @@ void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
         lv_label_set_text(row_format, "24-hour Formatting (e.g., 16:00)");
         lv_obj_set_pos(row_format, 0, get_next_row_pos(heading_time, DEFAULT_PADDING));
 
-        lv_obj_t * format_toggle = lv_switch_create(p_Ui->settings.general.main, NULL);
-        lv_obj_align(format_toggle, row_format, LV_ALIGN_IN_RIGHT_MID, 0, 0);
+        p_Ui->settings.general.toggle_format = lv_switch_create(p_Ui->settings.general.main, NULL);
+        lv_obj_align(p_Ui->settings.general.toggle_format, row_format, LV_ALIGN_IN_RIGHT_MID, 0, 0);
 
         if (p_Ui->settings.config.time_format24 == 1) {
-            lv_switch_on(format_toggle, false);
+            lv_switch_on(p_Ui->settings.general.toggle_format, false);
         } else {
-            lv_switch_off(format_toggle, false);
+            lv_switch_off(p_Ui->settings.general.toggle_format, false);
         }
 
         lv_obj_t * row_meridiem = lv_label_create(p_Ui->settings.general.main, NULL);
@@ -182,13 +182,13 @@ void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
         lv_label_set_text(row_meridiem, "Use Meridiem (e.g., am/pm)");
         lv_obj_set_pos(row_meridiem, 0, get_next_row_pos(row_format, DEFAULT_PADDING + DEFAULT_PADDING));
 
-        lv_obj_t * meridiem_toggle = lv_switch_create(p_Ui->settings.general.main, NULL);
-        lv_obj_align(meridiem_toggle, row_meridiem, LV_ALIGN_IN_RIGHT_MID, 0, 0);
+        p_Ui->settings.general.toggle_meridiem = lv_switch_create(p_Ui->settings.general.main, NULL);
+        lv_obj_align(p_Ui->settings.general.toggle_meridiem, row_meridiem, LV_ALIGN_IN_RIGHT_MID, 0, 0);
 
         if (p_Ui->settings.config.time_meridiem == 1) {
-            lv_switch_on(meridiem_toggle, false);
+            lv_switch_on(p_Ui->settings.general.toggle_meridiem, false);
         } else {
-            lv_switch_off(meridiem_toggle, false);
+            lv_switch_off(p_Ui->settings.general.toggle_meridiem, false);
         }
 
         lv_obj_t * row_flash_colon = lv_label_create(p_Ui->settings.general.main, NULL);
@@ -197,13 +197,13 @@ void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
         lv_label_set_text(row_flash_colon, "Flash the Time Separators");
         lv_obj_set_pos(row_flash_colon, 0, get_next_row_pos(row_meridiem, DEFAULT_PADDING + DEFAULT_PADDING));
 
-        lv_obj_t * flash_colon_toggle = lv_switch_create(p_Ui->settings.general.main, NULL);
-        lv_obj_align(flash_colon_toggle, row_flash_colon, LV_ALIGN_IN_RIGHT_MID, 0, 0);
+        p_Ui->settings.general.toggle_flash = lv_switch_create(p_Ui->settings.general.main, NULL);
+        lv_obj_align(p_Ui->settings.general.toggle_flash, row_flash_colon, LV_ALIGN_IN_RIGHT_MID, 0, 0);
 
         if (p_Ui->settings.config.time_flash == 1) {
-            lv_switch_on(flash_colon_toggle, false);
+            lv_switch_on(p_Ui->settings.general.toggle_flash, false);
         } else {
-            lv_switch_off(flash_colon_toggle, false);
+            lv_switch_off(p_Ui->settings.general.toggle_flash, false);
         }
 
         lv_obj_t * row_screensaver = lv_label_create(p_Ui->settings.general.main, NULL);
@@ -212,13 +212,13 @@ void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
         lv_label_set_text(row_screensaver, "Time as Screensaver");
         lv_obj_set_pos(row_screensaver, 0, get_next_row_pos(row_flash_colon, DEFAULT_PADDING + DEFAULT_PADDING));
 
-        lv_obj_t * screensaver_toggle = lv_switch_create(p_Ui->settings.general.main, NULL);
-        lv_obj_align(screensaver_toggle, row_screensaver, LV_ALIGN_IN_RIGHT_MID, 0, 0);
+        p_Ui->settings.general.toggle_screensaver = lv_switch_create(p_Ui->settings.general.main, NULL);
+        lv_obj_align(p_Ui->settings.general.toggle_screensaver, row_screensaver, LV_ALIGN_IN_RIGHT_MID, 0, 0);
 
         if (p_Ui->settings.config.time_screensaver == 1) {
-            lv_switch_on(screensaver_toggle, false);
+            lv_switch_on(p_Ui->settings.general.toggle_screensaver, false);
         } else {
-            lv_switch_off(screensaver_toggle, false);
+            lv_switch_off(p_Ui->settings.general.toggle_screensaver, false);
         }
     }
 }
