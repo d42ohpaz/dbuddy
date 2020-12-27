@@ -63,7 +63,10 @@ typedef struct ui_settings_calendars_t {
 
 typedef struct ui_settings_t {
     lv_obj_t * main;
+    lv_obj_t * overlay;
     lv_obj_t * list;
+    lv_obj_t * msgbox;
+    lv_obj_t * btn_close;
 
     lv_coord_t header_offset;
     configuration config;

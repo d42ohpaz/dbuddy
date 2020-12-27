@@ -51,7 +51,11 @@ void cb_list_btn_calendars(lv_obj_t * obj, lv_event_t event);
 
 void cb_settings_win_close(lv_obj_t * obj, lv_event_t event);
 
+void cb_settings_win_msgbox(lv_obj_t * obj, lv_event_t event);
+
 void cb_time_task_handler(lv_task_t * task);
+
+void cb_toggle_switch_event_handler(lv_obj_t * obj, lv_event_t event);
 
 void update_calendar(ui_t ui);
 
@@ -189,6 +193,7 @@ void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
         lv_obj_set_pos(row_format, 0, get_next_row_pos(heading_time, DEFAULT_PADDING));
 
         p_Ui->settings.general.toggle_format = lv_switch_create(p_Ui->settings.general.main, NULL);
+        lv_obj_set_event_cb(p_Ui->settings.general.toggle_format, cb_toggle_switch_event_handler);
         lv_obj_align(p_Ui->settings.general.toggle_format, row_format, LV_ALIGN_IN_RIGHT_MID, 0, 0);
 
         if (p_Ui->settings.config.time_format24 == 1) {
@@ -204,6 +209,7 @@ void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
         lv_obj_set_pos(row_meridiem, 0, get_next_row_pos(row_format, DEFAULT_PADDING + DEFAULT_PADDING));
 
         p_Ui->settings.general.toggle_meridiem = lv_switch_create(p_Ui->settings.general.main, NULL);
+        lv_obj_set_event_cb(p_Ui->settings.general.toggle_meridiem, cb_toggle_switch_event_handler);
         lv_obj_align(p_Ui->settings.general.toggle_meridiem, row_meridiem, LV_ALIGN_IN_RIGHT_MID, 0, 0);
 
         if (p_Ui->settings.config.time_meridiem == 1) {
@@ -219,6 +225,7 @@ void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
         lv_obj_set_pos(row_flash_colon, 0, get_next_row_pos(row_meridiem, DEFAULT_PADDING + DEFAULT_PADDING));
 
         p_Ui->settings.general.toggle_flash = lv_switch_create(p_Ui->settings.general.main, NULL);
+        lv_obj_set_event_cb(p_Ui->settings.general.toggle_flash, cb_toggle_switch_event_handler);
         lv_obj_align(p_Ui->settings.general.toggle_flash, row_flash_colon, LV_ALIGN_IN_RIGHT_MID, 0, 0);
 
         if (p_Ui->settings.config.time_flash == 1) {
@@ -234,6 +241,7 @@ void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
         lv_obj_set_pos(row_screensaver, 0, get_next_row_pos(row_flash_colon, DEFAULT_PADDING + DEFAULT_PADDING));
 
         p_Ui->settings.general.toggle_screensaver = lv_switch_create(p_Ui->settings.general.main, NULL);
+        lv_obj_set_event_cb(p_Ui->settings.general.toggle_screensaver, cb_toggle_switch_event_handler);
         lv_obj_align(p_Ui->settings.general.toggle_screensaver, row_screensaver, LV_ALIGN_IN_RIGHT_MID, 0, 0);
 
         if (p_Ui->settings.config.time_screensaver == 1) {
@@ -261,6 +269,23 @@ void cb_list_btn_calendars(lv_obj_t * obj, lv_event_t event) {
 
 void cb_settings_win_close(lv_obj_t * obj, lv_event_t event) {
     if (event == LV_EVENT_RELEASED) {
+        if (compareTo(p_Ui->settings.config, *p_config) != 0) {
+            static const char * btns[] ={"Continue", "Go Back", ""};
+            p_Ui->settings.msgbox = lv_msgbox_create(p_Ui->settings.main, NULL);
+            lv_obj_add_style(p_Ui->settings.msgbox, LV_OBJ_PART_MAIN, &style_default_background_color_black);
+            lv_obj_add_style(p_Ui->settings.msgbox, LV_OBJ_PART_MAIN, &style_default_border_color_white);
+            lv_obj_add_style(p_Ui->settings.msgbox, LV_OBJ_PART_MAIN, &style_default_shadow_none);
+            lv_obj_align(p_Ui->settings.msgbox, NULL, LV_ALIGN_IN_TOP_MID, 0, 0);
+
+            lv_msgbox_add_btns(p_Ui->settings.msgbox, btns);
+            lv_msgbox_set_text(p_Ui->settings.msgbox, "Unsaved changes will be lost.\n\nDo you wish to continue?");
+            lv_msgbox_set_anim_time(p_Ui->settings.msgbox, 0);
+
+            lv_obj_set_event_cb(p_Ui->settings.msgbox, cb_settings_win_msgbox);
+
+            return;
+        }
+
         if (p_Ui->settings.general.main && lv_debug_check_obj_valid(p_Ui->settings.general.main)) {
             lv_obj_del(p_Ui->settings.general.main);
         }
@@ -269,16 +294,58 @@ void cb_settings_win_close(lv_obj_t * obj, lv_event_t event) {
             lv_obj_del(p_Ui->settings.calendars.main);
         }
 
+        if (p_Ui->settings.overlay && lv_debug_check_obj_valid(p_Ui->settings.overlay)) {
+            lv_obj_del(p_Ui->settings.overlay);
+        }
+
         p_Ui->settings.general.main = NULL;
         p_Ui->settings.calendars.main = NULL;
+        p_Ui->settings.overlay = NULL;
     }
 
     lv_win_close_event_cb(obj, event);
 }
 
+void cb_settings_win_msgbox(lv_obj_t * obj, lv_event_t event) {
+    if (event == LV_EVENT_VALUE_CHANGED) {
+        const char * text = lv_msgbox_get_active_btn_text(obj);
+
+        if (strcasecmp(text, "Continue") == 0) {
+            // Reset the local config and close the settings
+            p_Ui->settings.config = *p_config;
+            cb_settings_win_close(p_Ui->settings.btn_close, LV_EVENT_RELEASED);
+            return;
+        }
+
+        lv_msgbox_start_auto_close(p_Ui->settings.msgbox, 0);
+    }
+}
+
 void cb_time_task_handler(lv_task_t * task) {
     ui_t ui = *(ui_t *) (task->user_data);
     update_time(ui);
+}
+
+void cb_toggle_switch_event_handler(lv_obj_t * obj, lv_event_t event) {
+    if (event == LV_EVENT_VALUE_CHANGED) {
+        bool state = lv_switch_get_state(obj);
+
+        if (obj == p_Ui->settings.general.toggle_flash) {
+            p_Ui->settings.config.time_flash = state ? 1 : 0;
+        }
+
+        if (obj == p_Ui->settings.general.toggle_format) {
+            p_Ui->settings.config.time_format24 = state ? 1 : 0;
+        }
+
+        if (obj == p_Ui->settings.general.toggle_meridiem) {
+            p_Ui->settings.config.time_meridiem = state ? 1 : 0;
+        }
+
+        if (obj == p_Ui->settings.general.toggle_screensaver) {
+            p_Ui->settings.config.time_screensaver = state ? 1 : 0;
+        }
+    }
 }
 
 void create_display(void) {
@@ -438,6 +505,10 @@ void create_page_right_main(void) {
 }
 
 void create_page_settings(void) {
+    if (lv_debug_check_obj_valid(p_Ui->settings.main)) {
+        return;
+    }
+
     p_Ui->settings.main = lv_win_create(p_Ui->screen, NULL);
     lv_obj_set_size(p_Ui->settings.main, lv_page_get_width_fit(p_Ui->page.main) - DEFAULT_MENU_HEIGHT - (DEFAULT_PADDING * 2), lv_page_get_height_fit(p_Ui->page.main) - DEFAULT_MENU_HEIGHT - (DEFAULT_PADDING * 2));
     lv_obj_align(p_Ui->settings.main, p_Ui->screen, LV_ALIGN_CENTER, 0, 0);
@@ -456,9 +527,15 @@ void create_page_settings(void) {
 
     lv_win_set_title(p_Ui->settings.main, "Settings");
 
-    lv_obj_t * btn_close = lv_win_add_btn(p_Ui->settings.main, LV_SYMBOL_CLOSE);
+    p_Ui->settings.btn_close = lv_win_add_btn(p_Ui->settings.main, LV_SYMBOL_CLOSE);
+    lv_obj_set_event_cb(p_Ui->settings.btn_close, cb_settings_win_close);
 
-    lv_obj_set_event_cb(btn_close, cb_settings_win_close);
+    // Overlay to simulate a modal dialog
+    p_Ui->settings.overlay = lv_obj_create(p_Ui->page.main, NULL);
+    lv_obj_set_size(p_Ui->settings.overlay, LV_HOR_RES, LV_VER_RES);
+    lv_obj_set_pos(p_Ui->settings.overlay, 0, 0);
+    lv_obj_add_style(p_Ui->settings.overlay, LV_OBJ_PART_MAIN, &style_default_background_overlay_color_black);
+    lv_obj_add_style(p_Ui->settings.overlay, LV_OBJ_PART_MAIN, &style_default_border_none);
 }
 
 void create_page_top_container(void) {
