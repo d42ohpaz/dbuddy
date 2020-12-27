@@ -5,16 +5,12 @@
 
 #include <stdlib.h>
 
-struct configuration;
-
-typedef struct configuration configuration;
-
-struct configuration {
+typedef struct configuration {
+    size_t time_flash;
     size_t time_format24;
     size_t time_meridiem;
-    size_t time_flash;
     size_t time_screensaver;
-};
+} configuration;
 
 configuration * p_config;
 
