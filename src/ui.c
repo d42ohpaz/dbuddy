@@ -417,27 +417,27 @@ void create_page_right_main(void) {
 }
 
 void create_page_settings(void) {
-        p_Ui->settings.main = lv_win_create(p_Ui->screen, NULL);
-        lv_obj_set_size(p_Ui->settings.main, lv_page_get_width_fit(p_Ui->page.main) - DEFAULT_MENU_HEIGHT - (DEFAULT_PADDING * 2), lv_page_get_height_fit(p_Ui->page.main) - DEFAULT_MENU_HEIGHT - (DEFAULT_PADDING * 2));
-        lv_obj_align(p_Ui->settings.main, p_Ui->screen, LV_ALIGN_CENTER, 0, 0);
+    p_Ui->settings.main = lv_win_create(p_Ui->screen, NULL);
+    lv_obj_set_size(p_Ui->settings.main, lv_page_get_width_fit(p_Ui->page.main) - DEFAULT_MENU_HEIGHT - (DEFAULT_PADDING * 2), lv_page_get_height_fit(p_Ui->page.main) - DEFAULT_MENU_HEIGHT - (DEFAULT_PADDING * 2));
+    lv_obj_align(p_Ui->settings.main, p_Ui->screen, LV_ALIGN_CENTER, 0, 0);
 
-        lv_obj_add_style(p_Ui->settings.main, LV_WIN_PART_HEADER, &style_default_background_color_black);
-        lv_obj_add_style(p_Ui->settings.main, LV_WIN_PART_HEADER, &style_default_border_color_white);
-        lv_obj_add_style(p_Ui->settings.main, LV_WIN_PART_HEADER, &style_default_border_sides_only_bottom);
-        lv_obj_add_style(p_Ui->settings.main, LV_WIN_PART_HEADER, &style_default_border_thin);
-        lv_obj_add_style(p_Ui->settings.main, LV_WIN_PART_HEADER, &style_default_font_regular_small);
-        lv_obj_add_style(p_Ui->settings.main, LV_WIN_PART_HEADER, &style_default_padding_top_none);
-        lv_obj_add_style(p_Ui->settings.main, LV_WIN_PART_HEADER, &style_default_padding_right_none);
-        lv_obj_add_style(p_Ui->settings.main, LV_WIN_PART_HEADER, &style_default_padding_bottom_none);
-        lv_obj_add_style(p_Ui->settings.main, LV_WIN_PART_BG, &style_default_background_color_black);
-        lv_obj_add_style(p_Ui->settings.main, LV_WIN_PART_BG, &style_default_radius_normal);
-        lv_obj_add_style(p_Ui->settings.main, LV_WIN_PART_CONTENT_SCROLLABLE, &style_default_padding_none);
+    lv_obj_add_style(p_Ui->settings.main, LV_WIN_PART_HEADER, &style_default_background_color_black);
+    lv_obj_add_style(p_Ui->settings.main, LV_WIN_PART_HEADER, &style_default_border_color_white);
+    lv_obj_add_style(p_Ui->settings.main, LV_WIN_PART_HEADER, &style_default_border_sides_only_bottom);
+    lv_obj_add_style(p_Ui->settings.main, LV_WIN_PART_HEADER, &style_default_border_thin);
+    lv_obj_add_style(p_Ui->settings.main, LV_WIN_PART_HEADER, &style_default_font_regular_small);
+    lv_obj_add_style(p_Ui->settings.main, LV_WIN_PART_HEADER, &style_default_padding_top_none);
+    lv_obj_add_style(p_Ui->settings.main, LV_WIN_PART_HEADER, &style_default_padding_right_none);
+    lv_obj_add_style(p_Ui->settings.main, LV_WIN_PART_HEADER, &style_default_padding_bottom_none);
+    lv_obj_add_style(p_Ui->settings.main, LV_WIN_PART_BG, &style_default_background_color_black);
+    lv_obj_add_style(p_Ui->settings.main, LV_WIN_PART_BG, &style_default_radius_normal);
+    lv_obj_add_style(p_Ui->settings.main, LV_WIN_PART_CONTENT_SCROLLABLE, &style_default_padding_none);
 
-        lv_win_set_title(p_Ui->settings.main, "Settings");
+    lv_win_set_title(p_Ui->settings.main, "Settings");
 
-        lv_obj_t * btn_close = lv_win_add_btn(p_Ui->settings.main, LV_SYMBOL_CLOSE);
+    lv_obj_t * btn_close = lv_win_add_btn(p_Ui->settings.main, LV_SYMBOL_CLOSE);
 
-        lv_obj_set_event_cb(btn_close, cb_settings_win_close);
+    lv_obj_set_event_cb(btn_close, cb_settings_win_close);
 }
 
 void create_page_top_container(void) {
