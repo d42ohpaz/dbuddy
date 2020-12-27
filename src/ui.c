@@ -212,7 +212,7 @@ void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
         lv_obj_set_event_cb(p_Ui->settings.general.toggle_meridiem, cb_toggle_switch_event_handler);
         lv_obj_align(p_Ui->settings.general.toggle_meridiem, row_meridiem, LV_ALIGN_IN_RIGHT_MID, 0, 0);
 
-        if (p_Ui->settings.config.time_meridiem == 1) {
+        if (p_Ui->settings.config.time_format24 == 0 && p_Ui->settings.config.time_meridiem == 1) {
             lv_switch_on(p_Ui->settings.general.toggle_meridiem, false);
         } else {
             lv_switch_off(p_Ui->settings.general.toggle_meridiem, false);
@@ -594,23 +594,27 @@ void update_calendar(ui_t ui) {
 void update_time(ui_t ui) {
     time_t t = time(NULL);
     struct tm local = *localtime(&t);
-    char bufMeridiem[3];
+    char bufMeridiem[3] = "";
     int tmHour = local.tm_hour;
 
-    if (local.tm_hour >= 12) {
-        sprintf(bufMeridiem, "%s", "pm");
-    } else {
-        sprintf(bufMeridiem, "%s", "am");
-    }
+    if (p_config->time_format24 == 0) {
+        if (p_config->time_meridiem == 1) {
+            if (local.tm_hour >= 12) {
+                sprintf(bufMeridiem, "%s", "pm");
+            } else {
+                sprintf(bufMeridiem, "%s", "am");
+            }
+        }
 
-    if (tmHour > 12) {
-        tmHour = tmHour - 12;
+        if (tmHour > 12) {
+            tmHour = tmHour - 12;
+        }
     }
 
     static int count_on = 0, count_off = 0;
     char * colon = strstr(lv_label_get_text(ui.page.top.label_time), ":");
 
-    if ((count_on % 2) == 0 && colon == NULL) {
+    if (((count_on % 2) == 0 && colon == NULL) || (p_config->time_flash == 0)) {
         lv_label_set_text_fmt(ui.page.top.label_time, "%02u:%02u %s", tmHour, local.tm_min, bufMeridiem);
 
         count_on = 0;
