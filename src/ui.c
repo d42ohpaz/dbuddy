@@ -6,39 +6,60 @@
 void create_display(void);
 
 void create_obj_left_top_container_day(void);
+
 void create_obj_left_top_container_month(void);
+
 void create_obj_left_top_container_year(void);
+
 void create_obj_top_container_actions(void);
+
 void create_obj_top_container_time(void);
 
 void create_page_left_bottom_itinerary(void);
+
 void create_page_left_bottom_main(void);
+
 void create_page_left_main(void);
+
 void create_page_left_top_container(void);
+
 void create_page_left_top_main(void);
+
 void create_page_main(void);
+
 void create_page_right_calendar(void);
+
 void create_page_right_main(void);
+
 void create_page_settings(void);
+
 void create_page_top_container(void);
+
 void create_page_top_main(void);
 
 void create_screen(void);
 
 lv_coord_t get_next_row_pos(lv_obj_t * obj, int padding);
 
-void cb_action_settings_event_handler(lv_obj_t *obj, lv_event_t event);
-void cb_calendar_event_handler(lv_obj_t *obj, lv_event_t event);
+void cb_action_settings_event_handler(lv_obj_t * obj, lv_event_t event);
+
+void cb_calendar_event_handler(lv_obj_t * obj, lv_event_t event);
+
 void cb_list_btn_general(lv_obj_t * obj, lv_event_t event);
+
 void cb_list_btn_calendars(lv_obj_t * obj, lv_event_t event);
+
 void cb_settings_win_close(lv_obj_t * obj, lv_event_t event);
+
 void cb_time_task_handler(lv_task_t * task);
+
 void update_calendar(ui_t ui);
+
 void update_time(ui_t ui);
 
 static ui_t * p_Ui = NULL;
 
-ui_t *ui_init(void) {
+ui_t * ui_init(void) {
     static bool ui_initialized = false;
 
     if (ui_initialized) {
@@ -74,7 +95,7 @@ ui_t *ui_init(void) {
     return p_Ui;
 }
 
-void cb_action_settings_event_handler(lv_obj_t *obj, lv_event_t event) {
+void cb_action_settings_event_handler(lv_obj_t * obj, lv_event_t event) {
     if (event == LV_EVENT_PRESSED) {
         // Copy the global configuration into the local version.
         p_Ui->settings.config = *p_config;
@@ -82,7 +103,7 @@ void cb_action_settings_event_handler(lv_obj_t *obj, lv_event_t event) {
         create_page_settings();
 
         if (p_Ui->settings.main) {
-            lv_win_ext_t *win_ext = lv_obj_get_ext_attr(p_Ui->settings.main);
+            lv_win_ext_t * win_ext = lv_obj_get_ext_attr(p_Ui->settings.main);
             p_Ui->settings.header_offset = lv_obj_get_height_fit(win_ext->header);
 
             p_Ui->settings.list = lv_list_create(p_Ui->settings.main, NULL);
@@ -121,9 +142,9 @@ void cb_action_settings_event_handler(lv_obj_t *obj, lv_event_t event) {
     }
 }
 
-void cb_calendar_event_handler(lv_obj_t *obj, lv_event_t event) {
+void cb_calendar_event_handler(lv_obj_t * obj, lv_event_t event) {
     if (event == LV_EVENT_VALUE_CHANGED) {
-        lv_calendar_date_t *date = lv_calendar_get_pressed_date(obj);
+        lv_calendar_date_t * date = lv_calendar_get_pressed_date(obj);
 
         if (date) {
             p_Ui->date.month = date->month;
@@ -256,7 +277,7 @@ void cb_settings_win_close(lv_obj_t * obj, lv_event_t event) {
 }
 
 void cb_time_task_handler(lv_task_t * task) {
-    ui_t ui = *(ui_t *)(task->user_data);
+    ui_t ui = *(ui_t *) (task->user_data);
     update_time(ui);
 }
 
