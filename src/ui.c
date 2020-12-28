@@ -32,6 +32,7 @@ void cb_calendar_event_handler(lv_obj_t * obj, lv_event_t event);
 void cb_list_btn_general(lv_obj_t * obj, lv_event_t event);
 void cb_list_btn_calendars(lv_obj_t * obj, lv_event_t event);
 void cb_settings_win_close(lv_obj_t * obj, lv_event_t event);
+void cb_settings_btnmatrix(lv_obj_t * obj, lv_event_t event);
 void cb_settings_win_msgbox(lv_obj_t * obj, lv_event_t event);
 void cb_time_task_handler(lv_task_t * task);
 void cb_toggle_switch_event_handler(lv_obj_t * obj, lv_event_t event);
@@ -137,6 +138,7 @@ void cb_action_settings_event_handler(lv_obj_t * obj, lv_event_t event) {
             lv_obj_add_style(p_Ui->settings.action_btns, LV_BTNMATRIX_PART_BTN, &style_pressed_text_color_black);
 
             lv_btnmatrix_set_map(p_Ui->settings.action_btns, btns);
+            lv_obj_set_event_cb(p_Ui->settings.action_btns, cb_settings_btnmatrix);
 
             p_Ui->settings.header_offset = p_Ui->settings.header_offset + lv_obj_get_height(actions_bar);
 
@@ -282,6 +284,16 @@ void cb_settings_win_close(lv_obj_t * obj, lv_event_t event) {
     }
 
     lv_win_close_event_cb(obj, event);
+}
+
+void cb_settings_btnmatrix(lv_obj_t * obj, lv_event_t event) {
+    if (event == LV_EVENT_VALUE_CHANGED) {
+        const char * text = lv_btnmatrix_get_active_btn_text(obj);
+
+        if (strcasecmp(text, "Cancel") == 0) {
+            cb_settings_win_close(p_Ui->settings.btn_close, LV_EVENT_RELEASED);
+        }
+    }
 }
 
 void cb_settings_win_msgbox(lv_obj_t * obj, lv_event_t event) {
