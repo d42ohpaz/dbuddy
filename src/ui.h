@@ -97,6 +97,6 @@ typedef struct ui_t {
     lv_calendar_date_t date;
 } ui_t;
 
-ui_t * ui_init(void);
+void ui_init(void);
 
 #endif //DBUDDY_UI_H
