@@ -67,6 +67,7 @@ typedef struct ui_settings_t {
     lv_obj_t * list;
     lv_obj_t * msgbox;
     lv_obj_t * btn_close;
+    lv_obj_t * action_btns;
 
     lv_coord_t header_offset;
     configuration config;

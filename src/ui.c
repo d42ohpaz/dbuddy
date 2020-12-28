@@ -119,6 +119,27 @@ void cb_action_settings_event_handler(lv_obj_t * obj, lv_event_t event) {
             lv_obj_set_style_local_pad_ver(btn_calendars, LV_BTN_PART_MAIN, LV_STATE_DEFAULT, DEFAULT_PADDING * 2);
             lv_obj_set_event_cb(btn_calendars, cb_list_btn_calendars);
 
+            lv_obj_t * actions_bar = lv_obj_create(p_Ui->settings.main, NULL);
+            lv_obj_set_width(actions_bar, lv_obj_get_width(p_Ui->settings.main) - lv_obj_get_width(p_Ui->settings.list));
+            lv_obj_align(actions_bar, NULL, LV_ALIGN_IN_BOTTOM_RIGHT, 0, 0);
+            lv_obj_add_style(actions_bar, LV_OBJ_PART_MAIN, &style_default_border_none);
+            lv_obj_add_style(actions_bar, LV_OBJ_PART_MAIN, &style_default_background_transparent_full);
+
+            static const char * btns[] = {"Cancel", "Save", ""};
+            p_Ui->settings.action_btns = lv_btnmatrix_create(actions_bar, NULL);
+            lv_obj_set_height(p_Ui->settings.action_btns, lv_obj_get_height(actions_bar));
+            lv_obj_align(p_Ui->settings.action_btns, NULL, LV_ALIGN_IN_RIGHT_MID, 0, 0);
+            lv_obj_add_style(p_Ui->settings.action_btns, LV_BTNMATRIX_PART_BG, &style_default_border_none);
+            lv_obj_add_style(p_Ui->settings.action_btns, LV_BTNMATRIX_PART_BG, &style_default_background_transparent_full);
+            lv_obj_add_style(p_Ui->settings.action_btns, LV_BTNMATRIX_PART_BTN, &style_default_border_color_white);
+            lv_obj_add_style(p_Ui->settings.action_btns, LV_BTNMATRIX_PART_BTN, &style_default_background_color_black);
+            lv_obj_add_style(p_Ui->settings.action_btns, LV_BTNMATRIX_PART_BTN, &style_pressed_background_color_white);
+            lv_obj_add_style(p_Ui->settings.action_btns, LV_BTNMATRIX_PART_BTN, &style_pressed_text_color_black);
+
+            lv_btnmatrix_set_map(p_Ui->settings.action_btns, btns);
+
+            p_Ui->settings.header_offset = p_Ui->settings.header_offset + lv_obj_get_height(actions_bar);
+
             lv_list_focus_btn(p_Ui->settings.list, btn_general);
             lv_event_send(btn_general, LV_EVENT_PRESSED, NULL);
         }
