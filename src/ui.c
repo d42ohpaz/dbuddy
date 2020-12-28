@@ -342,9 +342,6 @@ void cb_toggle_switch_event_handler(lv_obj_t * obj, lv_event_t event) {
 
 void create_display(ui_t * ui) {
     ui->display = lv_disp_get_default();
-
-    LV_IMG_DECLARE(tft_background_art)
-    lv_disp_set_bg_image(ui->display, &tft_background_art);
 }
 
 void create_obj_left_top_container_day(ui_t * ui) {
