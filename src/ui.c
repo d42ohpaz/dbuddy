@@ -36,6 +36,7 @@ void cb_settings_win_msgbox(lv_obj_t * obj, lv_event_t event);
 void cb_time_task_handler(lv_task_t * task);
 void cb_toggle_switch_event_handler(lv_obj_t * obj, lv_event_t event);
 
+void update_toggle_buttons(void);
 void update_calendar(ui_t ui);
 void update_time(ui_t ui);
 
@@ -174,12 +175,6 @@ void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
         lv_obj_set_event_cb(p_Ui->settings.general.toggle_format, cb_toggle_switch_event_handler);
         lv_obj_align(p_Ui->settings.general.toggle_format, row_format, LV_ALIGN_IN_RIGHT_MID, 0, 0);
 
-        if (p_Ui->settings.config.time_format24 == 1) {
-            lv_switch_on(p_Ui->settings.general.toggle_format, false);
-        } else {
-            lv_switch_off(p_Ui->settings.general.toggle_format, false);
-        }
-
         lv_obj_t * row_meridiem = lv_label_create(p_Ui->settings.general.main, NULL);
         lv_label_set_long_mode(row_meridiem, LV_LABEL_LONG_BREAK);
         lv_obj_set_width(row_meridiem, lv_obj_get_width_fit(p_Ui->settings.general.main));
@@ -189,12 +184,6 @@ void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
         p_Ui->settings.general.toggle_meridiem = lv_switch_create(p_Ui->settings.general.main, NULL);
         lv_obj_set_event_cb(p_Ui->settings.general.toggle_meridiem, cb_toggle_switch_event_handler);
         lv_obj_align(p_Ui->settings.general.toggle_meridiem, row_meridiem, LV_ALIGN_IN_RIGHT_MID, 0, 0);
-
-        if (p_Ui->settings.config.time_format24 == 0 && p_Ui->settings.config.time_meridiem == 1) {
-            lv_switch_on(p_Ui->settings.general.toggle_meridiem, false);
-        } else {
-            lv_switch_off(p_Ui->settings.general.toggle_meridiem, false);
-        }
 
         lv_obj_t * row_flash_colon = lv_label_create(p_Ui->settings.general.main, NULL);
         lv_label_set_long_mode(row_flash_colon, LV_LABEL_LONG_BREAK);
@@ -206,12 +195,6 @@ void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
         lv_obj_set_event_cb(p_Ui->settings.general.toggle_flash, cb_toggle_switch_event_handler);
         lv_obj_align(p_Ui->settings.general.toggle_flash, row_flash_colon, LV_ALIGN_IN_RIGHT_MID, 0, 0);
 
-        if (p_Ui->settings.config.time_flash == 1) {
-            lv_switch_on(p_Ui->settings.general.toggle_flash, false);
-        } else {
-            lv_switch_off(p_Ui->settings.general.toggle_flash, false);
-        }
-
         lv_obj_t * row_screensaver = lv_label_create(p_Ui->settings.general.main, NULL);
         lv_label_set_long_mode(row_screensaver, LV_LABEL_LONG_BREAK);
         lv_obj_set_width(row_screensaver, lv_obj_get_width_fit(p_Ui->settings.general.main));
@@ -222,11 +205,7 @@ void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
         lv_obj_set_event_cb(p_Ui->settings.general.toggle_screensaver, cb_toggle_switch_event_handler);
         lv_obj_align(p_Ui->settings.general.toggle_screensaver, row_screensaver, LV_ALIGN_IN_RIGHT_MID, 0, 0);
 
-        if (p_Ui->settings.config.time_screensaver == 1) {
-            lv_switch_on(p_Ui->settings.general.toggle_screensaver, false);
-        } else {
-            lv_switch_off(p_Ui->settings.general.toggle_screensaver, false);
-        }
+        update_toggle_buttons();
     }
 }
 
@@ -323,6 +302,8 @@ void cb_toggle_switch_event_handler(lv_obj_t * obj, lv_event_t event) {
         if (obj == p_Ui->settings.general.toggle_screensaver) {
             p_Ui->settings.config.time_screensaver = state ? 1 : 0;
         }
+
+        update_toggle_buttons();
     }
 }
 
@@ -538,6 +519,40 @@ void create_screen(void) {
 
 lv_coord_t get_next_row_pos(lv_obj_t * obj, int padding) {
     return lv_obj_get_y(obj) + lv_obj_get_height(obj) + padding;
+}
+
+void update_toggle_buttons(void) {
+    if (p_Ui->settings.config.time_flash == 1) {
+        lv_switch_on(p_Ui->settings.general.toggle_flash, false);
+    } else {
+        lv_switch_off(p_Ui->settings.general.toggle_flash, false);
+    }
+
+    if (p_Ui->settings.config.time_format24 == 1) {
+        lv_switch_on(p_Ui->settings.general.toggle_format, false);
+        lv_obj_set_click(p_Ui->settings.general.toggle_meridiem, false);
+        lv_obj_add_style(p_Ui->settings.general.toggle_meridiem, LV_SWITCH_PART_BG, &style_default_background_transparent_30);
+        lv_obj_add_style(p_Ui->settings.general.toggle_meridiem, LV_SWITCH_PART_INDIC, &style_default_background_transparent_30);
+        lv_obj_add_style(p_Ui->settings.general.toggle_meridiem, LV_SWITCH_PART_KNOB, &style_default_background_transparent_30);
+    } else {
+        lv_switch_off(p_Ui->settings.general.toggle_format, false);
+        lv_obj_set_click(p_Ui->settings.general.toggle_meridiem, true);
+        lv_obj_remove_style(p_Ui->settings.general.toggle_meridiem, LV_SWITCH_PART_BG, &style_default_background_transparent_30);
+        lv_obj_remove_style(p_Ui->settings.general.toggle_meridiem, LV_SWITCH_PART_INDIC, &style_default_background_transparent_30);
+        lv_obj_remove_style(p_Ui->settings.general.toggle_meridiem, LV_SWITCH_PART_KNOB, &style_default_background_transparent_30);
+    }
+
+    if (p_Ui->settings.config.time_meridiem == 1) {
+        lv_switch_on(p_Ui->settings.general.toggle_meridiem, false);
+    } else {
+        lv_switch_off(p_Ui->settings.general.toggle_meridiem, false);
+    }
+
+    if (p_Ui->settings.config.time_screensaver == 1) {
+        lv_switch_on(p_Ui->settings.general.toggle_screensaver, false);
+    } else {
+        lv_switch_off(p_Ui->settings.general.toggle_screensaver, false);
+    }
 }
 
 void update_calendar(ui_t ui) {
