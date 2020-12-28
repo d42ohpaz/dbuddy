@@ -54,6 +54,8 @@ lv_style_t style_focused_text_color_black;
 lv_style_t style_focused_border_color_white;
 
 lv_style_t style_pressed_background_color_none;
+lv_style_t style_pressed_background_color_white;
+lv_style_t style_pressed_text_color_black;
 
 void styles_init(void) {
     static bool initialized = false;
@@ -229,6 +231,12 @@ void styles_init(void) {
 
     lv_style_init(&style_pressed_background_color_none);
     lv_style_set_bg_opa(&style_pressed_background_color_none, LV_STATE_PRESSED, LV_OPA_TRANSP);
+
+    lv_style_init(&style_pressed_background_color_white);
+    lv_style_set_bg_color(&style_pressed_background_color_white, LV_STATE_PRESSED, LV_COLOR_WHITE);
+
+    lv_style_init(&style_pressed_text_color_black);
+    lv_style_set_text_color(&style_pressed_text_color_black, LV_STATE_PRESSED, LV_COLOR_BLACK);
 
     initialized = true;
     LV_LOG_INFO("styles_init ready");

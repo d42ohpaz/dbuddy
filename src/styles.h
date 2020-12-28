@@ -62,6 +62,8 @@ extern lv_style_t style_focused_border_thin;
 extern lv_style_t style_focused_text_color_black;
 
 extern lv_style_t style_pressed_background_color_none;
+extern lv_style_t style_pressed_background_color_white;
+extern lv_style_t style_pressed_text_color_black;
 
 void styles_init(void);
 
