@@ -6,35 +6,21 @@
 void create_display(void);
 
 void create_obj_left_top_container_day(void);
-
 void create_obj_left_top_container_month(void);
-
 void create_obj_left_top_container_year(void);
-
 void create_obj_top_container_actions(void);
-
 void create_obj_top_container_time(void);
 
 void create_page_left_bottom_itinerary(void);
-
 void create_page_left_bottom_main(void);
-
 void create_page_left_main(void);
-
 void create_page_left_top_container(void);
-
 void create_page_left_top_main(void);
-
 void create_page_main(void);
-
 void create_page_right_calendar(void);
-
 void create_page_right_main(void);
-
 void create_page_settings(void);
-
 void create_page_top_container(void);
-
 void create_page_top_main(void);
 
 void create_screen(void);
@@ -42,23 +28,15 @@ void create_screen(void);
 lv_coord_t get_next_row_pos(lv_obj_t * obj, int padding);
 
 void cb_action_settings_event_handler(lv_obj_t * obj, lv_event_t event);
-
 void cb_calendar_event_handler(lv_obj_t * obj, lv_event_t event);
-
 void cb_list_btn_general(lv_obj_t * obj, lv_event_t event);
-
 void cb_list_btn_calendars(lv_obj_t * obj, lv_event_t event);
-
 void cb_settings_win_close(lv_obj_t * obj, lv_event_t event);
-
 void cb_settings_win_msgbox(lv_obj_t * obj, lv_event_t event);
-
 void cb_time_task_handler(lv_task_t * task);
-
 void cb_toggle_switch_event_handler(lv_obj_t * obj, lv_event_t event);
 
 void update_calendar(ui_t ui);
-
 void update_time(ui_t ui);
 
 static ui_t * p_Ui = NULL;
