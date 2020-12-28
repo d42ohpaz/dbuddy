@@ -2,6 +2,7 @@
 #include <time.h>
 #include "ui.h"
 #include "styles.h"
+#include "fonts.h"
 
 void create_display(ui_t *);
 
@@ -54,6 +55,7 @@ void ui_init() {
     p_Ui = malloc(sizeof(ui_t));
 
     styles_init();
+    font_init();
 
     create_display(p_Ui);
     create_screen(p_Ui);
@@ -354,7 +356,7 @@ void create_obj_left_top_container_day(ui_t * ui) {
     lv_label_set_text(ui->page.left.top.label_day, "");
     lv_obj_set_auto_realign(ui->page.left.top.label_day, true);
     lv_obj_align(ui->page.left.top.label_day, ui->page.left.top.container_day, LV_ALIGN_CENTER, 0, 0);
-    lv_obj_add_style(ui->page.left.top.label_day, LV_LABEL_PART_MAIN, &style_default_font_black_large_72);
+    lv_obj_add_style(ui->page.left.top.label_day, LV_LABEL_PART_MAIN, &style_default_font_black_xxlarge);
 }
 
 void create_obj_left_top_container_month(ui_t * ui) {
@@ -478,9 +480,9 @@ void create_page_right_calendar(ui_t * ui) {
     lv_obj_add_style(ui->page.right.calendar, LV_CALENDAR_PART_DATE, &style_focused_background_color_purple);
     lv_obj_add_style(ui->page.right.calendar, LV_CALENDAR_PART_DATE, &style_focused_text_color_black);
 
-    lv_obj_set_style_local_text_font(ui->page.right.calendar, LV_CALENDAR_PART_HEADER, LV_STATE_DEFAULT, &roboto_black_24);
-    lv_obj_set_style_local_text_font(ui->page.right.calendar, LV_CALENDAR_PART_DAY_NAMES, LV_STATE_DEFAULT, &roboto_black_16);
-    lv_obj_set_style_local_text_font(ui->page.right.calendar, LV_CALENDAR_PART_BG, LV_STATE_DEFAULT, &roboto_regular_12);
+    lv_obj_add_style(ui->page.right.calendar, LV_CALENDAR_PART_HEADER, &style_default_font_black_medium);
+    lv_obj_add_style(ui->page.right.calendar, LV_CALENDAR_PART_DAY_NAMES, &style_default_font_black_small);
+    lv_obj_add_style(ui->page.right.calendar, LV_CALENDAR_PART_BG, &style_default_font_regular_xsmall);
 
     lv_obj_set_event_cb(ui->page.right.calendar, cb_calendar_event_handler);
 
