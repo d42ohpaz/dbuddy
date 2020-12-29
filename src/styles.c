@@ -110,9 +110,9 @@ void styles_init(void) {
     lv_style_init(&style_default_background_color_blue);
     lv_style_set_bg_color(&style_default_background_color_blue, LV_STATE_DEFAULT, LV_COLOR_BLUE);
 
-    lv_style_init(&style_default_background_overlay_color_black);
-    lv_style_set_bg_color(&style_default_background_overlay_color_black, LV_STATE_DEFAULT, LV_COLOR_BLACK);
-    lv_style_set_bg_opa(&style_default_background_overlay_color_black, LV_STATE_DEFAULT, LV_OPA_50);
+    lv_style_init(&style_default_background_overlay);
+    lv_style_set_bg_color(&style_default_background_overlay, LV_STATE_DEFAULT, LV_COLOR_BLACK);
+    lv_style_set_bg_opa(&style_default_background_overlay, LV_STATE_DEFAULT, LV_OPA_50);
 
     lv_style_init(&style_focused_background_color_purple);
     lv_style_set_bg_color(&style_focused_background_color_purple, LV_STATE_FOCUSED, LV_COLOR_PURPLE);
