@@ -250,7 +250,7 @@ void cb_list_btn_calendars(lv_obj_t * obj, lv_event_t event) {
 void cb_settings_win_close(lv_obj_t * obj, lv_event_t event) {
     if (event == LV_EVENT_RELEASED) {
         if (compareTo(p_Ui->settings.config, *p_config) != 0) {
-            static const char * btns[] ={"Continue", "Go Back", ""};
+            static const char * btns[] = {"Continue", "Go Back", ""};
             p_Ui->settings.msgbox = lv_msgbox_create(p_Ui->settings.main, NULL);
             lv_obj_add_style(p_Ui->settings.msgbox, LV_OBJ_PART_MAIN, &style_default_background_color_black);
             lv_obj_add_style(p_Ui->settings.msgbox, LV_OBJ_PART_MAIN, &style_default_border_color_white);
