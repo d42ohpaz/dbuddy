@@ -27,6 +27,8 @@ lv_style_t style_default_background_transparent_half;
 lv_style_t style_default_border_color_white;
 lv_style_t style_default_border_none;
 lv_style_t style_default_border_sides_only_bottom;
+lv_style_t style_default_border_sides_only_top;
+lv_style_t style_default_border_sides_only_left;
 lv_style_t style_default_border_sides_only_right;
 lv_style_t style_default_border_sides_right_none;
 lv_style_t style_default_border_thin;

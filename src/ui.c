@@ -45,6 +45,11 @@ void ui_init() {
 
     p_Ui = malloc(sizeof(ui_t));
 
+    // Initialize the date struct since it sometimes fills with random data.
+    p_Ui->date.year = 0;
+    p_Ui->date.month = 0;
+    p_Ui->date.day = 0;
+
     styles_init();
     font_init();
 
@@ -140,8 +145,10 @@ void create_obj_left_top_container_year(ui_t * ui) {
 void create_obj_top_container_actions(ui_t * ui) {
     ui->page.top.container_actions = lv_obj_create(ui->page.top.container, ui->page.top.main);
 
-    lv_obj_set_size(ui->page.top.container_actions, lv_obj_get_width_fit(ui->page.top.container) / 2, lv_obj_get_height_fit(ui->page.top.main));
+    lv_obj_set_size(ui->page.top.container_actions, (lv_obj_get_width_fit(ui->page.top.main) - DEFAULT_PADDING * 4) / 2, lv_obj_get_height_fit(ui->page.top.main));
     lv_obj_set_pos(ui->page.top.container_actions, lv_obj_get_width(ui->page.top.container_time), 0);
+
+    lv_obj_add_style(ui->page.top.container_actions, LV_OBJ_PART_MAIN, &style_default_background_transparent_full);
 
     ui->page.top.btn_action_settings = lv_btn_create(ui->page.top.container_actions, NULL);
     lv_obj_set_size(ui->page.top.btn_action_settings, lv_obj_get_width_fit(ui->page.top.container_actions) / 12, lv_obj_get_height_fit(ui->page.top.container_actions));
@@ -151,7 +158,7 @@ void create_obj_top_container_actions(ui_t * ui) {
     lv_obj_t * label = lv_label_create(ui->page.top.btn_action_settings, NULL);
     lv_label_set_text(label, LV_SYMBOL_SETTINGS);
     lv_obj_set_auto_realign(label, true);
-    lv_obj_align(label, ui->page.top.container_actions, LV_ALIGN_IN_RIGHT_MID, -DEFAULT_PADDING / 2, 0);
+    lv_obj_align(label, ui->page.top.container_actions, LV_ALIGN_IN_RIGHT_MID, 0, 0);
     lv_obj_add_style(label, LV_LABEL_PART_MAIN, &style_default_font_regular_small);
 
     lv_obj_set_style_local_text_color(ui->page.top.btn_action_settings, LV_LABEL_PART_MAIN, LV_STATE_PRESSED, LV_COLOR_AQUA);
@@ -159,8 +166,11 @@ void create_obj_top_container_actions(ui_t * ui) {
 }
 
 void create_obj_top_container_time(ui_t * ui) {
-    ui->page.top.container_time = lv_obj_create(ui->page.top.container, ui->page.top.main);
+    ui->page.top.container_time = lv_obj_create(ui->page.top.container, NULL);
     lv_obj_set_size(ui->page.top.container_time, lv_obj_get_width_fit(ui->page.top.main) / 2, lv_obj_get_height_fit(ui->page.top.main));
+
+    lv_obj_add_style(ui->page.top.container_time, LV_OBJ_PART_MAIN, &style_default_border_none);
+    lv_obj_add_style(ui->page.top.container_time, LV_OBJ_PART_MAIN, &style_default_background_transparent_full);
 
     ui->page.top.label_time = lv_label_create(ui->page.top.container_time, NULL);
     lv_label_set_text(ui->page.top.label_time, "");
@@ -172,10 +182,14 @@ void create_obj_top_container_time(ui_t * ui) {
 }
 
 void create_page_left_bottom_itinerary(ui_t * ui) {
-    ui->page.left.bottom.itinerary = lv_obj_create(ui->page.left.bottom.main, ui->page.main);
+    ui->page.left.bottom.itinerary = lv_obj_create(ui->page.left.bottom.main, NULL);
 
     lv_obj_set_size(ui->page.left.bottom.itinerary, lv_page_get_width_fit(ui->page.left.bottom.main), lv_page_get_height_fit(ui->page.left.bottom.main));
     lv_obj_add_style(ui->page.left.bottom.itinerary, LV_PAGE_PART_BG, &style_default_background_overlay);
+    lv_obj_add_style(ui->page.left.bottom.itinerary, LV_PAGE_PART_BG, &style_default_radius_none);
+    lv_obj_add_style(ui->page.left.bottom.itinerary, LV_PAGE_PART_BG, &style_default_border_color_white);
+    lv_obj_add_style(ui->page.left.bottom.itinerary, LV_PAGE_PART_BG, &style_focused_border_color_white);
+    lv_obj_add_style(ui->page.left.bottom.itinerary, LV_PAGE_PART_BG, &style_default_border_sides_only_top);
 }
 
 void create_page_left_bottom_main(ui_t * ui) {
@@ -204,7 +218,7 @@ void create_page_left_top_container(ui_t * ui) {
 void create_page_left_top_main(ui_t * ui) {
     ui->page.left.top.main = lv_page_create(ui->page.left.main, ui->page.main);
 
-    lv_obj_set_size(ui->page.left.top.main, lv_obj_get_width(ui->page.left.main), (lv_obj_get_width(ui->page.left.main) * 2 / 3) - DEFAULT_PADDING * 2);
+    lv_obj_set_size(ui->page.left.top.main, lv_obj_get_width(ui->page.left.main), (lv_obj_get_width(ui->page.left.main) * 2 / 3) - DEFAULT_PADDING * 6);
     lv_obj_add_style(ui->page.left.top.main, LV_PAGE_PART_BG, &style_default_padding_default);
 }
 
@@ -227,10 +241,13 @@ void create_page_right_calendar(ui_t * ui) {
     lv_obj_set_size(ui->page.right.calendar, lv_obj_get_width_fit(ui->page.right.container), lv_obj_get_height_fit(ui->page.right.container));
     lv_obj_align(ui->page.right.calendar, ui->page.right.main, LV_ALIGN_IN_LEFT_MID, 0, 0);
     lv_obj_add_style(ui->page.right.calendar, LV_CALENDAR_PART_BG, &style_default_background_overlay);
-    lv_obj_add_style(ui->page.right.calendar, LV_CALENDAR_PART_BG, &style_default_border_none);
     lv_obj_add_style(ui->page.right.calendar, LV_CALENDAR_PART_DATE, &style_focused_background_blend_mode_additive);
     lv_obj_add_style(ui->page.right.calendar, LV_CALENDAR_PART_DATE, &style_focused_background_color_purple);
     lv_obj_add_style(ui->page.right.calendar, LV_CALENDAR_PART_DATE, &style_focused_text_color_black);
+    lv_obj_add_style(ui->page.right.calendar, LV_PAGE_PART_BG, &style_default_border_color_white);
+    lv_obj_add_style(ui->page.right.calendar, LV_PAGE_PART_BG, &style_focused_border_color_white);
+    lv_obj_add_style(ui->page.right.calendar, LV_PAGE_PART_BG, &style_default_border_sides_only_left);
+    lv_obj_add_style(ui->page.right.calendar, LV_PAGE_PART_BG, &style_default_radius_none);
 
     lv_obj_add_style(ui->page.right.calendar, LV_CALENDAR_PART_HEADER, &style_default_font_black_medium);
     lv_obj_add_style(ui->page.right.calendar, LV_CALENDAR_PART_DAY_NAMES, &style_default_font_black_small);
@@ -249,15 +266,24 @@ void create_page_right_main(ui_t * ui) {
 }
 
 void create_page_top_container(ui_t * ui) {
-    ui->page.top.container = lv_obj_create(ui->page.top.main, ui->page.main);
+    ui->page.top.container = lv_obj_create(ui->page.top.main, NULL);
 
-    lv_obj_set_size(ui->page.top.container, lv_obj_get_width_fit(ui->page.top.main), lv_obj_get_height_fit(ui->page.top.main));
+    lv_obj_set_size(ui->page.top.container, lv_obj_get_width_fit(ui->page.top.main) - DEFAULT_PADDING * 2, lv_obj_get_height_fit(ui->page.top.main));
+    lv_obj_align(ui->page.top.container, ui->page.top.main, LV_ALIGN_CENTER, 0, 0);
+
+    lv_obj_add_style(ui->page.top.container, LV_OBJ_PART_MAIN, &style_default_padding_default);
+    lv_obj_add_style(ui->page.top.container, LV_OBJ_PART_MAIN, &style_default_radius_none);
+    lv_obj_add_style(ui->page.top.container, LV_OBJ_PART_MAIN, &style_default_background_transparent_full);
+    lv_obj_add_style(ui->page.top.container, LV_PAGE_PART_BG, &style_default_border_color_white);
+    lv_obj_add_style(ui->page.top.container, LV_PAGE_PART_BG, &style_focused_border_color_white);
+    lv_obj_add_style(ui->page.top.container, LV_OBJ_PART_MAIN, &style_default_border_sides_only_bottom);
 }
 
 void create_page_top_main(ui_t * ui) {
     ui->page.top.main = lv_obj_create(ui->page.main, ui->page.main);
 
-    lv_obj_set_size(ui->page.top.main, LV_HOR_RES, DEFAULT_MENU_HEIGHT);
+    lv_obj_set_size(ui->page.top.main, LV_HOR_RES, DEFAULT_MENU_HEIGHT + DEFAULT_PADDING);
+
     lv_obj_add_style(ui->page.top.main, LV_OBJ_PART_MAIN, &style_default_radius_none);
     lv_obj_add_style(ui->page.top.main, LV_OBJ_PART_MAIN, &style_default_background_overlay);
 }
@@ -265,7 +291,8 @@ void create_page_top_main(ui_t * ui) {
 void create_screen(ui_t * ui) {
     ui->screen = lv_scr_act();
 
-    lv_obj_add_style(ui->screen, LV_OBJMASK_PART_MAIN, &style_default_background_transparent_full);
+    lv_obj_add_style(ui->screen, LV_OBJMASK_PART_MAIN, &style_default_background_color_blue);
+    lv_obj_add_style(ui->screen, LV_OBJMASK_PART_MAIN, &style_default_background_transparent_cover);
 }
 
 void update_calendar(ui_t ui) {

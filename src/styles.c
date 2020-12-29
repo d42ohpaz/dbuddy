@@ -95,6 +95,12 @@ void styles_init(void) {
     lv_style_init(&style_default_border_sides_only_bottom);
     lv_style_set_border_side(&style_default_border_sides_only_bottom, LV_STATE_DEFAULT, LV_BORDER_SIDE_BOTTOM);
 
+    lv_style_init(&style_default_border_sides_only_top);
+    lv_style_set_border_side(&style_default_border_sides_only_top, LV_STATE_DEFAULT, LV_BORDER_SIDE_TOP);
+
+    lv_style_init(&style_default_border_sides_only_left);
+    lv_style_set_border_side(&style_default_border_sides_only_left, LV_STATE_DEFAULT, LV_BORDER_SIDE_LEFT);
+
     lv_style_init(&style_default_border_sides_only_right);
     lv_style_set_border_side(&style_default_border_sides_only_right, LV_STATE_DEFAULT, LV_BORDER_SIDE_RIGHT);
 
@@ -108,11 +114,11 @@ void styles_init(void) {
     lv_style_set_bg_color(&style_default_background_color_black, LV_STATE_DEFAULT, LV_COLOR_BLACK);
 
     lv_style_init(&style_default_background_color_blue);
-    lv_style_set_bg_color(&style_default_background_color_blue, LV_STATE_DEFAULT, LV_COLOR_BLUE);
+    lv_style_set_bg_color(&style_default_background_color_blue, LV_STATE_DEFAULT, LV_COLOR_MAKE(0x20, 0x2D, 0x58));
 
     lv_style_init(&style_default_background_overlay);
-    lv_style_set_bg_color(&style_default_background_overlay, LV_STATE_DEFAULT, LV_COLOR_BLACK);
-    lv_style_set_bg_opa(&style_default_background_overlay, LV_STATE_DEFAULT, LV_OPA_50);
+    lv_style_set_bg_color(&style_default_background_overlay, LV_STATE_DEFAULT, LV_COLOR_MAKE(0x2B, 0x36, 0x6F));
+    lv_style_set_bg_opa(&style_default_background_overlay, LV_STATE_DEFAULT, LV_OPA_10);
 
     lv_style_init(&style_focused_background_color_purple);
     lv_style_set_bg_color(&style_focused_background_color_purple, LV_STATE_FOCUSED, LV_COLOR_PURPLE);
