@@ -188,7 +188,7 @@ void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
         lv_label_set_long_mode(row_meridiem, LV_LABEL_LONG_BREAK);
         lv_obj_set_width(row_meridiem, lv_obj_get_width_fit(p_settings->general.main));
         lv_label_set_text(row_meridiem, "Use Meridiem (e.g., am/pm)");
-        lv_obj_set_pos(row_meridiem, 0, get_next_row_pos(row_format, DEFAULT_PADDING + DEFAULT_PADDING));
+        lv_obj_set_pos(row_meridiem, 0, get_next_row_pos(row_format, DEFAULT_PADDING * 2));
 
         p_settings->general.toggle_meridiem = lv_switch_create(p_settings->general.main, NULL);
         lv_obj_set_event_cb(p_settings->general.toggle_meridiem, cb_toggle_switch_event_handler);
@@ -198,7 +198,7 @@ void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
         lv_label_set_long_mode(row_flash_colon, LV_LABEL_LONG_BREAK);
         lv_obj_set_width(row_flash_colon, lv_obj_get_width_fit(p_settings->general.main));
         lv_label_set_text(row_flash_colon, "Flash the Time Separators");
-        lv_obj_set_pos(row_flash_colon, 0, get_next_row_pos(row_meridiem, DEFAULT_PADDING + DEFAULT_PADDING));
+        lv_obj_set_pos(row_flash_colon, 0, get_next_row_pos(row_meridiem, DEFAULT_PADDING * 2));
 
         p_settings->general.toggle_flash = lv_switch_create(p_settings->general.main, NULL);
         lv_obj_set_event_cb(p_settings->general.toggle_flash, cb_toggle_switch_event_handler);
@@ -208,7 +208,7 @@ void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
         lv_label_set_long_mode(row_screensaver, LV_LABEL_LONG_BREAK);
         lv_obj_set_width(row_screensaver, lv_obj_get_width_fit(p_settings->general.main));
         lv_label_set_text(row_screensaver, "Time as Screensaver");
-        lv_obj_set_pos(row_screensaver, 0, get_next_row_pos(row_flash_colon, DEFAULT_PADDING + DEFAULT_PADDING));
+        lv_obj_set_pos(row_screensaver, 0, get_next_row_pos(row_flash_colon, DEFAULT_PADDING * 2));
 
         p_settings->general.toggle_screensaver = lv_switch_create(p_settings->general.main, NULL);
         lv_obj_set_event_cb(p_settings->general.toggle_screensaver, cb_toggle_switch_event_handler);
