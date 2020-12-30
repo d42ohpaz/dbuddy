@@ -50,15 +50,24 @@ typedef struct ui_settings_t {
 
 ui_settings_t * p_settings = NULL;
 
-void settings_init(ui_t * ui, configuration * pconfig) {
+void settings_init(configuration * config) {
     p_settings = malloc(sizeof(ui_settings_t));
+    lv_obj_t * screen = lv_scr_act();
 
-    orig_config = *pconfig;
-    local_config = *pconfig;
+    orig_config = *config;
+    local_config = *config;
 
-    p_settings->main = lv_win_create(ui->screen, NULL);
-    lv_obj_set_size(p_settings->main, lv_page_get_width_fit(ui->page.main) - DEFAULT_MENU_HEIGHT - (DEFAULT_PADDING * 2), lv_page_get_height_fit(ui->page.main) - DEFAULT_MENU_HEIGHT - (DEFAULT_PADDING * 2));
-    lv_obj_align(p_settings->main, ui->screen, LV_ALIGN_CENTER, 0, 0);
+    // Overlay to simulate a modal dialog
+    p_settings->overlay = lv_obj_create(screen, NULL);
+    lv_obj_set_size(p_settings->overlay, LV_HOR_RES, LV_VER_RES);
+    lv_obj_set_pos(p_settings->overlay, 0, 0);
+    lv_obj_add_style(p_settings->overlay, LV_OBJ_PART_MAIN, &style_default_background_overlay);
+    lv_obj_add_style(p_settings->overlay, LV_OBJ_PART_MAIN, &style_default_border_none);
+
+    // Settings window
+    p_settings->main = lv_win_create(screen, NULL);
+    lv_obj_set_size(p_settings->main, lv_obj_get_width_fit(screen) - DEFAULT_MENU_HEIGHT - (DEFAULT_PADDING * 2), lv_obj_get_height_fit(screen) - DEFAULT_MENU_HEIGHT - (DEFAULT_PADDING * 2));
+    lv_obj_align(p_settings->main, NULL, LV_ALIGN_CENTER, 0, 0);
 
     lv_obj_add_style(p_settings->main, LV_WIN_PART_HEADER, &style_default_background_color_black);
     lv_obj_add_style(p_settings->main, LV_WIN_PART_HEADER, &style_default_border_color_white);
@@ -76,13 +85,6 @@ void settings_init(ui_t * ui, configuration * pconfig) {
 
     p_settings->btn_close = lv_win_add_btn(p_settings->main, LV_SYMBOL_CLOSE);
     lv_obj_set_event_cb(p_settings->btn_close, cb_settings_win_close);
-
-    // Overlay to simulate a modal dialog
-    p_settings->overlay = lv_obj_create(ui->page.main, NULL);
-    lv_obj_set_size(p_settings->overlay, LV_HOR_RES, LV_VER_RES);
-    lv_obj_set_pos(p_settings->overlay, 0, 0);
-    lv_obj_add_style(p_settings->overlay, LV_OBJ_PART_MAIN, &style_default_background_overlay);
-    lv_obj_add_style(p_settings->overlay, LV_OBJ_PART_MAIN, &style_default_border_none);
 
     if (p_settings->main) {
         lv_win_ext_t * win_ext = lv_obj_get_ext_attr(p_settings->main);

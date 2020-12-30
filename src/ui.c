@@ -77,7 +77,7 @@ void ui_init() {
 
 void cb_action_settings_event_handler(lv_obj_t * obj, lv_event_t event) {
     if (lv_debug_check_obj_valid(obj) && event == LV_EVENT_PRESSED) {
-        settings_init(p_Ui, p_config);
+        settings_init(p_config);
     }
 }
 
