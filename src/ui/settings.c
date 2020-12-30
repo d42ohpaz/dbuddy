@@ -19,6 +19,8 @@ void update_toggle_switches(void);
 configuration orig_config;
 configuration local_config;
 
+lv_obj_t * msgbox = NULL;
+
 typedef struct ui_settings_general_t {
     lv_obj_t * main;
 
@@ -36,7 +38,6 @@ typedef struct ui_settings_t {
     lv_obj_t * main;
     lv_obj_t * overlay;
     lv_obj_t * list;
-    lv_obj_t * msgbox;
     lv_obj_t * btn_close;
     lv_obj_t * action_btns;
 
@@ -308,18 +309,18 @@ void cb_settings_win_close(lv_obj_t * obj, lv_event_t event) {
     if (event == LV_EVENT_RELEASED) {
         if (compareTo(local_config, orig_config) != 0) {
             static const char * btns[] = {"Continue", "Go Back", ""};
-            p_settings->msgbox = lv_msgbox_create(p_settings->main, NULL);
-            lv_obj_add_style(p_settings->msgbox, LV_OBJ_PART_MAIN, &style_default_background_color_black);
-            lv_obj_add_style(p_settings->msgbox, LV_OBJ_PART_MAIN, &style_default_border_color_white);
-            lv_obj_add_style(p_settings->msgbox, LV_OBJ_PART_MAIN, &style_default_shadow_none);
-            lv_obj_align(p_settings->msgbox, NULL, LV_ALIGN_IN_TOP_MID, 0, 0);
 
-            lv_msgbox_add_btns(p_settings->msgbox, btns);
-            lv_msgbox_set_text(p_settings->msgbox, "Unsaved changes will be lost.\n\nDo you wish to continue?");
-            lv_msgbox_set_anim_time(p_settings->msgbox, 0);
+            msgbox = lv_msgbox_create(p_settings->main, NULL);
+            lv_obj_add_style(msgbox, LV_OBJ_PART_MAIN, &style_default_background_color_black);
+            lv_obj_add_style(msgbox, LV_OBJ_PART_MAIN, &style_default_border_color_white);
+            lv_obj_add_style(msgbox, LV_OBJ_PART_MAIN, &style_default_shadow_none);
+            lv_obj_align(msgbox, NULL, LV_ALIGN_IN_TOP_MID, 0, 0);
 
-            lv_obj_set_event_cb(p_settings->msgbox, cb_settings_win_msgbox);
+            lv_msgbox_add_btns(msgbox, btns);
+            lv_msgbox_set_text(msgbox, "Unsaved changes will be lost.\n\nDo you wish to continue?");
+            lv_msgbox_set_anim_time(msgbox, 0);
 
+            lv_obj_set_event_cb(msgbox, cb_settings_win_msgbox);
             return;
         }
 
@@ -354,6 +355,6 @@ void cb_settings_win_msgbox(lv_obj_t * obj, lv_event_t event) {
             return;
         }
 
-        lv_msgbox_start_auto_close(p_settings->msgbox, 0);
+        lv_msgbox_start_auto_close(msgbox, 0);
     }
 }
