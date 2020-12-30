@@ -14,7 +14,7 @@ void cb_settings_win_msgbox(lv_obj_t * obj, lv_event_t event);
 
 lv_coord_t get_next_row_pos(lv_obj_t * obj, int padding);
 
-void update_toggle_buttons(void);
+void update_toggle_switches(void);
 
 configuration orig_config;
 configuration local_config;
@@ -213,7 +213,7 @@ void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
         lv_obj_set_event_cb(p_settings->general.toggle_screensaver, cb_toggle_switch_event_handler);
         lv_obj_align(p_settings->general.toggle_screensaver, row_screensaver, LV_ALIGN_IN_RIGHT_MID, 0, 0);
 
-        update_toggle_buttons();
+        update_toggle_switches();
     }
 }
 
@@ -266,11 +266,11 @@ void cb_toggle_switch_event_handler(lv_obj_t * obj, lv_event_t event) {
             local_config.time_screensaver = state ? 1 : 0;
         }
 
-        update_toggle_buttons();
+        update_toggle_switches();
     }
 }
 
-void update_toggle_buttons(void) {
+void update_toggle_switches(void) {
     if (local_config.time_flash == 1) {
         lv_switch_on(p_settings->general.toggle_flash, false);
     } else {
