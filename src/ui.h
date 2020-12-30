@@ -48,36 +48,6 @@ typedef struct ui_right_page_t {
     lv_obj_t * calendar;
 } ui_right_page_t;
 
-typedef struct ui_settings_general_t {
-    lv_obj_t * main;
-
-    lv_obj_t * toggle_format;
-    lv_obj_t * toggle_meridiem;
-    lv_obj_t * toggle_flash;
-    lv_obj_t * toggle_screensaver;
-} ui_settings_general_t;
-
-typedef struct ui_settings_calendars_t {
-    lv_obj_t * main;
-} ui_settings_calendars_t;
-
-typedef struct ui_settings_t {
-    lv_obj_t * main;
-    lv_obj_t * overlay;
-    lv_obj_t * list;
-    lv_obj_t * msgbox;
-    lv_obj_t * btn_close;
-    lv_obj_t * action_btns;
-
-    lv_coord_t header_offset;
-    configuration config;
-
-    union {
-        ui_settings_general_t general;
-        ui_settings_calendars_t calendars;
-    };
-} ui_settings_t;
-
 typedef struct ui_page_t {
     lv_obj_t * main;
 
@@ -91,8 +61,6 @@ typedef struct ui_t {
     lv_obj_t * screen;
 
     ui_page_t page;
-
-    ui_settings_t settings;
 
     lv_calendar_date_t date;
 } ui_t;
