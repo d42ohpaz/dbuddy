@@ -18,7 +18,6 @@ lv_coord_t get_next_row_pos(lv_obj_t * obj, int padding);
 
 void update_toggle_switches(void);
 
-configuration_t * orig_config;
 configuration_t * local_config;
 
 lv_obj_t * msgbox = NULL;
@@ -51,6 +50,7 @@ typedef struct ui_settings_t {
     };
 } ui_settings_t;
 
+configuration_t * p_config;
 ui_settings_t * p_settings = NULL;
 settings_handler shandler = NULL;
 
@@ -60,7 +60,7 @@ void settings_init(configuration_t * u_config, settings_handler handler) {
 
     lv_obj_t * screen = lv_scr_act();
 
-    orig_config = u_config;
+    p_config = u_config;
     local_config = u_config;
 
     // Overlay to simulate a modal dialog
@@ -249,7 +249,7 @@ void cb_settings_btnmatrix(lv_obj_t * obj, lv_event_t event) {
                 return;
             }
 
-            orig_config = local_config;
+            p_config = local_config;
         }
 
         cb_settings_win_close(p_settings->btn_close, LV_EVENT_RELEASED);
@@ -282,7 +282,7 @@ void cb_toggle_switch(lv_obj_t * obj, lv_event_t event) {
 
 void cb_settings_win_close(lv_obj_t * obj, lv_event_t event) {
     if (lv_debug_check_obj_type(obj, "lv_btn") && event == LV_EVENT_RELEASED) {
-        if (compareTo(*local_config, *orig_config) != 0) {
+        if (compareTo(*local_config, *p_config) != 0) {
             static const char * btns[] = {"Continue", "Go Back", ""};
 
             msgbox = lv_msgbox_create(p_settings->main, NULL);
@@ -325,7 +325,7 @@ void cb_settings_win_msgbox(lv_obj_t * obj, lv_event_t event) {
 
         if (strcasecmp(text, "Continue") == 0) {
             // Reset the local config and close the settings
-            local_config = orig_config;
+            local_config = p_config;
             cb_settings_win_close(p_settings->btn_close, LV_EVENT_RELEASED);
             return;
         }
