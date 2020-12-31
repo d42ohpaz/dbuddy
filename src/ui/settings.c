@@ -54,14 +54,14 @@ typedef struct ui_settings_t {
 ui_settings_t * p_settings = NULL;
 settings_handler shandler = NULL;
 
-void settings_init(configuration_t * config, settings_handler handler) {
+void settings_init(configuration_t * u_config, settings_handler handler) {
     p_settings = malloc(sizeof(ui_settings_t));
     shandler = handler;
 
     lv_obj_t * screen = lv_scr_act();
 
-    orig_config = config;
-    local_config = config;
+    orig_config = u_config;
+    local_config = u_config;
 
     // Overlay to simulate a modal dialog
     p_settings->overlay = lv_obj_create(screen, NULL);
