@@ -52,11 +52,11 @@ configuration_t config;
 lv_obj_t * msgbox = NULL;
 
 ui_settings_t * p_settings = NULL;
-settings_handler shandler = NULL;
+settings_handler handler = NULL;
 
-void settings_init(configuration_t * u_config, settings_handler handler) {
+void settings_init(configuration_t * u_config, settings_handler u_handler) {
     p_settings = malloc(sizeof(ui_settings_t));
-    shandler = handler;
+    handler = u_handler;
 
     lv_obj_t * screen = lv_scr_act();
 
@@ -244,11 +244,12 @@ void cb_settings_btnmatrix(lv_obj_t * obj, lv_event_t event) {
         const char * text = lv_btnmatrix_get_active_btn_text(obj);
 
         if (strcasecmp(text, "Save") == 0) {
-            if ((*shandler)(&config) != 0) {
+            if ((*handler)(&config) != 0) {
                 // TODO Tell user that config could not be saved.
                 return;
             }
 
+            // Update the global config with the user's changes.
             *p_config = config;
         }
 
