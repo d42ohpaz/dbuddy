@@ -150,12 +150,12 @@ void settings_init(configuration_t * config, settings_handler handler) {
         p_settings->header_offset = p_settings->header_offset + lv_obj_get_height(actions_bar);
 
         lv_list_focus_btn(p_settings->list, btn_general);
-        lv_event_send(btn_general, LV_EVENT_PRESSED, NULL);
+        lv_event_send(btn_general, LV_EVENT_RELEASED, NULL);
     }
 }
 
 void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
-    if (lv_debug_check_obj_type(obj, "lv_btn") && event == LV_EVENT_PRESSED) {
+    if (lv_debug_check_obj_type(obj, "lv_btn") && event == LV_EVENT_RELEASED) {
         if (p_settings->calendars.main && lv_debug_check_obj_valid(p_settings->calendars.main)) {
             lv_obj_del(p_settings->calendars.main);
             p_settings->calendars.main = NULL;
@@ -225,7 +225,7 @@ void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
 }
 
 void cb_list_btn_calendars(lv_obj_t * obj, lv_event_t event) {
-    if (lv_debug_check_obj_type(obj, "lv_btn") && event == LV_EVENT_PRESSED) {
+    if (lv_debug_check_obj_type(obj, "lv_btn") && event == LV_EVENT_RELEASED) {
         if (p_settings->general.main && lv_debug_check_obj_valid(p_settings->general.main)) {
             lv_obj_del(p_settings->general.main);
             p_settings->general.main = NULL;
@@ -240,7 +240,7 @@ void cb_list_btn_calendars(lv_obj_t * obj, lv_event_t event) {
 }
 
 void cb_settings_btnmatrix(lv_obj_t * obj, lv_event_t event) {
-    if (lv_debug_check_obj_type(obj, "lv_btnmatrix") && event == LV_EVENT_VALUE_CHANGED) {
+    if (lv_debug_check_obj_type(obj, "lv_btnmatrix") && event == LV_EVENT_RELEASED) {
         const char * text = lv_btnmatrix_get_active_btn_text(obj);
 
         if (strcasecmp(text, "Save") == 0) {

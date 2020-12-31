@@ -80,7 +80,7 @@ void ui_init(configuration_t * config, settings_handler settings_handler) {
 }
 
 void cb_action_settings_event_handler(lv_obj_t * obj, lv_event_t event) {
-    if (lv_debug_check_obj_valid(obj) && event == LV_EVENT_PRESSED) {
+    if (lv_debug_check_obj_valid(obj) && event == LV_EVENT_RELEASED) {
         settings_init(p_config, shandler);
     }
 }
