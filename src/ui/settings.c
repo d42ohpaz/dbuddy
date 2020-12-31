@@ -18,8 +18,6 @@ lv_coord_t get_next_row_pos(lv_obj_t * obj, int padding);
 
 void update_toggle_switches(void);
 
-configuration_t * local_config;
-
 lv_obj_t * msgbox = NULL;
 
 typedef struct ui_settings_general_t {
@@ -51,6 +49,8 @@ typedef struct ui_settings_t {
 } ui_settings_t;
 
 configuration_t * p_config;
+configuration_t config;
+
 ui_settings_t * p_settings = NULL;
 settings_handler shandler = NULL;
 
@@ -61,7 +61,7 @@ void settings_init(configuration_t * u_config, settings_handler handler) {
     lv_obj_t * screen = lv_scr_act();
 
     p_config = u_config;
-    local_config = u_config;
+    config = *u_config;
 
     // Overlay to simulate a modal dialog
     p_settings->overlay = lv_obj_create(screen, NULL);
@@ -244,12 +244,12 @@ void cb_settings_btnmatrix(lv_obj_t * obj, lv_event_t event) {
         const char * text = lv_btnmatrix_get_active_btn_text(obj);
 
         if (strcasecmp(text, "Save") == 0) {
-            if ((*shandler)(local_config) != 0) {
+            if ((*shandler)(&config) != 0) {
                 // TODO Tell user that config could not be saved.
                 return;
             }
 
-            p_config = local_config;
+            *p_config = config;
         }
 
         cb_settings_win_close(p_settings->btn_close, LV_EVENT_RELEASED);
@@ -261,19 +261,19 @@ void cb_toggle_switch(lv_obj_t * obj, lv_event_t event) {
         bool state = lv_switch_get_state(obj);
 
         if (obj == p_settings->general.toggle_flash) {
-            local_config->time.flash = state ? 1 : 0;
+            config.time.flash = state ? 1 : 0;
         }
 
         if (obj == p_settings->general.toggle_format) {
-            local_config->time.format24 = state ? 1 : 0;
+            config.time.format24 = state ? 1 : 0;
         }
 
         if (obj == p_settings->general.toggle_meridiem) {
-            local_config->time.meridiem = state ? 1 : 0;
+            config.time.meridiem = state ? 1 : 0;
         }
 
         if (obj == p_settings->general.toggle_screensaver) {
-            local_config->time.screensaver = state ? 1 : 0;
+            config.time.screensaver = state ? 1 : 0;
         }
 
         update_toggle_switches();
@@ -282,7 +282,7 @@ void cb_toggle_switch(lv_obj_t * obj, lv_event_t event) {
 
 void cb_settings_win_close(lv_obj_t * obj, lv_event_t event) {
     if (lv_debug_check_obj_type(obj, "lv_btn") && event == LV_EVENT_RELEASED) {
-        if (compareTo(*local_config, *p_config) != 0) {
+        if (compareTo(config, *p_config) != 0) {
             static const char * btns[] = {"Continue", "Go Back", ""};
 
             msgbox = lv_msgbox_create(p_settings->main, NULL);
@@ -325,7 +325,7 @@ void cb_settings_win_msgbox(lv_obj_t * obj, lv_event_t event) {
 
         if (strcasecmp(text, "Continue") == 0) {
             // Reset the local config and close the settings
-            local_config = p_config;
+            config = *p_config;
             cb_settings_win_close(p_settings->btn_close, LV_EVENT_RELEASED);
             return;
         }
@@ -339,13 +339,13 @@ lv_coord_t get_next_row_pos(lv_obj_t * obj, int padding) {
 }
 
 void update_toggle_switches(void) {
-    if (local_config->time.flash == 1) {
+    if (config.time.flash == 1) {
         lv_switch_on(p_settings->general.toggle_flash, false);
     } else {
         lv_switch_off(p_settings->general.toggle_flash, false);
     }
 
-    if (local_config->time.format24 == 1) {
+    if (config.time.format24 == 1) {
         lv_switch_on(p_settings->general.toggle_format, false);
         lv_obj_set_click(p_settings->general.toggle_meridiem, false);
         lv_obj_add_style(p_settings->general.toggle_meridiem, LV_SWITCH_PART_BG, &style_default_background_transparent_30);
@@ -359,13 +359,13 @@ void update_toggle_switches(void) {
         lv_obj_remove_style(p_settings->general.toggle_meridiem, LV_SWITCH_PART_KNOB, &style_default_background_transparent_30);
     }
 
-    if (local_config->time.meridiem == 1) {
+    if (config.time.meridiem == 1) {
         lv_switch_on(p_settings->general.toggle_meridiem, false);
     } else {
         lv_switch_off(p_settings->general.toggle_meridiem, false);
     }
 
-    if (local_config->time.screensaver == 1) {
+    if (config.time.screensaver == 1) {
         lv_switch_on(p_settings->general.toggle_screensaver, false);
     } else {
         lv_switch_off(p_settings->general.toggle_screensaver, false);
