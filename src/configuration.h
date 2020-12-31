@@ -1,41 +1,39 @@
-
-
 #ifndef BASIC_ICS_CONFIGURATION_H
 #define BASIC_ICS_CONFIGURATION_H
 
-#include <stdlib.h>
+typedef struct time_config_t {
+    int flash;
+    int format24;
+    int meridiem;
+    int screensaver;
+} time_config_t;
 
-typedef struct configuration {
-    size_t time_flash;
-    size_t time_format24;
-    size_t time_meridiem;
-    size_t time_screensaver;
-} configuration;
+typedef struct config_t {
+    time_config_t time;
+} configuration_t;
 
-configuration * p_config;
-
-static inline int compareTo(const configuration lhs, const configuration rhs) {
-    if (lhs.time_flash < rhs.time_flash) {
+static inline int compareTo(const configuration_t lhs, const configuration_t rhs) {
+    if (lhs.time.flash < rhs.time.flash) {
         return -1;
-    } else if (lhs.time_flash > rhs.time_flash) {
+    } else if (lhs.time.flash > rhs.time.flash) {
         return 1;
     }
 
-    if (lhs.time_format24 < rhs.time_format24) {
+    if (lhs.time.format24 < rhs.time.format24) {
         return -1;
-    } else if (lhs.time_format24 > rhs.time_format24) {
+    } else if (lhs.time.format24 > rhs.time.format24) {
         return 1;
     }
 
-    if (lhs.time_meridiem < rhs.time_meridiem) {
+    if (lhs.time.meridiem < rhs.time.meridiem) {
         return -1;
-    } else if (lhs.time_meridiem > rhs.time_meridiem) {
+    } else if (lhs.time.meridiem > rhs.time.meridiem) {
         return 1;
     }
 
-    if (lhs.time_screensaver < rhs.time_screensaver) {
+    if (lhs.time.screensaver < rhs.time.screensaver) {
         return -1;
-    } else if (lhs.time_screensaver > rhs.time_screensaver) {
+    } else if (lhs.time.screensaver > rhs.time.screensaver) {
         return 1;
     }
 

@@ -1,11 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 #include "ui.h"
 #include "styles.h"
 #include "fonts.h"
 #include "ui/settings.h"
-
-void create_display(ui_t *);
 
 void create_obj_left_top_container_day(ui_t *);
 void create_obj_left_top_container_month(ui_t *);
@@ -35,13 +34,17 @@ void update_time(ui_t ui);
 
 static ui_t * p_Ui;
 
-void ui_init() {
+configuration_t * p_config;
+
+void ui_init(configuration_t * config) {
     static bool ui_initialized = false;
 
     if (ui_initialized) {
         LV_LOG_WARN("ui_init: already inited");
         return;
     }
+
+    p_config = config;
 
     p_Ui = malloc(sizeof(ui_t));
 
@@ -53,7 +56,6 @@ void ui_init() {
     styles_init();
     font_init();
 
-    create_display(p_Ui);
     create_screen(p_Ui);
     create_page_main(p_Ui);
     create_page_top_main(p_Ui);
@@ -98,10 +100,6 @@ void cb_calendar_event_handler(lv_obj_t * obj, lv_event_t event) {
 void cb_time_task_handler(lv_task_t * task) {
     ui_t ui = *(ui_t *) (task->user_data);
     update_time(ui);
-}
-
-void create_display(ui_t * ui) {
-    ui->display = lv_disp_get_default();
 }
 
 void create_obj_left_top_container_day(ui_t * ui) {
@@ -330,8 +328,8 @@ void update_time(ui_t ui) {
     char bufMeridiem[3] = "";
     int tmHour = local.tm_hour;
 
-    if (p_config->time_format24 == 0) {
-        if (p_config->time_meridiem == 1) {
+    if (p_config->time.format24 == 0) {
+        if (p_config->time.meridiem == 1) {
             if (local.tm_hour >= 12) {
                 sprintf(bufMeridiem, "%s", "pm");
             } else {
@@ -347,7 +345,7 @@ void update_time(ui_t ui) {
     static int count_on = 0, count_off = 0;
     char * colon = strstr(lv_label_get_text(ui.page.top.label_time), ":");
 
-    if (((count_on % 2) == 0 && colon == NULL) || (p_config->time_flash == 0)) {
+    if (((count_on % 2) == 0 && colon == NULL) || (p_config->time.flash == 0)) {
         lv_label_set_text_fmt(ui.page.top.label_time, "%02u:%02u %s", tmHour, local.tm_min, bufMeridiem);
 
         count_on = 0;

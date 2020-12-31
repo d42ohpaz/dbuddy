@@ -13,8 +13,8 @@ int main(int argc, char **argv) {
     (void) argc; /*Unused*/
     (void) argv; /*Unused*/
 
-    p_config = malloc(sizeof(configuration));
-    ini_parse("dbuddy.ini", cb_config_handler, p_config);
+    configuration_t * config = malloc(sizeof(configuration_t));
+    ini_parse("dbuddy.ini", cb_config_handler, config);
 
     /*Initialize LVGL*/
     lv_init();
@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
     hal_init();
 
     /*Initialize the UI*/
-    ui_init();
+    ui_init(config);
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "EndlessLoop"
@@ -42,17 +42,17 @@ int main(int argc, char **argv) {
 }
 
 int cb_config_handler(void* user, const char* section, const char* name, const char* value) {
-    configuration * config = (configuration *)user;
+    configuration_t * config = (configuration_t *)user;
 
 #define MATCH(s, n) strcmp(section, s) == 0 && strcmp(name, n) == 0
     if (MATCH("general", "time_format24")) {
-        config->time_format24 = strtol(value, NULL, 10);
+        config->time.format24 = (int)strtol(value, NULL, 10);
     } else if (MATCH("general", "time_meridiem")) {
-        config->time_meridiem = strtol(value, NULL, 10);
+        config->time.meridiem = (int)strtol(value, NULL, 10);
     } else if (MATCH("general", "time_flash")) {
-        config->time_flash = strtol(value, NULL, 10);
+        config->time.flash = (int)strtol(value, NULL, 10);
     } else if (MATCH("general", "time_screensaver")) {
-        config->time_screensaver = strtol(value, NULL, 10);
+        config->time.screensaver = (int)strtol(value, NULL, 10);
     } else {
         return 1;
     }

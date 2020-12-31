@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 #include "lvgl/lvgl.h"
 
 #include "settings.h"
@@ -16,8 +18,8 @@ lv_coord_t get_next_row_pos(lv_obj_t * obj, int padding);
 
 void update_toggle_switches(void);
 
-configuration orig_config;
-configuration local_config;
+configuration_t orig_config;
+configuration_t local_config;
 
 lv_obj_t * msgbox = NULL;
 
@@ -51,7 +53,7 @@ typedef struct ui_settings_t {
 
 ui_settings_t * p_settings = NULL;
 
-void settings_init(configuration * config) {
+void settings_init(configuration_t * config) {
     p_settings = malloc(sizeof(ui_settings_t));
     lv_obj_t * screen = lv_scr_act();
 
@@ -149,7 +151,7 @@ void settings_init(configuration * config) {
 }
 
 void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
-    if (lv_debug_check_obj_valid(obj) && event == LV_EVENT_PRESSED) {
+    if (lv_debug_check_obj_type(obj, "lv_btn") && event == LV_EVENT_PRESSED) {
         if (p_settings->calendars.main && lv_debug_check_obj_valid(p_settings->calendars.main)) {
             lv_obj_del(p_settings->calendars.main);
             p_settings->calendars.main = NULL;
@@ -219,7 +221,7 @@ void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
 }
 
 void cb_list_btn_calendars(lv_obj_t * obj, lv_event_t event) {
-    if (lv_debug_check_obj_valid(obj) && event == LV_EVENT_PRESSED) {
+    if (lv_debug_check_obj_type(obj, "lv_btn") && event == LV_EVENT_PRESSED) {
         if (p_settings->general.main && lv_debug_check_obj_valid(p_settings->general.main)) {
             lv_obj_del(p_settings->general.main);
             p_settings->general.main = NULL;
@@ -233,80 +235,42 @@ void cb_list_btn_calendars(lv_obj_t * obj, lv_event_t event) {
     }
 }
 
-lv_coord_t get_next_row_pos(lv_obj_t * obj, int padding) {
-    return lv_obj_get_y(obj) + lv_obj_get_height(obj) + padding;
-}
-
 void cb_settings_btnmatrix(lv_obj_t * obj, lv_event_t event) {
-    if (event == LV_EVENT_VALUE_CHANGED) {
+    if (lv_debug_check_obj_type(obj, "lv_btnmatrix") && event == LV_EVENT_VALUE_CHANGED) {
         const char * text = lv_btnmatrix_get_active_btn_text(obj);
 
         if (strcasecmp(text, "Cancel") == 0) {
-            cb_settings_win_close(p_settings->btn_close, LV_EVENT_RELEASED);
+            lv_event_send(p_settings->btn_close, LV_EVENT_RELEASED, NULL);
         }
     }
 }
 
 void cb_toggle_switch_event_handler(lv_obj_t * obj, lv_event_t event) {
-    if (event == LV_EVENT_VALUE_CHANGED) {
+    if (lv_debug_check_obj_type(obj, "lv_switch") && event == LV_EVENT_VALUE_CHANGED) {
         bool state = lv_switch_get_state(obj);
 
         if (obj == p_settings->general.toggle_flash) {
-            local_config.time_flash = state ? 1 : 0;
+            local_config.time.flash = state ? 1 : 0;
         }
 
         if (obj == p_settings->general.toggle_format) {
-            local_config.time_format24 = state ? 1 : 0;
+            local_config.time.format24 = state ? 1 : 0;
         }
 
         if (obj == p_settings->general.toggle_meridiem) {
-            local_config.time_meridiem = state ? 1 : 0;
+            local_config.time.meridiem = state ? 1 : 0;
         }
 
         if (obj == p_settings->general.toggle_screensaver) {
-            local_config.time_screensaver = state ? 1 : 0;
+            local_config.time.screensaver = state ? 1 : 0;
         }
 
         update_toggle_switches();
     }
 }
 
-void update_toggle_switches(void) {
-    if (local_config.time_flash == 1) {
-        lv_switch_on(p_settings->general.toggle_flash, false);
-    } else {
-        lv_switch_off(p_settings->general.toggle_flash, false);
-    }
-
-    if (local_config.time_format24 == 1) {
-        lv_switch_on(p_settings->general.toggle_format, false);
-        lv_obj_set_click(p_settings->general.toggle_meridiem, false);
-        lv_obj_add_style(p_settings->general.toggle_meridiem, LV_SWITCH_PART_BG, &style_default_background_transparent_30);
-        lv_obj_add_style(p_settings->general.toggle_meridiem, LV_SWITCH_PART_INDIC, &style_default_background_transparent_30);
-        lv_obj_add_style(p_settings->general.toggle_meridiem, LV_SWITCH_PART_KNOB, &style_default_background_transparent_30);
-    } else {
-        lv_switch_off(p_settings->general.toggle_format, false);
-        lv_obj_set_click(p_settings->general.toggle_meridiem, true);
-        lv_obj_remove_style(p_settings->general.toggle_meridiem, LV_SWITCH_PART_BG, &style_default_background_transparent_30);
-        lv_obj_remove_style(p_settings->general.toggle_meridiem, LV_SWITCH_PART_INDIC, &style_default_background_transparent_30);
-        lv_obj_remove_style(p_settings->general.toggle_meridiem, LV_SWITCH_PART_KNOB, &style_default_background_transparent_30);
-    }
-
-    if (local_config.time_meridiem == 1) {
-        lv_switch_on(p_settings->general.toggle_meridiem, false);
-    } else {
-        lv_switch_off(p_settings->general.toggle_meridiem, false);
-    }
-
-    if (local_config.time_screensaver == 1) {
-        lv_switch_on(p_settings->general.toggle_screensaver, false);
-    } else {
-        lv_switch_off(p_settings->general.toggle_screensaver, false);
-    }
-}
-
 void cb_settings_win_close(lv_obj_t * obj, lv_event_t event) {
-    if (event == LV_EVENT_RELEASED) {
+    if (lv_debug_check_obj_type(obj, "lv_win") && event == LV_EVENT_RELEASED) {
         if (compareTo(local_config, orig_config) != 0) {
             static const char * btns[] = {"Continue", "Go Back", ""};
 
@@ -345,16 +309,54 @@ void cb_settings_win_close(lv_obj_t * obj, lv_event_t event) {
 }
 
 void cb_settings_win_msgbox(lv_obj_t * obj, lv_event_t event) {
-    if (event == LV_EVENT_VALUE_CHANGED) {
+    if (lv_debug_check_obj_type(obj, "lv_msgbox") && event == LV_EVENT_VALUE_CHANGED) {
         const char * text = lv_msgbox_get_active_btn_text(obj);
 
         if (strcasecmp(text, "Continue") == 0) {
             // Reset the local config and close the settings
             local_config = orig_config;
-            cb_settings_win_close(p_settings->btn_close, LV_EVENT_RELEASED);
+            lv_event_send(p_settings->btn_close, LV_EVENT_RELEASED, NULL);
             return;
         }
 
         lv_msgbox_start_auto_close(msgbox, 0);
+    }
+}
+
+lv_coord_t get_next_row_pos(lv_obj_t * obj, int padding) {
+    return lv_obj_get_y(obj) + lv_obj_get_height(obj) + padding;
+}
+
+void update_toggle_switches(void) {
+    if (local_config.time.flash == 1) {
+        lv_switch_on(p_settings->general.toggle_flash, false);
+    } else {
+        lv_switch_off(p_settings->general.toggle_flash, false);
+    }
+
+    if (local_config.time.format24 == 1) {
+        lv_switch_on(p_settings->general.toggle_format, false);
+        lv_obj_set_click(p_settings->general.toggle_meridiem, false);
+        lv_obj_add_style(p_settings->general.toggle_meridiem, LV_SWITCH_PART_BG, &style_default_background_transparent_30);
+        lv_obj_add_style(p_settings->general.toggle_meridiem, LV_SWITCH_PART_INDIC, &style_default_background_transparent_30);
+        lv_obj_add_style(p_settings->general.toggle_meridiem, LV_SWITCH_PART_KNOB, &style_default_background_transparent_30);
+    } else {
+        lv_switch_off(p_settings->general.toggle_format, false);
+        lv_obj_set_click(p_settings->general.toggle_meridiem, true);
+        lv_obj_remove_style(p_settings->general.toggle_meridiem, LV_SWITCH_PART_BG, &style_default_background_transparent_30);
+        lv_obj_remove_style(p_settings->general.toggle_meridiem, LV_SWITCH_PART_INDIC, &style_default_background_transparent_30);
+        lv_obj_remove_style(p_settings->general.toggle_meridiem, LV_SWITCH_PART_KNOB, &style_default_background_transparent_30);
+    }
+
+    if (local_config.time.meridiem == 1) {
+        lv_switch_on(p_settings->general.toggle_meridiem, false);
+    } else {
+        lv_switch_off(p_settings->general.toggle_meridiem, false);
+    }
+
+    if (local_config.time.screensaver == 1) {
+        lv_switch_on(p_settings->general.toggle_screensaver, false);
+    } else {
+        lv_switch_off(p_settings->general.toggle_screensaver, false);
     }
 }

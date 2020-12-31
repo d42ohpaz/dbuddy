@@ -57,7 +57,6 @@ typedef struct ui_page_t {
 } ui_page_t;
 
 typedef struct ui_t {
-    lv_disp_t * display;
     lv_obj_t * screen;
 
     ui_page_t page;
@@ -65,6 +64,6 @@ typedef struct ui_t {
     lv_calendar_date_t date;
 } ui_t;
 
-void ui_init(void);
+void ui_init(configuration_t *);
 
 #endif //DBUDDY_UI_H
