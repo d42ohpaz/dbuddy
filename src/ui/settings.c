@@ -18,8 +18,8 @@ lv_coord_t get_next_row_pos(lv_obj_t * obj, int padding);
 
 void update_toggle_switches(void);
 
-configuration_t orig_config;
-configuration_t local_config;
+configuration_t * orig_config;
+configuration_t * local_config;
 
 lv_obj_t * msgbox = NULL;
 
@@ -57,8 +57,8 @@ void settings_init(configuration_t * config) {
     p_settings = malloc(sizeof(ui_settings_t));
     lv_obj_t * screen = lv_scr_act();
 
-    orig_config = *config;
-    local_config = *config;
+    orig_config = config;
+    local_config = config;
 
     // Overlay to simulate a modal dialog
     p_settings->overlay = lv_obj_create(screen, NULL);
@@ -130,6 +130,7 @@ void settings_init(configuration_t * config) {
         lv_obj_add_style(actions_bar, LV_OBJ_PART_MAIN, &style_default_background_transparent_full);
 
         static const char * btns[] = {"Cancel", "Save", ""};
+
         p_settings->action_btns = lv_btnmatrix_create(actions_bar, NULL);
         lv_obj_set_height(p_settings->action_btns, lv_obj_get_height(actions_bar));
         lv_obj_align(p_settings->action_btns, NULL, LV_ALIGN_IN_RIGHT_MID, 0, 0);
@@ -250,19 +251,19 @@ void cb_toggle_switch(lv_obj_t * obj, lv_event_t event) {
         bool state = lv_switch_get_state(obj);
 
         if (obj == p_settings->general.toggle_flash) {
-            local_config.time.flash = state ? 1 : 0;
+            local_config->time.flash = state ? 1 : 0;
         }
 
         if (obj == p_settings->general.toggle_format) {
-            local_config.time.format24 = state ? 1 : 0;
+            local_config->time.format24 = state ? 1 : 0;
         }
 
         if (obj == p_settings->general.toggle_meridiem) {
-            local_config.time.meridiem = state ? 1 : 0;
+            local_config->time.meridiem = state ? 1 : 0;
         }
 
         if (obj == p_settings->general.toggle_screensaver) {
-            local_config.time.screensaver = state ? 1 : 0;
+            local_config->time.screensaver = state ? 1 : 0;
         }
 
         update_toggle_switches();
@@ -328,13 +329,13 @@ lv_coord_t get_next_row_pos(lv_obj_t * obj, int padding) {
 }
 
 void update_toggle_switches(void) {
-    if (local_config.time.flash == 1) {
+    if (local_config->time.flash == 1) {
         lv_switch_on(p_settings->general.toggle_flash, false);
     } else {
         lv_switch_off(p_settings->general.toggle_flash, false);
     }
 
-    if (local_config.time.format24 == 1) {
+    if (local_config->time.format24 == 1) {
         lv_switch_on(p_settings->general.toggle_format, false);
         lv_obj_set_click(p_settings->general.toggle_meridiem, false);
         lv_obj_add_style(p_settings->general.toggle_meridiem, LV_SWITCH_PART_BG, &style_default_background_transparent_30);
@@ -348,13 +349,13 @@ void update_toggle_switches(void) {
         lv_obj_remove_style(p_settings->general.toggle_meridiem, LV_SWITCH_PART_KNOB, &style_default_background_transparent_30);
     }
 
-    if (local_config.time.meridiem == 1) {
+    if (local_config->time.meridiem == 1) {
         lv_switch_on(p_settings->general.toggle_meridiem, false);
     } else {
         lv_switch_off(p_settings->general.toggle_meridiem, false);
     }
 
-    if (local_config.time.screensaver == 1) {
+    if (local_config->time.screensaver == 1) {
         lv_switch_on(p_settings->general.toggle_screensaver, false);
     } else {
         lv_switch_off(p_settings->general.toggle_screensaver, false);
