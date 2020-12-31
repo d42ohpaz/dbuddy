@@ -9,6 +9,7 @@
 
 int cb_config_handler(void* user, const char* section, const char* name, const char* value);
 int cb_settings_handler(configuration_t * lconfig);
+int cfputs(char * name, int value, FILE * file);
 
 int main(int argc, char **argv) {
     (void) argc; /*Unused*/
@@ -71,25 +72,24 @@ int cb_settings_handler(configuration_t * lconfig) {
 
     fputs("[general]\n", file);
 
-    char time_format24[19];
-    sprintf(time_format24, "time_format24 = %d\n", lconfig->time.format24);
-    fputs(time_format24, file);
-
-    char time_meridiem[19];
-    sprintf(time_meridiem, "time_meridiem = %d\n", lconfig->time.meridiem);
-    fputs(time_meridiem, file);
-
-    char time_flash[16];
-    sprintf(time_flash, "time_flash = %d\n", lconfig->time.flash);
-    fputs(time_flash, file);
-
-    char time_screensaver[22];
-    sprintf(time_screensaver, "time_screensaver = %d\n", lconfig->time.screensaver);
-    fputs(time_screensaver, file);
+    cfputs("time_format24", lconfig->time.format24, file);
+    cfputs("time_meridiem", lconfig->time.meridiem, file);
+    cfputs("time_flash", lconfig->time.flash, file);
+    cfputs("time_screensaver", lconfig->time.screensaver, file);
 
     fputs("\n[calendars]\n", file);
 
     fclose(file);
 
     return 0;
+}
+
+int cfputs(char * name, int value, FILE * file) {
+    char buffer[strlen(name) + strlen(" = ") + 3];
+    char format[strlen(name) + strlen(" = ") + 4];
+
+    sprintf(format, "%s = %%d\n", name);
+    sprintf(buffer, format, value);
+
+    return fputs(buffer, file);
 }
