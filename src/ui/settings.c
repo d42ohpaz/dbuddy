@@ -18,8 +18,6 @@ lv_coord_t get_next_row_pos(lv_obj_t * obj, int padding);
 
 void update_toggle_switches(void);
 
-lv_obj_t * msgbox = NULL;
-
 typedef struct ui_settings_general_t {
     lv_obj_t * main;
 
@@ -50,6 +48,8 @@ typedef struct ui_settings_t {
 
 configuration_t * p_config;
 configuration_t config;
+
+lv_obj_t * msgbox = NULL;
 
 ui_settings_t * p_settings = NULL;
 settings_handler shandler = NULL;
