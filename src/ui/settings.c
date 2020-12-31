@@ -10,7 +10,7 @@
 void cb_list_btn_general(lv_obj_t * obj, lv_event_t event);
 void cb_list_btn_calendars(lv_obj_t * obj, lv_event_t event);
 void cb_settings_btnmatrix(lv_obj_t * obj, lv_event_t event);
-void cb_toggle_switch_event_handler(lv_obj_t * obj, lv_event_t event);
+void cb_toggle_switch(lv_obj_t * obj, lv_event_t event);
 void cb_settings_win_close(lv_obj_t * obj, lv_event_t event);
 void cb_settings_win_msgbox(lv_obj_t * obj, lv_event_t event);
 
@@ -183,7 +183,7 @@ void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
         lv_obj_set_pos(row_format, 0, get_next_row_pos(heading_time, DEFAULT_PADDING));
 
         p_settings->general.toggle_format = lv_switch_create(p_settings->general.main, NULL);
-        lv_obj_set_event_cb(p_settings->general.toggle_format, cb_toggle_switch_event_handler);
+        lv_obj_set_event_cb(p_settings->general.toggle_format, cb_toggle_switch);
         lv_obj_align(p_settings->general.toggle_format, row_format, LV_ALIGN_IN_RIGHT_MID, 0, 0);
 
         lv_obj_t * row_meridiem = lv_label_create(p_settings->general.main, NULL);
@@ -193,7 +193,7 @@ void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
         lv_obj_set_pos(row_meridiem, 0, get_next_row_pos(row_format, DEFAULT_PADDING * 2));
 
         p_settings->general.toggle_meridiem = lv_switch_create(p_settings->general.main, NULL);
-        lv_obj_set_event_cb(p_settings->general.toggle_meridiem, cb_toggle_switch_event_handler);
+        lv_obj_set_event_cb(p_settings->general.toggle_meridiem, cb_toggle_switch);
         lv_obj_align(p_settings->general.toggle_meridiem, row_meridiem, LV_ALIGN_IN_RIGHT_MID, 0, 0);
 
         lv_obj_t * row_flash_colon = lv_label_create(p_settings->general.main, NULL);
@@ -203,7 +203,7 @@ void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
         lv_obj_set_pos(row_flash_colon, 0, get_next_row_pos(row_meridiem, DEFAULT_PADDING * 2));
 
         p_settings->general.toggle_flash = lv_switch_create(p_settings->general.main, NULL);
-        lv_obj_set_event_cb(p_settings->general.toggle_flash, cb_toggle_switch_event_handler);
+        lv_obj_set_event_cb(p_settings->general.toggle_flash, cb_toggle_switch);
         lv_obj_align(p_settings->general.toggle_flash, row_flash_colon, LV_ALIGN_IN_RIGHT_MID, 0, 0);
 
         lv_obj_t * row_screensaver = lv_label_create(p_settings->general.main, NULL);
@@ -213,7 +213,7 @@ void cb_list_btn_general(lv_obj_t * obj, lv_event_t event) {
         lv_obj_set_pos(row_screensaver, 0, get_next_row_pos(row_flash_colon, DEFAULT_PADDING * 2));
 
         p_settings->general.toggle_screensaver = lv_switch_create(p_settings->general.main, NULL);
-        lv_obj_set_event_cb(p_settings->general.toggle_screensaver, cb_toggle_switch_event_handler);
+        lv_obj_set_event_cb(p_settings->general.toggle_screensaver, cb_toggle_switch);
         lv_obj_align(p_settings->general.toggle_screensaver, row_screensaver, LV_ALIGN_IN_RIGHT_MID, 0, 0);
 
         update_toggle_switches();
@@ -245,7 +245,7 @@ void cb_settings_btnmatrix(lv_obj_t * obj, lv_event_t event) {
     }
 }
 
-void cb_toggle_switch_event_handler(lv_obj_t * obj, lv_event_t event) {
+void cb_toggle_switch(lv_obj_t * obj, lv_event_t event) {
     if (lv_debug_check_obj_type(obj, "lv_switch") && event == LV_EVENT_VALUE_CHANGED) {
         bool state = lv_switch_get_state(obj);
 
