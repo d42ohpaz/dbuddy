@@ -8,6 +8,7 @@
 #include "src/configuration.h"
 
 int cb_config_handler(void* user, const char* section, const char* name, const char* value);
+int cb_settings_handler(configuration_t * lconfig);
 
 int main(int argc, char **argv) {
     (void) argc; /*Unused*/
@@ -23,7 +24,7 @@ int main(int argc, char **argv) {
     hal_init();
 
     /*Initialize the UI*/
-    ui_init(config);
+    ui_init(config, cb_settings_handler);
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "EndlessLoop"
@@ -56,6 +57,39 @@ int cb_config_handler(void* user, const char* section, const char* name, const c
     } else {
         return 1;
     }
+
+    return 0;
+}
+
+int cb_settings_handler(configuration_t * lconfig) {
+    FILE * file = fopen("dbuddy.ini", "wb+");
+
+    if (file == NULL) {
+        perror("Unable to open dbuddy.ini for writing\n");
+        return -1;
+    }
+
+    fputs("[general]\n", file);
+
+    char time_format24[19];
+    sprintf(time_format24, "time_format24 = %d\n", lconfig->time.format24);
+    fputs(time_format24, file);
+
+    char time_meridiem[19];
+    sprintf(time_meridiem, "time_meridiem = %d\n", lconfig->time.meridiem);
+    fputs(time_meridiem, file);
+
+    char time_flash[16];
+    sprintf(time_flash, "time_flash = %d\n", lconfig->time.flash);
+    fputs(time_flash, file);
+
+    char time_screensaver[22];
+    sprintf(time_screensaver, "time_screensaver = %d\n", lconfig->time.screensaver);
+    fputs(time_screensaver, file);
+
+    fputs("\n[calendars]\n", file);
+
+    fclose(file);
 
     return 0;
 }

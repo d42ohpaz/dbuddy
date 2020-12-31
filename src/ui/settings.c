@@ -52,9 +52,12 @@ typedef struct ui_settings_t {
 } ui_settings_t;
 
 ui_settings_t * p_settings = NULL;
+settings_handler shandler = NULL;
 
-void settings_init(configuration_t * config) {
+void settings_init(configuration_t * config, settings_handler handler) {
     p_settings = malloc(sizeof(ui_settings_t));
+    shandler = handler;
+
     lv_obj_t * screen = lv_scr_act();
 
     orig_config = config;
@@ -240,9 +243,16 @@ void cb_settings_btnmatrix(lv_obj_t * obj, lv_event_t event) {
     if (lv_debug_check_obj_type(obj, "lv_btnmatrix") && event == LV_EVENT_VALUE_CHANGED) {
         const char * text = lv_btnmatrix_get_active_btn_text(obj);
 
-        if (strcasecmp(text, "Cancel") == 0) {
-            lv_event_send(p_settings->btn_close, LV_EVENT_RELEASED, NULL);
+        if (strcasecmp(text, "Save") == 0) {
+            if ((*shandler)(local_config) != 0) {
+                // TODO Tell user that config could not be saved.
+                return;
+            }
+
+            orig_config = local_config;
         }
+
+        lv_event_send(p_settings->btn_close, LV_EVENT_RELEASED, NULL);
     }
 }
 

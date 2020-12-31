@@ -35,8 +35,9 @@ void update_time(ui_t ui);
 static ui_t * p_Ui;
 
 configuration_t * p_config;
+settings_handler shandler;
 
-void ui_init(configuration_t * config) {
+void ui_init(configuration_t * config, settings_handler settings_handler) {
     static bool ui_initialized = false;
 
     if (ui_initialized) {
@@ -45,6 +46,7 @@ void ui_init(configuration_t * config) {
     }
 
     p_config = config;
+    shandler = settings_handler;
 
     p_Ui = malloc(sizeof(ui_t));
 
@@ -79,7 +81,7 @@ void ui_init(configuration_t * config) {
 
 void cb_action_settings_event_handler(lv_obj_t * obj, lv_event_t event) {
     if (lv_debug_check_obj_valid(obj) && event == LV_EVENT_PRESSED) {
-        settings_init(p_config);
+        settings_init(p_config, shandler);
     }
 }
 

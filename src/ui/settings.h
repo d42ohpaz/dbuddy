@@ -3,6 +3,8 @@
 
 #include "src/configuration.h"
 
-void settings_init(configuration_t *);
+typedef int (*settings_handler)(configuration_t *);
+
+void settings_init(configuration_t *, settings_handler);
 
 #endif //BASIC_ICS_SETTINGS_H

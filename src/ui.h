@@ -3,6 +3,7 @@
 
 #include "lvgl/lvgl.h"
 #include "configuration.h"
+#include "ui/settings.h"
 
 typedef struct ui_top_left_page_t {
     lv_obj_t * main;
@@ -64,6 +65,6 @@ typedef struct ui_t {
     lv_calendar_date_t date;
 } ui_t;
 
-void ui_init(configuration_t *);
+void ui_init(configuration_t *, settings_handler);
 
 #endif //DBUDDY_UI_H
