@@ -252,7 +252,7 @@ void cb_settings_btnmatrix(lv_obj_t * obj, lv_event_t event) {
             orig_config = local_config;
         }
 
-        lv_event_send(p_settings->btn_close, LV_EVENT_RELEASED, NULL);
+        cb_settings_win_close(p_settings->btn_close, LV_EVENT_RELEASED);
     }
 }
 
@@ -326,7 +326,7 @@ void cb_settings_win_msgbox(lv_obj_t * obj, lv_event_t event) {
         if (strcasecmp(text, "Continue") == 0) {
             // Reset the local config and close the settings
             local_config = orig_config;
-            lv_event_send(p_settings->btn_close, LV_EVENT_RELEASED, NULL);
+            cb_settings_win_close(p_settings->btn_close, LV_EVENT_RELEASED);
             return;
         }
 
