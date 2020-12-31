@@ -271,8 +271,8 @@ void cb_toggle_switch(lv_obj_t * obj, lv_event_t event) {
 }
 
 void cb_settings_win_close(lv_obj_t * obj, lv_event_t event) {
-    if (lv_debug_check_obj_type(obj, "lv_win") && event == LV_EVENT_RELEASED) {
-        if (compareTo(local_config, orig_config) != 0) {
+    if (lv_debug_check_obj_type(obj, "lv_btn") && event == LV_EVENT_RELEASED) {
+        if (compareTo(*local_config, *orig_config) != 0) {
             static const char * btns[] = {"Continue", "Go Back", ""};
 
             msgbox = lv_msgbox_create(p_settings->main, NULL);
