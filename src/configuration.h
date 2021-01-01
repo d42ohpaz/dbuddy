@@ -1,5 +1,5 @@
-#ifndef BASIC_ICS_CONFIGURATION_H
-#define BASIC_ICS_CONFIGURATION_H
+#ifndef CONFIGURATION_H
+#define CONFIGURATION_H
 
 typedef struct time_config_t {
     int flash;
@@ -40,4 +40,4 @@ static inline int compareTo(const configuration_t lhs, const configuration_t rhs
     return 0;
 }
 
-#endif //BASIC_ICS_CONFIGURATION_H
+#endif //CONFIGURATION_H

@@ -1,5 +1,5 @@
-#ifndef BASIC_ICS_FONTS_H
-#define BASIC_ICS_FONTS_H
+#ifndef FONTS_H
+#define FONTS_H
 
 #include "lvgl/lvgl.h"
 
@@ -11,4 +11,4 @@ lv_style_t style_default_font_regular_xsmall;
 
 void font_init(void);
 
-#endif //BASIC_ICS_FONTS_H
+#endif //FONTS_H
