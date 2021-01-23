@@ -1,9 +1,9 @@
-#include "lvgl/lvgl.h"
+#include <lvgl.h>
 
 /*******************************************************************************
  * Size: 12 px
  * Bpp: 4
- * Opts: 
+ * Opts:
  ******************************************************************************/
 
 #ifndef ROBOTO_REGULAR_12
@@ -2705,4 +2705,3 @@ lv_font_t roboto_regular_12 = {
 
 
 #endif /*#if ROBOTO_REGULAR_12*/
-
