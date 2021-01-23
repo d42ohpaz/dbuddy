@@ -1,34 +1,33 @@
-cmake_minimum_required(VERSION 3.17)
-project(dbuddy C)
+# !!! WARNING !!! AUTO-GENERATED FILE, PLEASE DO NOT MODIFY IT AND USE
+# https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+#
+# If you need to override existing CMake configuration or add extra,
+# please create `CMakeListsUser.txt` in the root of project.
+# The `CMakeListsUser.txt` will not be overwritten by PlatformIO.
 
-set(CMAKE_C_STANDARD 11)
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+cmake_minimum_required(VERSION 3.13)
+set(CMAKE_SYSTEM_NAME Generic)
+set(CMAKE_C_COMPILER_WORKS 1)
+set(CMAKE_CXX_COMPILER_WORKS 1)
 
-include_directories(${PROJECT_SOURCE_DIR})
+project("dbuddy" C CXX)
 
-file(GLOB_RECURSE INCLUDES "lv_drivers/*.h" "lvgl/*.h" "inih/*.h" "assets/*.h" "src/*.h")
-file(GLOB_RECURSE SOURCES "lv_drivers/*.c" "lvgl/*.c" "inih/*.c" "assets/*.c" "src/*.c")
+include(CMakeListsPrivate.txt)
 
-list(FILTER SOURCES EXCLUDE REGEX "lvgl/src/lv_font/.*dejavu.*.c")
-list(FILTER SOURCES EXCLUDE REGEX "lvgl/src/lv_font/.*montserrat.*.c")
-list(FILTER SOURCES EXCLUDE REGEX "lvgl/src/lv_font/.*simsun.*.c")
-list(FILTER SOURCES EXCLUDE REGEX "lvgl/src/lv_font/.*unscii.*.c")
-list(FILTER SOURCES EXCLUDE REGEX "inih/cpp/.*.c")
-list(FILTER SOURCES EXCLUDE REGEX "inih/examples/.*.c")
-list(FILTER SOURCES EXCLUDE REGEX "inih/tests/.*.c")
+if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/CMakeListsUser.txt)
+include(CMakeListsUser.txt)
+endif()
 
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+add_custom_target(
+    Production ALL
+    COMMAND platformio -c clion run "$<$<NOT:$<CONFIG:All>>:-e${CMAKE_BUILD_TYPE}>"
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
 
-find_package(SDL2 REQUIRED)
-include_directories(${SDL2_INCLUDE_DIR} "/usr/local/include")
+add_custom_target(
+    Debug ALL
+    COMMAND platformio -c clion run --target debug "$<$<NOT:$<CONFIG:All>>:-e${CMAKE_BUILD_TYPE}>"
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
 
-add_executable(dbuddy main.c ${SOURCES} ${INCLUDES})
-
-if (APPLE)
-    target_link_libraries(dbuddy PRIVATE SDL2::SDL2)
-else ()
-    target_link_libraries(dbuddy PRIVATE SDL2)
-endif ()
-
-add_custom_target(run COMMAND ${EXECUTABLE_OUTPUT_PATH}/dbuddy)
+add_executable(Z_DUMMY_TARGET ${SRC_LIST})

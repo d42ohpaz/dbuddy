@@ -7,3 +7,5 @@ demo
 .pydevproject
 /.metadata/
 /.tracecompass
+/.pio
+/cmake-build-nodemcu-32s
