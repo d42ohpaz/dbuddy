@@ -7,7 +7,7 @@
 
 
 
-set(CMAKE_CONFIGURATION_TYPES "nodemcu-32s" CACHE STRING "Build Types reflect PlatformIO Environments" FORCE)
+set(CMAKE_CONFIGURATION_TYPES "nodemcu-32s;native;" CACHE STRING "Build Types reflect PlatformIO Environments" FORCE)
 
 
 SET(CMAKE_C_COMPILER "$ENV{HOME}/.platformio/packages/toolchain-xtensa32/bin/xtensa-esp32-elf-gcc")
@@ -21,8 +21,7 @@ set(CMAKE_CXX_STANDARD 11)
 if (CMAKE_BUILD_TYPE MATCHES "nodemcu-32s")
     add_definitions(-D'PLATFORMIO=50004')
     add_definitions(-D'ARDUINO_NodeMCU_32S')
-    add_definitions(-D'BOARD_HAS_PSRAM')
-    add_definitions(-D'CONFIG_SPIRAM_CACHE_WORKAROUND')
+    add_definitions(-D'LV_CONF_INCLUDE_SIMPLE')
     add_definitions(-D'ESP32')
     add_definitions(-D'ESP_PLATFORM')
     add_definitions(-D'F_CPU=240000000L')
@@ -35,15 +34,16 @@ if (CMAKE_BUILD_TYPE MATCHES "nodemcu-32s")
 
     include_directories("${CMAKE_CURRENT_LIST_DIR}/include")
     include_directories("${CMAKE_CURRENT_LIST_DIR}/src")
-    include_directories("${CMAKE_CURRENT_LIST_DIR}/.pio/libdeps/nodemcu-32s/lvgl")
-    include_directories("${CMAKE_CURRENT_LIST_DIR}/.pio/libdeps/nodemcu-32s/lvgl/src")
-    include_directories("$ENV{HOME}/.platformio/packages/framework-arduinoespressif32/libraries/BLE/src")
     include_directories("${CMAKE_CURRENT_LIST_DIR}/.pio/libdeps/nodemcu-32s/Adafruit RA8875")
     include_directories("${CMAKE_CURRENT_LIST_DIR}/.pio/libdeps/nodemcu-32s/Adafruit GFX Library")
     include_directories("${CMAKE_CURRENT_LIST_DIR}/.pio/libdeps/nodemcu-32s/Adafruit BusIO")
     include_directories("$ENV{HOME}/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src")
     include_directories("$ENV{HOME}/.platformio/packages/framework-arduinoespressif32/libraries/SPI/src")
     include_directories("$ENV{HOME}/.platformio/packages/framework-arduinoespressif32/libraries/EEPROM/src")
+    include_directories("${CMAKE_CURRENT_LIST_DIR}/.pio/libdeps/nodemcu-32s/lvgl")
+    include_directories("${CMAKE_CURRENT_LIST_DIR}/.pio/libdeps/nodemcu-32s/lvgl/src")
+    include_directories("$ENV{HOME}/.platformio/packages/framework-arduinoespressif32/libraries/BLE/src")
+    include_directories("${CMAKE_CURRENT_LIST_DIR}")
     include_directories("$ENV{HOME}/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/config")
     include_directories("$ENV{HOME}/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_trace")
     include_directories("$ENV{HOME}/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_update")
@@ -138,6 +138,29 @@ if (CMAKE_BUILD_TYPE MATCHES "nodemcu-32s")
     )
 endif()
 
+if (CMAKE_BUILD_TYPE MATCHES "native")
+    add_definitions(-D'PLATFORMIO=50004')
+    add_definitions(-D'LV_CONF_INCLUDE_SIMPLE')
+    add_definitions(-D'LV_LVGL_H_INCLUDE_SIMPLE')
+    add_definitions(-D'LV_DRV_NO_CONF')
+    add_definitions(-D'USE_MONITOR')
+    add_definitions(-D'MONITOR_ZOOM=2')
+    add_definitions(-D'USE_MOUSE')
+    add_definitions(-D'USE_MOUSEWHEEL')
+    add_definitions(-D'USE_KEYBOARD')
+
+    include_directories("${CMAKE_CURRENT_LIST_DIR}/include")
+    include_directories("${CMAKE_CURRENT_LIST_DIR}/src")
+    include_directories("${CMAKE_CURRENT_LIST_DIR}/.pio/libdeps/native/lv_drivers")
+    include_directories("${CMAKE_CURRENT_LIST_DIR}/.pio/libdeps/native/lvgl")
+    include_directories("${CMAKE_CURRENT_LIST_DIR}/.pio/libdeps/native/lvgl/src")
+    include_directories("${CMAKE_CURRENT_LIST_DIR}")
+    include_directories("$ENV{HOME}/.platformio/packages/tool-unity")
+
+    FILE(GLOB_RECURSE EXTRA_LIB_SOURCES
+        ${CMAKE_CURRENT_LIST_DIR}/.pio/libdeps/native/*.*
+    )
+endif()
 
 FILE(GLOB_RECURSE SRC_LIST
     ${CMAKE_CURRENT_LIST_DIR}/src/*.*
