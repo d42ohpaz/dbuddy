@@ -3,13 +3,8 @@
  * Configuration file for v7.9.1
  */
 
-/*
- * COPY THIS FILE AS `lv_conf.h` NEXT TO the `lvgl` FOLDER
- */
-
 #ifndef LV_CONF_H
 #define LV_CONF_H
-/* clang-format off */
 
 #include <stdint.h>
 
