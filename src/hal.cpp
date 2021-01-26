@@ -1,30 +1,35 @@
 #include <stdexcept>
-#include <Arduino.h>
-#include <functional>
 
 #include "hal.h"
 
-using namespace std;
-using namespace std::placeholders;
+using namespace DBuddy;
 
-void DBuddy::Hal::run(bool use_dbl_buff) {
-    Serial.println("Initializing HAL");
+Hal * instance;
+
+/**
+ * The c-callback for flushing our visual data to our display driver.
+ */
+extern "C" void flush_callback(lv_disp_drv_t * drv, const lv_area_t * area, lv_color_t * color) {
+    instance->flush(drv, area, color);
+}
+
+void Hal::run(bool use_dbl_buff) {
     init();
 
     if (use_dbl_buff) {
-        Serial.println("Initializing double-buffer display buffer");
         lv_disp_buf_init(display_buffer, buffer0, buffer1, BUFFER_SIZE);
     } else {
-        Serial.println("Initializing single-buffer display buffer");
         lv_disp_buf_init(display_buffer, buffer0, nullptr, BUFFER_SIZE);
     }
 
-    Serial.printf("Initializing the display driver: %p\n", this);
     lv_disp_drv_init(display_driver);
-    // display_driver->flush_cb = <what goes here?>;
+
+    // Make the instance available for our c-callback above.
+    instance = this;
+
+    display_driver->flush_cb = &flush_callback;
     display_driver->buffer = display_buffer;
 
-    Serial.println("Registering the display driver");
     if (!lv_disp_drv_register(display_driver)) {
         throw std::runtime_error("Unable to register the display driver");
     }

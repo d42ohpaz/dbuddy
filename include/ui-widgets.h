@@ -5,6 +5,7 @@
 
 struct MenuWidget {
     lv_obj_t * self = new lv_obj_t;
+    lv_obj_t * container = new lv_obj_t;
 
     lv_obj_t * container_time = new lv_obj_t;
     lv_obj_t * label_time = new lv_obj_t;

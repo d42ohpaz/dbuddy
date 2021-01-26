@@ -7,8 +7,12 @@
 namespace DBuddy {
     class Hal {
     public:
+        virtual ~Hal() {
+            delete display_buffer;
+            delete display_driver;
+        };
         virtual void init() = 0;
-        virtual void flush(lv_disp_drv_t *, const lv_area_t *, lv_color_t *) = 0;
+        virtual void flush(lv_disp_drv_t *, const lv_area_t *, lv_color_t *) {};
 
         void run(bool);
     private:
