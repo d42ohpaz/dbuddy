@@ -12,8 +12,8 @@ set(CMAKE_CONFIGURATION_TYPES "nodemcu-32s;native;" CACHE STRING "Build Types re
 
 SET(CMAKE_C_COMPILER "$ENV{HOME}/.platformio/packages/toolchain-xtensa32/bin/xtensa-esp32-elf-gcc")
 SET(CMAKE_CXX_COMPILER "$ENV{HOME}/.platformio/packages/toolchain-xtensa32/bin/xtensa-esp32-elf-g++")
-SET(CMAKE_CXX_FLAGS "-fno-rtti -fno-exceptions -std=gnu++11 -Os -Os -g3 -Wall -nostdlib -Wpointer-arith -Wno-error=unused-but-set-variable -Wno-error=unused-variable -mlongcalls -ffunction-sections -fdata-sections -fstrict-volatile-bitfields -Wno-error=deprecated-declarations -Wno-error=unused-function -Wno-unused-parameter -Wno-sign-compare -fstack-protector -fexceptions -Werror=reorder")
-SET(CMAKE_C_FLAGS "-std=gnu99 -Wno-old-style-declaration -Os -Os -g3 -Wall -nostdlib -Wpointer-arith -Wno-error=unused-but-set-variable -Wno-error=unused-variable -mlongcalls -ffunction-sections -fdata-sections -fstrict-volatile-bitfields -Wno-error=deprecated-declarations -Wno-error=unused-function -Wno-unused-parameter -Wno-sign-compare -fstack-protector -fexceptions -Werror=reorder")
+SET(CMAKE_CXX_FLAGS "-fno-rtti -fno-exceptions -std=gnu++11 -Os -g3 -Wall -nostdlib -Wpointer-arith -Wno-error=unused-but-set-variable -Wno-error=unused-variable -mlongcalls -ffunction-sections -fdata-sections -fstrict-volatile-bitfields -Wno-error=deprecated-declarations -Wno-error=unused-function -Wno-unused-parameter -Wno-sign-compare -fstack-protector -fexceptions -Werror=reorder")
+SET(CMAKE_C_FLAGS "-std=gnu99 -Wno-old-style-declaration -Os -g3 -Wall -nostdlib -Wpointer-arith -Wno-error=unused-but-set-variable -Wno-error=unused-variable -mlongcalls -ffunction-sections -fdata-sections -fstrict-volatile-bitfields -Wno-error=deprecated-declarations -Wno-error=unused-function -Wno-unused-parameter -Wno-sign-compare -fstack-protector -fexceptions -Werror=reorder")
 
 SET(CMAKE_C_STANDARD 99)
 set(CMAKE_CXX_STANDARD 11)
