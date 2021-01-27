@@ -24,10 +24,10 @@ Ui::~Ui() {
 void Ui::init() {
     instance = this;
 
-    display = lv_disp_get_default();
-
     auto * fonts = new Fonts;
     auto * styles = new Styles;
+
+    display = lv_disp_get_default();
 
     screen = new Widgets::Screen(nullptr, nullptr);
     screen->init(fonts, styles);
