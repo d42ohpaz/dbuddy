@@ -4,7 +4,6 @@
 using namespace DBuddy;
 
 Widgets::Screen::Screen(lv_obj_t * parent, lv_obj_t * copy) : Widget(parent, copy) {
-    init();
     self = lv_scr_act();
 }
 

@@ -5,7 +5,6 @@
 using namespace DBuddy;
 
 Widgets::TimeLabel::TimeLabel(lv_obj_t * parent, lv_obj_t * copy) : Widget(parent, copy) {
-    init();
     self = lv_label_create(parent, copy);
 }
 

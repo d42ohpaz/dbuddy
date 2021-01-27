@@ -4,7 +4,6 @@
 using namespace DBuddy;
 
 Widgets::Menu::Menu(lv_obj_t * parent, lv_obj_t * copy) : Widget(parent, copy) {
-    init();
     self = lv_obj_create(parent, copy);
 }
 
