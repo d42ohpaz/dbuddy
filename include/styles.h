@@ -95,6 +95,8 @@ namespace dbuddy {
         std::map<lv_state_t, lv_style_t> shadow_none{};
         std::map<lv_state_t, lv_style_t> text_color_black{};
         std::map<lv_state_t, lv_style_t> text_color_white{};
+
+        static void init_style(std::map<lv_state_t, lv_style_t> * member, lv_state_t state);
     };
 }
 

@@ -6,202 +6,130 @@ Styles::Styles() {
     lv_state_t STATES[8] = {LV_STATE_DEFAULT, LV_STATE_CHECKED, LV_STATE_FOCUSED, LV_STATE_EDITED, LV_STATE_HOVERED, LV_STATE_PRESSED, LV_STATE_DISABLED};
 
     for (unsigned char STATE : STATES) {
-        lv_style_t bbma;
-        lv_style_init(&bbma);
-        lv_style_set_bg_blend_mode(&bbma, STATE, LV_BLEND_MODE_ADDITIVE);
-        background_blend_mode_additive[STATE] = bbma;
+        init_style(&background_blend_mode_additive, STATE);
+        lv_style_set_bg_blend_mode(&background_blend_mode_additive[STATE], STATE, LV_BLEND_MODE_ADDITIVE);
 
-        lv_style_t bbms;
-        lv_style_init(&bbms);
-        lv_style_set_bg_blend_mode(&bbms, STATE, LV_BLEND_MODE_SUBTRACTIVE);
-        background_blend_mode_subtractive[STATE] = bbms;
+        init_style(&background_blend_mode_subtractive, STATE);
+        lv_style_set_bg_blend_mode(&background_blend_mode_subtractive[STATE], STATE, LV_BLEND_MODE_SUBTRACTIVE);
 
-        lv_style_t btf;
-        lv_style_init(&btf);
-        lv_style_set_bg_opa(&btf, STATE, LV_OPA_TRANSP);
-        background_transparent_full[STATE] = btf;
+        init_style(&background_transparent_full, STATE);
+        lv_style_set_bg_opa(&background_transparent_full[STATE], STATE, LV_OPA_TRANSP);
 
-        lv_style_t bt10;
-        lv_style_init(&bt10);
-        lv_style_set_bg_opa(&bt10, STATE, LV_OPA_10);
-        background_transparent_10[STATE] = bt10;
+        init_style(&background_transparent_10, STATE);
+        lv_style_set_bg_opa(&background_transparent_10[STATE], STATE, LV_OPA_10);
 
-        lv_style_t bt20;
-        lv_style_init(&bt20);
-        lv_style_set_bg_opa(&bt20, STATE, LV_OPA_20);
-        background_transparent_20[STATE] = bt20;
+        init_style(&background_transparent_20, STATE);
+        lv_style_set_bg_opa(&background_transparent_20[STATE], STATE, LV_OPA_20);
 
-        lv_style_t bt30;
-        lv_style_init(&bt30);
-        lv_style_set_bg_opa(&bt30, STATE, LV_OPA_30);
-        background_transparent_30[STATE] = bt30;
+        init_style(&background_transparent_30, STATE);
+        lv_style_set_bg_opa(&background_transparent_30[STATE], STATE, LV_OPA_30);
 
-        lv_style_t bt40;
-        lv_style_init(&bt40);
-        lv_style_set_bg_opa(&bt40, STATE, LV_OPA_40);
-        background_transparent_40[STATE] = bt40;
+        init_style(&background_transparent_40, STATE);
+        lv_style_set_bg_opa(&background_transparent_40[STATE], STATE, LV_OPA_40);
 
-        lv_style_t bth;
-        lv_style_init(&bth);
-        lv_style_set_bg_opa(&bth, STATE, LV_OPA_50);
-        background_transparent_half[STATE] = bth;
+        init_style(&background_transparent_half, STATE);
+        lv_style_set_bg_opa(&background_transparent_half[STATE], STATE, LV_OPA_50);
 
-        lv_style_t bt60;
-        lv_style_init(&bt60);
-        lv_style_set_bg_opa(&bt60, STATE, LV_OPA_60);
-        background_transparent_60[STATE] = bt60;
+        init_style(&background_transparent_60, STATE);
+        lv_style_set_bg_opa(&background_transparent_60[STATE], STATE, LV_OPA_60);
 
-        lv_style_t bt70;
-        lv_style_init(&bt70);
-        lv_style_set_bg_opa(&bt70, STATE, LV_OPA_70);
-        background_transparent_70[STATE] = bt70;
+        init_style(&background_transparent_70, STATE);
+        lv_style_set_bg_opa(&background_transparent_70[STATE], STATE, LV_OPA_70);
 
-        lv_style_t bt80;
-        lv_style_init(&bt80);
-        lv_style_set_bg_opa(&bt80, STATE, LV_OPA_80);
-        background_transparent_80[STATE] = bt80;
+        init_style(&background_transparent_80, STATE);
+        lv_style_set_bg_opa(&background_transparent_80[STATE], STATE, LV_OPA_80);
 
-        lv_style_t bt90;
-        lv_style_init(&bt90);
-        lv_style_set_bg_opa(&bt90, STATE, LV_OPA_90);
-        background_transparent_90[STATE] = bt90;
+        init_style(&background_transparent_90, STATE);
+        lv_style_set_bg_opa(&background_transparent_90[STATE], STATE, LV_OPA_90);
 
-        lv_style_t btc;
-        lv_style_init(&btc);
-        lv_style_set_bg_opa(&btc, STATE, LV_OPA_COVER);
-        background_transparent_cover[STATE] = btc;
+        init_style(&background_transparent_cover, STATE);
+        lv_style_set_bg_opa(&background_transparent_cover[STATE], STATE, LV_OPA_COVER);
 
-        lv_style_t mn;
-        lv_style_init(&mn);
-        lv_style_set_pad_all(&mn, STATE, 0);
-        margin_none[STATE] = mn;
+        init_style(&margin_none, STATE);
+        lv_style_set_pad_all(&margin_none[STATE], STATE, 0);
 
-        lv_style_t pd;
-        lv_style_init(&pd);
-        lv_style_set_pad_all(&pd, STATE, DEFAULT_PADDING);
-        padding_default[STATE] = pd;
+        init_style(&padding_default, STATE);
+        lv_style_set_pad_all(&padding_default[STATE], STATE, DEFAULT_PADDING);
 
-        lv_style_t ptn;
-        lv_style_init(&ptn);
-        lv_style_set_pad_top(&ptn, STATE, 0);
-        padding_top_none[STATE] = ptn;
+        init_style(&padding_top_none, STATE);
+        lv_style_set_pad_top(&padding_top_none[STATE], STATE, 0);
 
-        lv_style_t pln;
-        lv_style_init(&pln);
-        lv_style_set_pad_left(&pln, STATE, 0);
-        padding_left_none[STATE] = pln;
+        init_style(&padding_left_none, STATE);
+        lv_style_set_pad_left(&padding_left_none[STATE], STATE, 0);
 
-        lv_style_t prn;
-        lv_style_init(&prn);
-        lv_style_set_pad_right(&prn, STATE, 0);
-        padding_right_none[STATE] = prn;
+        init_style(&padding_right_none, STATE);
+        lv_style_set_pad_right(&padding_right_none[STATE], STATE, 0);
 
-        lv_style_t pbn;
-        lv_style_init(&pbn);
-        lv_style_set_pad_bottom(&pbn, STATE, 0);
-        padding_bottom_none[STATE] = pbn;
+        init_style(&padding_bottom_none, STATE);
+        lv_style_set_pad_bottom(&padding_bottom_none[STATE], STATE, 0);
 
-        lv_style_t pn;
-        lv_style_init(&pn);
-        lv_style_set_pad_all(&pn, STATE, 0);
-        padding_none[STATE] = pn;
+        init_style(&padding_none, STATE);
+        lv_style_set_pad_all(&padding_none[STATE], STATE, 0);
 
-        lv_style_t rn;
-        lv_style_init(&rn);
-        lv_style_set_radius(&rn, STATE, 0);
-        radius_none[STATE] = rn;
+        init_style(&radius_none, STATE);
+        lv_style_set_radius(&radius_none[STATE], STATE, 0);
 
-        lv_style_t rm;
-        lv_style_init(&rm);
-        lv_style_set_radius(&rm, STATE, 5);
-        radius_normal[STATE] = rm;
+        init_style(&radius_normal, STATE);
+        lv_style_set_radius(&radius_normal[STATE], STATE, 5);
 
-        lv_style_t sn;
-        lv_style_init(&sn);
-        lv_style_set_shadow_width(&sn, STATE, 0);
-        shadow_none[STATE] = sn;
+        init_style(&shadow_none, STATE);
+        lv_style_set_shadow_width(&shadow_none[STATE], STATE, 0);
 
-        lv_style_t tcb;
-        lv_style_init(&tcb);
-        lv_style_set_text_color(&tcb, STATE, LV_COLOR_BLACK);
-        text_color_black[STATE] = tcb;
+        init_style(&text_color_black, STATE);
+        lv_style_set_text_color(&text_color_black[STATE], STATE, LV_COLOR_BLACK);
 
-        lv_style_t tcw;
-        lv_style_init(&tcw);
-        lv_style_set_text_color(&tcw, STATE, LV_COLOR_WHITE);
-        text_color_white[STATE] = tcw;
+        init_style(&text_color_white, STATE);
+        lv_style_set_text_color(&text_color_white[STATE], STATE, LV_COLOR_WHITE);
 
-        lv_style_t bocw;
-        lv_style_init(&bocw);
-        lv_style_set_border_color(&bocw, STATE, LV_COLOR_WHITE);
-        border_color_white[STATE] = bocw;
+        init_style(&border_color_white, STATE);
+        lv_style_set_border_color(&border_color_white[STATE], STATE, LV_COLOR_WHITE);
 
-        lv_style_t bn;
-        lv_style_init(&bn);
-        lv_style_set_border_width(&bn, STATE, 0);
-        border_none[STATE] = bn;
+        init_style(&border_none, STATE);
+        lv_style_set_border_width(&border_none[STATE], STATE, 0);
 
-        lv_style_t bsob;
-        lv_style_init(&bsob);
-        lv_style_set_border_side(&bsob, STATE, LV_BORDER_SIDE_BOTTOM);
-        border_sides_only_bottom[STATE] = bsob;
+        init_style(&border_sides_only_bottom, STATE);
+        lv_style_set_border_side(&border_sides_only_bottom[STATE], STATE, LV_BORDER_SIDE_BOTTOM);
 
-        lv_style_t bsot;
-        lv_style_init(&bsot);
-        lv_style_set_border_side(&bsot, STATE, LV_BORDER_SIDE_TOP);
-        border_sides_only_top[STATE] = bsot;
+        init_style(&border_sides_only_top, STATE);
+        lv_style_set_border_side(&border_sides_only_top[STATE], STATE, LV_BORDER_SIDE_TOP);
 
-        lv_style_t bsol;
-        lv_style_init(&bsol);
-        lv_style_set_border_side(&bsol, STATE, LV_BORDER_SIDE_LEFT);
-        border_sides_only_left[STATE] = bsol;
+        init_style(&border_sides_only_left, STATE);
+        lv_style_set_border_side(&border_sides_only_left[STATE], STATE, LV_BORDER_SIDE_LEFT);
 
-        lv_style_t bsor;
-        lv_style_init(&bsor);
-        lv_style_set_border_side(&bsor, STATE, LV_BORDER_SIDE_RIGHT);
-        border_sides_only_right[STATE] = bsor;
+        init_style(&border_sides_only_right, STATE);
+        lv_style_set_border_side(&border_sides_only_right[STATE], STATE, LV_BORDER_SIDE_RIGHT);
 
-        lv_style_t bsrn;
-        lv_style_init(&bsrn);
-        lv_style_set_border_side(&bsrn, STATE, LV_BORDER_SIDE_LEFT | LV_BORDER_SIDE_BOTTOM | LV_BORDER_SIDE_TOP);
-        border_sides_right_none[STATE] = bsrn;
+        init_style(&border_sides_right_none, STATE);
+        lv_style_set_border_side(&border_sides_right_none[STATE], STATE, LV_BORDER_SIDE_LEFT | LV_BORDER_SIDE_BOTTOM | LV_BORDER_SIDE_TOP);
 
-        lv_style_t bt;
-        lv_style_init(&bt);
-        lv_style_set_border_width(&bt, STATE, 1);
-        border_thin[STATE] = bt;
+        init_style(&border_thin, STATE);
+        lv_style_set_border_width(&border_thin[STATE], STATE, 1);
 
-        lv_style_t bcb;
-        lv_style_init(&bcb);
-        lv_style_set_bg_color(&bcb, STATE, LV_COLOR_BLACK);
-        background_color_black[STATE] = bcb;
+        init_style(&background_color_black, STATE);
+        lv_style_set_bg_color(&background_color_black[STATE], STATE, LV_COLOR_BLACK);
 
-        lv_style_t bcbl;
-        lv_style_init(&bcbl);
-        lv_style_set_bg_color(&bcbl, STATE, LV_COLOR_MAKE(0x20, 0x2D, 0x58));
-        background_color_blue[STATE] = bcbl;
+        init_style(&background_color_blue, STATE);
+        lv_style_set_bg_color(&background_color_blue[STATE], STATE, LV_COLOR_MAKE(0x20, 0x2D, 0x58));
 
-        lv_style_t bo;
-        lv_style_init(&bo);
-        lv_style_set_bg_color(&bo, STATE, LV_COLOR_MAKE(0x2B, 0x36, 0x6F));
-        lv_style_set_bg_opa(&bo, STATE, LV_OPA_10);
-        background_overlay[STATE] = bo;
+        init_style(&background_overlay, STATE);
+        lv_style_set_bg_color(&background_overlay[STATE], STATE, LV_COLOR_MAKE(0x2B, 0x36, 0x6F));
+        lv_style_set_bg_opa(&background_overlay[STATE], STATE, LV_OPA_10);
 
-        lv_style_t bcp;
-        lv_style_init(&bcp);
-        lv_style_set_bg_color(&bcp, LV_STATE_FOCUSED, LV_COLOR_PURPLE);
-        background_color_purple[STATE] = bcp;
+        init_style(&background_color_purple, STATE);
+        lv_style_set_bg_color(&background_color_purple[STATE], LV_STATE_FOCUSED, LV_COLOR_PURPLE);
 
-        lv_style_t bcn;
-        lv_style_init(&bcn);
-        lv_style_set_bg_opa(&bcn, STATE, LV_OPA_TRANSP);
-        background_color_none[STATE] = bcn;
+        init_style(&background_color_none, STATE);
+        lv_style_set_bg_opa(&background_color_none[STATE], STATE, LV_OPA_TRANSP);
 
-        lv_style_t bacw;
-        lv_style_init(&bacw);
-        lv_style_set_bg_color(&bacw, STATE, LV_COLOR_WHITE);
-        background_color_white[STATE] = bacw;
+        init_style(&background_color_white, STATE);
+        lv_style_set_bg_color(&background_color_white[STATE], STATE, LV_COLOR_WHITE);
     }
+}
+
+void Styles::init_style(std::map<lv_state_t, lv_style_t> * map, lv_state_t state) {
+    lv_style_t style;
+    lv_style_init(&style);
+    (*map)[state] = style;
 }
 
 lv_style_t * Styles::get_background_blend_mode_additive(lv_state_t state) {
