@@ -23,13 +23,3 @@ Fonts::Fonts() {
     lv_style_set_text_font(style_default_font_regular_small, LV_STATE_DEFAULT, &roboto_regular_16);
     lv_style_set_value_font(style_default_font_regular_small, LV_STATE_DEFAULT, &roboto_regular_16);
 }
-
-Fonts * Fonts::get_instance() {
-    static Fonts * instance;
-
-    if (instance == nullptr) {
-        instance = new Fonts();
-    }
-
-    return instance;
-}

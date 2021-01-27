@@ -145,13 +145,3 @@ Styles::Styles() {
     lv_style_init(style_pressed_text_color_black);
     lv_style_set_text_color(style_pressed_text_color_black, LV_STATE_PRESSED, LV_COLOR_BLACK);
 }
-
-Styles * Styles::get_instance() {
-    static Styles * instance;
-
-    if (instance == nullptr) {
-        instance = new Styles();
-    }
-
-    return instance;
-}
