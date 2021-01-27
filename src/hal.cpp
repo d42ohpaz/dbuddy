@@ -24,13 +24,13 @@ void Hal::run(bool use_dbl_buff) {
 
     lv_disp_drv_init(display_driver);
 
-    // Make the instance available for our c-callback above.
-    instance = this;
-
     display_driver->flush_cb = &flush_callback;
     display_driver->buffer = display_buffer;
 
     if (!lv_disp_drv_register(display_driver)) {
         throw std::runtime_error("Unable to register the display driver");
     }
+
+    // Make the instance available for our c-callback above.
+    instance = this;
 }
