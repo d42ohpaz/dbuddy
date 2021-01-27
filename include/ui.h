@@ -14,6 +14,8 @@
 
 #include "ui-widgets.h"
 
+using namespace dbuddy::Widgets;
+
 namespace dbuddy {
     class Ui {
     public:
@@ -26,14 +28,14 @@ namespace dbuddy {
     private:
         lv_disp_t * display;
 
-        Widgets::Screen * screen;
-        Widgets::Page * page;
-        Widgets::Menu * menu;
+        Screen * screen;
+        Page * page;
+        Menu * menu;
 
-        Widgets::TimeContainer * timeContainer;
-        Widgets::TimeLabel * timeLabel;
+        TimeContainer * timeContainer;
+        TimeLabel * timeLabel;
 
-        Widgets::ActionsContainer * actionsContainer;
+        ActionsContainer * actionsContainer;
     };
 }
 

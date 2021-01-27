@@ -10,6 +10,8 @@
 
 #define USE_DOUBLE_BUFFER (false)
 
+using namespace dbuddy;
+
 static void memory_monitor(lv_task_t *param);
 
 void setup() {
@@ -17,9 +19,9 @@ void setup() {
     Serial.begin(115200);
 #endif
 
-    dbuddy::DBuddy::setup(
-        new dbuddy::NodeMCU32s(new Adafruit_RA8875(RA8875_CS, RA8875_RESET), RA8875_INT),
-        new dbuddy::Ui,
+    DBuddy::setup(
+        new NodeMCU32s(new Adafruit_RA8875(RA8875_CS, RA8875_RESET), RA8875_INT),
+        new Ui,
         USE_DOUBLE_BUFFER
     );
 
@@ -27,7 +29,7 @@ void setup() {
 }
 
 void loop() {
-    dbuddy::DBuddy::loop();
+    DBuddy::loop();
 }
 
 /**
