@@ -11,6 +11,6 @@ void Page::init(Fonts * fonts, Styles * styles) {
 
     set_size(lv_obj_get_width(get_parent()), lv_obj_get_height(get_parent()));
 
-    add_style(LV_PAGE_PART_BG, &styles->style_default_border_none);
-    add_style(LV_PAGE_PART_BG, &styles->style_default_padding_none);
+    add_style(LV_PAGE_PART_BG, styles->get_border_none(LV_STATE_DEFAULT));
+    add_style(LV_PAGE_PART_BG, styles->get_padding_none(LV_STATE_DEFAULT));
 }
