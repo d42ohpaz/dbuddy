@@ -6,6 +6,7 @@
       <file path="$PROJECT_DIR$/.pio/libdeps" />
     </libraryRoots>
     <excludeRoots>
+      <file path="$PROJECT_DIR$/examples" />
       <file path="$PROJECT_DIR$/inih" />
       <file path="$PROJECT_DIR$/lv_drivers" />
       <file path="$PROJECT_DIR$/lvgl" />
