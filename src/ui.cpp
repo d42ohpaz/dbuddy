@@ -2,6 +2,8 @@
 #include <ctime>
 
 #include "ui.h"
+#include "fonts.h"
+#include "styles.h"
 
 using namespace DBuddy;
 
@@ -25,12 +27,15 @@ Ui::~Ui() {
 };
 
 void Ui::init() {
-    screen->init();
-    page->init();
-    menu->init();
-    timeContainer->init();
-    timeLabel->init();
-    actionsContainer->init();
+    auto * fonts = new Fonts;
+    auto * styles = new Styles;
+
+    screen->init(fonts, styles);
+    page->init(fonts, styles);
+    menu->init(fonts, styles);
+    timeContainer->init(fonts, styles);
+    timeLabel->init(fonts, styles);
+    actionsContainer->init(fonts, styles);
 
     lv_task_create(cb_time_task_handler, 500, LV_TASK_PRIO_MID, nullptr);
 }
