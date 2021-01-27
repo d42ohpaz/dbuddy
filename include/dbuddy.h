@@ -7,15 +7,15 @@
 namespace DBuddy {
     class DBuddy {
     public:
-        explicit DBuddy(Hal * hal);
+        explicit DBuddy(Hal *, Ui *);
         ~DBuddy();
 
-        static void setup(Hal *, bool);
+        static void setup(Hal *, Ui *, bool);
         static void loop();
 
         void init(bool);
     private:
-        Ui * ui = new Ui;
+        Ui * ui{};
         Hal * hal{};
     };
 }
