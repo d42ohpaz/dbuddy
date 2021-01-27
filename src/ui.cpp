@@ -11,11 +11,6 @@ static Ui * instance;
 
 extern "C" void cb_time_task_handler(lv_task_t * task) { instance->updateTimeCallback(task); }
 
-Ui::Ui() {
-    display = lv_disp_get_default();
-    instance = this;
-};
-
 Ui::~Ui() {
     delete display;
 
@@ -27,14 +22,29 @@ Ui::~Ui() {
 };
 
 void Ui::init() {
+    instance = this;
+
+    display = lv_disp_get_default();
+
     auto * fonts = new Fonts;
     auto * styles = new Styles;
 
+    screen = new Widgets::Screen(nullptr, nullptr);
     screen->init(fonts, styles);
+
+    page = new Widgets::Page(screen->get_self(), nullptr);
     page->init(fonts, styles);
+
+    menu = new Widgets::Menu(page->get_self(), nullptr);
     menu->init(fonts, styles);
+
+    timeContainer = new Widgets::TimeContainer(menu->get_self(), nullptr);
     timeContainer->init(fonts, styles);
+
+    timeLabel = new Widgets::TimeLabel(timeContainer->get_self(), nullptr);
     timeLabel->init(fonts, styles);
+
+    actionsContainer = new Widgets::ActionsContainer(menu->get_self(), nullptr);
     actionsContainer->init(fonts, styles);
 
     lv_task_create(cb_time_task_handler, 500, LV_TASK_PRIO_MID, nullptr);

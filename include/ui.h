@@ -17,23 +17,23 @@
 namespace DBuddy {
     class Ui {
     public:
-        Ui();
+        Ui() = default;
         ~Ui();
 
         void init();
 
         void updateTimeCallback(lv_task_t * task);
     private:
-        lv_disp_t * display = new lv_disp_t;
+        lv_disp_t * display;
 
-        Widgets::Screen * screen = new Widgets::Screen(nullptr, nullptr);
-        Widgets::Page * page = new Widgets::Page(screen->get_self(), nullptr);
-        Widgets::Menu * menu = new Widgets::Menu(page->get_self(), nullptr);
+        Widgets::Screen * screen;
+        Widgets::Page * page;
+        Widgets::Menu * menu;
 
-        Widgets::TimeContainer * timeContainer = new Widgets::TimeContainer(menu->get_self(), nullptr);
-        Widgets::TimeLabel * timeLabel = new Widgets::TimeLabel(timeContainer->get_self(), nullptr);
+        Widgets::TimeContainer * timeContainer;
+        Widgets::TimeLabel * timeLabel;
 
-        Widgets::ActionsContainer * actionsContainer = new Widgets::ActionsContainer(menu->get_self(), nullptr);
+        Widgets::ActionsContainer * actionsContainer;
     };
 }
 
