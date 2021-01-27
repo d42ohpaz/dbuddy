@@ -10,7 +10,7 @@ Widgets::TimeContainer::TimeContainer(lv_obj_t * parent, lv_obj_t * copy) : Widg
 void Widgets::TimeContainer::init(Fonts * fonts, Styles * styles) {
     set_size(lv_obj_get_width(get_parent()) / 2, lv_obj_get_height(get_parent()));
 
-    add_style(LV_OBJ_PART_MAIN, styles->style_default_border_none);
-    add_style(LV_OBJ_PART_MAIN, styles->style_default_radius_none);
-    add_style(LV_OBJ_PART_MAIN, styles->style_default_background_transparent_full);
+    add_style(LV_OBJ_PART_MAIN, &styles->style_default_border_none);
+    add_style(LV_OBJ_PART_MAIN, &styles->style_default_radius_none);
+    add_style(LV_OBJ_PART_MAIN, &styles->style_default_background_transparent_full);
 }
