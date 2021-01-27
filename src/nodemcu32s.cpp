@@ -8,8 +8,6 @@
 using namespace DBuddy;
 
 void NodeMCU32s::init() {
-    Serial.begin(115200);
-
     tft->begin(RA8875_800x480);
     tft->displayOn(true);
     tft->touchEnable(true);
