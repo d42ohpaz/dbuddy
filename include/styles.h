@@ -11,6 +11,7 @@
 namespace DBuddy {
     class Styles {
     public:
+        Styles();
         Styles(Styles &other) = delete;
         void operator=(const Styles &) = delete;
 
@@ -66,7 +67,6 @@ namespace DBuddy {
         lv_style_t * style_pressed_background_color_white{};
         lv_style_t * style_pressed_text_color_black{};
     protected:
-        Styles();
     };
 }
 

@@ -2,6 +2,8 @@
 #define BASIC_ICS_ACTIONSCONTAINER_H
 
 #include "widget.h"
+#include "fonts.h"
+#include "styles.h"
 
 namespace DBuddy {
     namespace Widgets {
@@ -9,7 +11,7 @@ namespace DBuddy {
         public:
             ActionsContainer(lv_obj_t *, lv_obj_t *);
 
-            void init() final;
+            void init(Fonts *, Styles *) final;
         };
     }
 }

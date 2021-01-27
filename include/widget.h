@@ -16,7 +16,7 @@ namespace DBuddy {
             delete self;
         };
 
-        virtual void init() = 0;
+        virtual void init(Fonts *, Styles *) = 0;
 
         void add_style(lv_obj_part_t, lv_style_t *);
         void clear_styles(lv_obj_part_t);
@@ -40,9 +40,6 @@ namespace DBuddy {
         lv_obj_t * parent;
         lv_obj_t * copy;
         lv_obj_t * self{};
-
-        const Fonts * fonts = Fonts::get_instance();
-        const Styles * styles = Styles::get_instance();
     };
 }
 

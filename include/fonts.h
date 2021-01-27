@@ -6,6 +6,7 @@
 namespace DBuddy {
     class Fonts {
     public:
+        Fonts();
         Fonts(Fonts &other) = delete;
         void operator=(const Fonts &) = delete;
 
@@ -17,7 +18,6 @@ namespace DBuddy {
         lv_style_t * style_default_font_regular_small{};
         lv_style_t * style_default_font_regular_xsmall{};
     private:
-        Fonts();
     };
 }
 #endif // BASIC_ICS_FONTS_H

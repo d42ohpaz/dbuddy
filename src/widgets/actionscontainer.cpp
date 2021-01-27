@@ -7,7 +7,7 @@ Widgets::ActionsContainer::ActionsContainer(lv_obj_t * parent, lv_obj_t * copy) 
     self = lv_obj_create(parent, copy);
 }
 
-void Widgets::ActionsContainer::init() {
+void Widgets::ActionsContainer::init(Fonts * fonts, Styles * styles) {
     set_size(lv_obj_get_width(get_parent()) / 2, lv_obj_get_height(get_parent()));
     set_pos(lv_obj_get_width(get_parent()) / 2, 0);
 
