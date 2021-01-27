@@ -10,7 +10,7 @@
 #define USE_DOUBLE_BUFFER (true)
 
 void setup() {
-    DBuddy::Hal * hal = new DBuddy::NodeMCU32s(Adafruit_RA8875(RA8875_CS, RA8875_RESET), RA8875_INT);
+    DBuddy::Hal * hal = new DBuddy::NodeMCU32s(new Adafruit_RA8875(RA8875_CS, RA8875_RESET), RA8875_INT);
     DBuddy::DBuddy::setup(hal, USE_DOUBLE_BUFFER);
 }
 
