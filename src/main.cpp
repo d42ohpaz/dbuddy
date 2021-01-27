@@ -7,7 +7,7 @@
 #include "dbuddy.h"
 #include "nodemcu32s.h"
 
-#define USE_DOUBLE_BUFFER (true)
+#define USE_DOUBLE_BUFFER (false)
 
 void setup() {
     DBuddy::Hal * hal = new DBuddy::NodeMCU32s(new Adafruit_RA8875(RA8875_CS, RA8875_RESET), RA8875_INT);
