@@ -1,6 +1,6 @@
 #include "styles.h"
 
-using namespace DBuddy;
+using namespace dbuddy;
 
 Styles::Styles() {
     lv_style_init(&style_default_background_blend_mode_additive);

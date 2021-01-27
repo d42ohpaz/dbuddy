@@ -17,9 +17,9 @@ void setup() {
     Serial.begin(115200);
 #endif
 
-    DBuddy::DBuddy::setup(
-        new DBuddy::NodeMCU32s(new Adafruit_RA8875(RA8875_CS, RA8875_RESET), RA8875_INT),
-        new DBuddy::Ui,
+    dbuddy::DBuddy::setup(
+        new dbuddy::NodeMCU32s(new Adafruit_RA8875(RA8875_CS, RA8875_RESET), RA8875_INT),
+        new dbuddy::Ui,
         USE_DOUBLE_BUFFER
     );
 
@@ -27,7 +27,7 @@ void setup() {
 }
 
 void loop() {
-    DBuddy::DBuddy::loop();
+    dbuddy::DBuddy::loop();
 }
 
 /**

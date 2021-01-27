@@ -1,6 +1,6 @@
 #include "fonts.h"
 
-using namespace DBuddy;
+using namespace dbuddy;
 
 Fonts::Fonts() {
     lv_style_init(&style_default_font_black_medium);

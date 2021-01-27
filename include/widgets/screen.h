@@ -5,7 +5,7 @@
 #include "fonts.h"
 #include "styles.h"
 
-namespace DBuddy {
+namespace dbuddy {
     namespace Widgets {
         class Screen : public Widget {
         public:

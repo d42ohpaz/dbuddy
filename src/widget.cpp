@@ -1,6 +1,6 @@
 #include "widget.h"
 
-using namespace DBuddy;
+using namespace dbuddy;
 
 Widget::Widget(lv_obj_t * parent, lv_obj_t * copy) : parent(parent), copy(copy) {}
 

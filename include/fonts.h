@@ -3,7 +3,7 @@
 
 #include <lvgl.h>
 
-namespace DBuddy {
+namespace dbuddy {
     class Fonts {
     public:
         Fonts();

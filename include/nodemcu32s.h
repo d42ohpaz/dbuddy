@@ -5,7 +5,7 @@
 
 #include "hal.h"
 
-namespace DBuddy {
+namespace dbuddy {
     class NodeMCU32s : public Hal {
     public:
         NodeMCU32s(Adafruit_RA8875 *, uint8_t);

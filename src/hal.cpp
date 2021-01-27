@@ -2,7 +2,7 @@
 
 #include "hal.h"
 
-using namespace DBuddy;
+using namespace dbuddy;
 
 Hal * instance;
 

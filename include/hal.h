@@ -4,7 +4,7 @@
 #include <lvgl.h>
 #include <Arduino.h>
 
-namespace DBuddy {
+namespace dbuddy {
     class Hal {
     public:
         virtual ~Hal() {

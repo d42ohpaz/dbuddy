@@ -14,7 +14,7 @@
 
 #include "ui-widgets.h"
 
-namespace DBuddy {
+namespace dbuddy {
     class Ui {
     public:
         Ui() = default;

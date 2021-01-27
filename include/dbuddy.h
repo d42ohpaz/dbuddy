@@ -4,7 +4,7 @@
 #include "ui.h"
 #include "hal.h"
 
-namespace DBuddy {
+namespace dbuddy {
     class DBuddy {
     public:
         explicit DBuddy(Hal *, Ui *);

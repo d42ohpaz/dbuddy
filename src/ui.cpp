@@ -5,7 +5,7 @@
 #include "fonts.h"
 #include "styles.h"
 
-using namespace DBuddy;
+using namespace dbuddy;
 
 static Ui * instance;
 

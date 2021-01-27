@@ -5,7 +5,7 @@
 
 #include "nodemcu32s.h"
 
-using namespace DBuddy;
+using namespace dbuddy;
 
 void NodeMCU32s::init() {
     tft->begin(RA8875_800x480);

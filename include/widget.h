@@ -5,7 +5,7 @@
 #include "fonts.h"
 #include "styles.h"
 
-namespace DBuddy {
+namespace dbuddy {
     class Widget {
     public:
         Widget(lv_obj_t *, lv_obj_t *);

@@ -8,7 +8,7 @@
 #define DEFAULT_MENU_HEIGHT 24
 #define DEFAULT_LIST_WIDTH 160
 
-namespace DBuddy {
+namespace dbuddy {
     class Styles {
     public:
         Styles();

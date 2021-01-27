@@ -1,7 +1,7 @@
 #include "widgets/actionscontainer.h"
 #include "styles.h"
 
-using namespace DBuddy;
+using namespace dbuddy;
 
 Widgets::ActionsContainer::ActionsContainer(lv_obj_t * parent, lv_obj_t * copy) : Widget(parent, copy) {
     self = lv_obj_create(parent, copy);

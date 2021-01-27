@@ -1,7 +1,7 @@
 #include "widgets/screen.h"
 #include "styles.h"
 
-using namespace DBuddy;
+using namespace dbuddy;
 
 Widgets::Screen::Screen(lv_obj_t * parent, lv_obj_t * copy) : Widget(parent, copy) {
     self = lv_scr_act();
