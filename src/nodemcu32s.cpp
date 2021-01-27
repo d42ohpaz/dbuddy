@@ -15,7 +15,7 @@ void NodeMCU32s::init() {
     tft->PWM1out(255);
 
     pinMode(interrupt, INPUT);
-    digitalWrite(interrupt, HIGH);;
+    digitalWrite(interrupt, HIGH);
 }
 
 void NodeMCU32s::flush(lv_disp_drv_t * disp, const lv_area_t * area, lv_color_t * color) {
