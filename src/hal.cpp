@@ -14,8 +14,6 @@ extern "C" void flush_callback(lv_disp_drv_t * drv, const lv_area_t * area, lv_c
 }
 
 void Hal::run(bool use_dbl_buff) {
-    init();
-
     if (use_dbl_buff) {
         lv_disp_buf_init(display_buffer, buffer0, buffer1, BUFFER_SIZE);
     } else {

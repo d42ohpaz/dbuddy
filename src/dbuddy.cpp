@@ -23,6 +23,7 @@ DBuddy::DBuddy::~DBuddy() {
 void DBuddy::DBuddy::init(bool use_dbl_buff) {
     lv_init();
 
+    hal->init();
     hal->run(use_dbl_buff);
     ui->init();
 }
