@@ -9,6 +9,7 @@ using namespace DBuddy;
 
 void NodeMCU32s::init() {
     tft->begin(RA8875_800x480);
+    tft->GPIOX(true);
     tft->displayOn(true);
     tft->touchEnable(true);
     tft->PWM1config(true, RA8875_PWM_CLK_DIV1024); // PWM output for backlight
