@@ -50,7 +50,31 @@ void Ui::init() {
     lv_task_create(cb_time_task_handler, 500, LV_TASK_PRIO_MID, nullptr);
 }
 
-void Ui::updateTimeCallback(lv_task_t * task) {
+lv_disp_t * Ui::get_display() const {
+    return display;
+}
+
+Screen * Ui::get_screen() const {
+    return screen;
+}
+
+Page * Ui::get_page() const {
+    return page;
+}
+Menu * Ui::get_menu() const {
+    return menu;
+}
+TimeContainer * Ui::get_time_container() const {
+    return timeContainer;
+}
+TimeLabel * Ui::get_time_label() const {
+    return timeLabel;
+}
+ActionsContainer * Ui::get_actions_container() const {
+    return actionsContainer;
+}
+
+void Ui::updateTimeCallback(lv_task_t * task) const {
     (void)task;
 
     time_t t = time(nullptr);
