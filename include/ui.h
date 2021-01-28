@@ -15,7 +15,6 @@ namespace dbuddy {
 
         void init();
 
-        lv_disp_t * get_display() const;
         Screen * get_screen() const;
         Page * get_page() const;
         Menu * get_menu() const;
@@ -25,8 +24,6 @@ namespace dbuddy {
 
         void updateTimeCallback(lv_task_t * task) const;
     private:
-        lv_disp_t * display;
-
         Screen * screen;
         Page * page;
         Menu * menu;
