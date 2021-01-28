@@ -1,5 +1,5 @@
-#ifndef BASIC_ICS_WIDGET_H
-#define BASIC_ICS_WIDGET_H
+#ifndef DBUDDY_WIDGET_H
+#define DBUDDY_WIDGET_H
 
 #include <lvgl.h>
 #include "fonts.h"
@@ -43,4 +43,4 @@ namespace dbuddy {
     };
 }
 
-#endif //BASIC_ICS_WIDGET_H
+#endif //DBUDDY_WIDGET_H

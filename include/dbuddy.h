@@ -1,5 +1,5 @@
-#ifndef BASIC_ICS_DBUDDY_H
-#define BASIC_ICS_DBUDDY_H
+#ifndef DBUDDY_DBUDDY_H
+#define DBUDDY_DBUDDY_H
 
 #include "ui.h"
 #include "hal.h"
@@ -21,4 +21,4 @@ namespace dbuddy {
 }
 
 
-#endif //BASIC_ICS_DBUDDY_H
+#endif //DBUDDY_DBUDDY_H

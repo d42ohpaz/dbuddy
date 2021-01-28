@@ -1,5 +1,5 @@
-#ifndef BASIC_ICS_UI_WIDGETS_H
-#define BASIC_ICS_UI_WIDGETS_H
+#ifndef DBUDDY_UI_WIDGETS_H
+#define DBUDDY_UI_WIDGETS_H
 
 #include <lvgl.h>
 
@@ -52,4 +52,4 @@ struct PageWidget {
     CalendarWidget * calendar = new CalendarWidget;
 };
 
-#endif // BASIC_ICS_UI_WIDGETS_H
+#endif // DBUDDY_UI_WIDGETS_H

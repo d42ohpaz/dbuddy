@@ -1,5 +1,5 @@
-#ifndef BASIC_ICS_TIMECONTAINER_H
-#define BASIC_ICS_TIMECONTAINER_H
+#ifndef DBUDDY_TIMECONTAINER_H
+#define DBUDDY_TIMECONTAINER_H
 
 #include "widget.h"
 #include "fonts.h"
@@ -14,4 +14,4 @@ namespace dbuddy {
     };
 }
 
-#endif //BASIC_ICS_TIMECONTAINER_H
+#endif //DBUDDY_TIMECONTAINER_H

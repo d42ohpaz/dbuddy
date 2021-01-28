@@ -1,5 +1,5 @@
-#ifndef BASIC_ICS_MENU_H
-#define BASIC_ICS_WIDGET_MENU_H
+#ifndef DBUDDY_MENU_H
+#define DBUDDY_WIDGET_MENU_H
 
 #include "widget.h"
 #include "fonts.h"
@@ -14,4 +14,4 @@ namespace dbuddy {
     };
 }
 
-#endif //BASIC_ICS_MENU_H
+#endif //DBUDDY_MENU_H

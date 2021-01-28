@@ -1,5 +1,5 @@
-#ifndef BASIC_ICS_PAGE_H
-#define BASIC_ICS_WIDGET_PAGE_H
+#ifndef DBUDDY_PAGE_H
+#define DBUDDY_WIDGET_PAGE_H
 
 #include "widget.h"
 #include "fonts.h"
@@ -14,4 +14,4 @@ namespace dbuddy {
     };
 }
 
-#endif //BASIC_ICS_PAGE_H
+#endif //DBUDDY_PAGE_H

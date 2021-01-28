@@ -1,5 +1,5 @@
-#ifndef BASIC_ICS_HAL_H
-#define BASIC_ICS_HAL_H
+#ifndef DBUDDY_HAL_H
+#define DBUDDY_HAL_H
 
 #include <lvgl.h>
 #include <Arduino.h>
@@ -27,4 +27,4 @@ namespace dbuddy {
 }
 
 
-#endif //BASIC_ICS_HAL_H
+#endif //DBUDDY_HAL_H

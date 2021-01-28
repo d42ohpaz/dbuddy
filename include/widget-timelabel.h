@@ -1,5 +1,5 @@
-#ifndef BASIC_ICS_TIMELABEL_H
-#define BASIC_ICS_TIMELABEL_H
+#ifndef DBUDDY_TIMELABEL_H
+#define DBUDDY_TIMELABEL_H
 
 #include "widget.h"
 #include "fonts.h"
@@ -14,4 +14,4 @@ namespace dbuddy {
     };
 }
 
-#endif //BASIC_ICS_TIMELABEL_H
+#endif //DBUDDY_TIMELABEL_H

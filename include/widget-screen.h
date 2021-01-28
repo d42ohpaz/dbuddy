@@ -1,5 +1,5 @@
-#ifndef BASIC_ICS_SCREEN_H
-#define BASIC_ICS_SCREEN_H
+#ifndef DBUDDY_SCREEN_H
+#define DBUDDY_SCREEN_H
 
 #include "widget.h"
 #include "fonts.h"
@@ -14,4 +14,4 @@ namespace dbuddy {
     };
 }
 
-#endif //BASIC_ICS_SCREEN_H
+#endif //DBUDDY_SCREEN_H

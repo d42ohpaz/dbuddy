@@ -1,5 +1,5 @@
-#ifndef BASIC_ICS_STYLES_H
-#define BASIC_ICS_STYLES_H
+#ifndef DBUDDY_STYLES_H
+#define DBUDDY_STYLES_H
 
 #include <lvgl.h>
 #include <map>
@@ -100,4 +100,4 @@ namespace dbuddy {
     };
 }
 
-#endif // BASIC_ICS_STYLES_H
+#endif // DBUDDY_STYLES_H

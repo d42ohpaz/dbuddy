@@ -1,5 +1,5 @@
-#ifndef BASIC_ICS_NODEMCU32S_H
-#define BASIC_ICS_NODEMCU32S_H
+#ifndef DBUDDY_NODEMCU32S_H
+#define DBUDDY_NODEMCU32S_H
 
 #include <Adafruit_RA8875.h>
 
@@ -18,4 +18,4 @@ namespace dbuddy {
     };
 }
 
-#endif //BASIC_ICS_NODEMCU32S_H
+#endif //DBUDDY_NODEMCU32S_H

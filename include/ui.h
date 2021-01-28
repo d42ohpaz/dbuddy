@@ -1,7 +1,7 @@
 #include <algorithm>
 
-#ifndef BASIC_ICS_UI_H
-#define BASIC_ICS_UI_H
+#ifndef DBUDDY_UI_H
+#define DBUDDY_UI_H
 
 #include <lvgl.h>
 
@@ -38,4 +38,4 @@ namespace dbuddy {
     };
 }
 
-#endif //BASIC_ICS_UI_H
+#endif //DBUDDY_UI_H
