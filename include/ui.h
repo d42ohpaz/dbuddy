@@ -5,14 +5,7 @@
 
 #include <lvgl.h>
 
-#include "widgets/screen.h"
-#include "widgets/page.h"
-#include "widgets/menu.h"
-#include "widgets/timecontainer.h"
-#include "widgets/timelabel.h"
-#include "widgets/actionscontainer.h"
-
-#include "ui-widgets.h"
+#include "widgets.h"
 
 using namespace dbuddy::Widgets;
 
