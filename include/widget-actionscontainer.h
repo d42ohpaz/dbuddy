@@ -6,7 +6,7 @@
 #include "styles.h"
 
 namespace dbuddy {
-    class ActionsContainer : Widget {
+    class ActionsContainer : public Widget {
     public:
         ActionsContainer(lv_obj_t *, lv_obj_t *);
 
