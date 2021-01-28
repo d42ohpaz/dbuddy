@@ -1,5 +1,3 @@
-#include <algorithm>
-
 #ifndef DBUDDY_UI_H
 #define DBUDDY_UI_H
 
