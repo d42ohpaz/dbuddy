@@ -1,7 +1,7 @@
-#include "widgets/menu.h"
+#include "widget-menu.h"
 #include "styles.h"
 
-using namespace dbuddy::Widgets;
+using namespace dbuddy;
 
 Menu::Menu(lv_obj_t * parent, lv_obj_t * copy) : Widget(parent, copy) {
     self = lv_obj_create(parent, copy);

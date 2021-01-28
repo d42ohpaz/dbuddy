@@ -1,5 +1,5 @@
 #ifndef BASIC_ICS_PAGE_H
-#define BASIC_ICS_PAGE_H
+#define BASIC_ICS_WIDGET_PAGE_H
 
 #include "widget.h"
 #include "fonts.h"

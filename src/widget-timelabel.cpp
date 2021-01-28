@@ -1,8 +1,8 @@
-#include "widgets/timelabel.h"
+#include "widget-timelabel.h"
 #include "fonts.h"
 #include "styles.h"
 
-using namespace dbuddy::Widgets;
+using namespace dbuddy;
 
 TimeLabel::TimeLabel(lv_obj_t * parent, lv_obj_t * copy) : Widget(parent, copy) {
     self = lv_label_create(parent, copy);

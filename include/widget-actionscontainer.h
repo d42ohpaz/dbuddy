@@ -1,5 +1,5 @@
-#ifndef BASIC_ICS_ACTIONSCONTAINER_H
-#define BASIC_ICS_ACTIONSCONTAINER_H
+#ifndef BASIC_ICS_WIDGET_ACTIONSCONTAINER_H
+#define BASIC_ICS_WIDGET_ACTIONSCONTAINER_H
 
 #include "widget.h"
 #include "fonts.h"
@@ -16,4 +16,4 @@ namespace dbuddy {
     }
 }
 
-#endif //BASIC_ICS_ACTIONSCONTAINER_H
+#endif //BASIC_ICS_WIDGET_ACTIONSCONTAINER_H

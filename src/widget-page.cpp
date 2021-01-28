@@ -1,7 +1,7 @@
-#include "widgets/page.h"
+#include "widget-page.h"
 #include "styles.h"
 
-using namespace dbuddy::Widgets;
+using namespace dbuddy;
 
 Page::Page(lv_obj_t * parent, lv_obj_t * copy) : Widget(parent, copy) {
     self = lv_page_create(parent, copy);
