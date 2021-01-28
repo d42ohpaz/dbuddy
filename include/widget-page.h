@@ -6,14 +6,12 @@
 #include "styles.h"
 
 namespace dbuddy {
-    namespace Widgets {
-        class Page : public Widget {
-        public:
-            Page(lv_obj_t *, lv_obj_t *);
+    class Page : public Widget {
+    public:
+        Page(lv_obj_t *, lv_obj_t *);
 
-            void init(Fonts *, Styles *) final;
-        };
-    }
+        void init(Fonts *, Styles *) final;
+    };
 }
 
 #endif //BASIC_ICS_PAGE_H

@@ -7,8 +7,6 @@
 
 #include "widgets.h"
 
-using namespace dbuddy::Widgets;
-
 namespace dbuddy {
     class Ui {
     public:

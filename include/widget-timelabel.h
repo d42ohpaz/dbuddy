@@ -6,14 +6,12 @@
 #include "styles.h"
 
 namespace dbuddy {
-    namespace Widgets {
-        class TimeLabel : public Widget {
-        public:
-            TimeLabel(lv_obj_t *, lv_obj_t *);
+    class TimeLabel : public Widget {
+    public:
+        TimeLabel(lv_obj_t *, lv_obj_t *);
 
-            void init(Fonts *, Styles *) final;
-        };
-    }
+        void init(Fonts *, Styles *) final;
+    };
 }
 
 #endif //BASIC_ICS_TIMELABEL_H

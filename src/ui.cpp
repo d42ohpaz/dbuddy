@@ -29,22 +29,22 @@ void Ui::init() {
 
     display = lv_disp_get_default();
 
-    screen = new Widgets::Screen(nullptr, nullptr);
+    screen = new Screen(nullptr, nullptr);
     screen->init(fonts, styles);
 
-    page = new Widgets::Page(screen->get_self(), nullptr);
+    page = new Page(screen->get_self(), nullptr);
     page->init(fonts, styles);
 
-    menu = new Widgets::Menu(page->get_self(), nullptr);
+    menu = new Menu(page->get_self(), nullptr);
     menu->init(fonts, styles);
 
-    timeContainer = new Widgets::TimeContainer(menu->get_self(), nullptr);
+    timeContainer = new TimeContainer(menu->get_self(), nullptr);
     timeContainer->init(fonts, styles);
 
-    timeLabel = new Widgets::TimeLabel(timeContainer->get_self(), nullptr);
+    timeLabel = new TimeLabel(timeContainer->get_self(), nullptr);
     timeLabel->init(fonts, styles);
 
-    actionsContainer = new Widgets::ActionsContainer(menu->get_self(), nullptr);
+    actionsContainer = new ActionsContainer(menu->get_self(), nullptr);
     actionsContainer->init(fonts, styles);
 
     lv_task_create(cb_time_task_handler, 500, LV_TASK_PRIO_MID, nullptr);
