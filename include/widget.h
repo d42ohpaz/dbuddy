@@ -6,6 +6,17 @@
 #include "styles.h"
 
 namespace dbuddy {
+    enum {
+        WIDGET_SCREEN               = 0x01,
+        WIDGET_PAGE                 = 0x02,
+        WIDGET_MENU                 = 0x03,
+        WIDGET_TIME_CONTAINER       = 0x04,
+        WIDGET_TIME_LABEL           = 0x05,
+        WIDGET_ACTIONS_CONTAINER    = 0x06,
+    };
+
+    typedef uint8_t widget_t;
+
     class Widget {
     public:
         Widget(lv_obj_t *, lv_obj_t *);
