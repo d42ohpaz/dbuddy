@@ -25,17 +25,9 @@ namespace dbuddy {
         void set_pos(lv_coord_t, lv_coord_t);
         void set_size(lv_coord_t, lv_coord_t);
 
-        lv_obj_t * get_copy() {
-            return copy;
-        }
-
-        lv_obj_t * get_parent() {
-            return parent;
-        }
-
-        lv_obj_t * get_self() {
-            return self;
-        }
+        lv_obj_t * get_copy() { return copy; }
+        lv_obj_t * get_parent() { return parent; }
+        lv_obj_t * get_self() { return self; }
     protected:
         lv_obj_t * parent;
         lv_obj_t * copy;
