@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include <lvgl.h>
 #include <ctime>
 
@@ -11,59 +12,29 @@ static Ui * instance;
 
 extern "C" void cb_time_task_handler(lv_task_t * task) { instance->updateTimeCallback(task); }
 
-Ui::~Ui() {
-    delete screen;
-    delete page;
-    delete menu;
-    delete timeLabel;
-    delete timeContainer;
-};
-
 void Ui::init() {
     instance = this;
 
     auto * fonts = new Fonts;
     auto * styles = new Styles;
 
-    screen = new Screen(nullptr, nullptr);
-    screen->init(fonts, styles);
 
-    page = new Page(screen->get_self(), nullptr);
-    page->init(fonts, styles);
-
-    menu = new Menu(page->get_self(), nullptr);
-    menu->init(fonts, styles);
-
-    timeContainer = new TimeContainer(menu->get_self(), nullptr);
-    timeContainer->init(fonts, styles);
-
-    timeLabel = new TimeLabel(timeContainer->get_self(), nullptr);
-    timeLabel->init(fonts, styles);
-
-    actionsContainer = new ActionsContainer(menu->get_self(), nullptr);
-    actionsContainer->init(fonts, styles);
+    add_widget(WIDGET_SCREEN, new Screen(nullptr, nullptr));
+    add_widget(WIDGET_PAGE, new Page(get_widget(WIDGET_SCREEN)->get_self(), nullptr));
+    add_widget(WIDGET_MENU, new Menu(get_widget(WIDGET_PAGE)->get_self(), nullptr));
+    add_widget(WIDGET_TIME_CONTAINER, new TimeContainer(get_widget(WIDGET_MENU)->get_self(), nullptr));
+    add_widget(WIDGET_TIME_LABEL, new TimeLabel(get_widget(WIDGET_TIME_CONTAINER)->get_self(), nullptr));
+    add_widget(WIDGET_ACTIONS_CONTAINER, new ActionsContainer(get_widget(WIDGET_MENU)->get_self(), nullptr));
 
     lv_task_create(cb_time_task_handler, 500, LV_TASK_PRIO_MID, nullptr);
 }
 
-Screen * Ui::get_screen() const {
-    return screen;
+void Ui::add_widget(widget_t w, Widget * widget) {
+    widgets[w] = widget;
 }
 
-Page * Ui::get_page() const {
-    return page;
-}
-Menu * Ui::get_menu() const {
-    return menu;
-}
-TimeContainer * Ui::get_time_container() const {
-    return timeContainer;
-}
-TimeLabel * Ui::get_time_label() const {
-    return timeLabel;
-}
-ActionsContainer * Ui::get_actions_container() const {
-    return actionsContainer;
+Widget * Ui::get_widget(widget_t widget) const {
+    return widgets.at(widget);
 }
 
 void Ui::updateTimeCallback(lv_task_t * task) const {
@@ -87,6 +58,8 @@ void Ui::updateTimeCallback(lv_task_t * task) const {
 //            tmHour = tmHour - 12;
 //        }
 //    }
+
+    auto * timeLabel = (TimeLabel *)get_widget(WIDGET_TIME_LABEL);
 
     static int count_on = 0, count_off = 0;
     char * colon = strstr(lv_label_get_text(timeLabel->get_self()), ":");

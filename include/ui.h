@@ -3,33 +3,20 @@
 
 #include <lvgl.h>
 
+#include "widget.h"
 #include "widgets.h"
 
 namespace dbuddy {
     class Ui {
     public:
-        Ui() = default;
-        ~Ui();
-
         void init();
 
-        Screen * get_screen() const;
-        Page * get_page() const;
-        Menu * get_menu() const;
-        TimeContainer * get_time_container() const;
-        TimeLabel * get_time_label() const;
-        ActionsContainer * get_actions_container() const;
+        void add_widget(widget_t w, Widget * widget);
+        Widget * get_widget(widget_t) const;
 
         void updateTimeCallback(lv_task_t * task) const;
     private:
-        Screen * screen;
-        Page * page;
-        Menu * menu;
-
-        TimeContainer * timeContainer;
-        TimeLabel * timeLabel;
-
-        ActionsContainer * actionsContainer;
+        std::map<widget_t, Widget *> widgets;
     };
 }
 
