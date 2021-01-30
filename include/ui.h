@@ -4,7 +4,6 @@
 #include <lvgl.h>
 
 #include "widget.h"
-#include "widgets.h"
 
 namespace dbuddy {
     class Ui {
