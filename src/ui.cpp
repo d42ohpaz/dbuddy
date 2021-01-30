@@ -24,7 +24,10 @@ void Ui::init() {
 }
 
 void Ui::add_widget(widget_t w, Widget * widget) {
-    widgets[w] = widget;
+    if (widgets.find(w) == widgets.end()) {
+        widgets[w] = widget;
+        widget->init();
+    }
 }
 
 Widget * Ui::get_widget(widget_t widget) const {
