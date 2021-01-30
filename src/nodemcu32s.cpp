@@ -1,8 +1,6 @@
 #include <SPI.h>
 #include <Wire.h>
 
-#include <utility>
-
 #include "nodemcu32s.h"
 
 using namespace dbuddy;
