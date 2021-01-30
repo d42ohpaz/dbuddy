@@ -19,6 +19,8 @@ void setup() {
     Serial.begin(115200);
 #endif
 
+    lv_init();
+
     DBuddy::setup(
         new NodeMCU32s(new Adafruit_RA8875(RA8875_CS, RA8875_RESET), RA8875_INT),
         new Ui,
