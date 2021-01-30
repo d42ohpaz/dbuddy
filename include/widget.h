@@ -2,8 +2,6 @@
 #define DBUDDY_WIDGET_H
 
 #include <lvgl.h>
-#include "fonts.h"
-#include "styles.h"
 
 namespace dbuddy {
     enum {
@@ -17,17 +15,17 @@ namespace dbuddy {
 
     typedef uint8_t widget_t;
 
+    class Ui;
+
     class Widget {
     public:
-        Widget(lv_obj_t *, lv_obj_t *);
+        explicit Widget(Ui * ui) : ui(ui) {}
 
         virtual ~Widget() {
-            delete parent;
-            delete copy;
             delete self;
         };
 
-        virtual void init(Fonts *, Styles *) = 0;
+        virtual void init() {};
 
         void add_style(lv_obj_part_t, lv_style_t *);
         void clear_styles(lv_obj_part_t);
@@ -36,12 +34,11 @@ namespace dbuddy {
         void set_pos(lv_coord_t, lv_coord_t);
         void set_size(lv_coord_t, lv_coord_t);
 
-        lv_obj_t * get_copy() { return copy; }
-        lv_obj_t * get_parent() { return parent; }
+        Ui * get_ui() { return ui; }
         lv_obj_t * get_self() { return self; }
+        void set_self(lv_obj_t * s) { self = s; }
     protected:
-        lv_obj_t * parent;
-        lv_obj_t * copy;
+        Ui * ui;
         lv_obj_t * self{};
     };
 }

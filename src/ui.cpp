@@ -13,13 +13,6 @@ extern "C" void cb_time_task_handler(lv_task_t * task) { instance->updateTimeCal
 void Ui::init() {
     instance = this;
 
-    add_widget(WIDGET_SCREEN, new Screen(nullptr, nullptr));
-    add_widget(WIDGET_PAGE, new Page(get_widget(WIDGET_SCREEN)->get_self(), nullptr));
-    add_widget(WIDGET_MENU, new Menu(get_widget(WIDGET_PAGE)->get_self(), nullptr));
-    add_widget(WIDGET_TIME_CONTAINER, new TimeContainer(get_widget(WIDGET_MENU)->get_self(), nullptr));
-    add_widget(WIDGET_TIME_LABEL, new TimeLabel(get_widget(WIDGET_TIME_CONTAINER)->get_self(), nullptr));
-    add_widget(WIDGET_ACTIONS_CONTAINER, new ActionsContainer(get_widget(WIDGET_MENU)->get_self(), nullptr));
-
     lv_task_create(cb_time_task_handler, 500, LV_TASK_PRIO_MID, nullptr);
 }
 

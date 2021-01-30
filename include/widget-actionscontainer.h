@@ -2,15 +2,13 @@
 #define DBUDDY_WIDGET_ACTIONSCONTAINER_H
 
 #include "widget.h"
-#include "fonts.h"
-#include "styles.h"
+#include "ui.h"
 
 namespace dbuddy {
     class ActionsContainer : public Widget {
     public:
-        ActionsContainer(lv_obj_t *, lv_obj_t *);
-
-        void init(Fonts *, Styles *) final;
+        explicit ActionsContainer(Ui * ui) : Widget(ui) {}
+        void init() final;
     };
 }
 
