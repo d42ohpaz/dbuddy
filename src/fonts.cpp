@@ -14,23 +14,18 @@ Fonts::Fonts() {
     for (unsigned char STATE : STATES) {
         init_font(&black_medium, STATE);
         lv_style_set_text_font(&black_medium[STATE], STATE, &roboto_black_24);
-        lv_style_set_value_font(&black_medium[STATE], STATE, &roboto_black_24);
 
         init_font(&black_small, STATE);
         lv_style_set_text_font(&black_small[STATE], STATE, &roboto_black_16);
-        lv_style_set_value_font(&black_small[STATE], STATE, &roboto_black_16);
 
         init_font(&black_xxlarge, STATE);
         lv_style_set_text_font(&black_xxlarge[STATE], STATE, &roboto_black_72);
-        lv_style_set_value_font(&black_xxlarge[STATE], STATE, &roboto_black_72);
 
         init_font(&regular_xsmall, STATE);
         lv_style_set_text_font(&regular_xsmall[STATE], STATE, &roboto_regular_14);
-        lv_style_set_value_font(&regular_xsmall[STATE], STATE, &roboto_regular_14);
 
         init_font(&regular_small, STATE);
         lv_style_set_text_font(&regular_small[STATE], STATE, &roboto_regular_16);
-        lv_style_set_value_font(&regular_small[STATE], STATE, &roboto_regular_16);
     }
 }
 
