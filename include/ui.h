@@ -12,7 +12,7 @@ namespace dbuddy {
     public:
         Ui(Fonts * fonts, Styles * styles) : fonts(fonts), styles(styles) {}
 
-        void add_widget(widget_t w, Widget * widget);
+        void add_widget(widget_t, Widget *);
         Widget * get_widget(widget_t) const;
         bool has_widget(widget_t) const;
 
