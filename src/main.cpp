@@ -5,7 +5,9 @@
 #define RA8875_RESET    12
 
 #include "dbuddy.h"
+#include "fonts.h"
 #include "nodemcu32s.h"
+#include "styles.h"
 #include "ui.h"
 
 #define USE_DOUBLE_BUFFER (false)
@@ -23,7 +25,7 @@ void setup() {
 
     DBuddy::setup(
         new NodeMCU32s(new Adafruit_RA8875(RA8875_CS, RA8875_RESET), RA8875_INT),
-        new Ui,
+        new Ui(new Fonts, new Styles),
         USE_DOUBLE_BUFFER
     );
 

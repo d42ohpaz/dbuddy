@@ -3,8 +3,6 @@
 #include <ctime>
 
 #include "ui.h"
-#include "fonts.h"
-#include "styles.h"
 
 using namespace dbuddy;
 
@@ -14,10 +12,6 @@ extern "C" void cb_time_task_handler(lv_task_t * task) { instance->updateTimeCal
 
 void Ui::init() {
     instance = this;
-
-    auto * fonts = new Fonts;
-    auto * styles = new Styles;
-
 
     add_widget(WIDGET_SCREEN, new Screen(nullptr, nullptr));
     add_widget(WIDGET_PAGE, new Page(get_widget(WIDGET_SCREEN)->get_self(), nullptr));
