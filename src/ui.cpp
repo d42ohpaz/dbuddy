@@ -7,7 +7,7 @@
 using namespace dbuddy;
 
 void Ui::add_widget(widget_t w, Widget * widget) {
-    if (widgets.find(w) == widgets.end()) {
+    if (!has_widget(w)) {
         widgets[w] = widget;
         widget->init();
     }
@@ -15,4 +15,8 @@ void Ui::add_widget(widget_t w, Widget * widget) {
 
 Widget * Ui::get_widget(widget_t widget) const {
     return widgets.at(widget);
+}
+
+bool Ui::has_widget(widget_t widget) const {
+    return widgets.find(widget) != widgets.end();
 }

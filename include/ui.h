@@ -14,6 +14,7 @@ namespace dbuddy {
 
         void add_widget(widget_t w, Widget * widget);
         Widget * get_widget(widget_t) const;
+        bool has_widget(widget_t) const;
 
         Fonts * get_fonts() const { return fonts; }
         Styles * get_styles() const { return styles; }
