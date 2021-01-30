@@ -3,7 +3,7 @@
 using namespace dbuddy;
 
 Fonts::Fonts() {
-    lv_state_t STATES[8] = {LV_STATE_DEFAULT, LV_STATE_CHECKED, LV_STATE_FOCUSED, LV_STATE_EDITED, LV_STATE_HOVERED, LV_STATE_PRESSED, LV_STATE_DISABLED};
+    lv_state_t STATES[8] = {LV_STATE_DEFAULT};
 
     for (unsigned char STATE : STATES) {
         init_font(&black_medium, STATE);
