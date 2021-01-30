@@ -14,7 +14,9 @@
 
 using namespace dbuddy;
 
+#if LV_MEM_CUSTOM == 0
 static void memory_monitor(lv_task_t *param);
+#endif
 
 void setup() {
 #ifndef USE_MONITOR
@@ -29,13 +31,16 @@ void setup() {
         USE_DOUBLE_BUFFER
     );
 
+#if LV_MEM_CUSTOM == 0
     lv_task_create(memory_monitor, 5000, LV_TASK_PRIO_MID, nullptr);
+#endif
 }
 
 void loop() {
     DBuddy::loop();
 }
 
+#if LV_MEM_CUSTOM == 0
 /**
  * Print the memory usage periodically
  * @param param
@@ -56,3 +61,4 @@ static void memory_monitor(lv_task_t *param) {
          (int)mon.free_biggest_size);
 #endif
 }
+#endif
