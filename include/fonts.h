@@ -17,13 +17,13 @@ namespace dbuddy {
         lv_style_t * get_regular_small(lv_state_t);
         lv_style_t * get_regular_xsmall(lv_state_t);
     private:
-        std::map<lv_state_t, lv_style_t> black_medium{};
-        std::map<lv_state_t, lv_style_t> black_small{};
-        std::map<lv_state_t, lv_style_t> black_xxlarge{};
-        std::map<lv_state_t, lv_style_t> regular_small{};
-        std::map<lv_state_t, lv_style_t> regular_xsmall{};
+        std::map<lv_state_t, lv_style_t *> * black_medium{};
+        std::map<lv_state_t, lv_style_t *> * black_small{};
+        std::map<lv_state_t, lv_style_t *> * black_xxlarge{};
+        std::map<lv_state_t, lv_style_t *> * regular_small{};
+        std::map<lv_state_t, lv_style_t *> * regular_xsmall{};
 
-        static void init_font(std::map<lv_state_t, lv_style_t> *, lv_state_t);
+        static void init_font(std::map<lv_state_t, lv_style_t *> *, lv_state_t);
     };
 }
 #endif // DBUDDY_FONTS_H
