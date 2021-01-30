@@ -14,6 +14,8 @@ namespace dbuddy {
         static void loop();
 
         void init(bool);
+
+        void updateTimeCallback(lv_task_t * task) const;
     private:
         Ui * ui{};
         Hal * hal{};

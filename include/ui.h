@@ -12,15 +12,11 @@ namespace dbuddy {
     public:
         Ui(Fonts * fonts, Styles * styles) : fonts(fonts), styles(styles) {}
 
-        void init();
-
         void add_widget(widget_t w, Widget * widget);
         Widget * get_widget(widget_t) const;
 
         Fonts * get_fonts() const { return fonts; }
         Styles * get_styles() const { return styles; }
-
-        void updateTimeCallback(lv_task_t * task) const;
     private:
         Fonts * fonts;
         Styles * styles;
