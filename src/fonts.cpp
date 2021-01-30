@@ -5,6 +5,12 @@ using namespace dbuddy;
 Fonts::Fonts() {
     lv_state_t STATES[8] = {LV_STATE_DEFAULT};
 
+    black_medium = new std::map<lv_state_t, lv_style_t *>();
+    black_small = new std::map<lv_state_t, lv_style_t *>();
+    black_xxlarge = new std::map<lv_state_t, lv_style_t *>();
+    regular_small = new std::map<lv_state_t, lv_style_t *>();
+    regular_xsmall = new std::map<lv_state_t, lv_style_t *>();
+
     for (unsigned char STATE : STATES) {
         init_font(&black_medium, STATE);
         lv_style_set_text_font(&black_medium[STATE], STATE, &roboto_black_24);
