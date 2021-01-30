@@ -56,16 +56,16 @@ void Ui::updateTimeCallback(lv_task_t * task) const {
 //        }
 //    }
 
-    auto * timeLabel = (TimeLabel *)get_widget(WIDGET_TIME_LABEL);
+    lv_obj_t * time_label = get_widget(WIDGET_TIME_LABEL)->get_self();
 
     static int count_on = 0, count_off = 0;
-    char * colon = strstr(lv_label_get_text(timeLabel->get_self()), ":");
+    char * colon = strstr(lv_label_get_text(time_label), ":");
 
     if (((count_on % 2) == 0 && colon == nullptr)/* || (p_config->time.flash == 0)*/) {
-        lv_label_set_text_fmt(timeLabel->get_self(), "%02u:%02u %s", tmHour, local.tm_min, bufMeridiem);
+        lv_label_set_text_fmt(time_label, "%02u:%02u %s", tmHour, local.tm_min, bufMeridiem);
         count_on = 0;
     } else if ((count_off % 2) == 0) {
-        lv_label_set_text_fmt(timeLabel->get_self(), "%02u %02u %s", tmHour, local.tm_min, bufMeridiem);
+        lv_label_set_text_fmt(time_label, "%02u %02u %s", tmHour, local.tm_min, bufMeridiem);
         count_off = 0;
     }
 
