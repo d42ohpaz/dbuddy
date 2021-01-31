@@ -2,7 +2,6 @@
 #define DBUDDY_HAL_H
 
 #include <lvgl.h>
-#include <Arduino.h>
 
 namespace dbuddy {
     class Hal {
