@@ -50,6 +50,16 @@ void loop() {
     DBuddy::loop();
 }
 
+#if !defined(ARDUINO)
+int main() {
+    setup();
+
+    while (true) {
+        loop();
+    }
+}
+#endif
+
 #if LV_MEM_CUSTOM == 0
 /**
  * Print the memory usage periodically
