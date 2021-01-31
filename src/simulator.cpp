@@ -1,6 +1,6 @@
-#ifdef USE_MONITOR
-#include <display/monitor.h>
+#if !defined(ARDUINO)
 #include <SDL2/SDL.h>
+#include <display/monitor.h>
 
 #include "simulator.h"
 

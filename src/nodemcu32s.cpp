@@ -1,4 +1,4 @@
-#ifndef USE_MONITOR
+#if defined(ARDUINO)
 #include <SPI.h>
 #include <Wire.h>
 

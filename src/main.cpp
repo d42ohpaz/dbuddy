@@ -5,14 +5,15 @@
 #include "styles.h"
 #include "ui.h"
 
-#ifdef USE_MONITOR
-#include "simulator.h"
-#else
+#if defined(ARDUINO)
 #define RA8875_INT      13
 #define RA8875_CS       5
 #define RA8875_RESET    12
 
 #include "nodemcu32s.h"
+#else
+#include <cstdio>
+#include "simulator.h"
 #endif
 
 #define USE_DOUBLE_BUFFER (false)
@@ -24,17 +25,17 @@ static void memory_monitor(lv_task_t *param);
 #endif
 
 void setup() {
-#ifndef USE_MONITOR
+#if defined (ARDUINO)
     Serial.begin(115200);
 #endif
 
     lv_init();
 
     DBuddy::setup(
-#ifdef USE_MONITOR
-        new Simulator(),
-#else
+#if defined (ARDUINO)
         new NodeMCU32s(new Adafruit_RA8875(RA8875_CS, RA8875_RESET), RA8875_INT),
+#else
+        new Simulator(),
 #endif
         new Ui(new Fonts, new Styles),
         USE_DOUBLE_BUFFER
@@ -60,7 +61,7 @@ static void memory_monitor(lv_task_t *param) {
   lv_mem_monitor_t mon;
   lv_mem_monitor(&mon);
 
-#ifndef USE_MONITOR
+#if defined(ARDUINO)
   Serial.printf("used: %6d (%3d %%), frag: %3d %%, biggest free: %6d\n",
          (int)mon.total_size - mon.free_size, mon.used_pct, mon.frag_pct,
          (int)mon.free_biggest_size);

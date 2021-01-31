@@ -1,3 +1,4 @@
+#ifndef ARDUINO
 #ifndef DBUDDY_SIMULATOR_H
 #define DBUDDY_SIMULATOR_H
 
@@ -13,3 +14,4 @@ namespace dbuddy {
 
 
 #endif //DBUDDY_SIMULATOR_H
+#endif //ARDUINO
