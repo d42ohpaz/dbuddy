@@ -1,5 +1,5 @@
 #ifndef DBUDDY_MENU_H
-#define DBUDDY_WIDGET_MENU_H
+#define DBUDDY_MENU_H
 
 #include "widget.h"
 #include "ui.h"

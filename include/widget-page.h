@@ -1,5 +1,5 @@
 #ifndef DBUDDY_PAGE_H
-#define DBUDDY_WIDGET_PAGE_H
+#define DBUDDY_PAGE_H
 
 #include "widget.h"
 #include "ui.h"

@@ -1,5 +1,5 @@
-#ifndef DBUDDY_WIDGET_ACTIONSCONTAINER_H
-#define DBUDDY_WIDGET_ACTIONSCONTAINER_H
+#ifndef DBUDDY_ACTIONSCONTAINER_H
+#define DBUDDY_ACTIONSCONTAINER_H
 
 #include "widget.h"
 #include "ui.h"
@@ -12,4 +12,4 @@ namespace dbuddy {
     };
 }
 
-#endif //DBUDDY_WIDGET_ACTIONSCONTAINER_H
+#endif //DBUDDY_ACTIONSCONTAINER_H
