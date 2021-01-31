@@ -19,7 +19,7 @@ void DBuddy::setup(Hal * hal, Ui * ui, bool use_dbl_buff) {
 
 void DBuddy::loop() {
     lv_task_handler();
-    usleep(5);
+    usleep(5000);
 }
 
 void DBuddy::init(bool use_dbl_buff) {
