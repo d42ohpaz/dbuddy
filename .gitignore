@@ -9,3 +9,5 @@ demo
 /.tracecompass
 /.pio
 /cmake-build-nodemcu-32s
+/cmake-build-native
+/venv
