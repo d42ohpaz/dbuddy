@@ -1,3 +1,4 @@
+#ifndef USE_MONITOR
 #include <SPI.h>
 #include <Wire.h>
 
@@ -32,3 +33,4 @@ void NodeMCU32s::flush(lv_disp_drv_t * disp, const lv_area_t * area, lv_color_t 
 }
 
 NodeMCU32s::NodeMCU32s(Adafruit_RA8875 * tft, uint8_t interrupt) : Hal(), tft(tft), interrupt(interrupt) {}
+#endif
