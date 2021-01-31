@@ -21,12 +21,6 @@ void DBuddy::loop() {
     delay(5);
 }
 
-DBuddy::DBuddy(Hal * hal, Ui * ui) : ui(ui), hal(hal) {};
-DBuddy::~DBuddy() {
-    delete hal;
-    delete ui;
-}
-
 void DBuddy::init(bool use_dbl_buff) {
     hal->init();
     hal->run(use_dbl_buff);

@@ -7,8 +7,11 @@
 namespace dbuddy {
     class DBuddy {
     public:
-        explicit DBuddy(Hal *, Ui *);
-        ~DBuddy();
+        DBuddy(Hal * hal, Ui * ui) : ui(ui), hal(hal) {};
+        ~DBuddy() {
+            delete hal;
+            delete ui;
+        }
 
         static void setup(Hal *, Ui *, bool);
         static void loop();
