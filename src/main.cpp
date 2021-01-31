@@ -1,14 +1,19 @@
 #include <stdexcept>
 
+#include "dbuddy.h"
+#include "fonts.h"
+#include "styles.h"
+#include "ui.h"
+
+#ifdef USE_MONITOR
+#include "simulator.h"
+#else
 #define RA8875_INT      13
 #define RA8875_CS       5
 #define RA8875_RESET    12
 
-#include "dbuddy.h"
-#include "fonts.h"
 #include "nodemcu32s.h"
-#include "styles.h"
-#include "ui.h"
+#endif
 
 #define USE_DOUBLE_BUFFER (false)
 
@@ -26,7 +31,11 @@ void setup() {
     lv_init();
 
     DBuddy::setup(
+#ifdef USE_MONITOR
+        new Simulator(),
+#else
         new NodeMCU32s(new Adafruit_RA8875(RA8875_CS, RA8875_RESET), RA8875_INT),
+#endif
         new Ui(new Fonts, new Styles),
         USE_DOUBLE_BUFFER
     );
