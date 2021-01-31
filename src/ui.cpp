@@ -1,7 +1,3 @@
-#include <Arduino.h>
-#include <lvgl.h>
-#include <ctime>
-
 #include "ui.h"
 
 using namespace dbuddy;
