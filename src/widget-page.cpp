@@ -10,4 +10,5 @@ void Page::init() {
 
     add_style(LV_PAGE_PART_BG, get_ui()->get_styles()->get_border_none(LV_STATE_DEFAULT));
     add_style(LV_PAGE_PART_BG, get_ui()->get_styles()->get_padding_none(LV_STATE_DEFAULT));
+    add_style(LV_PAGE_PART_BG, get_ui()->get_styles()->get_radius_none(LV_STATE_DEFAULT));
 }
