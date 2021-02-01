@@ -1,5 +1,5 @@
-#ifndef DBUDDY_TIMELABEL_H
-#define DBUDDY_TIMELABEL_H
+#ifndef DBUDDY_TIME_LABEL_H
+#define DBUDDY_TIME_LABEL_H
 
 #include "widget.h"
 #include "ui.h"
@@ -12,4 +12,4 @@ namespace dbuddy {
     };
 }
 
-#endif //DBUDDY_TIMELABEL_H
+#endif //DBUDDY_TIME_LABEL_H

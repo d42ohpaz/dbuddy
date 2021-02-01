@@ -1,4 +1,4 @@
-#include "widget-timelabel.h"
+#include "widget-time-label.h"
 
 using namespace dbuddy;
 

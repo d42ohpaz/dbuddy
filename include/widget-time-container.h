@@ -1,5 +1,5 @@
-#ifndef DBUDDY_TIMECONTAINER_H
-#define DBUDDY_TIMECONTAINER_H
+#ifndef DBUDDY_TIME_CONTAINER_H
+#define DBUDDY_TIME_CONTAINER_H
 
 #include "widget.h"
 #include "ui.h"
@@ -12,4 +12,4 @@ namespace dbuddy {
     };
 }
 
-#endif //DBUDDY_TIMECONTAINER_H
+#endif //DBUDDY_TIME_CONTAINER_H
