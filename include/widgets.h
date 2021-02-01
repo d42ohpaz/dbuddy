@@ -7,5 +7,6 @@
 #include "widget-timecontainer.h"
 #include "widget-timelabel.h"
 #include "widget-actionscontainer.h"
+#include "widget-action-settings.h"
 
 #endif // DBUDDY_WIDGETS_H
