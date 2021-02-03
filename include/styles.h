@@ -5,7 +5,8 @@
 #include <map>
 
 #define DEFAULT_PADDING 12
-#define DEFAULT_BORDER 5
+#define DEFAULT_MARGIN 6
+#define DEFAULT_BORDER 1
 #define DEFAULT_MENU_HEIGHT 24
 #define DEFAULT_LIST_WIDTH 160
 
@@ -34,6 +35,7 @@ namespace dbuddy {
         lv_style_t * get_background_transparent_half(lv_state_t);
         lv_style_t * get_border_color_white(lv_state_t);
         lv_style_t * get_border_none(lv_state_t);
+        lv_style_t * get_border_reset(lv_state_t);
         lv_style_t * get_border_sides_only_bottom(lv_state_t);
         lv_style_t * get_border_sides_only_top(lv_state_t);
         lv_style_t * get_border_sides_only_left(lv_state_t);
@@ -41,14 +43,16 @@ namespace dbuddy {
         lv_style_t * get_border_sides_right_none(lv_state_t);
         lv_style_t * get_border_thin(lv_state_t);
         lv_style_t * get_margin_none(lv_state_t);
+        lv_style_t * get_margin_reset(lv_state_t);
         lv_style_t * get_padding_bottom_none(lv_state_t);
         lv_style_t * get_padding_default(lv_state_t);
         lv_style_t * get_padding_left_none(lv_state_t);
         lv_style_t * get_padding_none(lv_state_t);
+        lv_style_t * get_padding_reset(lv_state_t);
         lv_style_t * get_padding_right_none(lv_state_t);
         lv_style_t * get_padding_top_none(lv_state_t);
         lv_style_t * get_radius_none(lv_state_t);
-        lv_style_t * get_radius_normal(lv_state_t);
+        lv_style_t * get_radius_reset(lv_state_t state);
         lv_style_t * get_shadow_none(lv_state_t);
         lv_style_t * get_text_color_black(lv_state_t);
         lv_style_t * get_text_color_white(lv_state_t);
@@ -77,6 +81,7 @@ namespace dbuddy {
         std::map<lv_state_t, lv_style_t *> * background_transparent_half{};
         std::map<lv_state_t, lv_style_t *> * border_color_white{};
         std::map<lv_state_t, lv_style_t *> * border_none{};
+        std::map<lv_state_t, lv_style_t *> * border_reset{};
         std::map<lv_state_t, lv_style_t *> * border_sides_only_bottom{};
         std::map<lv_state_t, lv_style_t *> * border_sides_only_left{};
         std::map<lv_state_t, lv_style_t *> * border_sides_only_right{};
@@ -84,14 +89,16 @@ namespace dbuddy {
         std::map<lv_state_t, lv_style_t *> * border_sides_right_none{};
         std::map<lv_state_t, lv_style_t *> * border_thin{};
         std::map<lv_state_t, lv_style_t *> * margin_none{};
+        std::map<lv_state_t, lv_style_t *> * margin_reset{};
         std::map<lv_state_t, lv_style_t *> * padding_bottom_none{};
         std::map<lv_state_t, lv_style_t *> * padding_default{};
         std::map<lv_state_t, lv_style_t *> * padding_left_none{};
         std::map<lv_state_t, lv_style_t *> * padding_none{};
+        std::map<lv_state_t, lv_style_t *> * padding_reset{};
         std::map<lv_state_t, lv_style_t *> * padding_right_none{};
         std::map<lv_state_t, lv_style_t *> * padding_top_none{};
         std::map<lv_state_t, lv_style_t *> * radius_none{};
-        std::map<lv_state_t, lv_style_t *> * radius_normal{};
+        std::map<lv_state_t, lv_style_t *> * radius_reset{};
         std::map<lv_state_t, lv_style_t *> * shadow_none{};
         std::map<lv_state_t, lv_style_t *> * text_color_black{};
         std::map<lv_state_t, lv_style_t *> * text_color_white{};

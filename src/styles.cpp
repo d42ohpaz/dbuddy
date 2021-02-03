@@ -26,6 +26,7 @@ Styles::Styles() {
     background_transparent_half = new std::map<lv_state_t, lv_style_t *>();
     border_color_white = new std::map<lv_state_t, lv_style_t *>();
     border_none = new std::map<lv_state_t, lv_style_t *>();
+    border_reset = new std::map<lv_state_t, lv_style_t *>();
     border_sides_only_bottom = new std::map<lv_state_t, lv_style_t *>();
     border_sides_only_left = new std::map<lv_state_t, lv_style_t *>();
     border_sides_only_right = new std::map<lv_state_t, lv_style_t *>();
@@ -33,14 +34,16 @@ Styles::Styles() {
     border_sides_right_none = new std::map<lv_state_t, lv_style_t *>();
     border_thin = new std::map<lv_state_t, lv_style_t *>();
     margin_none = new std::map<lv_state_t, lv_style_t *>();
+    margin_reset = new std::map<lv_state_t, lv_style_t *>();
     padding_bottom_none = new std::map<lv_state_t, lv_style_t *>();
     padding_default = new std::map<lv_state_t, lv_style_t *>();
     padding_left_none = new std::map<lv_state_t, lv_style_t *>();
     padding_none = new std::map<lv_state_t, lv_style_t *>();
+    padding_reset = new std::map<lv_state_t, lv_style_t *>();
     padding_right_none = new std::map<lv_state_t, lv_style_t *>();
     padding_top_none = new std::map<lv_state_t, lv_style_t *>();
     radius_none = new std::map<lv_state_t, lv_style_t *>();
-    radius_normal = new std::map<lv_state_t, lv_style_t *>();
+    radius_reset = new std::map<lv_state_t, lv_style_t *>();
     shadow_none = new std::map<lv_state_t, lv_style_t *>();
     text_color_black = new std::map<lv_state_t, lv_style_t *>();
     text_color_white = new std::map<lv_state_t, lv_style_t *>();
@@ -88,6 +91,9 @@ Styles::Styles() {
         init_style(margin_none, STATE);
         lv_style_set_pad_all(margin_none->at(STATE), STATE, 0);
 
+        init_style(margin_reset, STATE);
+        lv_style_set_pad_all(margin_reset->at(STATE), STATE, DEFAULT_MARGIN);
+
         init_style(padding_default, STATE);
         lv_style_set_pad_all(padding_default->at(STATE), STATE, DEFAULT_PADDING);
 
@@ -106,11 +112,14 @@ Styles::Styles() {
         init_style(padding_none, STATE);
         lv_style_set_pad_all(padding_none->at(STATE), STATE, 0);
 
+        init_style(padding_reset, STATE);
+        lv_style_set_pad_all(padding_reset->at(STATE), STATE, DEFAULT_PADDING);
+
         init_style(radius_none, STATE);
         lv_style_set_radius(radius_none->at(STATE), STATE, 0);
 
-        init_style(radius_normal, STATE);
-        lv_style_set_radius(radius_normal->at(STATE), STATE, 5);
+        init_style(radius_reset, STATE);
+        lv_style_set_radius(radius_reset->at(STATE), STATE, 5);
 
         init_style(shadow_none, STATE);
         lv_style_set_shadow_width(shadow_none->at(STATE), STATE, 0);
@@ -126,6 +135,9 @@ Styles::Styles() {
 
         init_style(border_none, STATE);
         lv_style_set_border_width(border_none->at(STATE), STATE, 0);
+
+        init_style(border_reset, STATE);
+        lv_style_set_border_width(border_reset->at(STATE), STATE, DEFAULT_BORDER);
 
         init_style(border_sides_only_bottom, STATE);
         lv_style_set_border_side(border_sides_only_bottom->at(STATE), STATE, LV_BORDER_SIDE_BOTTOM);
@@ -244,6 +256,10 @@ lv_style_t * Styles::get_border_none(lv_state_t state) {
     return border_none->at(state);
 }
 
+lv_style_t * Styles::get_border_reset(lv_state_t state) {
+    return border_reset->at(state);
+}
+
 lv_style_t * Styles::get_border_sides_only_bottom(lv_state_t state) {
     return border_sides_only_bottom->at(state);
 }
@@ -272,6 +288,10 @@ lv_style_t * Styles::get_margin_none(lv_state_t state) {
     return margin_none->at(state);
 }
 
+lv_style_t * Styles::get_margin_reset(lv_state_t state) {
+    return margin_reset->at(state);
+}
+
 lv_style_t * Styles::get_padding_bottom_none(lv_state_t state) {
     return padding_bottom_none->at(state);
 }
@@ -288,6 +308,10 @@ lv_style_t * Styles::get_padding_none(lv_state_t state) {
     return padding_none->at(state);
 }
 
+lv_style_t * Styles::get_padding_reset(lv_state_t state) {
+    return padding_reset->at(state);
+}
+
 lv_style_t * Styles::get_padding_right_none(lv_state_t state) {
     return padding_right_none->at(state);
 }
@@ -300,8 +324,8 @@ lv_style_t * Styles::get_radius_none(lv_state_t state) {
     return radius_none->at(state);
 }
 
-lv_style_t * Styles::get_radius_normal(lv_state_t state) {
-    return radius_normal->at(state);
+lv_style_t * Styles::get_radius_reset(lv_state_t state) {
+    return radius_reset->at(state);
 }
 
 lv_style_t * Styles::get_shadow_none(lv_state_t state) {
