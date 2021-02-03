@@ -2,8 +2,9 @@
 
 void dbuddy::ActionSettings::init() {
     Widget * actions_container = get_ui()->get_widget(WIDGET_ACTIONS_CONTAINER);
+    Widget * page = get_ui()->get_widget(WIDGET_PAGE);
 
-    set_self(lv_obj_create(actions_container->get_self(), nullptr));
+    set_self(lv_obj_create(actions_container->get_self(), page->get_self()));
     set_size(24 + DEFAULT_PADDING, 24 + DEFAULT_PADDING);
 
     lv_obj_align(get_self(), nullptr, LV_ALIGN_IN_RIGHT_MID, 0, 0);

@@ -1,11 +1,11 @@
 #include "widget-calendar-details.h"
 
 void dbuddy::CalendarDetails::init() {
-    Widget * page = get_ui()->get_widget(WIDGET_PAGE);
-    Widget * menu = get_ui()->get_widget(WIDGET_MENU);
     Widget * calendar_date = get_ui()->get_widget(WIDGET_CALENDAR_DATE);
+    Widget * menu = get_ui()->get_widget(WIDGET_MENU);
+    Widget * page = get_ui()->get_widget(WIDGET_PAGE);
 
-    set_self(lv_obj_create(page->get_self(), nullptr));
+    set_self(lv_obj_create(page->get_self(), page->get_self()));
 
     set_pos(0, menu->get_height() + calendar_date->get_height());
     set_size(calendar_date->get_width(), page->get_height() - menu->get_height() - calendar_date->get_height());

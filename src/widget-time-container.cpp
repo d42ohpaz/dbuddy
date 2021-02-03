@@ -4,8 +4,9 @@ using namespace dbuddy;
 
 void TimeContainer::init() {
     Widget * menu = get_ui()->get_widget(WIDGET_MENU);
+    Widget * page = get_ui()->get_widget(WIDGET_PAGE);
 
-    set_self(lv_obj_create(menu->get_self(), nullptr));
+    set_self(lv_obj_create(menu->get_self(), page->get_self()));
 
     set_size(menu->get_width() / 2, menu->get_height());
 

@@ -1,9 +1,9 @@
 #include "widget-calendar.h"
 
 void dbuddy::Calendar::init() {
-    Widget * page = get_ui()->get_widget(WIDGET_PAGE);
-    Widget * menu = get_ui()->get_widget(WIDGET_MENU);
     Widget * calendar_date = get_ui()->get_widget(WIDGET_CALENDAR_DATE);
+    Widget * menu = get_ui()->get_widget(WIDGET_MENU);
+    Widget * page = get_ui()->get_widget(WIDGET_PAGE);
 
     set_self(lv_calendar_create(page->get_self(), nullptr));
 
