@@ -32,6 +32,9 @@ namespace dbuddy {
         void clear_styles(lv_obj_part_t);
         void remove_style(lv_obj_part_t, lv_style_t *);
 
+        lv_coord_t get_width() const;
+        lv_coord_t get_height() const;
+
         void set_pos(lv_coord_t, lv_coord_t);
         void set_size(lv_coord_t, lv_coord_t);
 
