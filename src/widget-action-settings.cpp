@@ -1,11 +1,12 @@
 #include "widget-action-settings.h"
 
 void dbuddy::ActionSettings::init() {
-    lv_obj_t * actions_container = get_ui()->get_widget(WIDGET_ACTIONS_CONTAINER)->get_self();
-    set_self(lv_obj_create(actions_container, nullptr));
+    Widget * actions_container = get_ui()->get_widget(WIDGET_ACTIONS_CONTAINER);
+
+    set_self(lv_obj_create(actions_container->get_self(), nullptr));
     set_size(24 + DEFAULT_PADDING, 24 + DEFAULT_PADDING);
 
-    lv_obj_align(get_self(), actions_container, LV_ALIGN_IN_RIGHT_MID, 0, 0);
+    lv_obj_align(get_self(), nullptr, LV_ALIGN_IN_RIGHT_MID, 0, 0);
 
     lv_obj_t * label = lv_label_create(get_self(), nullptr);
     lv_label_set_text(label, LV_SYMBOL_SETTINGS);
