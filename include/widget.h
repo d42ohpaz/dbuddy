@@ -38,8 +38,8 @@ namespace dbuddy {
         void set_pos(lv_coord_t, lv_coord_t);
         void set_size(lv_coord_t, lv_coord_t);
 
-        Ui * get_ui() { return ui; }
-        lv_obj_t * get_self() { return self; }
+        Ui * get_ui() const { return ui; }
+        lv_obj_t * get_self() const { return self; }
         void set_self(lv_obj_t * s) { self = s; }
     protected:
         Ui * ui;
