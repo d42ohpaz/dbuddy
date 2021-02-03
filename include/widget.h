@@ -12,6 +12,7 @@ namespace dbuddy {
         WIDGET_TIME_LABEL           = 0x05,
         WIDGET_ACTIONS_CONTAINER    = 0x06,
         WIDGET_ACTION_SETTINGS      = 0x07,
+        WIDGET_CALENDAR             = 0x10,
     };
 
     typedef uint8_t widget_t;

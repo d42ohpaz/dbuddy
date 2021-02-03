@@ -8,5 +8,6 @@
 #include "widget-time-label.h"
 #include "widget-actions-container.h"
 #include "widget-action-settings.h"
+#include "widget-calendar.h"
 
 #endif // DBUDDY_WIDGETS_H
