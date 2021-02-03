@@ -3,12 +3,13 @@
 using namespace dbuddy;
 
 void ActionsContainer::init() {
-    lv_obj_t * menu = get_ui()->get_widget(WIDGET_MENU)->get_self();
-    lv_obj_t * time_container = get_ui()->get_widget(WIDGET_TIME_CONTAINER)->get_self();
-    set_self(lv_obj_create(menu, nullptr));
+    Widget * menu = get_ui()->get_widget(WIDGET_MENU);
+    Widget * time_container = get_ui()->get_widget(WIDGET_TIME_CONTAINER);
 
-    set_size(lv_obj_get_width(time_container), lv_obj_get_height(time_container));
-    set_pos(lv_obj_get_width(time_container), 0);
+    set_self(lv_obj_create(menu->get_self(), nullptr));
+
+    set_size(time_container->get_width(), time_container->get_height());
+    set_pos(time_container->get_width(), 0);
 
     add_style(LV_OBJ_PART_MAIN, get_ui()->get_styles()->get_border_none(LV_STATE_DEFAULT));
     add_style(LV_OBJ_PART_MAIN, get_ui()->get_styles()->get_radius_none(LV_STATE_DEFAULT));

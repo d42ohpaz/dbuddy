@@ -3,10 +3,10 @@
 using namespace dbuddy;
 
 void Menu::init() {
-    lv_obj_t * page = get_ui()->get_widget(WIDGET_PAGE)->get_self();
-    set_self(lv_obj_create(page, nullptr));
+    Widget * page = get_ui()->get_widget(WIDGET_PAGE);
+    set_self(lv_obj_create(page->get_self(), nullptr));
 
-    set_size(lv_obj_get_width(page), DEFAULT_MENU_HEIGHT + DEFAULT_PADDING);
+    set_size(page->get_width(), DEFAULT_MENU_HEIGHT + DEFAULT_PADDING);
 
     add_style(LV_OBJ_PART_MAIN, get_ui()->get_styles()->get_radius_none(LV_STATE_DEFAULT));
     add_style(LV_OBJ_PART_MAIN, get_ui()->get_styles()->get_background_overlay(LV_STATE_DEFAULT));
