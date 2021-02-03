@@ -11,4 +11,7 @@ void dbuddy::CalendarDetails::init() {
     set_size(calendar_date->get_width(), page->get_height() - menu->get_height() - calendar_date->get_height());
 
     add_style(LV_OBJ_PART_MAIN, get_ui()->get_styles()->get_padding_default(LV_STATE_DEFAULT));
+    add_style(LV_PAGE_PART_BG, get_ui()->get_styles()->get_border_color_white(LV_STATE_DEFAULT));
+    add_style(LV_OBJ_PART_MAIN, get_ui()->get_styles()->get_border_sides_only_right(LV_STATE_DEFAULT));
+    add_style(LV_OBJ_PART_MAIN, get_ui()->get_styles()->get_border_reset(LV_STATE_DEFAULT));
 }
