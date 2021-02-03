@@ -9,5 +9,6 @@
 #include "widget-actions-container.h"
 #include "widget-action-settings.h"
 #include "widget-calendar.h"
+#include "widget-calendar-date.h"
 
 #endif // DBUDDY_WIDGETS_H
