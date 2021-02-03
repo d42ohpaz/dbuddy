@@ -13,6 +13,7 @@ namespace dbuddy {
         WIDGET_ACTIONS_CONTAINER    = 0x06,
         WIDGET_ACTION_SETTINGS      = 0x07,
         WIDGET_CALENDAR_DATE        = 0x08,
+        WIDGET_CALENDAR_DETAILS     = 0x09,
         WIDGET_CALENDAR             = 0x10,
     };
 

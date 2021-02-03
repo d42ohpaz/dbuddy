@@ -10,5 +10,6 @@
 #include "widget-action-settings.h"
 #include "widget-calendar.h"
 #include "widget-calendar-date.h"
+#include "widget-calendar-details.h"
 
 #endif // DBUDDY_WIDGETS_H

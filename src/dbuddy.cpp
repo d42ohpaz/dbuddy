@@ -34,6 +34,7 @@ void DBuddy::init(bool use_dbl_buff) {
     ui->add_widget(WIDGET_ACTIONS_CONTAINER, new ActionsContainer(ui));
     ui->add_widget(WIDGET_ACTION_SETTINGS, new ActionSettings(ui));
     ui->add_widget(WIDGET_CALENDAR_DATE, new CalendarDate(ui));
+    ui->add_widget(WIDGET_CALENDAR_DETAILS, new CalendarDetails(ui));
     ui->add_widget(WIDGET_CALENDAR, new Calendar(ui));
 
     lv_task_create(cb_time_task_handler, 500, LV_TASK_PRIO_MID, this);
