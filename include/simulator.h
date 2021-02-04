@@ -1,4 +1,4 @@
-#ifndef ARDUINO
+#if !defined(ARDUINO)
 #ifndef DBUDDY_SIMULATOR_H
 #define DBUDDY_SIMULATOR_H
 
