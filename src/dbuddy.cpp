@@ -63,6 +63,10 @@ void DBuddy::updateTimeCallback(lv_task_t * task) const {
         if (tmHour > 12) {
             tmHour -= 12;
         }
+
+        if (tmHour == 0) {
+            tmHour += 12;
+        }
 //    }
 
     lv_obj_t * time_label = ui->get_widget(WIDGET_TIME_LABEL)->get_self();
