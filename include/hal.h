@@ -11,7 +11,7 @@ namespace dbuddy {
             delete display_driver;
         };
         virtual void init() = 0;
-        virtual void flush(lv_disp_drv_t *, const lv_area_t *, lv_color_t *) = 0;
+        virtual void display_flush(lv_disp_drv_t *, const lv_area_t *, lv_color_t *) = 0;
 
         void run(bool);
     private:

@@ -11,7 +11,7 @@ namespace dbuddy {
         NodeMCU32s(Adafruit_RA8875 *, uint8_t);
 
         void init() final;
-        void flush(lv_disp_drv_t *, const lv_area_t *, lv_color_t *) final;
+        void display_flush(lv_disp_drv_t *, const lv_area_t *, lv_color_t *) final;
     private:
         Adafruit_RA8875 * tft;
         uint8_t interrupt;

@@ -18,7 +18,7 @@ void NodeMCU32s::init() {
     digitalWrite(interrupt, HIGH);
 }
 
-void NodeMCU32s::flush(lv_disp_drv_t * disp, const lv_area_t * area, lv_color_t * color) {
+void NodeMCU32s::display_flush(lv_disp_drv_t * disp, const lv_area_t * area, lv_color_t * color) {
     int32_t width = (area->x2 - area->x1 + 1);
 
     tft->startWrite();

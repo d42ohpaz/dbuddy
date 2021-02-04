@@ -7,9 +7,9 @@ using namespace dbuddy;
 /**
  * The c-callback for flushing our visual data to our display driver.
  */
-extern "C" void flush_callback(lv_disp_drv_t * drv, const lv_area_t * area, lv_color_t * color) {
+extern "C" void display_flush_callback(lv_disp_drv_t * drv, const lv_area_t * area, lv_color_t * color) {
     auto * instance = (Hal *)drv->user_data;
-    instance->flush(drv, area, color);
+    instance->display_flush(drv, area, color);
 }
 
 void Hal::run(bool use_dbl_buff) {
@@ -24,7 +24,7 @@ void Hal::run(bool use_dbl_buff) {
     // Make the instance available for our c-callback above.
     display_driver->user_data = this;
 
-    display_driver->flush_cb = &flush_callback;
+    display_driver->flush_cb = &display_flush_callback;
     display_driver->buffer = display_buffer;
 
     if (!lv_disp_drv_register(display_driver)) {
