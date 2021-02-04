@@ -13,6 +13,10 @@ extern "C" void display_flush_callback(lv_disp_drv_t * drv, const lv_area_t * ar
 }
 
 void Hal::run(bool use_dbl_buff) {
+    initializeDisplay(use_dbl_buff);
+}
+
+void Hal::initializeDisplay(bool use_dbl_buff) {
     if (use_dbl_buff) {
         lv_disp_buf_init(display_buffer, buffer0, buffer1, BUFFER_SIZE);
     } else {

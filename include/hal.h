@@ -22,6 +22,8 @@ namespace dbuddy {
 
         lv_color_t * buffer0[BUFFER_SIZE]{};
         lv_color_t * buffer1[BUFFER_SIZE]{};
+
+        void initializeDisplay(bool);
     };
 }
 
