@@ -40,6 +40,8 @@ void DBuddy::init(bool use_dbl_buff) {
     ui->add_widget(WIDGET_CALENDAR, new Calendar(ui));
 
     lv_task_create(cb_time_task_handler, 500, LV_TASK_PRIO_MID, this);
+
+    initializeCalendar();
 }
 
 void DBuddy::updateTimeCallback(lv_task_t * task) const {
@@ -84,4 +86,18 @@ void DBuddy::updateTimeCallback(lv_task_t * task) const {
 
     count_off++;
     count_on++;
+}
+
+void DBuddy::initializeCalendar() {
+    time_t t = time(nullptr);
+    struct tm local_time = *localtime(&t);
+
+    lv_calendar_date_t today;
+    today.year = (local_time.tm_year + 1900);
+    today.month = (local_time.tm_mon + 1);
+    today.day = local_time.tm_mday;
+
+    auto * calendar = (Calendar *)ui->get_widget(WIDGET_CALENDAR);
+    calendar->set_today(&today);
+    calendar->set_showed(&today);
 }

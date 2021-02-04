@@ -22,6 +22,8 @@ namespace dbuddy {
     private:
         Ui * ui{};
         Hal * hal{};
+
+        void initializeCalendar();
     };
 }
 
