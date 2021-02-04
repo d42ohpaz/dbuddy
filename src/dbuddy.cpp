@@ -1,6 +1,7 @@
 #include <lvgl.h>
 #include <unistd.h>
 #include <ctime>
+#include <cstdio>
 
 #include "dbuddy.h"
 #include "widgets.h"
@@ -52,16 +53,16 @@ void DBuddy::updateTimeCallback(lv_task_t * task) const {
 
 //    if (p_config->time.format24 == 0) {
 //        if (p_config->time.meridiem == 1) {
-//            if (local.tm_hour >= 12) {
-//                sprintf(bufMeridiem, "%s", "pm");
-//            } else {
-//                sprintf(bufMeridiem, "%s", "am");
-//            }
+            if (tmHour >= 12) {
+                sprintf(bufMeridiem, "%s", "pm");
+            } else {
+                sprintf(bufMeridiem, "%s", "am");
+            }
 //        }
 //
-//        if (tmHour > 12) {
-//            tmHour = tmHour - 12;
-//        }
+        if (tmHour > 12) {
+            tmHour -= 12;
+        }
 //    }
 
     lv_obj_t * time_label = ui->get_widget(WIDGET_TIME_LABEL)->get_self();
