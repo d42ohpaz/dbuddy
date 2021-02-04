@@ -15,7 +15,7 @@ namespace dbuddy {
 
         void run(bool);
     private:
-        static const uint32_t BUFFER_SIZE = LV_HOR_RES_MAX * 10;
+        static const uint32_t BUFFER_SIZE = LV_HOR_RES_MAX;
 
         lv_disp_buf_t * display_buffer = new lv_disp_buf_t;
         lv_disp_drv_t * display_driver = new lv_disp_drv_t;
