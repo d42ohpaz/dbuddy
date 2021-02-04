@@ -1,5 +1,3 @@
-#include <stdexcept>
-
 #include "dbuddy.h"
 #include "fonts.h"
 #include "styles.h"
