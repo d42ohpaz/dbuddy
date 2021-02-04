@@ -14,6 +14,7 @@ extern "C" void cb_time_task_handler(lv_task_t * task) {
 
 void DBuddy::setup(Hal * hal, Ui * ui, bool use_dbl_buff) {
     auto * db = new DBuddy(hal, ui);
+
     db->init(use_dbl_buff);
 }
 
@@ -44,9 +45,10 @@ void DBuddy::updateTimeCallback(lv_task_t * task) const {
     (void)task;
 
     time_t t = time(nullptr);
-    struct tm local = *localtime(&t);
+    struct tm local_time = *localtime(&t);
+
     char bufMeridiem[3] = "";
-    int tmHour = local.tm_hour;
+    int tmHour = local_time.tm_hour;
 
 //    if (p_config->time.format24 == 0) {
 //        if (p_config->time.meridiem == 1) {
@@ -68,10 +70,10 @@ void DBuddy::updateTimeCallback(lv_task_t * task) const {
     char * colon = strstr(lv_label_get_text(time_label), ":");
 
     if (((count_on % 2) == 0 && colon == nullptr)/* || (p_config->time.flash == 0)*/) {
-        lv_label_set_text_fmt(time_label, "%02u:%02u %s", tmHour, local.tm_min, bufMeridiem);
+        lv_label_set_text_fmt(time_label, "%02u:%02u %s", tmHour, local_time.tm_min, bufMeridiem);
         count_on = 0;
     } else if ((count_off % 2) == 0) {
-        lv_label_set_text_fmt(time_label, "%02u %02u %s", tmHour, local.tm_min, bufMeridiem);
+        lv_label_set_text_fmt(time_label, "%02u %02u %s", tmHour, local_time.tm_min, bufMeridiem);
         count_off = 0;
     }
 
