@@ -15,3 +15,11 @@ void dbuddy::Calendar::init() {
     add_style(LV_OBJ_PART_MAIN, get_ui()->get_styles()->get_background_color_blue(LV_STATE_DEFAULT));
     add_style(LV_OBJ_PART_MAIN, get_ui()->get_styles()->get_radius_none(LV_STATE_DEFAULT));
 }
+
+void dbuddy::Calendar::set_today(lv_calendar_date_t * today) {
+    lv_calendar_set_today_date(get_self(), today);
+}
+
+void dbuddy::Calendar::set_showed(lv_calendar_date_t * showed) {
+    lv_calendar_set_showed_date(get_self(), showed);
+}

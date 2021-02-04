@@ -9,6 +9,9 @@ namespace dbuddy {
     public:
         explicit Calendar(Ui * ui) : Widget(ui) {}
         void init() final;
+
+        void set_today(lv_calendar_date_t *);
+        void set_showed(lv_calendar_date_t *);
     };
 }
 
