@@ -6,7 +6,7 @@
 #if defined(ARDUINO)
 #define RA8875_INT      14
 #define RA8875_CS       5
-#define RA8875_RESET    12
+#define RA8875_RESET    34
 #define RA8875_XP       4
 #define RA8875_YP       A11
 #define RA8875_XM       A12
