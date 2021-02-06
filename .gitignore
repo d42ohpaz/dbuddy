@@ -11,3 +11,4 @@ demo
 /cmake-build-nodemcu-32s
 /cmake-build-native
 /venv
+/CMakeListsPrivate.txt
