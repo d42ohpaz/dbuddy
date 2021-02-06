@@ -4,7 +4,7 @@
 #include "ui.h"
 
 #if defined(ARDUINO)
-#define RA8875_INT      13
+#define RA8875_INT      14
 #define RA8875_CS       5
 #define RA8875_RESET    12
 
