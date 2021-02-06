@@ -12,7 +12,7 @@ void NodeMCU32s::init() {
     tft->GPIOX(true);
     tft->displayOn(true);
     tft->touchEnable(true);
-    tft->PWM1config(true, RA8875_PWM_CLK_DIV1024); // PWM output for backlight
+    tft->PWM1config(true, RA8875_PWM_CLK_DIV2); // PWM output for backlight
     tft->PWM1out(255);
 
     pinMode(interrupt, INPUT);
