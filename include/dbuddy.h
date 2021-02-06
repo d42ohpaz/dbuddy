@@ -13,10 +13,10 @@ namespace dbuddy {
             delete ui;
         }
 
-        static void setup(Hal *, Ui *, bool);
+        static void setup(Hal *, Ui *, bool, lv_indev_type_t);
         static void loop();
 
-        void init(bool);
+        void init(bool, lv_indev_type_t);
 
         void updateTimeCallback(lv_task_t * task) const;
     private:

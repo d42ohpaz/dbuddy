@@ -12,8 +12,9 @@ extern "C" void display_flush_callback(lv_disp_drv_t * drv, const lv_area_t * ar
     instance->display_flush(drv, area, color);
 }
 
-void Hal::run(bool use_dbl_buff) {
+void Hal::run(bool use_dbl_buff, lv_indev_type_t type) {
     initializeDisplay(use_dbl_buff);
+    initializeInputDevice(type);
 }
 
 void Hal::initializeDisplay(bool use_dbl_buff) {

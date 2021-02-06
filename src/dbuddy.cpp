@@ -13,10 +13,10 @@ extern "C" void cb_time_task_handler(lv_task_t * task) {
     db->updateTimeCallback(task);
 }
 
-void DBuddy::setup(Hal * hal, Ui * ui, bool use_dbl_buff) {
+void DBuddy::setup(Hal * hal, Ui * ui, bool use_dbl_buff, lv_indev_type_t input_type) {
     auto * db = new DBuddy(hal, ui);
 
-    db->init(use_dbl_buff);
+    db->init(use_dbl_buff, input_type);
 }
 
 void DBuddy::loop() {
@@ -24,9 +24,9 @@ void DBuddy::loop() {
     usleep(5000);
 }
 
-void DBuddy::init(bool use_dbl_buff) {
+void DBuddy::init(bool use_dbl_buff, lv_indev_type_t input_type) {
     hal->init();
-    hal->run(use_dbl_buff);
+    hal->run(use_dbl_buff, input_type);
 
     ui->add_widget(WIDGET_SCREEN, new Screen(ui));
     ui->add_widget(WIDGET_PAGE, new Page(ui));

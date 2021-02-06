@@ -13,7 +13,7 @@ namespace dbuddy {
         virtual void init() = 0;
         virtual void display_flush(lv_disp_drv_t *, const lv_area_t *, lv_color_t *) = 0;
 
-        void run(bool);
+        void run(bool, lv_indev_type_t);
     private:
         static const uint32_t BUFFER_SIZE = LV_HOR_RES_MAX;
 

@@ -36,7 +36,8 @@ void setup() {
         new Simulator(),
 #endif
         new Ui(new Fonts, new Styles),
-        USE_DOUBLE_BUFFER
+        USE_DOUBLE_BUFFER,
+        LV_INDEV_TYPE_POINTER
     );
 
 #if LV_MEM_CUSTOM == 0
