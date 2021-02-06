@@ -1,10 +1,13 @@
 #if !defined(ARDUINO)
 #include <SDL2/SDL.h>
 #include <display/monitor.h>
+#include <indev/mouse.h>
 
 #include "simulator.h"
 
 #define SDL_MAIN_HANDLED
+
+using namespace dbuddy;
 
 extern "C" int tick_thread(void *data) {
   (void)data;
@@ -17,7 +20,7 @@ extern "C" int tick_thread(void *data) {
   return 0;
 }
 
-void dbuddy::Simulator::init() {
+void Simulator::init() {
     monitor_init();
 
     /* Tick init.
@@ -26,7 +29,11 @@ void dbuddy::Simulator::init() {
     SDL_CreateThread(tick_thread, "tick", NULL);
 }
 
-void dbuddy::Simulator::flush(lv_disp_drv_t * drv, const lv_area_t * area, lv_color_t * color) {
+void Simulator::display_flush(lv_disp_drv_t * drv, const lv_area_t * area, lv_color_t * color) {
     monitor_flush(drv, area, color);
+}
+
+bool Simulator::input_read(lv_indev_drv_t * drv, lv_indev_data_t * data) {
+    return mouse_read(drv, data);
 }
 #endif
