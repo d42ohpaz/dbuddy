@@ -1,6 +1,7 @@
 #if defined(ARDUINO)
 #include <SPI.h>
 #include <Wire.h>
+#include <Arduino.h>
 
 #include "nodemcu32s.h"
 
@@ -16,6 +17,10 @@ void NodeMCU32s::init() {
 
     pinMode(interrupt, INPUT);
     digitalWrite(interrupt, HIGH);
+
+#if defined(ESP32)
+    analogReadResolution(10);
+#endif
 }
 
 void NodeMCU32s::display_flush(lv_disp_drv_t * disp, const lv_area_t * area, lv_color_t * color) {
