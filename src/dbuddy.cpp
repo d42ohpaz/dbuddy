@@ -9,43 +9,7 @@
 using namespace dbuddy;
 
 extern "C" void cb_time_task_handler(lv_task_t * task) {
-    auto * db = (DBuddy *)task->user_data;
-    db->updateTimeCallback(task);
-}
-
-void DBuddy::setup(Hal * hal, Ui * ui, bool use_dbl_buff, lv_indev_type_t input_type) {
-    auto * db = new DBuddy(hal, ui);
-
-    db->init(use_dbl_buff, input_type);
-}
-
-void DBuddy::loop() {
-    lv_task_handler();
-    usleep(5000);
-}
-
-void DBuddy::init(bool use_dbl_buff, lv_indev_type_t input_type) {
-    hal->init();
-    hal->run(use_dbl_buff, input_type);
-
-    ui->add_widget(WIDGET_SCREEN, new Screen(ui));
-    ui->add_widget(WIDGET_PAGE, new Page(ui));
-    ui->add_widget(WIDGET_MENU, new Menu(ui));
-    ui->add_widget(WIDGET_TIME_CONTAINER, new TimeContainer(ui));
-    ui->add_widget(WIDGET_TIME_LABEL, new TimeLabel(ui));
-    ui->add_widget(WIDGET_ACTIONS_CONTAINER, new ActionsContainer(ui));
-    ui->add_widget(WIDGET_ACTION_SETTINGS, new ActionSettings(ui));
-    ui->add_widget(WIDGET_CALENDAR_DATE, new CalendarDate(ui));
-    ui->add_widget(WIDGET_CALENDAR_DETAILS, new CalendarDetails(ui));
-    ui->add_widget(WIDGET_CALENDAR, new Calendar(ui));
-
-    lv_task_create(cb_time_task_handler, 500, LV_TASK_PRIO_MID, this);
-
-    initializeCalendar();
-}
-
-void DBuddy::updateTimeCallback(lv_task_t * task) const {
-    (void)task;
+    auto * ui = (Ui *)task->user_data;
 
     time_t t = time(nullptr);
     struct tm local_time = *localtime(&t);
@@ -86,6 +50,37 @@ void DBuddy::updateTimeCallback(lv_task_t * task) const {
 
     count_off++;
     count_on++;
+}
+
+void DBuddy::setup(Hal * hal, Ui * ui, bool use_dbl_buff, lv_indev_type_t input_type) {
+    auto * db = new DBuddy(hal, ui);
+
+    db->init(use_dbl_buff, input_type);
+}
+
+void DBuddy::loop() {
+    lv_task_handler();
+    usleep(5000);
+}
+
+void DBuddy::init(bool use_dbl_buff, lv_indev_type_t input_type) {
+    hal->init();
+    hal->run(use_dbl_buff, input_type);
+
+    ui->add_widget(WIDGET_SCREEN, new Screen(ui));
+    ui->add_widget(WIDGET_PAGE, new Page(ui));
+    ui->add_widget(WIDGET_MENU, new Menu(ui));
+    ui->add_widget(WIDGET_TIME_CONTAINER, new TimeContainer(ui));
+    ui->add_widget(WIDGET_TIME_LABEL, new TimeLabel(ui));
+    ui->add_widget(WIDGET_ACTIONS_CONTAINER, new ActionsContainer(ui));
+    ui->add_widget(WIDGET_ACTION_SETTINGS, new ActionSettings(ui));
+    ui->add_widget(WIDGET_CALENDAR_DATE, new CalendarDate(ui));
+    ui->add_widget(WIDGET_CALENDAR_DETAILS, new CalendarDetails(ui));
+    ui->add_widget(WIDGET_CALENDAR, new Calendar(ui));
+
+    ui->create_task(cb_time_task_handler, 500);
+
+    initializeCalendar();
 }
 
 void DBuddy::initializeCalendar() {
