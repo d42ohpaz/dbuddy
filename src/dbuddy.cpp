@@ -37,19 +37,18 @@ extern "C" void cb_time_task_handler(lv_task_t * task) {
 
     lv_obj_t * time_label = ui->get_widget(WIDGET_TIME_LABEL)->get_self();
 
-    static int count_on = 0, count_off = 0;
+    static int count = 0;
     char * colon = strstr(lv_label_get_text(time_label), ":");
 
-    if (((count_on % 2) == 0 && colon == nullptr)/* || (p_config->time.flash == 0)*/) {
+    if (((count % 2) == 0 && colon == nullptr)/* || (p_config->time.flash == 0)*/) {
         lv_label_set_text_fmt(time_label, "%02u:%02u %s", tmHour, local_time.tm_min, bufMeridiem);
-        count_on = 0;
-    } else if ((count_off % 2) == 0) {
+        count = 0;
+    } else if ((count % 2) == 0) {
         lv_label_set_text_fmt(time_label, "%02u %02u %s", tmHour, local_time.tm_min, bufMeridiem);
-        count_off = 0;
+        count = 0;
     }
 
-    count_off++;
-    count_on++;
+    ++count;
 }
 
 void DBuddy::setup(Hal * hal, Ui * ui, bool use_dbl_buff, lv_indev_type_t input_type) {
