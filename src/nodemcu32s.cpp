@@ -60,6 +60,4 @@ bool NodeMCU32s::input_read(lv_indev_drv_t * drv, lv_indev_data_t * data) {
 
     return false;
 }
-
-NodeMCU32s::NodeMCU32s(Adafruit_RA8875 * tft, TouchScreen * ts, uint8_t interrupt) : Hal(), tft(tft), ts(ts), interrupt(interrupt) {}
 #endif
