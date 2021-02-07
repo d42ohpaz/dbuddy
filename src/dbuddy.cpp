@@ -87,7 +87,7 @@ void DBuddy::init(bool use_dbl_buff, lv_indev_type_t input_type) {
 
     ui->create_task(cb_time_task_handler, 500);
 #if LV_MEM_CUSTOM == 0
-    ui->create_task(cb_memory_monitor_task_handler, 500);
+    ui->create_task(cb_memory_monitor_task_handler, 5000);
 #endif
 #if defined(ARDUINO)
 #endif
