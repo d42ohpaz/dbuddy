@@ -15,7 +15,7 @@ lv_task_t * Ui::create_task(lv_task_cb_t task_xcb, uint32_t period, lv_task_prio
     return task;
 }
 
-void * Ui::delete_task(lv_task_t * task) {
+void Ui::delete_task(lv_task_t * task) {
     auto it = tasks->begin();
     while (it != tasks->end()) {
         if (*it == task) {

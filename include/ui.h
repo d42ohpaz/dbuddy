@@ -24,7 +24,7 @@ namespace dbuddy {
 
         void add_widget(widget_t, Widget *);
         lv_task_t * create_task(lv_task_cb_t, uint32_t period, lv_task_prio_t prio = LV_TASK_PRIO_MID);
-        void * delete_task(lv_task_t * task);
+        void delete_task(lv_task_t * task);
         Widget * get_widget(widget_t) const;
         bool has_widget(widget_t) const;
 
