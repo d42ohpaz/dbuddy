@@ -51,13 +51,12 @@ extern "C" void cb_time_task_handler(lv_task_t * task) {
     ++count;
 }
 
-#if defined(ARDUINO)
-
-#include <Arduino.h>
-
 #if LV_MEM_CUSTOM == 0
 extern "C" void cb_memory_monitor_task_handler(lv_task_t * param);
 #endif
+
+#if defined(ARDUINO)
+#include <Arduino.h>
 #endif
 
 void DBuddy::setup(Hal * hal, Ui * ui, bool use_dbl_buff, lv_indev_type_t input_type) {
@@ -87,10 +86,10 @@ void DBuddy::init(bool use_dbl_buff, lv_indev_type_t input_type) {
     ui->add_widget(WIDGET_CALENDAR, new Calendar(ui));
 
     ui->create_task(cb_time_task_handler, 500);
-#if defined(ARDUINO)
 #if LV_MEM_CUSTOM == 0
     ui->create_task(cb_memory_monitor_task_handler, 500);
 #endif
+#if defined(ARDUINO)
 #endif
 
     initializeCalendar();
@@ -110,9 +109,7 @@ void DBuddy::initializeCalendar() {
     calendar->set_showed(&today);
 }
 
-#if defined(ARDUINO)
 #if LV_MEM_CUSTOM == 0
-
 /**
  * Print the memory usage periodically
  * @param param
@@ -134,5 +131,4 @@ void cb_memory_monitor_task_handler(lv_task_t * param) {
 #endif
 }
 
-#endif
 #endif
