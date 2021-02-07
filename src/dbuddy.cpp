@@ -57,6 +57,9 @@ extern "C" void cb_memory_monitor_task_handler(lv_task_t * param);
 
 #if defined(ARDUINO)
 #include <Arduino.h>
+#include <WiFi.h>
+
+extern "C" void cb_wifi_task_handler(lv_task_t * param);
 #endif
 
 void DBuddy::setup(Hal * hal, Ui * ui, bool use_dbl_buff, lv_indev_type_t input_type) {
@@ -91,6 +94,7 @@ void DBuddy::init(bool use_dbl_buff, lv_indev_type_t input_type) {
     ui->create_task(cb_memory_monitor_task_handler, 5000);
 #endif
 #if defined(ARDUINO)
+    ui->create_task(cb_wifi_task_handler, 500);
 #endif
 
     initializeCalendar();
@@ -109,6 +113,24 @@ void DBuddy::initializeCalendar() {
     calendar->set_today(&today);
     calendar->set_showed(&today);
 }
+
+#if defined(ARDUINO)
+void cb_wifi_task_handler(lv_task_t * param) {
+    auto * ui = (Ui *)param->user_data;
+    Widget * wifi_signal = ui->get_widget(WIDGET_WIFI_SIGNAL);
+
+    switch (WiFiClass::status()) {
+        case WL_CONNECTED:
+            wifi_signal->remove_style(LV_OBJ_PART_MAIN, ui->get_styles()->get_text_color_gray(LV_STATE_DEFAULT));
+            wifi_signal->add_style(LV_OBJ_PART_MAIN, ui->get_styles()->get_text_color_white(LV_STATE_DEFAULT));
+            break;
+        default: // Disconnected, never connected, etc
+            wifi_signal->remove_style(LV_OBJ_PART_MAIN, ui->get_styles()->get_text_color_white(LV_STATE_DEFAULT));
+            wifi_signal->add_style(LV_OBJ_PART_MAIN, ui->get_styles()->get_text_color_gray(LV_STATE_DEFAULT));
+            break;
+    }
+}
+#endif
 
 #if LV_MEM_CUSTOM == 0
 /**
@@ -131,5 +153,4 @@ void cb_memory_monitor_task_handler(lv_task_t * param) {
            (int)mon.free_biggest_size);
 #endif
 }
-
 #endif
