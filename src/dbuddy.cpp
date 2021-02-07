@@ -84,6 +84,7 @@ void DBuddy::init(bool use_dbl_buff, lv_indev_type_t input_type) {
     ui->add_widget(WIDGET_CALENDAR_DATE, new CalendarDate(ui));
     ui->add_widget(WIDGET_CALENDAR_DETAILS, new CalendarDetails(ui));
     ui->add_widget(WIDGET_CALENDAR, new Calendar(ui));
+    ui->add_widget(WIDGET_WIFI_SIGNAL, new WifiSignal(ui));
 
     ui->create_task(cb_time_task_handler, 500);
 #if LV_MEM_CUSTOM == 0

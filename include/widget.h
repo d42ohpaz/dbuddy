@@ -15,6 +15,7 @@ namespace dbuddy {
         WIDGET_CALENDAR_DATE        = 0x08,
         WIDGET_CALENDAR_DETAILS     = 0x09,
         WIDGET_CALENDAR             = 0x10,
+        WIDGET_WIFI_SIGNAL          = 0x11,
     };
 
     typedef uint8_t widget_t;

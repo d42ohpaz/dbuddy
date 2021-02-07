@@ -11,5 +11,6 @@
 #include "widget-calendar.h"
 #include "widget-calendar-date.h"
 #include "widget-calendar-details.h"
+#include "widget-wifi-signal.h"
 
 #endif // DBUDDY_WIDGETS_H
