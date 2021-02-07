@@ -51,6 +51,14 @@ extern "C" void cb_time_task_handler(lv_task_t * task) {
     ++count;
 }
 
+#if defined(ARDUINO)
+#include <Arduino.h>
+
+#if LV_MEM_CUSTOM == 0
+extern "C" void cb_memory_monitor_task_handler(lv_task_t *param);
+#endif
+#endif
+
 void DBuddy::setup(Hal * hal, Ui * ui, bool use_dbl_buff, lv_indev_type_t input_type) {
     auto * db = new DBuddy(hal, ui);
 
@@ -78,6 +86,11 @@ void DBuddy::init(bool use_dbl_buff, lv_indev_type_t input_type) {
     ui->add_widget(WIDGET_CALENDAR, new Calendar(ui));
 
     ui->create_task(cb_time_task_handler, 500);
+#if defined(ARDUINO)
+#if LV_MEM_CUSTOM == 0
+    ui->create_task(cb_memory_monitor_task_handler, 500);
+#endif
+#endif
 
     initializeCalendar();
 }
@@ -95,3 +108,28 @@ void DBuddy::initializeCalendar() {
     calendar->set_today(&today);
     calendar->set_showed(&today);
 }
+
+#if defined(ARDUINO)
+#if LV_MEM_CUSTOM == 0
+/**
+ * Print the memory usage periodically
+ * @param param
+ */
+void cb_memory_monitor_task_handler(lv_task_t *param) {
+  (void)param; /*Unused*/
+
+  lv_mem_monitor_t mon;
+  lv_mem_monitor(&mon);
+
+#if defined(ARDUINO)
+  Serial.printf("used: %6d (%3d %%), frag: %3d %%, biggest free: %6d\n",
+         (int)mon.total_size - mon.free_size, mon.used_pct, mon.frag_pct,
+         (int)mon.free_biggest_size);
+#else
+  printf("used: %6d (%3d %%), frag: %3d %%, biggest free: %6d\n",
+         (int)mon.total_size - mon.free_size, mon.used_pct, mon.frag_pct,
+         (int)mon.free_biggest_size);
+#endif
+}
+#endif
+#endif
