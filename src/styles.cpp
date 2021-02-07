@@ -47,6 +47,7 @@ Styles::Styles() {
     shadow_none = new std::map<lv_state_t, lv_style_t *>();
     text_color_black = new std::map<lv_state_t, lv_style_t *>();
     text_color_white = new std::map<lv_state_t, lv_style_t *>();
+    text_color_gray = new std::map<lv_state_t, lv_style_t *>();
 
     for (unsigned char STATE : STATES) {
         init_style(background_blend_mode_additive, STATE);
@@ -129,6 +130,9 @@ Styles::Styles() {
 
         init_style(text_color_white, STATE);
         lv_style_set_text_color(text_color_white->at(STATE), STATE, LV_COLOR_WHITE);
+
+        init_style(text_color_gray, STATE);
+        lv_style_set_text_color(text_color_gray->at(STATE), STATE, LV_COLOR_GRAY);
 
         init_style(border_color_white, STATE);
         lv_style_set_border_color(border_color_white->at(STATE), STATE, LV_COLOR_WHITE);
@@ -338,6 +342,10 @@ lv_style_t * Styles::get_text_color_black(lv_state_t state) {
 
 lv_style_t * Styles::get_text_color_white(lv_state_t state) {
     return text_color_white->at(state);
+}
+
+lv_style_t * Styles::get_text_color_gray(lv_state_t state) {
+    return text_color_gray->at(state);
 }
 
 lv_style_t * Styles::get_background_color_purple(lv_state_t state) {

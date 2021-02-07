@@ -56,6 +56,7 @@ namespace dbuddy {
         lv_style_t * get_shadow_none(lv_state_t);
         lv_style_t * get_text_color_black(lv_state_t);
         lv_style_t * get_text_color_white(lv_state_t);
+        lv_style_t * get_text_color_gray(lv_state_t);
         lv_style_t * get_background_color_purple(lv_state_t);
         lv_style_t * get_background_color_none(lv_state_t);
         lv_style_t * get_background_color_white(lv_state_t);
@@ -102,6 +103,7 @@ namespace dbuddy {
         std::map<lv_state_t, lv_style_t *> * shadow_none{};
         std::map<lv_state_t, lv_style_t *> * text_color_black{};
         std::map<lv_state_t, lv_style_t *> * text_color_white{};
+        std::map<lv_state_t, lv_style_t *> * text_color_gray{};
 
         static void init_style(std::map<lv_state_t, lv_style_t *> *, lv_state_t);
     };
