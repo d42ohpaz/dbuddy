@@ -9,7 +9,7 @@
 using namespace dbuddy;
 
 extern "C" void cb_time_task_handler(lv_task_t * task) {
-    auto * ui = (Ui *)task->user_data;
+    auto * ui = (Ui *) task->user_data;
 
     time_t t = time(nullptr);
     struct tm local_time = *localtime(&t);
@@ -19,20 +19,20 @@ extern "C" void cb_time_task_handler(lv_task_t * task) {
 
 //    if (p_config->time.format24 == 0) {
 //        if (p_config->time.meridiem == 1) {
-            if (tmHour >= 12) {
-                sprintf(bufMeridiem, "%s", "pm");
-            } else {
-                sprintf(bufMeridiem, "%s", "am");
-            }
+    if (tmHour >= 12) {
+        sprintf(bufMeridiem, "%s", "pm");
+    } else {
+        sprintf(bufMeridiem, "%s", "am");
+    }
 //        }
 //
-        if (tmHour > 12) {
-            tmHour -= 12;
-        }
+    if (tmHour > 12) {
+        tmHour -= 12;
+    }
 
-        if (tmHour == 0) {
-            tmHour += 12;
-        }
+    if (tmHour == 0) {
+        tmHour += 12;
+    }
 //    }
 
     lv_obj_t * time_label = ui->get_widget(WIDGET_TIME_LABEL)->get_self();
@@ -52,10 +52,11 @@ extern "C" void cb_time_task_handler(lv_task_t * task) {
 }
 
 #if defined(ARDUINO)
+
 #include <Arduino.h>
 
 #if LV_MEM_CUSTOM == 0
-extern "C" void cb_memory_monitor_task_handler(lv_task_t *param);
+extern "C" void cb_memory_monitor_task_handler(lv_task_t * param);
 #endif
 #endif
 
@@ -104,32 +105,34 @@ void DBuddy::initializeCalendar() {
     today.month = (local_time.tm_mon + 1);
     today.day = local_time.tm_mday;
 
-    auto * calendar = (Calendar *)ui->get_widget(WIDGET_CALENDAR);
+    auto * calendar = (Calendar *) ui->get_widget(WIDGET_CALENDAR);
     calendar->set_today(&today);
     calendar->set_showed(&today);
 }
 
 #if defined(ARDUINO)
 #if LV_MEM_CUSTOM == 0
+
 /**
  * Print the memory usage periodically
  * @param param
  */
-void cb_memory_monitor_task_handler(lv_task_t *param) {
-  (void)param; /*Unused*/
+void cb_memory_monitor_task_handler(lv_task_t * param) {
+    (void) param; /*Unused*/
 
-  lv_mem_monitor_t mon;
-  lv_mem_monitor(&mon);
+    lv_mem_monitor_t mon;
+    lv_mem_monitor(&mon);
 
 #if defined(ARDUINO)
-  Serial.printf("used: %6d (%3d %%), frag: %3d %%, biggest free: %6d\n",
-         (int)mon.total_size - mon.free_size, mon.used_pct, mon.frag_pct,
-         (int)mon.free_biggest_size);
+    Serial.printf("used: %6d (%3d %%), frag: %3d %%, biggest free: %6d\n",
+                  (int) mon.total_size - mon.free_size, mon.used_pct, mon.frag_pct,
+                  (int) mon.free_biggest_size);
 #else
-  printf("used: %6d (%3d %%), frag: %3d %%, biggest free: %6d\n",
-         (int)mon.total_size - mon.free_size, mon.used_pct, mon.frag_pct,
-         (int)mon.free_biggest_size);
+    printf("used: %6d (%3d %%), frag: %3d %%, biggest free: %6d\n",
+           (int)mon.total_size - mon.free_size, mon.used_pct, mon.frag_pct,
+           (int)mon.free_biggest_size);
 #endif
 }
+
 #endif
 #endif
