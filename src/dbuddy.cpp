@@ -8,48 +8,7 @@
 
 using namespace dbuddy;
 
-extern "C" void cb_time_task_handler(lv_task_t * task) {
-    auto * ui = (Ui *) task->user_data;
-
-    time_t t = time(nullptr);
-    struct tm local_time = *localtime(&t);
-
-    char bufMeridiem[3] = "";
-    int tmHour = local_time.tm_hour;
-
-//    if (p_config->time.format24 == 0) {
-//        if (p_config->time.meridiem == 1) {
-    if (tmHour >= 12) {
-        sprintf(bufMeridiem, "%s", "pm");
-    } else {
-        sprintf(bufMeridiem, "%s", "am");
-    }
-//        }
-//
-    if (tmHour > 12) {
-        tmHour -= 12;
-    }
-
-    if (tmHour == 0) {
-        tmHour += 12;
-    }
-//    }
-
-    lv_obj_t * time_label = ui->get_widget(WIDGET_TIME_LABEL)->get_self();
-
-    static int count = 0;
-    char * colon = strstr(lv_label_get_text(time_label), ":");
-
-    if (((count % 2) == 0 && colon == nullptr)/* || (p_config->time.flash == 0)*/) {
-        lv_label_set_text_fmt(time_label, "%02u:%02u %s", tmHour, local_time.tm_min, bufMeridiem);
-        count = 0;
-    } else if ((count % 2) == 0) {
-        lv_label_set_text_fmt(time_label, "%02u %02u %s", tmHour, local_time.tm_min, bufMeridiem);
-        count = 0;
-    }
-
-    ++count;
-}
+extern "C" void cb_time_task_handler(lv_task_t * task);
 
 #if LV_MEM_CUSTOM == 0
 extern "C" void cb_memory_monitor_task_handler(lv_task_t * param);
@@ -112,6 +71,49 @@ void DBuddy::initializeCalendar() {
     auto * calendar = (Calendar *) ui->get_widget(WIDGET_CALENDAR);
     calendar->set_today(&today);
     calendar->set_showed(&today);
+}
+
+void cb_time_task_handler(lv_task_t * task) {
+    auto * ui = (Ui *) task->user_data;
+
+    time_t t = time(nullptr);
+    struct tm local_time = *localtime(&t);
+
+    char bufMeridiem[3] = "";
+    int tmHour = local_time.tm_hour;
+
+//    if (p_config->time.format24 == 0) {
+//        if (p_config->time.meridiem == 1) {
+    if (tmHour >= 12) {
+        sprintf(bufMeridiem, "%s", "pm");
+    } else {
+        sprintf(bufMeridiem, "%s", "am");
+    }
+//        }
+//
+    if (tmHour > 12) {
+        tmHour -= 12;
+    }
+
+    if (tmHour == 0) {
+        tmHour += 12;
+    }
+//    }
+
+    lv_obj_t * time_label = ui->get_widget(WIDGET_TIME_LABEL)->get_self();
+
+    static int count = 0;
+    char * colon = strstr(lv_label_get_text(time_label), ":");
+
+    if (((count % 2) == 0 && colon == nullptr)/* || (p_config->time.flash == 0)*/) {
+        lv_label_set_text_fmt(time_label, "%02u:%02u %s", tmHour, local_time.tm_min, bufMeridiem);
+        count = 0;
+    } else if ((count % 2) == 0) {
+        lv_label_set_text_fmt(time_label, "%02u %02u %s", tmHour, local_time.tm_min, bufMeridiem);
+        count = 0;
+    }
+
+    ++count;
 }
 
 #if defined(ARDUINO)
