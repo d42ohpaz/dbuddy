@@ -13,6 +13,9 @@
 #define RA8875_YM       15
 #define RA8875_RX       500
 
+#include <SPIFFS.h>
+#include <WiFiSettings.h>
+
 #include "nodemcu32s.h"
 #else
 #include <cstdio>
@@ -26,6 +29,12 @@ using namespace dbuddy;
 void setup() {
 #if defined (ARDUINO)
     Serial.begin(115200);
+
+    // Mount a filesystem that stores the WiFi creds long enough to connect to
+    // the WiFi.
+    SPIFFS.begin(true);
+    WiFiSettings.connect();
+    SPIFFS.end();
 #endif
 
     lv_init();
