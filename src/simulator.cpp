@@ -23,7 +23,7 @@ void Simulator::init() {
     /* Tick init.
      * You have to call 'lv_tick_inc()' in periodically to inform LVGL about
      * how much time were elapsed Create an SDL thread to do this */
-    SDL_CreateThread(tick_thread, "tick", NULL);
+    SDL_CreateThread(tick_thread, "tick", nullptr);
 }
 
 void Simulator::display_flush(lv_disp_drv_t * drv, const lv_area_t * area, lv_color_t * color) {
