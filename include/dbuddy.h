@@ -18,8 +18,6 @@ namespace dbuddy {
         void init(bool, lv_indev_type_t);
         Ui * get_ui() const { return ui; }
         Hal * get_hal() const { return hal; }
-
-        void updateTimeCallback(lv_task_t * task) const;
     private:
         Ui * ui{};
         Hal * hal{};
