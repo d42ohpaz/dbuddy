@@ -61,14 +61,14 @@ void DBuddy::init(bool use_dbl_buff, lv_indev_type_t input_type) {
 }
 
 void DBuddy::initializeCalendar() {
-    lv_calendar_date_t today;
-    today.year = hal->get_year();
-    today.month = hal->get_month();
-    today.day = hal->get_day();
+    auto * today = new lv_calendar_date_t;
+    today->year = hal->get_year();
+    today->month = hal->get_month();
+    today->day = hal->get_day();
 
     auto * calendar = (Calendar *) ui->get_widget(WIDGET_CALENDAR);
-    calendar->set_today(&today);
-    calendar->set_showed(&today);
+    calendar->set_today(today);
+    calendar->set_showed(today);
 }
 
 void cb_time_task_handler(lv_task_t * task) {
