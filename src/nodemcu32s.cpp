@@ -60,4 +60,28 @@ bool NodeMCU32s::input_read(lv_indev_drv_t * drv, lv_indev_data_t * data) {
 
     return false;
 }
+
+int NodeMCU32s::get_year() const {
+    return 0;
+}
+
+int NodeMCU32s::get_month() const {
+    return 0;
+}
+
+int NodeMCU32s::get_day() const {
+    return 0;
+}
+
+int NodeMCU32s::get_hours() const {
+    return 0;
+}
+
+int NodeMCU32s::get_minutes() const {
+    return 0;
+}
+
+int NodeMCU32s::get_seconds() const {
+    return 0;
+}
 #endif
