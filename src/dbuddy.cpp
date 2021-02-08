@@ -3,6 +3,11 @@
 #include <ctime>
 #include <cstdio>
 
+#if defined(ARDUINO)
+#include <Arduino.h>
+#include <WiFi.h>
+#endif
+
 #include "dbuddy.h"
 #include "widgets.h"
 
@@ -15,9 +20,6 @@ extern "C" void cb_memory_monitor_task_handler(lv_task_t * param);
 #endif
 
 #if defined(ARDUINO)
-#include <Arduino.h>
-#include <WiFi.h>
-
 extern "C" void cb_wifi_task_handler(lv_task_t * param);
 #endif
 
