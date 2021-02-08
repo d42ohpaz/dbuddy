@@ -1,5 +1,4 @@
 #include "widget-wifi-signal.h"
-#include <Arduino.h>
 
 using namespace dbuddy;
 
