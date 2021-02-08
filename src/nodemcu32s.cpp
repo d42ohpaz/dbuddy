@@ -2,6 +2,9 @@
 #include <SPI.h>
 #include <Wire.h>
 #include <Arduino.h>
+#include <SPIFFS.h>
+#include <WiFiSettings.h>
+#include <WiFi.h>
 
 #include "nodemcu32s.h"
 
@@ -20,6 +23,17 @@ void NodeMCU32s::init() {
 
 #if defined(ESP32)
     analogReadResolution(10);
+
+    // Mount a filesystem that stores the WiFi creds long enough to connect to
+    // the WiFi.
+    SPIFFS.begin(true);
+
+    WiFi.disconnect();
+    WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE);
+    WiFi.setHostname("Desk-Buddy");
+
+    WiFiSettings.connect();
+    SPIFFS.end();
 #endif
 }
 
