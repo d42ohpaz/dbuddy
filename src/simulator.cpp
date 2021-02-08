@@ -8,15 +8,13 @@
 
 using namespace dbuddy;
 
-extern "C" int tick_thread(void *data) {
+extern "C" [[noreturn]] int tick_thread(void *data) {
   (void)data;
 
   while (true) {
     SDL_Delay(5);   /*Sleep for 5 millisecond*/
     lv_tick_inc(5); /*Tell LVGL that 5 milliseconds were elapsed*/
   }
-
-  return 0;
 }
 
 void Simulator::init() {
