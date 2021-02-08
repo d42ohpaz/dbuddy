@@ -10,6 +10,8 @@
 
 using namespace dbuddy;
 
+extern "C" void cb_update_ntp_task_handler(lv_task_t *);
+
 void NodeMCU32s::init() {
     tft->begin(RA8875_800x480);
     tft->GPIOX(true);
@@ -34,6 +36,22 @@ void NodeMCU32s::init() {
 
     WiFiSettings.connect();
     SPIFFS.end();
+
+    // Start the NTP queries and update the RTC.
+    if (!rtc->begin()) {
+        Serial.print("Unable to communicate with the RTC");
+        return;
+    }
+
+    setServer("time.nist.gov");
+    setInterval(3600);
+
+    Timezone tz;
+    tz.setLocation("America/New_York");
+
+    if (waitForSync()) {
+        RTC_DS3231::adjust(DateTime(tz.now()));
+    }
 #endif
 }
 
@@ -76,26 +94,32 @@ bool NodeMCU32s::input_read(lv_indev_drv_t * drv, lv_indev_data_t * data) {
 }
 
 int NodeMCU32s::get_year() const {
-    return 0;
+    DateTime dtime = RTC_DS3231::now();
+    return dtime.year();
 }
 
 int NodeMCU32s::get_month() const {
-    return 0;
+    DateTime dtime = RTC_DS3231::now();
+    return dtime.month();
 }
 
 int NodeMCU32s::get_day() const {
-    return 0;
+    DateTime dtime = RTC_DS3231::now();
+    return dtime.day();
 }
 
 int NodeMCU32s::get_hours() const {
-    return 0;
+    DateTime dtime = RTC_DS3231::now();
+    return dtime.hour();
 }
 
 int NodeMCU32s::get_minutes() const {
-    return 0;
+    DateTime dtime = RTC_DS3231::now();
+    return dtime.minute();
 }
 
 int NodeMCU32s::get_seconds() const {
-    return 0;
+    DateTime dtime = RTC_DS3231::now();
+    return dtime.second();
 }
 #endif

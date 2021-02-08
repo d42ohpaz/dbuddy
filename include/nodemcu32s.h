@@ -3,6 +3,9 @@
 
 #include <Adafruit_RA8875.h>
 #include <TouchScreen.h>
+#include <ezTime.h>
+#include <WiFiUdp.h>
+#include <RTClib.h>
 
 #include "hal.h"
 
@@ -24,12 +27,14 @@ namespace dbuddy {
         int get_seconds() const final;
 
         RTC_DS3231 * get_rtc() const { return rtc; }
-        NTP * get_ntp() const { return ntp; }
     private:
         Adafruit_RA8875 * tft;
         TouchScreen * ts;
 
         uint8_t interrupt;
+
+        RTC_DS3231 * rtc = new RTC_DS3231();
+        WiFiUDP * wiFiUdp = new WiFiUDP();
     };
 }
 
