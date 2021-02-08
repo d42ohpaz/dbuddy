@@ -1,5 +1,5 @@
-#ifndef DBUDDY_NODEMCU32S_H
-#define DBUDDY_NODEMCU32S_H
+#ifndef DBUDDY_ESP32DEV_H
+#define DBUDDY_ESP32DEV_H
 
 #include <Adafruit_RA8875.h>
 #include <TouchScreen.h>
@@ -10,9 +10,9 @@
 #include "hal.h"
 
 namespace dbuddy {
-    class NodeMCU32s : public Hal {
+    class ESP32Dev : public Hal {
     public:
-        NodeMCU32s(Adafruit_RA8875 * tft, TouchScreen * ts, uint8_t interrupt) : Hal(), tft(tft), ts(ts), interrupt(interrupt) {}
+        ESP32Dev(Adafruit_RA8875 * tft, TouchScreen * ts, uint8_t interrupt) : Hal(), tft(tft), ts(ts), interrupt(interrupt) {}
 
         void init() final;
 
@@ -38,4 +38,4 @@ namespace dbuddy {
     };
 }
 
-#endif //DBUDDY_NODEMCU32S_H
+#endif //DBUDDY_ESP32DEV_H

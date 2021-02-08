@@ -4354,32 +4354,32 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Z_DUMMY_TARGET.dir/build.make CMakeFiles/Z_DUMMY_TARGET.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/nodemcu32s.obj: src/nodemcu32s.cpp.obj
+src/esp32dev.obj: src/esp32dev.cpp.obj
 
-.PHONY : src/nodemcu32s.obj
+.PHONY : src/esp32dev.obj
 
 # target to build an object file
-src/nodemcu32s.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Z_DUMMY_TARGET.dir/build.make CMakeFiles/Z_DUMMY_TARGET.dir/src/nodemcu32s.cpp.obj
-.PHONY : src/nodemcu32s.cpp.obj
+src/esp32dev.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Z_DUMMY_TARGET.dir/build.make CMakeFiles/Z_DUMMY_TARGET.dir/src/esp32dev.cpp.obj
+.PHONY : src/esp32dev.cpp.obj
 
-src/nodemcu32s.i: src/nodemcu32s.cpp.i
+src/esp32dev.i: src/esp32dev.cpp.i
 
-.PHONY : src/nodemcu32s.i
+.PHONY : src/esp32dev.i
 
 # target to preprocess a source file
-src/nodemcu32s.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Z_DUMMY_TARGET.dir/build.make CMakeFiles/Z_DUMMY_TARGET.dir/src/nodemcu32s.cpp.i
-.PHONY : src/nodemcu32s.cpp.i
+src/esp32dev.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Z_DUMMY_TARGET.dir/build.make CMakeFiles/Z_DUMMY_TARGET.dir/src/esp32dev.cpp.i
+.PHONY : src/esp32dev.cpp.i
 
-src/nodemcu32s.s: src/nodemcu32s.cpp.s
+src/esp32dev.s: src/esp32dev.cpp.s
 
-.PHONY : src/nodemcu32s.s
+.PHONY : src/esp32dev.s
 
 # target to generate assembly for a file
-src/nodemcu32s.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Z_DUMMY_TARGET.dir/build.make CMakeFiles/Z_DUMMY_TARGET.dir/src/nodemcu32s.cpp.s
-.PHONY : src/nodemcu32s.cpp.s
+src/esp32dev.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Z_DUMMY_TARGET.dir/build.make CMakeFiles/Z_DUMMY_TARGET.dir/src/esp32dev.cpp.s
+.PHONY : src/esp32dev.cpp.s
 
 src/simulator.obj: src/simulator.cpp.obj
 
@@ -5127,9 +5127,9 @@ help:
 	@echo "... src/main.obj"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/nodemcu32s.obj"
-	@echo "... src/nodemcu32s.i"
-	@echo "... src/nodemcu32s.s"
+	@echo "... src/esp32dev.obj"
+	@echo "... src/esp32dev.i"
+	@echo "... src/esp32dev.s"
 	@echo "... src/simulator.obj"
 	@echo "... src/simulator.i"
 	@echo "... src/simulator.s"
@@ -5173,4 +5173,3 @@ help:
 cmake_check_build_system:
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
-

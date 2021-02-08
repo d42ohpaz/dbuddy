@@ -6,13 +6,13 @@
 #include <WiFiSettings.h>
 #include <WiFi.h>
 
-#include "nodemcu32s.h"
+#include "esp32dev.h"
 
 using namespace dbuddy;
 
 extern "C" void cb_update_ntp_task_handler(lv_task_t *);
 
-void NodeMCU32s::init() {
+void ESP32Dev::init() {
     tft->begin(RA8875_800x480);
     tft->GPIOX(true);
     tft->displayOn(true);
@@ -55,7 +55,7 @@ void NodeMCU32s::init() {
 #endif
 }
 
-void NodeMCU32s::display_flush(lv_disp_drv_t * disp, const lv_area_t * area, lv_color_t * color) {
+void ESP32Dev::display_flush(lv_disp_drv_t * disp, const lv_area_t * area, lv_color_t * color) {
     int32_t width = (area->x2 - area->x1 + 1);
 
     tft->startWrite();
@@ -69,7 +69,7 @@ void NodeMCU32s::display_flush(lv_disp_drv_t * disp, const lv_area_t * area, lv_
     lv_disp_flush_ready(disp);
 }
 
-bool NodeMCU32s::input_read(lv_indev_drv_t * drv, lv_indev_data_t * data) {
+bool ESP32Dev::input_read(lv_indev_drv_t * drv, lv_indev_data_t * data) {
     static int last_x = 0, last_y = 0;
     bool valid = true;
 
@@ -93,32 +93,32 @@ bool NodeMCU32s::input_read(lv_indev_drv_t * drv, lv_indev_data_t * data) {
     return false;
 }
 
-int NodeMCU32s::get_year() const {
+int ESP32Dev::get_year() const {
     DateTime dtime = RTC_DS3231::now();
     return dtime.year();
 }
 
-int NodeMCU32s::get_month() const {
+int ESP32Dev::get_month() const {
     DateTime dtime = RTC_DS3231::now();
     return dtime.month();
 }
 
-int NodeMCU32s::get_day() const {
+int ESP32Dev::get_day() const {
     DateTime dtime = RTC_DS3231::now();
     return dtime.day();
 }
 
-int NodeMCU32s::get_hours() const {
+int ESP32Dev::get_hours() const {
     DateTime dtime = RTC_DS3231::now();
     return dtime.hour();
 }
 
-int NodeMCU32s::get_minutes() const {
+int ESP32Dev::get_minutes() const {
     DateTime dtime = RTC_DS3231::now();
     return dtime.minute();
 }
 
-int NodeMCU32s::get_seconds() const {
+int ESP32Dev::get_seconds() const {
     DateTime dtime = RTC_DS3231::now();
     return dtime.second();
 }

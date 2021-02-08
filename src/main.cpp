@@ -13,7 +13,7 @@
 #define RA8875_YM       15
 #define RA8875_RX       500
 
-#include "nodemcu32s.h"
+#include "esp32dev.h"
 #else
 #include <cstdio>
 #include "simulator.h"
@@ -32,7 +32,7 @@ void setup() {
 
     DBuddy::setup(
 #if defined (ARDUINO)
-        new NodeMCU32s(
+        new ESP32Dev(
                 new Adafruit_RA8875(RA8875_CS, RA8875_RESET),
                 new TouchScreen(RA8875_XP, RA8875_YP, RA8875_XM, RA8875_YM, RA8875_RX),
                 RA8875_INT
