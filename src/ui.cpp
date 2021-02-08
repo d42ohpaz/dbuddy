@@ -9,8 +9,9 @@ void Ui::add_widget(widget_t w, Widget * widget) {
     }
 }
 
-lv_task_t * Ui::create_task(lv_task_cb_t task_xcb, uint32_t period, lv_task_prio_t prio) {
-    lv_task_t * task = lv_task_create(task_xcb, period, prio, this);
+lv_task_t * Ui::create_task(lv_task_cb_t task_xcb, uint32_t period, lv_task_prio_t prio, void * user_data) {
+    user_data = user_data == nullptr ? this : user_data;
+    lv_task_t * task = lv_task_create(task_xcb, period, prio, user_data);
     tasks->push_back(task);
     return task;
 }

@@ -1,6 +1,5 @@
 #include <lvgl.h>
 #include <unistd.h>
-#include <ctime>
 #include <cstdio>
 
 #if defined(ARDUINO)
@@ -50,7 +49,7 @@ void DBuddy::init(bool use_dbl_buff, lv_indev_type_t input_type) {
     ui->add_widget(WIDGET_CALENDAR, new Calendar(ui));
     ui->add_widget(WIDGET_WIFI_SIGNAL, new WifiSignal(ui));
 
-    ui->create_task(cb_time_task_handler, 500);
+    ui->create_task(cb_time_task_handler, 500, LV_TASK_PRIO_MID, this);
 #if LV_MEM_CUSTOM == 0
     ui->create_task(cb_memory_monitor_task_handler, 5000);
 #endif
@@ -62,13 +61,10 @@ void DBuddy::init(bool use_dbl_buff, lv_indev_type_t input_type) {
 }
 
 void DBuddy::initializeCalendar() {
-    time_t t = time(nullptr);
-    struct tm local_time = *localtime(&t);
-
     lv_calendar_date_t today;
-    today.year = (local_time.tm_year + 1900);
-    today.month = (local_time.tm_mon + 1);
-    today.day = local_time.tm_mday;
+    today.year = hal->get_year();
+    today.month = hal->get_month();
+    today.day = hal->get_day();
 
     auto * calendar = (Calendar *) ui->get_widget(WIDGET_CALENDAR);
     calendar->set_today(&today);
@@ -76,13 +72,12 @@ void DBuddy::initializeCalendar() {
 }
 
 void cb_time_task_handler(lv_task_t * task) {
-    auto * ui = (Ui *) task->user_data;
-
-    time_t t = time(nullptr);
-    struct tm local_time = *localtime(&t);
+    auto * db = (DBuddy *) task->user_data;
+    Hal * hal = db->get_hal();
+    Ui * ui = db->get_ui();
 
     char bufMeridiem[3] = "";
-    int tmHour = local_time.tm_hour;
+    int tmHour = hal->get_hours();
 
 //    if (p_config->time.format24 == 0) {
 //        if (p_config->time.meridiem == 1) {
@@ -108,10 +103,10 @@ void cb_time_task_handler(lv_task_t * task) {
     char * colon = strstr(lv_label_get_text(time_label), ":");
 
     if (((count % 2) == 0 && colon == nullptr)/* || (p_config->time.flash == 0)*/) {
-        lv_label_set_text_fmt(time_label, "%02u:%02u %s", tmHour, local_time.tm_min, bufMeridiem);
+        lv_label_set_text_fmt(time_label, "%02u:%02u %s", tmHour, hal->get_minutes(), bufMeridiem);
         count = 0;
     } else if ((count % 2) == 0) {
-        lv_label_set_text_fmt(time_label, "%02u %02u %s", tmHour, local_time.tm_min, bufMeridiem);
+        lv_label_set_text_fmt(time_label, "%02u %02u %s", tmHour, hal->get_minutes(), bufMeridiem);
         count = 0;
     }
 
