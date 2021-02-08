@@ -6,8 +6,6 @@
 
 #include "simulator.h"
 
-#define SDL_MAIN_HANDLED
-
 using namespace dbuddy;
 
 extern "C" int tick_thread(void *data) {
