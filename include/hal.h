@@ -1,5 +1,4 @@
-#ifndef DBUDDY_HAL_H
-#define DBUDDY_HAL_H
+#pragma once
 
 #include <lvgl.h>
 
@@ -39,6 +38,3 @@ namespace dbuddy {
         void initializeInputDevice(lv_indev_type_t);
     };
 }
-
-
-#endif //DBUDDY_HAL_H

@@ -1,5 +1,4 @@
-#ifndef DBUDDY_ESP32DEV_H
-#define DBUDDY_ESP32DEV_H
+#pragma once
 
 #include <Adafruit_RA8875.h>
 #include <TouchScreen.h>
@@ -37,5 +36,3 @@ namespace dbuddy {
         WiFiUDP * wiFiUdp = new WiFiUDP();
     };
 }
-
-#endif //DBUDDY_ESP32DEV_H

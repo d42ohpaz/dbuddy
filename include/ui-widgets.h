@@ -1,5 +1,4 @@
-#ifndef DBUDDY_UI_WIDGETS_H
-#define DBUDDY_UI_WIDGETS_H
+#pragma once
 
 #include <lvgl.h>
 
@@ -51,5 +50,3 @@ struct PageWidget {
     DockWidget * dock = new DockWidget;
     CalendarWidget * calendar = new CalendarWidget;
 };
-
-#endif // DBUDDY_UI_WIDGETS_H

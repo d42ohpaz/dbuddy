@@ -1,5 +1,4 @@
-#ifndef DBUDDY_WIFI_SIGNAL_H
-#define DBUDDY_WIFI_SIGNAL_H
+#pragma once
 
 #include "widget.h"
 #include "ui.h"
@@ -11,5 +10,3 @@ namespace dbuddy {
         void init() final;
     };
 }
-
-#endif //DBUDDY_WIFI_SIGNAL_H

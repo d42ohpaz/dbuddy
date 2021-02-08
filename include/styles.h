@@ -1,5 +1,4 @@
-#ifndef DBUDDY_STYLES_H
-#define DBUDDY_STYLES_H
+#pragma once
 
 #include <lvgl.h>
 #include <map>
@@ -108,5 +107,3 @@ namespace dbuddy {
         static void init_style(std::map<lv_state_t, lv_style_t *> *, lv_state_t);
     };
 }
-
-#endif // DBUDDY_STYLES_H

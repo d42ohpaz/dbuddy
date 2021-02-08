@@ -1,5 +1,4 @@
-#ifndef DBUDDY_WIDGETS_H
-#define DBUDDY_WIDGETS_H
+#pragma once
 
 #include "widget-screen.h"
 #include "widget-page.h"
@@ -12,5 +11,3 @@
 #include "widget-calendar-date.h"
 #include "widget-calendar-details.h"
 #include "widget-wifi-signal.h"
-
-#endif // DBUDDY_WIDGETS_H

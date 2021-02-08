@@ -1,5 +1,4 @@
-#ifndef DBUDDY_DBUDDY_H
-#define DBUDDY_DBUDDY_H
+#pragma once
 
 #include "ui.h"
 #include "hal.h"
@@ -28,6 +27,3 @@ namespace dbuddy {
         void initializeCalendar();
     };
 }
-
-
-#endif //DBUDDY_DBUDDY_H

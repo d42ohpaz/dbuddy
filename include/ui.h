@@ -1,5 +1,4 @@
-#ifndef DBUDDY_UI_H
-#define DBUDDY_UI_H
+#pragma once
 
 #include <lvgl.h>
 #include <vector>
@@ -39,5 +38,3 @@ namespace dbuddy {
         std::map<widget_t, Widget *> widgets;
     };
 }
-
-#endif //DBUDDY_UI_H

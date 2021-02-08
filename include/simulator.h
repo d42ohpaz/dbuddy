@@ -1,6 +1,5 @@
 #if !defined(ARDUINO)
-#ifndef DBUDDY_SIMULATOR_H
-#define DBUDDY_SIMULATOR_H
+#pragma once
 
 #include "hal.h"
 
@@ -21,6 +20,4 @@ namespace dbuddy {
     };
 }
 
-
-#endif //DBUDDY_SIMULATOR_H
 #endif //ARDUINO

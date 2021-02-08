@@ -1,5 +1,4 @@
-#ifndef DBUDDY_FONTS_H
-#define DBUDDY_FONTS_H
+#pragma once
 
 #include <lvgl.h>
 #include <map>
@@ -26,4 +25,3 @@ namespace dbuddy {
         static void init_font(std::map<lv_state_t, lv_style_t *> *, lv_state_t);
     };
 }
-#endif // DBUDDY_FONTS_H

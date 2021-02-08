@@ -1,5 +1,4 @@
-#ifndef DBUDDY_CALENDAR_H
-#define DBUDDY_CALENDAR_H
+#pragma once
 
 #include "widget.h"
 #include "ui.h"
@@ -14,5 +13,3 @@ namespace dbuddy {
         void set_showed(lv_calendar_date_t *);
     };
 }
-
-#endif //DBUDDY_CALENDAR_H

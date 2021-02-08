@@ -1,5 +1,4 @@
-#ifndef DBUDDY_SETTINGS_ACTION_H
-#define DBUDDY_SETTINGS_ACTION_H
+#pragma once
 
 #include "widget.h"
 #include "ui.h"
@@ -11,5 +10,3 @@ namespace dbuddy {
         void init() final;
     };
 }
-
-#endif //DBUDDY_SETTINGS_ACTION_H

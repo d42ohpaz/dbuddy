@@ -1,5 +1,4 @@
-#ifndef DBUDDY_WIDGET_H
-#define DBUDDY_WIDGET_H
+#pragma once
 
 #include <lvgl.h>
 
@@ -50,5 +49,3 @@ namespace dbuddy {
         lv_obj_t * self{};
     };
 }
-
-#endif //DBUDDY_WIDGET_H
