@@ -70,26 +70,6 @@ void ESP32Dev::display_flush(lv_disp_drv_t * disp, const lv_area_t * area, lv_co
 }
 
 bool ESP32Dev::input_read(lv_indev_drv_t * drv, lv_indev_data_t * data) {
-    static int last_x = 0, last_y = 0;
-    bool valid = true;
-
-    TSPoint point = ts->getPoint();
-
-    if (point.z > ts->pressureThreshhold) {
-        last_x = point.x;
-        last_y = point.y;
-
-        Serial.printf("X: %d; Y: %d; Z: %d\n", point.x, point.y, point.z);
-    } else {
-        point.x = last_x;
-        point.y = last_y;
-        valid = false;
-    }
-
-    data->point.x = point.x;
-    data->point.y = point.y;
-    data->state = valid ? LV_INDEV_STATE_PR : LV_INDEV_STATE_REL;
-
     return false;
 }
 
