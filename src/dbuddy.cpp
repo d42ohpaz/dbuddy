@@ -12,15 +12,17 @@
 
 using namespace dbuddy;
 
-extern "C" void cb_time_task_handler(lv_task_t * task);
+extern "C" {
+    void cb_time_task_handler(lv_task_t * task);
 
 #if LV_MEM_CUSTOM == 0
-extern "C" void cb_memory_monitor_task_handler(lv_task_t * param);
+    void cb_memory_monitor_task_handler(lv_task_t * param);
 #endif
 
 #if defined(ARDUINO)
-extern "C" void cb_wifi_task_handler(lv_task_t * param);
+    void cb_wifi_task_handler(lv_task_t * param);
 #endif
+}
 
 void DBuddy::setup(Hal * hal, Ui * ui, bool use_dbl_buff, lv_indev_type_t input_type) {
     auto * db = new DBuddy(hal, ui);
