@@ -86,6 +86,10 @@ void cb_time_task_handler(lv_task_t * task) {
     Ui * ui = db->get_ui();
 
     lv_obj_t * time_label = ui->get_widget(WIDGET_TIME_LABEL)->get_self();
+    lv_obj_t * calendar = ui->get_widget(WIDGET_CALENDAR)->get_self();
+
+    lv_calendar_date_t * today = get_calendar_date(hal);
+    lv_calendar_set_today_date(calendar, today);
 
     char bufMeridiem[3] = "";
     int tmHour = hal->get_hours();
