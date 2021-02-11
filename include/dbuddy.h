@@ -22,6 +22,6 @@ namespace dbuddy {
         Ui * ui{};
         Hal * hal{};
 
-        void initializeCalendar();
+        void initialize_calendar();
     };
 }

@@ -57,10 +57,10 @@ void DBuddy::init(bool use_dbl_buff, lv_indev_type_t input_type) {
     ui->create_task(cb_wifi_task_handler, 500);
 #endif
 
-    initializeCalendar();
+    initialize_calendar();
 }
 
-void DBuddy::initializeCalendar() {
+void DBuddy::initialize_calendar() {
     auto * today = new lv_calendar_date_t;
     today->year = hal->get_year();
     today->month = hal->get_month();
