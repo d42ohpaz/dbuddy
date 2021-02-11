@@ -85,6 +85,8 @@ void cb_time_task_handler(lv_task_t * task) {
     Hal * hal = db->get_hal();
     Ui * ui = db->get_ui();
 
+    lv_obj_t * time_label = ui->get_widget(WIDGET_TIME_LABEL)->get_self();
+
     char bufMeridiem[3] = "";
     int tmHour = hal->get_hours();
 
@@ -105,8 +107,6 @@ void cb_time_task_handler(lv_task_t * task) {
         tmHour += 12;
     }
 //    }
-
-    lv_obj_t * time_label = ui->get_widget(WIDGET_TIME_LABEL)->get_self();
 
     static int count = 0;
     char * colon = strstr(lv_label_get_text(time_label), ":");
