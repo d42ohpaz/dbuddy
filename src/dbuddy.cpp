@@ -14,6 +14,7 @@ using namespace dbuddy;
 
 extern "C" {
     void cb_time_task_handler(lv_task_t * task);
+    lv_calendar_date_t * get_calendar_date(Hal *);
 
 #if LV_MEM_CUSTOM == 0
     void cb_memory_monitor_task_handler(lv_task_t * param);
@@ -63,14 +64,20 @@ void DBuddy::init(bool use_dbl_buff, lv_indev_type_t input_type) {
 }
 
 void DBuddy::initialize_calendar() {
+    lv_calendar_date_t * today = get_calendar_date(hal);
+
+    auto * calendar = (Calendar *) ui->get_widget(WIDGET_CALENDAR);
+    calendar->set_today(today);
+    calendar->set_showed(today);
+}
+
+lv_calendar_date_t * get_calendar_date(Hal * hal) {
     auto * today = new lv_calendar_date_t;
     today->year = hal->get_year();
     today->month = hal->get_month();
     today->day = hal->get_day();
 
-    auto * calendar = (Calendar *) ui->get_widget(WIDGET_CALENDAR);
-    calendar->set_today(today);
-    calendar->set_showed(today);
+    return today;
 }
 
 void cb_time_task_handler(lv_task_t * task) {
