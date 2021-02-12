@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <cstdio>
 
-#if defined(ARDUINO)
+#if defined(ESP32)
 #include <Arduino.h>
 #include <WiFi.h>
 #endif
@@ -25,8 +25,10 @@ extern "C" {
 #endif
 }
 
+static DBuddy * db;
+
 void DBuddy::setup(Hal * hal, Ui * ui, bool use_dbl_buff, lv_indev_type_t input_type) {
-    auto * db = new DBuddy(hal, ui);
+    db = new DBuddy(hal, ui);
 
     db->init(use_dbl_buff, input_type);
 }
@@ -86,10 +88,12 @@ void cb_time_task_handler(lv_task_t * task) {
     Ui * ui = db->get_ui();
 
     lv_obj_t * time_label = ui->get_widget(WIDGET_TIME_LABEL)->get_self();
-    lv_obj_t * calendar = ui->get_widget(WIDGET_CALENDAR)->get_self();
 
-    lv_calendar_date_t * today = get_calendar_date(hal);
-    lv_calendar_set_today_date(calendar, today);
+    if (hal->get_hours() == 0 && hal->get_minutes() == 0 && hal->get_seconds() == 0) {
+        lv_obj_t * calendar = ui->get_widget(WIDGET_CALENDAR)->get_self();
+        lv_calendar_date_t * today = get_calendar_date(hal);
+        lv_calendar_set_today_date(calendar, today);
+    }
 
     char bufMeridiem[3] = "";
     int tmHour = hal->get_hours();
