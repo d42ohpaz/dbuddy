@@ -1,16 +1,14 @@
 #if defined(ARDUINO)
-#include <SPI.h>
-#include <Wire.h>
+
 #include <Arduino.h>
-#include <SPIFFS.h>
-#include <WiFiSettings.h>
 #include <WiFi.h>
+#include <Wire.h>
+#include <ezTime.h>
 
 #include "esp32dev.h"
 
 using namespace dbuddy;
 
-extern "C" void cb_update_ntp_task_handler(lv_task_t *);
 
 void ESP32Dev::init() {
     tft->begin(RA8875_800x480);
@@ -25,17 +23,6 @@ void ESP32Dev::init() {
 
 #if defined(ESP32)
     analogReadResolution(10);
-
-    // Mount a filesystem that stores the WiFi creds long enough to connect to
-    // the WiFi.
-    SPIFFS.begin(true);
-
-    WiFi.disconnect();
-    WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE);
-    WiFi.setHostname("Desk-Buddy");
-
-    WiFiSettings.connect();
-    SPIFFS.end();
 
     // Start the NTP queries and update the RTC.
     if (!rtc->begin()) {
@@ -54,7 +41,6 @@ void ESP32Dev::init() {
             RTC_DS3231::adjust(DateTime(tz.now()));
         }
     }
-
 #endif
 }
 

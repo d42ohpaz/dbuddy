@@ -1,10 +1,8 @@
 #pragma once
 
 #include <Adafruit_RA8875.h>
-#include <TouchScreen.h>
-#include <ezTime.h>
-#include <WiFiUdp.h>
 #include <RTClib.h>
+#include <TouchScreen.h>
 
 #include "hal.h"
 
@@ -33,6 +31,5 @@ namespace dbuddy {
         uint8_t interrupt;
 
         RTC_DS3231 * rtc = new RTC_DS3231();
-        WiFiUDP * wiFiUdp = new WiFiUDP();
     };
 }
