@@ -43,15 +43,18 @@ void ESP32Dev::init() {
         return;
     }
 
-    setServer("time.nist.gov");
-    setInterval(3600);
+    if (WiFi.isConnected()) {
+        setServer("time.nist.gov");
+        setInterval(3600);
 
-    Timezone tz;
-    tz.setLocation("America/New_York");
+        Timezone tz;
+        tz.setLocation("America/New_York");
 
-    if (waitForSync()) {
-        RTC_DS3231::adjust(DateTime(tz.now()));
+        if (waitForSync()) {
+            RTC_DS3231::adjust(DateTime(tz.now()));
+        }
     }
+
 #endif
 }
 
