@@ -10,7 +10,6 @@
 
 using namespace dbuddy;
 
-
 void ESP32Dev::init() {
     tft->begin(RA8875_800x480);
     tft->GPIOX(true);
