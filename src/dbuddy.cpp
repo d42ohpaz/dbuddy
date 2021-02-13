@@ -5,6 +5,7 @@
 #if defined(ESP32)
 #include <Arduino.h>
 #include <WiFi.h>
+#include "esp32dev.h"
 #endif
 
 #include "dbuddy.h"
@@ -35,6 +36,12 @@ void DBuddy::setup(Hal * hal, Ui * ui, bool use_dbl_buff, lv_indev_type_t input_
 
 void DBuddy::loop() {
     lv_task_handler();
+
+#if defined(ESP32)
+    auto * hal = (ESP32Dev *)db->get_hal();
+    hal->get_manager()->loop();
+#endif
+
     usleep(5000);
 }
 

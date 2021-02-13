@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Adafruit_RA8875.h>
+#include <ConfigManager.h>
 #include <RTClib.h>
 #include <TouchScreen.h>
 
@@ -24,6 +25,7 @@ namespace dbuddy {
         int get_seconds() const final;
 
         RTC_DS3231 * get_rtc() const { return rtc; }
+        ConfigManager * get_manager() const { return configManager; }
     private:
         Adafruit_RA8875 * tft;
         TouchScreen * ts;
@@ -31,5 +33,6 @@ namespace dbuddy {
         uint8_t interrupt;
 
         RTC_DS3231 * rtc = new RTC_DS3231();
+        ConfigManager * configManager = new ConfigManager();
     };
 }
