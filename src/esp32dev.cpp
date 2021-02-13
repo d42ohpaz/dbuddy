@@ -1,5 +1,3 @@
-#if defined(ARDUINO)
-
 #include <Arduino.h>
 #include <WiFi.h>
 #include <Wire.h>
@@ -161,4 +159,3 @@ int ESP32Dev::get_seconds() const {
     DateTime dtime = RTC_DS3231::now();
     return dtime.second();
 }
-#endif

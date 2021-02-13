@@ -2,11 +2,9 @@
 #include <unistd.h>
 #include <cstdio>
 
-#if defined(ESP32)
 #include <Arduino.h>
 #include <WiFi.h>
 #include "esp32dev.h"
-#endif
 
 #include "dbuddy.h"
 #include "widgets.h"
@@ -21,9 +19,7 @@ extern "C" {
     void cb_memory_monitor_task_handler(lv_task_t * param);
 #endif
 
-#if defined(ARDUINO)
     void cb_wifi_task_handler(lv_task_t * param);
-#endif
 }
 
 static DBuddy * db;
@@ -37,10 +33,8 @@ void DBuddy::setup(Hal * hal, Ui * ui, bool use_dbl_buff, lv_indev_type_t input_
 void DBuddy::loop() {
     lv_task_handler();
 
-#if defined(ESP32)
     auto * hal = (ESP32Dev *)db->get_hal();
     hal->get_manager()->loop();
-#endif
 
     usleep(5000);
 }
@@ -65,9 +59,7 @@ void DBuddy::init(bool use_dbl_buff, lv_indev_type_t input_type) {
 #if LV_MEM_CUSTOM == 0
     ui->create_task(cb_memory_monitor_task_handler, 5000);
 #endif
-#if defined(ARDUINO)
     ui->create_task(cb_wifi_task_handler, 500);
-#endif
 
     initialize_calendar();
 }
@@ -137,7 +129,6 @@ void cb_time_task_handler(lv_task_t * task) {
     ++count;
 }
 
-#if defined(ARDUINO)
 void cb_wifi_task_handler(lv_task_t * param) {
     auto * ui = (Ui *)param->user_data;
     Widget * wifi_signal = ui->get_widget(WIDGET_WIFI_SIGNAL);
@@ -153,7 +144,6 @@ void cb_wifi_task_handler(lv_task_t * param) {
             break;
     }
 }
-#endif
 
 #if LV_MEM_CUSTOM == 0
 /**
@@ -166,14 +156,8 @@ void cb_memory_monitor_task_handler(lv_task_t * param) {
     lv_mem_monitor_t mon;
     lv_mem_monitor(&mon);
 
-#if defined(ARDUINO)
     Serial.printf("used: %6d (%3d %%), frag: %3d %%, biggest free: %6d\n",
                   (int) mon.total_size - mon.free_size, mon.used_pct, mon.frag_pct,
                   (int) mon.free_biggest_size);
-#else
-    printf("used: %6d (%3d %%), frag: %3d %%, biggest free: %6d\n",
-           (int)mon.total_size - mon.free_size, mon.used_pct, mon.frag_pct,
-           (int)mon.free_biggest_size);
-#endif
 }
 #endif
