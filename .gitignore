@@ -6,6 +6,7 @@
 /.tracecompass
 /CMakeListsPrivate.txt
 /cmake-build-*
+/data
 /venv
 Debug/
 bin/
