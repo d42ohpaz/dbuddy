@@ -19,7 +19,6 @@ void ESP32Dev::init() {
     pinMode(interrupt, INPUT);
     digitalWrite(interrupt, HIGH);
 
-#if defined(ESP32)
     analogReadResolution(10);
 
     // Start the NTP queries and update the RTC.
@@ -109,7 +108,6 @@ void ESP32Dev::init() {
             RTC_DS3231::adjust(DateTime(tz.now()));
         }
     }
-#endif
 }
 
 void ESP32Dev::display_flush(lv_disp_drv_t * disp, const lv_area_t * area, lv_color_t * color) {
