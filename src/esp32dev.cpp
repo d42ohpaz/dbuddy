@@ -103,3 +103,9 @@ int ESP32Dev::get_seconds() const {
     DateTime dtime = RTC_DS3231::now();
     return dtime.second();
 }
+template<typename Func>
+TaskHandle_t * ESP32Dev::execute_on_core(const Func &lambda, const char * task_name, const uint32_t depth, void * const parameter, const BaseType_t core) {
+    auto * task_handle = new TaskHandle_t;
+    xTaskCreatePinnedToCore(lambda, task_name, depth, parameter, 1, task_handle, core);
+    return task_handle;
+}

@@ -24,6 +24,9 @@ namespace dbuddy {
         int get_minutes() const final;
         int get_seconds() const final;
 
+        template<typename Func>
+        TaskHandle_t * execute_on_core(Func const &, const char *, uint32_t, void *, BaseType_t = 1);
+
         RTC_DS3231 * get_rtc() const { return rtc; }
     private:
         Adafruit_RA8875 * tft;
