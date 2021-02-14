@@ -52,7 +52,6 @@ Config::Config(const char * ap_name, uint16_t port) {
     manager->setAPICallback([this](WebServer * server) {
         server->on("/styles.css", HTTPMethod::HTTP_GET, [this]() {
             this->manager->streamFile("/styles.css", mimeCSS);
-            DebugPrintln("Streamed file");
         });
     });
 }
