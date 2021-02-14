@@ -7,6 +7,9 @@
 #include "config.h"
 #include "hal.h"
 
+#define DBUDDY_ESP32DEV_CORE_0 (0)
+#define DBUDDY_ESP32DEV_CORE_1 (1)
+
 namespace dbuddy {
     class ESP32Dev : public Hal {
     public:
@@ -25,7 +28,7 @@ namespace dbuddy {
         int get_seconds() const final;
 
         template<typename Func>
-        TaskHandle_t * execute_on_core(Func const &, const char *, uint32_t, void *, BaseType_t = 1);
+        TaskHandle_t * execute_on_core(Func const &, const char *, uint32_t, void *, BaseType_t);
 
         RTC_DS3231 * get_rtc() const { return rtc; }
     private:
