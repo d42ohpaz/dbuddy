@@ -82,6 +82,8 @@ namespace dbuddy {
         void calendar_url(calendar_t, const char *);
 
         void begin() const;
+        bool isAPIMode() const;
+        bool isAPMode() const;
         void loop() const;
         void save();
     private:

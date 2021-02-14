@@ -223,6 +223,14 @@ void Config::calendar_url(calendar_t calendar, const char * url) {
     }
 }
 
+bool Config::isAPIMode() const {
+    return manager->getMode() == api;
+}
+
+bool Config::isAPMode() const {
+    return manager->getMode() == ap;
+}
+
 void Config::loop() const {
     manager->loop();
 }
