@@ -21,39 +21,45 @@ void ESP32Dev::init() {
 
     analogReadResolution(10);
 
-    // Start the NTP queries and update the RTC.
-    if (!rtc->begin()) {
-        Serial.print("Unable to communicate with the RTC");
-        return;
-    }
+    execute_on_core([](void * parameter) {
+        auto self = *(ESP32Dev *)parameter;
 
-    // Set sane defaults for the timeserver and timezone.
-    if (config->version() == 0) {
-        DebugPrintln("Setting the default time server");
-        config->timeserver(CONFIG_DEFAULT_TIMESERVER);
-    }
-
-    if (config->version() == 0) {
-        DebugPrintln("Setting the default timezone");
-        config->timezone(CONFIG_DEFAULT_TIMEZONE);
-    }
-
-    if (config->version() == 0) {
-        DebugPrintln("Saving the initial defaults for the configuration.");
-        config->save();
-    }
-
-    if (WiFi.isConnected()) {
-        setServer(config->timeserver());
-        setInterval(config->timeinterval());
-
-        Timezone tz;
-        tz.setLocation(config->timezone());
-
-        if (waitForSync()) {
-            RTC_DS3231::adjust(DateTime(tz.now()));
+        // Start the NTP queries and update the RTC.
+        if (!self.rtc->begin()) {
+            Serial.print("Unable to communicate with the RTC");
+            return;
         }
-    }
+
+        // Set sane defaults for the timeserver and timezone.
+        if (self.config->version() == 0) {
+            DebugPrintln("Setting the default time server");
+            self.config->timeserver(CONFIG_DEFAULT_TIMESERVER);
+        }
+
+        if (self.config->version() == 0) {
+            DebugPrintln("Setting the default timezone");
+            self.config->timezone(CONFIG_DEFAULT_TIMEZONE);
+        }
+
+        if (self.config->version() == 0) {
+            DebugPrintln("Saving the initial defaults for the configuration.");
+            self.config->save();
+        }
+
+        if (WiFi.isConnected()) {
+            setServer(self.config->timeserver());
+            setInterval(self.config->timeinterval());
+
+            Timezone tz;
+            tz.setLocation(self.config->timezone());
+
+            if (waitForSync()) {
+                RTC_DS3231::adjust(DateTime(tz.now()));
+            }
+        }
+
+        vTaskDelete(nullptr);
+    }, "ESP32Dev::init()", 10000, this, DBUDDY_ESP32DEV_CORE_1);
 }
 
 void ESP32Dev::display_flush(lv_disp_drv_t * disp, const lv_area_t * area, lv_color_t * color) {
