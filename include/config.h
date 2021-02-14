@@ -7,7 +7,7 @@
 #define CONFIG_DEFAULT_TIMEZONE_LENGTH (sizeof(CONFIG_DEFAULT_TIMEZONE) + 1)
 
 namespace dbuddy {
-    struct config_t {
+    typedef struct configuration_t {
         char timeserver[200]{};
         uint32_t timeinterval = 3600;
         char timezone[32]{};
@@ -45,7 +45,7 @@ namespace dbuddy {
         char calendar8_url[200]{};
     } config_t;
 
-    struct metadata_t {
+    typedef struct metadata_t {
         int8_t version = 0;
     } meta_t;
 }
