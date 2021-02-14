@@ -22,20 +22,20 @@ extern "C" {
     void cb_wifi_task_handler(lv_task_t * param);
 }
 
-static DBuddy * db;
+DBuddy * DBuddy::instance = nullptr;
 
 void DBuddy::setup(Hal * hal, Ui * ui, Config * config, bool use_dbl_buff, lv_indev_type_t input_type) {
-    db = new DBuddy(hal, ui);
-
-    db->config = config;
-    db->init(use_dbl_buff, input_type);
-    db->config->begin();
+    instance = new DBuddy(hal, ui);
+    instance->config = config;
+    instance->init(use_dbl_buff, input_type);
+    instance->config->begin();
 }
 
 void DBuddy::loop() {
     lv_task_handler();
 
-    db->get_config()->loop();
+    Config * config = instance->get_config();
+    config->loop();
 
     usleep(5000);
 }
