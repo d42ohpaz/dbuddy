@@ -1,5 +1,6 @@
 #pragma once
 
+#include "config.h"
 #include "ui.h"
 #include "hal.h"
 
@@ -12,15 +13,17 @@ namespace dbuddy {
             delete ui;
         }
 
-        static void setup(Hal *, Ui *, bool, lv_indev_type_t);
+        static void setup(Hal *, Ui *, Config *, bool, lv_indev_type_t);
         static void loop();
 
         void init(bool, lv_indev_type_t);
         Ui * get_ui() const { return ui; }
         Hal * get_hal() const { return hal; }
+        Config * get_config() const { return config; }
     private:
         Ui * ui{};
         Hal * hal{};
+        Config * config{};
 
         void initialize_calendar();
     };

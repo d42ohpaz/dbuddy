@@ -4,9 +4,9 @@
 
 #include <Arduino.h>
 #include <WiFi.h>
-#include "esp32dev.h"
 
 #include "dbuddy.h"
+#include "esp32dev.h"
 #include "widgets.h"
 
 using namespace dbuddy;
@@ -24,17 +24,18 @@ extern "C" {
 
 static DBuddy * db;
 
-void DBuddy::setup(Hal * hal, Ui * ui, bool use_dbl_buff, lv_indev_type_t input_type) {
+void DBuddy::setup(Hal * hal, Ui * ui, Config * config, bool use_dbl_buff, lv_indev_type_t input_type) {
     db = new DBuddy(hal, ui);
 
+    db->config = config;
     db->init(use_dbl_buff, input_type);
+    db->config->begin();
 }
 
 void DBuddy::loop() {
     lv_task_handler();
 
-    auto * hal = (ESP32Dev *)db->get_hal();
-    hal->get_manager()->loop();
+    db->get_config()->loop();
 
     usleep(5000);
 }

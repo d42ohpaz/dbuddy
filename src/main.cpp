@@ -13,6 +13,7 @@
 #define RA8875_RX       500
 
 #include "esp32dev.h"
+#include "config.h"
 
 #define USE_DOUBLE_BUFFER (false)
 
@@ -23,13 +24,17 @@ void setup() {
 
     lv_init();
 
+    auto * config = new Config((char *)"Desk Buddy Setup", 80);
+
     DBuddy::setup(
         new ESP32Dev(
             new Adafruit_RA8875(RA8875_CS, RA8875_RESET),
             new TouchScreen(RA8875_XP, RA8875_YP, RA8875_XM, RA8875_YM, RA8875_RX),
+            config,
             RA8875_INT
         ),
         new Ui(new Fonts, new Styles),
+        config,
         USE_DOUBLE_BUFFER,
         LV_INDEV_TYPE_POINTER
     );

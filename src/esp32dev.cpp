@@ -27,82 +27,28 @@ void ESP32Dev::init() {
         return;
     }
 
-    DEBUG_MODE = true;
-
-    configManager->setAPName("Desk Buddy Setup");
-    configManager->setAPFilename("/index.html");
-
-    configManager->addParameter("timeserver", config_t.timeserver, sizeof(config_t.timeserver));
-    configManager->addParameter("update_interval", &config_t.timeinterval);
-    configManager->addParameter("timezone", config_t.timezone, sizeof(config_t.timezone));
-
-    configManager->addParameter("calendar_1_color", config_t.calendar1_color, sizeof(config_t.calendar1_color));
-    configManager->addParameter("calendar_1_name", config_t.calendar1_name, sizeof(config_t.calendar1_name));
-    configManager->addParameter("calendar_1_url", config_t.calendar1_url, sizeof(config_t.calendar1_url));
-
-    configManager->addParameter("calendar_2_color", config_t.calendar2_color, sizeof(config_t.calendar2_color));
-    configManager->addParameter("calendar_2_name", config_t.calendar2_name, sizeof(config_t.calendar2_name));
-    configManager->addParameter("calendar_2_url", config_t.calendar2_url, sizeof(config_t.calendar2_url));
-
-    configManager->addParameter("calendar_3_color", config_t.calendar3_color, sizeof(config_t.calendar3_color));
-    configManager->addParameter("calendar_3_name", config_t.calendar3_name, sizeof(config_t.calendar3_name));
-    configManager->addParameter("calendar_3_url", config_t.calendar3_url, sizeof(config_t.calendar3_url));
-
-    configManager->addParameter("calendar_4_color", config_t.calendar4_color, sizeof(config_t.calendar4_color));
-    configManager->addParameter("calendar_4_name", config_t.calendar4_name, sizeof(config_t.calendar4_name));
-    configManager->addParameter("calendar_4_url", config_t.calendar4_url, sizeof(config_t.calendar4_url));
-
-    configManager->addParameter("calendar_5_color", config_t.calendar5_color, sizeof(config_t.calendar5_color));
-    configManager->addParameter("calendar_5_name", config_t.calendar5_name, sizeof(config_t.calendar5_name));
-    configManager->addParameter("calendar_5_url", config_t.calendar5_url, sizeof(config_t.calendar5_url));
-
-    configManager->addParameter("calendar_6_color", config_t.calendar6_color, sizeof(config_t.calendar6_color));
-    configManager->addParameter("calendar_6_name", config_t.calendar6_name, sizeof(config_t.calendar6_name));
-    configManager->addParameter("calendar_6_url", config_t.calendar6_url, sizeof(config_t.calendar6_url));
-
-    configManager->addParameter("calendar_7_color", config_t.calendar7_color, sizeof(config_t.calendar7_color));
-    configManager->addParameter("calendar_7_name", config_t.calendar7_name, sizeof(config_t.calendar7_name));
-    configManager->addParameter("calendar_7_url", config_t.calendar7_url, sizeof(config_t.calendar7_url));
-
-    configManager->addParameter("calendar_8_color", config_t.calendar8_color, sizeof(config_t.calendar8_color));
-    configManager->addParameter("calendar_8_name", config_t.calendar8_name, sizeof(config_t.calendar8_name));
-    configManager->addParameter("calendar_8_url", config_t.calendar8_url, sizeof(config_t.calendar8_url));
-
-    configManager->addParameter("version", &meta_t.version, get);
-
-    configManager->setWebPort(80);
-    configManager->setAPICallback([this](WebServer * server) {
-        server->on("/styles.css", HTTPMethod::HTTP_GET, [this]() {
-            this->configManager->streamFile("/styles.css", mimeCSS);
-            DebugPrintln("Streamed file");
-        });
-    });
-
-    configManager->begin(config_t);
-
     // Set sane defaults for the timeserver and timezone.
-    if (meta_t.version == 0) {
+    if (config->version() == 0) {
         DebugPrintln("Setting the default time server");
-        strncpy(config_t.timeserver, CONFIG_DEFAULT_TIMESERVER, CONFIG_DEFAULT_TIMESERVER_LENGTH);
+        config->timeserver(CONFIG_DEFAULT_TIMESERVER);
     }
 
-    if (meta_t.version == 0) {
+    if (config->version() == 0) {
         DebugPrintln("Setting the default timezone");
-        strncpy(config_t.timezone, CONFIG_DEFAULT_TIMEZONE, CONFIG_DEFAULT_TIMEZONE_LENGTH);
+        config->timezone(CONFIG_DEFAULT_TIMEZONE);
     }
 
-    if (meta_t.version == 0) {
+    if (config->version() == 0) {
         DebugPrintln("Saving the initial defaults for the configuration.");
-        meta_t.version = 1;
-        configManager->save();
+        config->save();
     }
 
     if (WiFi.isConnected()) {
-        setServer(config_t.timeserver);
-        setInterval(config_t.timeinterval);
+        setServer(config->timeserver());
+        setInterval(config->timeinterval());
 
         Timezone tz;
-        tz.setLocation(config_t.timezone);
+        tz.setLocation(config->timezone());
 
         if (waitForSync()) {
             RTC_DS3231::adjust(DateTime(tz.now()));

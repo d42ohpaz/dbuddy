@@ -5,9 +5,6 @@
 #define CONFIG_DEFAULT_TIMESERVER ("time.nist.gov")
 #define CONFIG_DEFAULT_TIMEZONE ("America/New_York")
 
-#define CONFIG_DEFAULT_TIMESERVER_LENGTH (sizeof(CONFIG_DEFAULT_TIMESERVER) + 1)
-#define CONFIG_DEFAULT_TIMEZONE_LENGTH (sizeof(CONFIG_DEFAULT_TIMEZONE) + 1)
-
 namespace dbuddy {
     enum calendar_t {
         CALENDAR_1  = 0x01,
