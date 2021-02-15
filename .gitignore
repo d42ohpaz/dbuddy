@@ -7,8 +7,10 @@
 /CMakeListsPrivate.txt
 /cmake-build-*
 /data
+/node_modules
 /venv
 Debug/
 bin/
 demo
 lv_dev_tools/
+/yarn-error.log
