@@ -50,6 +50,26 @@ Config::Config(const char * ap_name, uint16_t port) {
     manager->addParameter("version", &meta->version, get);
 
     manager->setAPICallback([this](WebServer * server) {
+        server->on("/index.html", HTTP_GET, [this]() {
+            this->manager->streamFile("/index.html", mimeHTML);
+        });
+
+        server->on("/calendars.html", HTTP_GET, [this]() {
+            this->manager->streamFile("/calendars.html", mimeHTML);
+        });
+
+        server->on("/stock.html", HTTP_GET, [this]() {
+            this->manager->streamFile("/stock.html", mimeHTML);
+        });
+
+        server->on("/timesync.html", HTTP_GET, [this]() {
+            this->manager->streamFile("/timesync.html", mimeHTML);
+        });
+
+        server->on("/wifi.html", HTTP_GET, [this]() {
+            this->manager->streamFile("/wifi.html", mimeHTML);
+        });
+
         server->on("/styles.css", HTTPMethod::HTTP_GET, [this]() {
             this->manager->streamFile("/styles.css", mimeCSS);
         });

@@ -1,5 +1,44 @@
 ---
 layout: layout.html
 permalink: "{{ page.filePathStem }}.html"
-title: Login
+title: Home
+icon: laptop-house
+webpages:
+    - title: 'WiFi Settings'
+      prefix: 'home'
+      icon: 'wifi'
+      url: 'wifi.html'
+      text: 'Configure which Access Point Desk Buddy will connect through.'
+    - title: 'Calendar Settings'
+      prefix: 'home'
+      icon: 'calendar-alt'
+      url: 'calendars.html'
+      text: 'Configure the iCal-compatible calendars to display.'
+    - title: 'Stock Settings'
+      prefix: 'home'
+      icon: 'file-contract'
+      url: 'stock.html'
+      text: 'Configure which stock tickers to show and update.'
+    - title: 'Time Sync Settings'
+      prefix: 'home'
+      icon: 'clock'
+      url: 'timesync.html'
+      text: 'Configure how to synchronize the system time.'
 ---
+<div class="container-fluid">
+    <div class="row">
+        {% for webpage in webpages  -%}
+            <div class="col-lg-3 col-md-12">
+                <div id="{{ webpage.prefix | slug }}-{{ webpage.title | slug }} " class="card text-center pt-3">
+                    <a href="{{ webpage.url }}" class="btn btn-link"><span class="icon-{{ webpage.icon }} fa-5x"></span></a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ webpage.title }}</h5>
+                        {% if webpage.text.size > 0 %}<p class="card-text">{{ webpage.text }}</p>{% endif %}
+                        <a href="{{ webpage.url }}" class="btn btn-primary">
+                            Go <span class="icon-chevron-circle-right"></span></a>
+                    </div>
+                </div>
+            </div>
+        {%- endfor %}
+    </div>
+</div>

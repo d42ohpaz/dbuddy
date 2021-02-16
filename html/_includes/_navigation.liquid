@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+    <a href="index.html" class="navbar-brand">
+        <span class="icon-handshake"></span> Desk Buddy</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle Navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbar-content">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item{% if page.fileSlug == 'wifi' %} active{% endif %}">
+                <a class="nav-link text-nowrap" href="wifi.html">
+                    <span class="icon-wifi"></span> WiFi</a>
+            </li>
+            <li class="nav-item{% if page.fileSlug == 'calendars' %} active{% endif %}">
+                <a class="nav-link text-nowrap" href="calendars.html">
+                    <span class="icon-calendar-alt"></span> Calendar</a>
+            </li>
+            <li class="nav-item{% if page.fileSlug == 'stock' %} active{% endif %}">
+                <a class="nav-link text-nowrap" href="stock.html">
+                    <span class="icon-file-contract"></span> Stock</a>
+            </li>
+            <li class="nav-item{% if page.fileSlug == 'timesync' %} active{% endif %}">
+                <a class="nav-link text-nowrap" href="timesync.html">
+                    <span class="icon-clock"></span> Time Sync</a>
+            </li>
+        </ul>
+    </div>
+</nav>

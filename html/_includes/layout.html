@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ title }} &middot; Desk Buddy</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
 </head>
 <body>
-    <header></header>
-    <main>
+    <header class="container-fluid">{% include _navigation %}</header>
+    <main class="container-fluid">
+        <h1 class="h4"><span class="icon-{{ icon }} fa-2x align-middle"></span> {{ title }}</h1>
+        <hr>
         {{ content }}
     </main>
-    <footer></footer>
+    <footer class="container-fluid">
+        <p class="small text-center">Copyright &copy; 2020-2021. All rights reserved.</p>
+    </footer>
 
-    <script src="js/vendor.js"></script>
-    <script src="js/bundle.js"></script>
+    <script src="scripts/vendor.js"></script>
+    <script src="scripts/bundle.js"></script>
 </body>
 </html>

@@ -4,6 +4,7 @@
   <component name="CidrRootsConfiguration">
     <libraryRoots>
       <file path="$PROJECT_DIR$/.pio/libdeps" />
+      <file path="$PROJECT_DIR$/data/scripts" />
     </libraryRoots>
     <excludeRoots>
       <file path="$PROJECT_DIR$/examples" />

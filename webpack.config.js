@@ -3,7 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-    entry: {bundle: [path.resolve(__dirname, 'html/js')]},
+    entry: {bundle: [path.resolve(__dirname, 'html/scripts/main.js')]},
     resolve: {
         extensions: ['.js'],
         symlinks: false,
@@ -11,31 +11,31 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.m?js$/,
-                exclude: /(node_modules|bower_components)/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env']
-                    },
-                },
+                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+                use: [
+                    {loader: 'file-loader', options: {name: '[name].[ext]', outputPath: '../webfonts'}},
+                ],
+            },
+            {
+                test: /\.js$/,
+                exclude: /(node_modules)/,
+                use: [
+                    {loader: 'babel-loader', options: {presets: ['@babel/preset-env']}}
+                ],
             },
         ],
     },
     optimization: {
         minimize: true,
-        minimizer: [new TerserPlugin({
-            extractComments: false,
-            terserOptions: {
-                compress: {
-                    ecma: 2018,
-                    drop_console: true,
+        minimizer: [
+            new TerserPlugin({
+                extractComments: false,
+                terserOptions: {
+                    compress: {ecma: 2018, drop_console: true},
+                    format: {comments: false},
                 },
-                format: {
-                    comments: false,
-                },
-            },
-        })],
+            }),
+        ],
         splitChunks: {
             cacheGroups: {
                 default: false,
@@ -60,12 +60,12 @@ module.exports = {
     output: {
         chunkFilename: '[name].js',
         publicPath: '/',
-        path: path.resolve(__dirname, 'data/js'),
+        path: path.resolve(__dirname, 'data/scripts'),
         filename: '[name].js',
     },
     plugins: [
         new webpack.ProvidePlugin({
             $: 'jquery'
-        })
+        }),
     ],
 }
