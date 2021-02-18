@@ -8,6 +8,6 @@ module.exports = (config) => {
     return {
         dir: { input: 'html', output: 'data' },
         passthroughFileCopy: true,
-        templateFormats: ["html", "css"],
+        templateFormats: ["html"],
     };
 };
