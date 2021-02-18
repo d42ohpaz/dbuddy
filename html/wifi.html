@@ -4,3 +4,28 @@ permalink: "{{ page.filePathStem }}.html"
 title: WiFi Settings
 icon: wifi
 ---
+<div class="container">
+    <form name="dbuddy-form-wifi">
+        <div class="form-group">
+            <label for="ssid" class="required">SSID</label>
+            <input type="text" class="form-control" id="ssid" aria-describedby="ssid-help" autocomplete="username">
+            <small id="ssid-help" class="form-text text-muted">
+                <span class="icon-info-circle small"></span> The SSID is the primary name associated with your wireless network.</small>
+        </div>
+        <div class="form-group row align-items-center">
+            <div class="col-11">
+                <label for="password" class="required">Password</label>
+                <input type="password" class="form-control" id="password" aria-describedby="password-help" autocomplete="current-password">
+                <small id="password-help" class="form-text text-muted">
+                    <span class="icon-info-circle small"></span> The password is used for secure authentication for your SSID.</small>
+            </div>
+            <div class="col-1 pt-2 text-center">
+                <input type="checkbox" id="show-password" class="d-none">
+                <label for="show-password" class="form-check-label"><span class="icon-eye fa-2x" aria-label="Show password" title="Show Password"></span></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+</div>

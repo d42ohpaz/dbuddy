@@ -23,8 +23,35 @@ main.container-fluid {
     text-decoration: none;
 }
 
+input[type=checkbox] + label {
+    cursor: pointer;
+}
+input[type=checkbox]:checked + label > .icon-eye {
+    color: var(--primary);
+}
+
 .toast {
     position: absolute;
     right: 1rem;
     top: 1rem;
+}
+
+.error {
+    color: var(--danger);
+}
+
+.error ~ input, .error ~ input:focus {
+    border-color: var(--danger);
+}
+
+.error ~ input:focus {
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, .25);
+}
+
+.error:before {
+    content: '> ';
+}
+
+.required:after {
+    content: ' *';
 }
