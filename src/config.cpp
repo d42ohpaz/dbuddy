@@ -49,6 +49,7 @@ Config::Config(const char * ap_name, uint16_t port) {
 
     manager->addParameter("version", &meta->version, get);
 
+    manager->setAPFilename("/wifi.html");
     manager->setAPICallback([this](WebServer * server) {
         server->on("/index.html", HTTP_GET, [this]() {
             this->manager->streamFile("/index.html", mimeHTML);
