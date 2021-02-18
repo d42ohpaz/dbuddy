@@ -6,6 +6,8 @@ const cssnano = require('cssnano');
 const nested = require('postcss-nested');
 const purgeCSS = require('@fullhuman/postcss-purgecss');
 
+const PROD = process.env.NODE_ENV === 'production';
+
 const plugins = [
     atImport({
         resolve: (id) => {
@@ -25,6 +27,6 @@ const plugins = [
 ];
 
 module.exports = {
-    map: false,
+    map: !PROD,
     plugins
 };

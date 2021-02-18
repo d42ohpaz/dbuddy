@@ -4,6 +4,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
 
+const PROD = process.env.NODE_ENV === 'production';
+
 module.exports = {
     entry: {bundle: [path.resolve(__dirname, 'html/scripts/main.js')]},
     resolve: {
@@ -22,12 +24,12 @@ module.exports = {
         ],
     },
     optimization: {
-        minimize: true,
+        minimize: PROD,
         minimizer: [
             new TerserWebpackPlugin({
                 extractComments: false,
                 terserOptions: {
-                    compress: {ecma: 2018, drop_console: true},
+                    compress: {ecma: 2018, drop_console: PROD},
                     format: {comments: false},
                 },
             }),
