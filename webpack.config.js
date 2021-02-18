@@ -54,10 +54,10 @@ module.exports = {
         },
     },
     output: {
-        chunkFilename: '[name].js',
+        chunkFilename: 'scripts/[name].js',
         publicPath: '/',
-        path: path.resolve(__dirname, 'data/scripts'),
-        filename: '[name].js',
+        path: path.resolve(__dirname, 'data'),
+        filename: 'scripts/[name].js',
     },
     plugins: [
         new CopyWebpackPlugin({
