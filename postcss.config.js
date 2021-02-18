@@ -1,28 +1,23 @@
 const path = require('path');
 
-const atImport = require('postcss-import');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
-const nested = require('postcss-nested');
-const purgeCSS = require('@fullhuman/postcss-purgecss');
+const PostcssImport = require('postcss-import');
+const PostcssNested = require('postcss-nested');
+const PostcssPurgecss = require('@fullhuman/postcss-purgecss');
 
 const PROD = process.env.NODE_ENV === 'production';
 
 const plugins = [
-    atImport({
-        resolve: (id) => {
-            if (id.startsWith('~')) {
-                return id.substring(1, id.length);
-            }
-
-            return id;
-        }
+    PostcssImport({
+        from: path.resolve(__dirname, 'html/css'),
+        resolve: id => id.startsWith('~') ? id.substring(1, id.length) : id,
     }),
-    cssnano({ preset: 'default', discardComments: { "removeAll": true } }),
-    purgeCSS({
+    PostcssPurgecss({
         content: [path.resolve(__dirname, 'data/**/*.html')],
     }),
-    nested,
+    cssnano({ preset: 'default', discardComments: { "removeAll": true } }),
+    PostcssNested,
     autoprefixer,
 ];
 
