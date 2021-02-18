@@ -1,4 +1,3 @@
 import 'bootstrap';
 
-(function() {
-})();
+console.debug('Loaded main.js');
