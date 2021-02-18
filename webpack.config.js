@@ -1,5 +1,6 @@
 const path = require('path');
 
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
 
@@ -59,6 +60,11 @@ module.exports = {
         filename: '[name].js',
     },
     plugins: [
+        new CopyWebpackPlugin({
+            patterns: [
+                {from: path.resolve(__dirname, 'html/fonts/**/*'), to: 'fonts', context: path.resolve(__dirname, 'html/fonts')},
+            ],
+        }),
         new webpack.ProvidePlugin({
             $: 'jquery'
         }),
