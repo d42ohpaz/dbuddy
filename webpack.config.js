@@ -1,5 +1,6 @@
-const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
+
+const TerserWebpackPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
@@ -22,7 +23,7 @@ module.exports = {
     optimization: {
         minimize: true,
         minimizer: [
-            new TerserPlugin({
+            new TerserWebpackPlugin({
                 extractComments: false,
                 terserOptions: {
                     compress: {ecma: 2018, drop_console: true},
