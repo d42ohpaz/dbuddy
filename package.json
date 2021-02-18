@@ -16,6 +16,7 @@
     "babel-loader": "^8.2.2",
     "babel-preset-env": "^1.7.0",
     "clean-css": "^5.0.1",
+    "copy-webpack-plugin": "^7.0.0",
     "cssnano": "^4.1.10",
     "cssnano-preset-advanced": "^4.0.7",
     "file-loader": "^6.2.0",
@@ -24,7 +25,10 @@
     "postcss-import": "^14.0.0",
     "postcss-loader": "^5.0.0",
     "postcss-nested": "^5.0.3",
+    "postcss-preset-env": "^6.7.0",
+    "purgecss-webpack-plugin": "^4.0.0",
     "style-loader": "^2.0.0",
+    "terser-webpack-plugin": "^5.1.1",
     "url-loader": "^4.1.1",
     "webpack": "^5.21.2",
     "webpack-cli": "^4.5.0"
