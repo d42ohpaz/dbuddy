@@ -1,10 +1,6 @@
 @font-face {
   font-family: 'icons';
-  src:  url('../webfonts/icons.eot?5lwyvq');
-  src:  url('../webfonts/icons.eot?5lwyvq#iefix') format('embedded-opentype'),
-    url('../webfonts/icons.ttf?5lwyvq') format('truetype'),
-    url('../webfonts/icons.woff?5lwyvq') format('woff'),
-    url('../webfonts/icons.svg?5lwyvq#icons') format('svg');
+  src:  url('../fonts/icons.woff?wkqsds') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: block;
