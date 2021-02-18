@@ -16,7 +16,10 @@ const plugins = [
         resolve: id => id.startsWith('~') ? id.substring(1, id.length) : id,
     }),
     PostcssPurgecss({
-        content: [path.resolve(__dirname, 'data/**/*.html')],
+        content: [
+            path.resolve(__dirname, 'data/**/*.html'),
+            path.resolve(__dirname, 'data/**/*.js'),
+        ],
     }),
     cssnano({ preset: 'default', discardComments: { "removeAll": true } }),
     PostcssNested,
