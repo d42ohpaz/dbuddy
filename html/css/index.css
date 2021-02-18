@@ -22,3 +22,9 @@ main.container-fluid {
     color: inherit;
     text-decoration: none;
 }
+
+.toast {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
