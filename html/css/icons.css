@@ -42,11 +42,20 @@
 .icon-clock:before {
   content: "\e905";
 }
+.icon-exclamation-circle:before {
+  content: "\e90f";
+}
+.icon-eye:before {
+  content: "\e911";
+}
 .icon-file-contract:before {
   content: "\e906";
 }
 .icon-handshake:before {
   content: "\e907";
+}
+.icon-info-circle:before {
+  content: "\e910";
 }
 .icon-laptop-house:before {
   content: "\e908";
@@ -56,6 +65,9 @@
 }
 .icon-plus-circle:before {
   content: "\e90a";
+}
+.icon-question-circle:before {
+  content: "\e90e";
 }
 .icon-times:before {
   content: "\e90b";
