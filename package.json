@@ -20,6 +20,7 @@
     "cssnano": "^4.1.10",
     "cssnano-preset-advanced": "^4.0.7",
     "file-loader": "^6.2.0",
+    "npm-run-all": "^4.1.5",
     "postcss": "^8.2.6",
     "postcss-cli": "^8.3.1",
     "postcss-import": "^14.0.0",
@@ -37,11 +38,15 @@
   "name": "dbuddy",
   "private": true,
   "scripts": {
-    "build": "yarn clean && yarn eleventy && yarn scripts && yarn styles && rm -f data/css/icons.css",
+    "build": "yarn clean && yarn eleventy:prod && yarn webpack:prod && yarn postcss:prod",
+    "dev": "run-p clean eleventy:dev webpack:dev postcss:dev",
     "clean": "rm -rf data/*",
-    "eleventy": "eleventy",
-    "scripts": "webpack --mode=production",
-    "styles": "postcss --env production ./data/**/*.css --replace"
+    "eleventy:dev": "eleventy --watch",
+    "eleventy:prod": "eleventy --quiet",
+    "postcss:dev": "postcss html/css/index.css --env=development --watch -d data/css",
+    "postcss:prod": "postcss html/css/index.css --env=production -d data/css --quiet",
+    "webpack:dev": "webpack --mode=development --watch",
+    "webpack:prod": "webpack --mode=production --no-stats"
   },
   "sideEffects": false
 }
