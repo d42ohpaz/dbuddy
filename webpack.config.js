@@ -7,7 +7,9 @@ const webpack = require('webpack');
 const PROD = process.env.NODE_ENV === 'production';
 
 module.exports = {
-    entry: {bundle: [path.resolve(__dirname, 'html/scripts/main.js')]},
+    entry: {
+        global: path.resolve(__dirname, 'html/scripts/main.js'),
+    },
     resolve: {
         extensions: ['.js'],
         symlinks: false,
