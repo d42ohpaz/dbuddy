@@ -53,6 +53,10 @@ Config::Config(const char * ap_name, uint16_t port) {
     manager->setAPICallback([this](WebServer * server) {
         server->enableCORS(true);
 
+        server->on("/", HTTP_GET, [this]() {
+            this->manager->streamFile("/index.html", mimeHTML);
+        });
+
         server->on("/index.html", HTTP_GET, [this]() {
             this->manager->streamFile("/index.html", mimeHTML);
         });
