@@ -33,7 +33,7 @@ import { createToast } from './common';
         const location = window.location;
         const action = location.hostname === 'localhost'
             ? 'http://192.168.42.71/'
-            : `${location.protocol}//${location.host}`;
+            : '/';
 
         $.post(action, {
             ssid: ssid.val(),
