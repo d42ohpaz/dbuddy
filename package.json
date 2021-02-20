@@ -16,6 +16,7 @@
     "babel-loader": "^8.2.2",
     "babel-preset-env": "^1.7.0",
     "clean-css": "^5.0.1",
+    "compressing": "^1.5.1",
     "copy-webpack-plugin": "^7.0.0",
     "cssnano": "^4.1.10",
     "cssnano-preset-advanced": "^4.0.7",
@@ -32,15 +33,17 @@
     "terser-webpack-plugin": "^5.1.1",
     "url-loader": "^4.1.1",
     "webpack": "^5.21.2",
-    "webpack-cli": "^4.5.0"
+    "webpack-cli": "^4.5.0",
+    "yargs": "^16.2.0"
   },
   "license": "MIT",
   "name": "dbuddy",
   "private": true,
   "scripts": {
-    "build": "yarn clean && yarn eleventy:prod && yarn webpack:prod && yarn postcss:prod",
-    "dev": "run-p clean eleventy:dev webpack:dev postcss:dev",
+    "build": "yarn clean && yarn eleventy:prod && yarn webpack:prod && yarn postcss:prod && yarn compress",
     "clean": "rm -rf data/*",
+    "compress": "node compress.js data",
+    "dev": "run-p clean eleventy:dev webpack:dev postcss:dev",
     "eleventy:dev": "eleventy --watch",
     "eleventy:prod": "eleventy --quiet",
     "postcss:dev": "postcss html/css/index.css --env=development --watch -d data/css",
