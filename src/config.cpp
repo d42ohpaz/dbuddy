@@ -49,7 +49,6 @@ Config::Config(const char * ap_name, uint16_t port) {
 
     manager->addParameter("version", &meta->version, get);
 
-    manager->setAPFilename("/wifi.html");
     manager->setAPICallback([this](WebServer * server) {
         server->enableCORS(true);
 
@@ -81,6 +80,7 @@ Config::Config(const char * ap_name, uint16_t port) {
             this->manager->streamFile("/styles.css", mimeCSS);
         });
     });
+    manager->setAPFilename("/index.html");
 }
 
 void Config::begin() const {
