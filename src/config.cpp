@@ -9,7 +9,6 @@ Config::Config(const char * ap_name, uint16_t port) {
 
     manager->setWebPort(port);
     manager->setAPName(ap_name);
-    manager->setAPFilename("/index.html");
 
     manager->addParameter("timeserver", config->timeserver, sizeof(config->timeserver));
     manager->addParameter("update_interval", &config->timeinterval);
