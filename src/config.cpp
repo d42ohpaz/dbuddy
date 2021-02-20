@@ -1,4 +1,5 @@
 #include <stdexcept>
+
 #include "config.h"
 #include "endpoints/assets-request-handler.h"
 #include "endpoints/calendars-request-handler.h"
@@ -13,7 +14,6 @@ Config::Config(const char * ap_name, uint16_t port) {
     DEBUG_MODE = true;
 
     auto webserver_callback_handler = [this](WebServer * server) {
-
         server->addHandler(new AssetsRequestHandler(this->manager));
         server->addHandler(new CalendarsRequestHandler(this->manager));
         server->addHandler(new IndexRequestHandler(this->manager));
@@ -24,8 +24,15 @@ Config::Config(const char * ap_name, uint16_t port) {
 
     manager = new ConfigManager();
 
+    if (manager->getMode() == ap) {
+        manager->setAPName(ap_name);
+        manager->setAPFilename("/index.html");
+        manager->setAPCallback(webserver_callback_handler);
+    } else {
+        manager->setAPICallback(webserver_callback_handler);
+    }
+
     manager->setWebPort(port);
-    manager->setAPName(ap_name);
 
     manager->addParameter("timeserver", config->timeserver, sizeof(config->timeserver));
     manager->addParameter("update_interval", &config->timeinterval);
@@ -64,10 +71,6 @@ Config::Config(const char * ap_name, uint16_t port) {
     manager->addParameter("calendar_8_url", config->calendar8_url, sizeof(config->calendar8_url));
 
     manager->addParameter("version", &meta->version, get);
-
-    manager->setAPFilename("/index.html");
-    manager->setAPCallback(webserver_callback_handler);
-    manager->setAPICallback(webserver_callback_handler);
 }
 
 void Config::begin() const {
