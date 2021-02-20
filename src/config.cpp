@@ -5,6 +5,60 @@ using namespace dbuddy;
 
 Config::Config(const char * ap_name, uint16_t port) {
     DEBUG_MODE = true;
+
+    auto webserver_callback_handler = [this](WebServer * server) {
+        server->enableCORS(true);
+
+        // TODO https://gist.github.com/igrr/0da0c4adc7588d9bd911
+        server->on("/", HTTP_GET, [this]() {
+            this->manager->streamFile("/index.html", mimeHTML);
+        });
+
+        server->on("/index.html", HTTP_GET, [this]() {
+            this->manager->streamFile("/index.html", mimeHTML);
+        });
+
+        server->on("/calendars.html", HTTP_GET, [this]() {
+            this->manager->streamFile("/calendars.html", mimeHTML);
+        });
+
+        server->on("/stock.html", HTTP_GET, [this]() {
+            this->manager->streamFile("/stock.html", mimeHTML);
+        });
+
+        server->on("/timesync.html", HTTP_GET, [this]() {
+            this->manager->streamFile("/timesync.html", mimeHTML);
+        });
+
+        server->on("/wifi.html", HTTP_GET, [this]() {
+            this->manager->streamFile("/wifi.html", mimeHTML);
+        });
+
+        server->on("/css/index.css", HTTPMethod::HTTP_GET, [this]() {
+            this->manager->streamFile("/css/index.css", mimeCSS);
+        });
+
+        server->on("/fonts/icons.woff", HTTPMethod::HTTP_GET, [this]() {
+            this->manager->streamFile("/fonts/icons.woff", "font/woff");
+        });
+
+        server->on("/scripts/global.js", HTTPMethod::HTTP_GET, [this]() {
+            this->manager->streamFile("/scripts/global.js", mimeJS);
+        });
+
+        server->on("/scripts/vendor.js", HTTPMethod::HTTP_GET, [this]() {
+            this->manager->streamFile("/scripts/vendor.js", mimeJS);
+        });
+
+        server->on("/scripts/wifi.js", HTTPMethod::HTTP_GET, [this]() {
+            this->manager->streamFile("/scripts/wifi.js", mimeJS);
+        });
+
+        server->on("/favicon.ico", HTTPMethod::HTTP_GET, [server]() {
+            server->client().write("HTTP/1.1 404 Not Found");
+        });
+    };
+
     manager = new ConfigManager();
 
     manager->setWebPort(port);
@@ -48,38 +102,9 @@ Config::Config(const char * ap_name, uint16_t port) {
 
     manager->addParameter("version", &meta->version, get);
 
-    manager->setAPICallback([this](WebServer * server) {
-        server->enableCORS(true);
-
-        server->on("/", HTTP_GET, [this]() {
-            this->manager->streamFile("/index.html", mimeHTML);
-        });
-
-        server->on("/index.html", HTTP_GET, [this]() {
-            this->manager->streamFile("/index.html", mimeHTML);
-        });
-
-        server->on("/calendars.html", HTTP_GET, [this]() {
-            this->manager->streamFile("/calendars.html", mimeHTML);
-        });
-
-        server->on("/stock.html", HTTP_GET, [this]() {
-            this->manager->streamFile("/stock.html", mimeHTML);
-        });
-
-        server->on("/timesync.html", HTTP_GET, [this]() {
-            this->manager->streamFile("/timesync.html", mimeHTML);
-        });
-
-        server->on("/wifi.html", HTTP_GET, [this]() {
-            this->manager->streamFile("/wifi.html", mimeHTML);
-        });
-
-        server->on("/styles.css", HTTPMethod::HTTP_GET, [this]() {
-            this->manager->streamFile("/styles.css", mimeCSS);
-        });
-    });
     manager->setAPFilename("/index.html");
+    manager->setAPCallback(webserver_callback_handler);
+    manager->setAPICallback(webserver_callback_handler);
 }
 
 void Config::begin() const {
