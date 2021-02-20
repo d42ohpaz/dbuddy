@@ -8,14 +8,14 @@ icon: wifi
     <form name="dbuddy-form-wifi" action="/" method="post">
         <div class="form-group">
             <label for="ssid" class="required">SSID</label>
-            <input type="text" class="form-control" id="ssid" aria-describedby="ssid-help" autocomplete="username">
+            <input type="text" class="form-control" id="ssid" name="ssid" aria-describedby="ssid-help" autocomplete="username">
             <small id="ssid-help" class="form-text text-muted">
                 <span class="icon-info-circle small"></span> The SSID is the primary name associated with your wireless network.</small>
         </div>
         <div class="form-group row align-items-center">
             <div class="col-11">
                 <label for="password" class="required">Password</label>
-                <input type="password" class="form-control" id="password" aria-describedby="password-help" autocomplete="current-password">
+                <input type="password" class="form-control" id="password" name="password" aria-describedby="password-help" autocomplete="current-password">
                 <small id="password-help" class="form-text text-muted">
                     <span class="icon-info-circle small"></span> The password is used for secure authentication for your SSID.</small>
             </div>
