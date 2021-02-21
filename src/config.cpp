@@ -14,6 +14,7 @@ Config::Config(const char * ap_name, uint16_t port) {
     DEBUG_MODE = true;
 
     auto webserver_callback_handler = [this](WebServer * server) {
+        server->enableDelay(true);
         server->addHandler(new AssetsRequestHandler(this->manager));
         server->addHandler(new CalendarsRequestHandler(this->manager));
         server->addHandler(new IndexRequestHandler(this->manager));
