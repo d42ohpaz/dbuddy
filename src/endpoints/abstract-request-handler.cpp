@@ -1,4 +1,4 @@
-#include "abstract-request-handler.h"
+#include "endpoints/abstract-request-handler.h"
 
 using namespace dbuddy;
 

@@ -1,4 +1,4 @@
-#include "stock-request-handler.h"
+#include "endpoints/stock-request-handler.h"
 
 using namespace dbuddy;
 

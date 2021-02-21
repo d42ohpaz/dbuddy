@@ -1,4 +1,4 @@
-#include "wifi-request-handler.h"
+#include "endpoints/wifi-request-handler.h"
 
 using namespace dbuddy;
 

@@ -1,4 +1,4 @@
-#include "assets-request-handler.h"
+#include "endpoints/assets-request-handler.h"
 
 using namespace dbuddy;
 

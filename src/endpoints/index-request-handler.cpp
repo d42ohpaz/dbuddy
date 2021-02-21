@@ -1,4 +1,4 @@
-#include "index-request-handler.h"
+#include "endpoints/index-request-handler.h"
 
 using namespace dbuddy;
 

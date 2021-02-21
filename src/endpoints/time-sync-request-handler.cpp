@@ -1,4 +1,4 @@
-#include "time-sync-request-handler.h"
+#include "endpoints/time-sync-request-handler.h"
 
 using namespace dbuddy;
 
