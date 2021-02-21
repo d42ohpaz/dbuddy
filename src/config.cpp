@@ -25,13 +25,10 @@ Config::Config(const char * ap_name, uint16_t port) {
 
     manager = new ConfigManager();
 
-    if (manager->getMode() == ap) {
-        manager->setAPName(ap_name);
-        manager->setAPFilename("/index.html");
-        manager->setAPCallback(webserver_callback_handler);
-    } else {
-        manager->setAPICallback(webserver_callback_handler);
-    }
+    manager->setAPName(ap_name);
+    manager->setAPFilename("/index.html");
+    manager->setAPCallback(webserver_callback_handler);
+    manager->setAPICallback(webserver_callback_handler);
 
     manager->setWebPort(port);
 
