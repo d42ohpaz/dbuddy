@@ -98,15 +98,12 @@ void cb_time_task_handler(lv_task_t * task) {
     char bufMeridiem[3] = "";
     int tmHour = hal->get_hours();
 
-//    if (p_config->time.format24 == 0) {
-//        if (p_config->time.meridiem == 1) {
     if (tmHour >= 12) {
         sprintf(bufMeridiem, "%s", "pm");
     } else {
         sprintf(bufMeridiem, "%s", "am");
     }
-//        }
-//
+
     if (tmHour > 12) {
         tmHour -= 12;
     }
@@ -114,7 +111,6 @@ void cb_time_task_handler(lv_task_t * task) {
     if (tmHour == 0) {
         tmHour += 12;
     }
-//    }
 
     static int count = 0;
     char * colon = strstr(lv_label_get_text(time_label), ":");
