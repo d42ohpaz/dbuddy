@@ -3,13 +3,13 @@
 #include "styles.h"
 #include "ui.h"
 
-#define RA8875_INT      14
+#define RA8875_INT      17
 #define RA8875_CS       5
-#define RA8875_RESET    34
-#define RA8875_XP       4
-#define RA8875_YP       A11
+#define RA8875_RESET    25
+#define RA8875_XP       33
+#define RA8875_YP       A10
 #define RA8875_XM       A12
-#define RA8875_YM       15
+#define RA8875_YM       0
 #define RA8875_RX       500
 
 #include "esp32dev.h"
