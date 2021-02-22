@@ -7,7 +7,6 @@ Fonts::Fonts() {
 
     black_medium = new std::map<lv_state_t, lv_style_t *>();
     black_small = new std::map<lv_state_t, lv_style_t *>();
-    black_xxlarge = new std::map<lv_state_t, lv_style_t *>();
     regular_small = new std::map<lv_state_t, lv_style_t *>();
     regular_xsmall = new std::map<lv_state_t, lv_style_t *>();
 
@@ -17,9 +16,6 @@ Fonts::Fonts() {
 
         init_font(black_small, STATE);
         lv_style_set_text_font(black_small->at(STATE), STATE, &roboto_black_16);
-
-        init_font(black_xxlarge, STATE);
-        lv_style_set_text_font(black_xxlarge->at(STATE), STATE, &roboto_black_72);
 
         init_font(regular_xsmall, STATE);
         lv_style_set_text_font(regular_xsmall->at(STATE), STATE, &roboto_regular_14);
@@ -41,10 +37,6 @@ lv_style_t * Fonts::get_black_medium(lv_state_t state) {
 
 lv_style_t * Fonts::get_black_small(lv_state_t state) {
     return black_small->at(state);
-}
-
-lv_style_t * Fonts::get_black_xxlarge(lv_state_t state) {
-    return black_xxlarge->at(state);
 }
 
 lv_style_t * Fonts::get_regular_small(lv_state_t state) {

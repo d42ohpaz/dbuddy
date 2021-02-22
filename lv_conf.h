@@ -419,8 +419,7 @@ typedef void * lv_indev_drv_user_data_t;            /*Type of user data in the i
                                 LV_FONT_DECLARE(roboto_regular_16) \
                                 LV_FONT_DECLARE(roboto_regular_18) \
                                 LV_FONT_DECLARE(roboto_black_16) \
-                                LV_FONT_DECLARE(roboto_black_24) \
-                                LV_FONT_DECLARE(roboto_black_72)
+                                LV_FONT_DECLARE(roboto_black_24)
 
 /* Enable it if you have fonts with a lot of characters.
  * The limit depends on the font size, font face and bpp
