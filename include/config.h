@@ -6,53 +6,31 @@
 #define CONFIG_DEFAULT_TIMEZONE ("America/New_York")
 
 namespace dbuddy {
+    const uint8_t CALENDARS = 8;
+
     enum calendar_t {
-        CALENDAR_1  = 0x01,
-        CALENDAR_2  = 0x02,
-        CALENDAR_3  = 0x03,
-        CALENDAR_4  = 0x04,
-        CALENDAR_5  = 0x05,
-        CALENDAR_6  = 0x06,
-        CALENDAR_7  = 0x07,
-        CALENDAR_8  = 0x08,
+        CALENDAR_1,
+        CALENDAR_2,
+        CALENDAR_3,
+        CALENDAR_4,
+        CALENDAR_5,
+        CALENDAR_6,
+        CALENDAR_7,
+        CALENDAR_8,
     };
+
+    typedef struct configuration_calendar_t {
+        char name[100]{};
+        char color[8]{};
+        char url[200]{};
+    } config_cal_t;
 
     typedef struct configuration_t {
         char timeserver[200]{};
         uint32_t timeinterval = 3600;
         char timezone[32]{};
 
-        char calendar1_name[100]{};
-        char calendar1_color[8]{};
-        char calendar1_url[200]{};
-
-        char calendar2_name[100]{};
-        char calendar2_color[8]{};
-        char calendar2_url[200]{};
-
-        char calendar3_name[100]{};
-        char calendar3_color[8]{};
-        char calendar3_url[200]{};
-
-        char calendar4_name[100]{};
-        char calendar4_color[8]{};
-        char calendar4_url[200]{};
-
-        char calendar5_name[100]{};
-        char calendar5_color[8]{};
-        char calendar5_url[200]{};
-
-        char calendar6_name[100]{};
-        char calendar6_color[8]{};
-        char calendar6_url[200]{};
-
-        char calendar7_name[100]{};
-        char calendar7_color[8]{};
-        char calendar7_url[200]{};
-
-        char calendar8_name[100]{};
-        char calendar8_color[8]{};
-        char calendar8_url[200]{};
+        config_cal_t calendar[CALENDARS]{};
     } config_t;
 
     typedef struct metadata_t {
