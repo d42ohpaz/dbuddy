@@ -15,3 +15,4 @@ demo
 lv_dev_tools/
 /yarn-error.log
 backtrace.txt
+/.vscode
