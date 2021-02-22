@@ -37,17 +37,15 @@ Config::Config(const char * ap_name, uint16_t port) {
     manager->addParameter("timezone", config->timezone, sizeof(config->timezone));
 
     for (int i = 0; i < CALENDARS; i++) {
-        char * cal_color;
-        char * cal_name;
-        char * cal_url;
+        char cal_color[18], cal_name[18], cal_url[18];
 
         sprintf(cal_color, "calendar_color_%d", i);
         sprintf(cal_name, "calendar_name_%d", i);
         sprintf(cal_url, "calendar_url_%d", i);
 
-        manager->addParameter(cal_color, config->calendar[i].color, sizeof(config->calendar[i].color));
-        manager->addParameter(cal_name, config->calendar[i].name, sizeof(config->calendar[i].name));
-        manager->addParameter(cal_url, config->calendar[i].url, sizeof(config->calendar[i].url));
+        manager->addParameter(cal_color, config->calendar[i].color, sizeof(config->calendar[i].color) + 1);
+        manager->addParameter(cal_name, config->calendar[i].name, sizeof(config->calendar[i].name) + 1);
+        manager->addParameter(cal_url, config->calendar[i].url, sizeof(config->calendar[i].url) + 1);
     }
 
     manager->addParameter("version", &meta->version, get);

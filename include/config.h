@@ -20,15 +20,15 @@ namespace dbuddy {
     };
 
     typedef struct configuration_calendar_t {
-        char name[100]{};
-        char color[8]{};
-        char url[200]{};
+        char name[100];
+        char color[8];
+        char url[200];
     } config_cal_t;
 
     typedef struct configuration_t {
-        char timeserver[200]{};
+        char timeserver[200] = "time.nist.gov";
         uint32_t timeinterval = 3600;
-        char timezone[32]{};
+        char timezone[32] = "America/New_York";
 
         config_cal_t calendar[CALENDARS]{};
     } config_t;
