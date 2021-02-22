@@ -46,6 +46,7 @@
     "dev": "run-p clean eleventy:dev webpack:dev postcss:dev",
     "eleventy:dev": "eleventy --watch",
     "eleventy:prod": "eleventy --quiet",
+    "erase_flash": "/Users/kstanl27/Library/Arduino15/packages/esp32/tools/esptool_py/2.6.1/esptool --chip esp32 erase_flash",
     "postcss:dev": "postcss html/css/index.css --env=development --watch -d data/css",
     "postcss:prod": "postcss html/css/index.css --env=production -d data/css --quiet",
     "webpack:dev": "webpack --mode=development --watch",
