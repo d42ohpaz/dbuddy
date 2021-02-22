@@ -33,7 +33,7 @@ Config::Config(const char * ap_name, uint16_t port) {
     manager->setWebPort(port);
 
     manager->addParameter("timeserver", config->timeserver, sizeof(config->timeserver));
-    manager->addParameter("update_interval", &config->timeinterval);
+    manager->addParameter("timeinterval", &config->timeinterval);
     manager->addParameter("timezone", config->timezone, sizeof(config->timezone));
 
     for (int i = 0; i < CALENDARS; i++) {
