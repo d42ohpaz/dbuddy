@@ -43,13 +43,3 @@ void setup() {
 void loop() {
     DBuddy::loop();
 }
-
-#if !defined(ARDUINO)
-int main() {
-    setup();
-
-    while (true) {
-        loop();
-    }
-}
-#endif
