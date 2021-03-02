@@ -26,7 +26,7 @@ Config::Config(const char * ap_name, uint16_t port) {
     manager = new ConfigManager();
 
     manager->setAPName(ap_name);
-    manager->setAPFilename("/index.html");
+    manager->setAPFilename("/");
     manager->setAPCallback(webserver_callback_handler);
     manager->setAPICallback(webserver_callback_handler);
 
