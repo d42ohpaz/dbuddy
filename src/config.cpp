@@ -50,6 +50,8 @@ Config::Config(const char * ap_name, uint16_t port) {
     }
     manager->addParameter("calendars", &config->calendars);
     manager->addParameter("version", &meta->version, get);
+
+    meta->version = 1;
 }
 
 void Config::begin() const {
@@ -116,7 +118,6 @@ void Config::loop() const {
 }
 
 void Config::save() {
-    meta->version += 1;
     manager->save();
 }
 
