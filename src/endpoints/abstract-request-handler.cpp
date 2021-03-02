@@ -8,7 +8,9 @@ bool AbstractRequestHandler::handle(WebServer &server, HTTPMethod requestMethod,
     }
 
     server.enableCORS(true);
-    server.sendHeader("Content-Encoding", "gzip");
+    if (requestMethod == HTTP_GET) {
+        server.sendHeader("Content-Encoding", "gzip");
+    }
 
     return setup(server, requestMethod, requestUri);
 }
