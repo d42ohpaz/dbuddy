@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'icons';
-  src:  url('../fonts/icons.woff?wkqsds') format('woff');
+  src:  url('../fonts/icons.woff?4tregd') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -41,6 +41,9 @@
 }
 .icon-clock:before {
   content: "\e905";
+}
+.icon-edit:before {
+  content: "\e912";
 }
 .icon-exclamation-circle:before {
   content: "\e90f";
