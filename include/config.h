@@ -8,17 +8,6 @@
 namespace dbuddy {
     const uint8_t CALENDARS = 8;
 
-    enum calendar_t {
-        CALENDAR_1,
-        CALENDAR_2,
-        CALENDAR_3,
-        CALENDAR_4,
-        CALENDAR_5,
-        CALENDAR_6,
-        CALENDAR_7,
-        CALENDAR_8,
-    };
-
     typedef struct configuration_calendar_t {
         char name[100];
         char color[8];
@@ -30,7 +19,8 @@ namespace dbuddy {
         uint32_t timeinterval = 3600;
         char timezone[32] = "America/New_York";
 
-        config_cal_t calendar[CALENDARS]{};
+        config_cal_t * calendar = new config_cal_t[CALENDARS];
+        uint8_t calendars = 0;
     } config_t;
 
     typedef struct metadata_t {
@@ -45,19 +35,19 @@ namespace dbuddy {
         uint32_t timeinterval() const;
         char * timezone() const;
 
-        char * calendar_color(calendar_t) const;
-        char * calendar_name(calendar_t) const;
-        char * calendar_url(calendar_t) const;
-
         int8_t version() const;
 
         void timeserver(const char *);
         void timeinterval(uint32_t);
         void timezone(const char *);
 
-        void calendar_color(calendar_t, const char *);
-        void calendar_name(calendar_t, const char *);
-        void calendar_url(calendar_t, const char *);
+        uint add_calendar(config_cal_t * config);
+        void update_calendar(uint calendar, config_cal_t * config);
+
+        void clear_calendars();
+        config_cal_t * get_calendar(uint) const;
+        const config_cal_t * get_calendars() const;
+        int length_calendars() const;
 
         void begin() const;
         bool isAPIMode() const;

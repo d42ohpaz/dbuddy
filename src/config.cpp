@@ -43,11 +43,12 @@ Config::Config(const char * ap_name, uint16_t port) {
         sprintf(cal_name, "calendar_name_%d", i);
         sprintf(cal_url, "calendar_url_%d", i);
 
-        manager->addParameter(cal_color, config->calendar[i].color, sizeof(config->calendar[i].color) + 1);
-        manager->addParameter(cal_name, config->calendar[i].name, sizeof(config->calendar[i].name) + 1);
-        manager->addParameter(cal_url, config->calendar[i].url, sizeof(config->calendar[i].url) + 1);
+        config_cal_t * calendar = &config->calendar[i];
+        manager->addParameter(cal_color, calendar->color, sizeof(calendar->color) + 1);
+        manager->addParameter(cal_name, calendar->name, sizeof(calendar->name) + 1);
+        manager->addParameter(cal_url, calendar->url, sizeof(calendar->url) + 1);
     }
-
+    manager->addParameter("calendars", &config->calendars);
     manager->addParameter("version", &meta->version, get);
 }
 
@@ -55,28 +56,51 @@ void Config::begin() const {
     manager->begin(*config);
 }
 
-char * Config::calendar_color(calendar_t calendar) const {
-    return config->calendar[calendar].color;
+uint Config::add_calendar(config_cal_t * calendar) {
+    if (config->calendars >= CALENDARS) {
+        throw std::out_of_range("Exceeded maximum number of calendars");
+    }
+
+    memcpy(&config->calendar[config->calendars++], calendar, sizeof(config_cal_t));
+    return config->calendars;
 }
 
-void Config::calendar_color(calendar_t calendar, const char * color) {
-    strncpy(config->calendar[calendar].color, color, sizeof(config->calendar[calendar].color));
+void Config::update_calendar(uint idx, config_cal_t * calendar) {
+    if (idx >= CALENDARS) {
+        throw std::out_of_range("Exceeded maximum number of calendars");
+    }
+
+    memcpy(&config->calendar[idx], calendar, sizeof(config_cal_t));
 }
 
-char * Config::calendar_name(calendar_t calendar) const {
-    return config->calendar[calendar].name;
+void Config::clear_calendars() {
+    for (int i = 0; i < CALENDARS; i++) {
+        memcpy(&config->calendar[i], new config_cal_t(), sizeof(config_cal_t));
+        config->calendars--;
+    }
 }
 
-void Config::calendar_name(calendar_t calendar, const char * name) {
-    strncpy(config->calendar[calendar].name, name, sizeof(config->calendar[calendar].name));
+config_cal_t * Config::get_calendar(uint calendar) const {
+    if (calendar >= CALENDARS) {
+        char * message = new char();
+        sprintf(message, "Only %d calendars are allowed", CALENDARS);
+        throw std::out_of_range(message);
+    }
+
+    return &config->calendar[calendar];
 }
 
-char * Config::calendar_url(calendar_t calendar) const {
-    return config->calendar[calendar].url;
+const config_cal_t * Config::get_calendars() const {
+    auto * calendars = new config_cal_t[CALENDARS];
+    for (int i = 0; i < CALENDARS; i++) {
+        memcpy(&calendars[i], &config->calendar[i], sizeof(config_cal_t));
+    }
+
+    return calendars;
 }
 
-void Config::calendar_url(calendar_t calendar, const char * url) {
-    strncpy(config->calendar[calendar].url, url, sizeof(config->calendar[calendar].url));
+int Config::length_calendars() const {
+    return config->calendars;
 }
 
 bool Config::isAPIMode() const {
