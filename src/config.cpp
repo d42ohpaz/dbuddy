@@ -15,12 +15,12 @@ Config::Config(const char * ap_name, uint16_t port) {
 
     auto webserver_callback_handler = [this](WebServer * server) {
         server->enableDelay(true);
-        server->addHandler(new AssetsRequestHandler(this->manager));
-        server->addHandler(new CalendarsRequestHandler(this->manager));
-        server->addHandler(new IndexRequestHandler(this->manager));
-        server->addHandler(new StockRequestHandler(this->manager));
-        server->addHandler(new TimeSyncRequestHandler(this->manager));
-        server->addHandler(new WifiRequestHandler(this->manager));
+        server->addHandler(new AssetsRequestHandler(this));
+        server->addHandler(new CalendarsRequestHandler(this));
+        server->addHandler(new IndexRequestHandler(this));
+        server->addHandler(new StockRequestHandler(this));
+        server->addHandler(new TimeSyncRequestHandler(this));
+        server->addHandler(new WifiRequestHandler(this));
     };
 
     manager = new ConfigManager();

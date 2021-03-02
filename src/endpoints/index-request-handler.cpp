@@ -16,11 +16,11 @@ bool IndexRequestHandler::canHandle(HTTPMethod method, String uri) {
 
 bool IndexRequestHandler::setup(WebServer &server, HTTPMethod requestMethod, String requestUri) {
     if (requestUri.equals("/") || requestUri.equals("/index.html")) {
-        manager->streamFile("/index.html", mimeHTML);
+        config->streamFile("/index.html", mimeHTML);
     } else if (requestUri.equals("/css/index.css")) {
-        manager->streamFile("/css/index.css", mimeCSS);
+        config->streamFile("/css/index.css", mimeCSS);
     } else if (requestUri.equals("/scripts/index.js")) {
-        manager->streamFile("/scripts/index.js", mimeJS);
+        config->streamFile("/scripts/index.js", mimeJS);
     }
 
     return true;

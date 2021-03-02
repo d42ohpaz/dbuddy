@@ -15,11 +15,11 @@ bool AssetsRequestHandler::canHandle(HTTPMethod method, String uri) {
 
 bool AssetsRequestHandler::setup(WebServer &server, HTTPMethod requestMethod, String requestUri) {
     if (requestUri.equals("/scripts/global.js")) {
-        manager->streamFile("/scripts/global.js", mimeJS);
+        config->streamFile("/scripts/global.js", mimeJS);
     } else if (requestUri.equals("/scripts/vendor.js")) {
-        manager->streamFile("/scripts/vendor.js", mimeJS);
+        config->streamFile("/scripts/vendor.js", mimeJS);
     } else if (requestUri.equals("/fonts/icons.woff")) {
-        manager->streamFile("/fonts/icons.woff", "font/woff");
+        config->streamFile("/fonts/icons.woff", "font/woff");
     }
 
     return true;

@@ -15,11 +15,11 @@ bool WifiRequestHandler::canHandle(HTTPMethod method, String uri) {
 
 bool WifiRequestHandler::setup(WebServer &server, HTTPMethod requestMethod, String requestUri) {
     if (requestUri.equals("/wifi.html")) {
-        manager->streamFile("/wifi.html", mimeHTML);
+        config->streamFile("/wifi.html", mimeHTML);
     } else if (requestUri.equals("/css/wifi.css")) {
-        manager->streamFile("/css/wifi.css", mimeCSS);
+        config->streamFile("/css/wifi.css", mimeCSS);
     } else if (requestUri.equals("/scripts/wifi.js")) {
-        manager->streamFile("/scripts/wifi.js", mimeJS);
+        config->streamFile("/scripts/wifi.js", mimeJS);
     } else {
         return false;
     }

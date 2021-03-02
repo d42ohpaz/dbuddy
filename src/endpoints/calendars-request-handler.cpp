@@ -15,11 +15,11 @@ bool CalendarsRequestHandler::canHandle(HTTPMethod method, String uri) {
 
 bool CalendarsRequestHandler::setup(WebServer &server, HTTPMethod requestMethod, String requestUri) {
     if (requestUri.equals("/calendars.html")) {
-        manager->streamFile("/calendars.html", mimeHTML);
+        config->streamFile("/calendars.html", mimeHTML);
     } else if (requestUri.equals("/css/calendars.css")) {
-        manager->streamFile("/css/calendars.css", mimeCSS);
+        config->streamFile("/css/calendars.css", mimeCSS);
     } else if (requestUri.equals("/scripts/calendars.js")) {
-        manager->streamFile("/scripts/calendars.js", mimeCSS);
+        config->streamFile("/scripts/calendars.js", mimeCSS);
     }
 
     return true;

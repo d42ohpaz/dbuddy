@@ -15,11 +15,11 @@ bool StockRequestHandler::canHandle(HTTPMethod method, String uri) {
 
 bool StockRequestHandler::setup(WebServer &server, HTTPMethod requestMethod, String requestUri) {
     if (requestUri.equals("/stock.html")) {
-        manager->streamFile("/stock.html", mimeHTML);
+        config->streamFile("/stock.html", mimeHTML);
     } else if (requestUri.equals("/css/stock.css")) {
-        manager->streamFile("/css/stock.css", mimeCSS);
+        config->streamFile("/css/stock.css", mimeCSS);
     } else if (requestUri.equals("/scripts/stock.js")) {
-        manager->streamFile("/scripts/stock.js", mimeJS);
+        config->streamFile("/scripts/stock.js", mimeJS);
     } else {
         return false;
     }

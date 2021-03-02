@@ -15,11 +15,11 @@ bool TimeSyncRequestHandler::canHandle(HTTPMethod method, String uri) {
 
 bool TimeSyncRequestHandler::setup(WebServer &server, HTTPMethod requestMethod, String requestUri) {
     if (requestUri.equals("/timesync.html")) {
-        manager->streamFile("/timesync.html", mimeHTML);
+        config->streamFile("/timesync.html", mimeHTML);
     } else if (requestUri.equals("/css/timesync.css")) {
-        manager->streamFile("/css/timesync.css", mimeCSS);
+        config->streamFile("/css/timesync.css", mimeCSS);
     } else if (requestUri.equals("/scripts/timesync.js")) {
-        manager->streamFile("/scripts/timesync.js", mimeJS);
+        config->streamFile("/scripts/timesync.js", mimeJS);
     } else {
         return false;
     }

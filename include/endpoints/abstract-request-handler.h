@@ -1,16 +1,16 @@
 #pragma once
 
 #include <WebServer.h>
-#include <ConfigManager.h>
+#include "config.h"
 
 namespace dbuddy {
     class AbstractRequestHandler : public RequestHandler {
     public:
-        explicit AbstractRequestHandler(ConfigManager * manager) : manager(manager) {};
+        explicit AbstractRequestHandler(Config * config) : config(config) {};
 
         bool handle(WebServer &server, HTTPMethod requestMethod, String requestUri) final;
     protected:
-        ConfigManager * manager;
+        Config * config;
 
         virtual bool setup(WebServer &server, HTTPMethod requestMethod, String requestUri) = 0;
     };
