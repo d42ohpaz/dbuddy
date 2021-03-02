@@ -64,6 +64,8 @@ namespace dbuddy {
         bool isAPMode() const;
         void loop() const;
         void save();
+
+        void streamFile(const char* file, const char mime[]) const;
     private:
         ConfigManager * manager{};
         configuration_t * config = new configuration_t;

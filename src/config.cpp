@@ -96,6 +96,10 @@ void Config::save() {
     manager->save();
 }
 
+void Config::streamFile(const char* file, const char mime[]) const {
+    manager->streamFile(file, mime);
+}
+
 uint32_t Config::timeinterval() const {
     return config->timeinterval;
 }
