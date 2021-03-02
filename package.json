@@ -41,17 +41,22 @@
   "name": "dbuddy",
   "private": true,
   "scripts": {
-    "build": "yarn clean && yarn eleventy:prod && yarn webpack:prod && yarn postcss:prod && yarn compress",
+    "build": "run-s clean eleventy:prod webpack:prod postcss:prod compress",
     "clean": "rm -rf data/*",
     "compress": "node compress.js data",
-    "dev": "run-p clean eleventy:dev webpack:dev postcss:dev",
-    "eleventy:dev": "eleventy --watch",
-    "eleventy:prod": "eleventy --quiet",
+    "dev": "run-p eleventy:dev webpack:dev postcss:dev",
+    "eleventy": "eleventy",
+    "eleventy:dev": "run-p clean \"eleventy {*}\" --",
+    "eleventy:prod": "yarn eleventy:dev --quiet",
+    "eleventy:watch": "yarn eleventy:dev --watch",
     "erase_flash": "/Users/kstanl27/Library/Arduino15/packages/esp32/tools/esptool_py/2.6.1/esptool --chip esp32 erase_flash",
-    "postcss:dev": "postcss html/css/index.css --env=development --watch -d data/css",
-    "postcss:prod": "postcss html/css/index.css --env=production -d data/css --quiet",
-    "webpack:dev": "webpack --mode=development --watch",
-    "webpack:prod": "webpack --mode=production --no-stats"
+    "postcss:dev": "postcss -d data/css --env=development --verbose html/css/*.css",
+    "postcss:prod": "postcss -d data/css --env=production html/css/*.css",
+    "postcss:watch": "yarn postcss:dev --watch",
+    "watch": "run-p eleventy:watch webpack:watch postcss:watch",
+    "webpack:dev": "webpack --mode=development",
+    "webpack:prod": "webpack --mode=production --no-stats",
+    "webpack:watch": "yarn webpack:dev --watch"
   },
   "sideEffects": false
 }
