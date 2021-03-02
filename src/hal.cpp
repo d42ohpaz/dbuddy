@@ -10,11 +10,9 @@ void Hal::run(bool use_dbl_buff, lv_indev_type_t type) {
 }
 
 void Hal::initializeDisplay(bool use_dbl_buff) {
-    if (use_dbl_buff) {
-        lv_disp_buf_init(display_buffer, buffer0, buffer1, BUFFER_SIZE);
-    } else {
-        lv_disp_buf_init(display_buffer, buffer0, nullptr, BUFFER_SIZE);
-    }
+    static lv_color_t buffer0[BUFFER_SIZE];
+    static lv_color_t buffer1[BUFFER_SIZE];
+    lv_disp_buf_init(display_buffer, buffer0, buffer1, BUFFER_SIZE);
 
     lv_disp_drv_init(display_driver);
 
