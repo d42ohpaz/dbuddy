@@ -5,9 +5,14 @@ const cssnano = require('cssnano');
 const PostcssPresetEnv = require('postcss-preset-env');
 const PostcssImport = require('postcss-import');
 const PostcssNested = require('postcss-nested');
-const PostcssPurgecss = require('@fullhuman/postcss-purgecss');
+let PostcssPurgecss = require('@fullhuman/postcss-purgecss');
 
 const PROD = process.env.NODE_ENV === 'production';
+
+if (!PROD) {
+    // Disable PurgeCSS when not in production.
+    PostcssPurgecss = () => {};
+}
 
 const plugins = [
     PostcssPresetEnv({ stage: 0, browsers: 'last 2 versions' }),
