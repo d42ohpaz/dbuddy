@@ -4618,6 +4618,11 @@ spdx-license-ids@^3.0.0:
   resolved "https://registry.npmjs.org/spdx-license-ids/-/spdx-license-ids-3.0.7.tgz#e9c18a410e5ed7e12442a549fbd8afa767038d65"
   integrity sha512-U+MTEOO0AiDzxwFvoa4JVnMV6mZlJKk2sBLt90s7G0Gd0Mlknc7kxEn3nuDPNZRta7O2uy8oLcZLVT+4sqNZHQ==
 
+spectrum-colorpicker2@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.npmjs.org/spectrum-colorpicker2/-/spectrum-colorpicker2-2.0.5.tgz#97741d6d4fcf3dba2139a8c224be20405e0260ef"
+  integrity sha512-XKUdlupvwKn+nM5oEGXhSlJ2Is6bkcCFSjzVIiAZk14iyFSOq1yxwq2lAiqYXsE7S9f7lFyvvBCN0BVs65Or6A==
+
 sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://registry.npmjs.org/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"

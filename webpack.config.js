@@ -10,6 +10,7 @@ module.exports = {
     entry: {
         global: path.resolve(__dirname, 'html/scripts/main.js'),
         wifi: path.resolve(__dirname, 'html/scripts/wifi.js'),
+        calendars: path.resolve(__dirname, 'html/scripts/calendars.js'),
     },
     resolve: {
         extensions: ['.js'],

@@ -4,3 +4,59 @@ permalink: "{{ page.filePathStem }}.html"
 title: Calendar Settings
 icon: calendar-alt
 ---
+<div class="container">
+    <form name="dbuddy-form-calendars" action="http://192.168.42.12/calendars.html" method="post">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input id="name" type="text" class="form-control" tabindex="1">
+                        <span class="form-text text-danger" style="display: none">* You must provide a unique name for your calendar.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="url">iCal URL</label>
+                        <input id="url" type="text" class="form-control" tabindex="2">
+                        <span class="form-text text-danger" style="display: none">* You must provide the iCal URL for your calendar.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="color">Color</label><br>
+                        <input id="color" type="text" class="form-control" tabindex="3">
+                        <span class="form-text text-danger" style="display: none">* You must provide a color to represent your calendar.</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <button id="reset" type="reset" class="btn btn-outline-danger" tabindex="5">
+                            Reset</button>
+
+                        <button id="add-edit" type="submit" class="btn btn-primary" tabindex="4">
+                            <span class="icon-plus-circle"></span> <span class="text">Add</span></button>
+                    </div>
+                </div>
+                <div id="side-panel" class="text-truncate">
+                    <ul class="list-unstyled">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script id="side-panel-li" type="text/html">
+<li class="media text-nowrap">
+    <span class="swatch"><span class="rounded"></span></span>
+    <div class="media-body">
+        <h5 class="m-0">
+            <span class="text"></span>
+            <span class="icons float-right justify-content-around">
+                <span class="edit icon-edit text-primary"></span>
+                <span class="remove icon-minus-circle text-danger"></span>
+            </span>
+        </h5>
+    </div>
+
+    <input class="color" type="hidden" name="color[]">
+    <input class="name" type="hidden" name="name[]">
+    <input class="url" type="hidden" name="url[]">
+</li>
+</script>

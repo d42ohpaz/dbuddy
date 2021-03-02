@@ -1,6 +1,8 @@
 @import './icons.css';
 @import './fonts.css';
 @import '~bootstrap';
+@import '~spectrum-colorpicker2/dist/spectrum.css';
+@import 'calendars.css';
 
 body {
     color: #434343;

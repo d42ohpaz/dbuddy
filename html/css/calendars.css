@@ -1,0 +1,38 @@
+.media .swatch {
+    width: calc(1.5rem + 8px);
+    height: 3rem;
+}
+.media .swatch > span {
+    display: block;
+    width: calc(100% - 8px);
+    height: 50%;
+}
+.media-body {
+    width: 255px;
+}
+
+.media-body p {
+    width: 100%;
+}
+
+.icons .edit, .icons .remove {
+    cursor: pointer;
+}
+
+.media {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+}
+.media:not(:last-child) {
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+#side-panel {
+    width: 0;
+    transition: width .3s;
+}
+
+#side-panel.active {
+    width: 285px;
+}
