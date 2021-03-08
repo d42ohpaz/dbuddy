@@ -41,7 +41,7 @@
   "name": "dbuddy",
   "private": true,
   "scripts": {
-    "build": "run-s clean eleventy:prod webpack:prod postcss:prod compress",
+    "build": "run-s clean eleventy:prod webpack:prod postcss:prod",
     "clean": "rm -rf data/*",
     "compress": "node compress.js data",
     "dev": "run-p eleventy:dev webpack:dev postcss:dev",
