@@ -24,7 +24,7 @@ Config::Config(const char * ap_name, uint16_t port) {
     };
 
     manager.setAPName(ap_name);
-    manager.setAPFilename("/");
+    manager.setAPFilename("/wifi.html.gz");
     manager.setAPCallback(webserver_callback_handler);
     manager.setAPICallback(webserver_callback_handler);
 
