@@ -41,7 +41,6 @@ namespace dbuddy {
         void timeinterval(uint32_t);
         void timezone(const char *);
 
-        void update_calendar(uint calendar, config_cal_t * config);
         uint8_t add_calendar(config_cal_t * config);
 
         void clear_calendars();

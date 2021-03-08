@@ -68,14 +68,6 @@ uint8_t Config::add_calendar(config_cal_t * calendar) {
     return config.calendars;
 }
 
-void Config::update_calendar(uint idx, config_cal_t * calendar) {
-    if (idx >= CALENDARS) {
-        throw std::out_of_range("Exceeded maximum number of calendars");
-    }
-
-    memcpy(&config.calendar[idx], calendar, sizeof(config_cal_t));
-}
-
 void Config::clear_calendars() {
     for (uint8_t i = 0; i < CALENDARS; i++) {
         memcpy(&config.calendar[i], new config_cal_t(), sizeof(config_cal_t));
