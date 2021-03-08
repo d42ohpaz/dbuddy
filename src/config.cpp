@@ -81,14 +81,14 @@ void Config::clear_calendars() {
     }
 }
 
-config_cal_t Config::get_calendar(uint8_t calendar) const {
-    if (calendar >= CALENDARS) {
+config_cal_t Config::get_calendar(uint8_t idx) const {
+    if (idx >= CALENDARS) {
         char * message = new char();
         sprintf(message, "Only %d calendars are allowed", CALENDARS);
         throw std::out_of_range(message);
     }
 
-    return config.calendar[calendar];
+    return config.calendar[idx];
 }
 
 const config_cal_t * Config::get_calendars() const {
