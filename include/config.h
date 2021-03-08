@@ -46,6 +46,7 @@ namespace dbuddy {
         void clear_calendars();
         config_cal_t * get_calendar(uint8_t) const;
         const config_cal_t * get_calendars() const;
+        bool has_calendar(uint8_t) const;
         uint8_t length_calendars() const;
 
         void begin();

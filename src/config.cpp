@@ -94,6 +94,10 @@ const config_cal_t * Config::get_calendars() const {
     return calendars;
 }
 
+bool Config::has_calendar(uint8_t i) const {
+    return i < config.calendars;
+}
+
 uint8_t Config::length_calendars() const {
     return config.calendars;
 }
