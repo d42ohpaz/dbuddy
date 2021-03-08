@@ -57,8 +57,9 @@ namespace dbuddy {
 
         void streamFile(const char* file, const char mime[]);
     private:
-        ConfigManager * manager{};
         config_t config{};
         meta_t meta{};
+
+        ConfigManager manager{};
     };
 }

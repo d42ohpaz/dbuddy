@@ -23,18 +23,16 @@ Config::Config(const char * ap_name, uint16_t port) {
         server->addHandler(new WifiRequestHandler(this));
     };
 
-    manager = new ConfigManager();
+    manager.setAPName(ap_name);
+    manager.setAPFilename("/");
+    manager.setAPCallback(webserver_callback_handler);
+    manager.setAPICallback(webserver_callback_handler);
 
-    manager->setAPName(ap_name);
-    manager->setAPFilename("/");
-    manager->setAPCallback(webserver_callback_handler);
-    manager->setAPICallback(webserver_callback_handler);
+    manager.setWebPort(port);
 
-    manager->setWebPort(port);
-
-    manager->addParameter("timeserver", config.timeserver, sizeof(config.timeserver));
-    manager->addParameter("timeinterval", &config.timeinterval);
-    manager->addParameter("timezone", config.timezone, sizeof(config.timezone));
+    manager.addParameter("timeserver", config.timeserver, sizeof(config.timeserver));
+    manager.addParameter("timeinterval", &config.timeinterval);
+    manager.addParameter("timezone", config.timezone, sizeof(config.timezone));
 
     for (uint8_t i = 0; i < CALENDARS; i++) {
         char cal_color[18], cal_name[18], cal_url[18];
@@ -45,18 +43,18 @@ Config::Config(const char * ap_name, uint16_t port) {
 
         if (has_calendar(i)) {
             config_cal_t calendar = get_calendar(i);
-            manager->addParameter(cal_color, calendar.color, sizeof(config_cal_t::color));
-            manager->addParameter(cal_name, calendar.name, sizeof(config_cal_t::name));
-            manager->addParameter(cal_url, calendar.url, sizeof(config_cal_t::url));
+            manager.addParameter(cal_color, calendar.color, sizeof(config_cal_t::color));
+            manager.addParameter(cal_name, calendar.name, sizeof(config_cal_t::name));
+            manager.addParameter(cal_url, calendar.url, sizeof(config_cal_t::url));
         } else {
-            manager->addParameter(cal_color, (char *)"", sizeof(config_cal_t::color));
-            manager->addParameter(cal_name, (char *)"", sizeof(config_cal_t::name));
-            manager->addParameter(cal_url, (char *)"", sizeof(config_cal_t::url));
+            manager.addParameter(cal_color, (char *)"", sizeof(config_cal_t::color));
+            manager.addParameter(cal_name, (char *)"", sizeof(config_cal_t::name));
+            manager.addParameter(cal_url, (char *)"", sizeof(config_cal_t::url));
         }
     }
 
-    manager->addParameter("calendars", &config.calendars);
-    manager->addParameter("version", &meta.version, get);
+    manager.addParameter("calendars", &config.calendars);
+    manager.addParameter("version", &meta.version, get);
 
     meta.version = 1;
 }
@@ -64,7 +62,7 @@ Config::Config(const char * ap_name, uint16_t port) {
 void Config::begin() {
     bool needs_save = false;
 
-    manager->begin(config);
+    manager.begin(config);
 
     // Unwritten data comes back as either -1 or 255; if we have that value,
     // then assume we need to write the default.
@@ -74,7 +72,7 @@ void Config::begin() {
     }
 
     if (needs_save)
-        manager->save();
+        manager.save();
 }
 
 uint8_t Config::add_calendar(config_cal_t &calendar) {
@@ -127,23 +125,23 @@ uint8_t Config::length_calendars() const {
 }
 
 bool Config::isStation() {
-    return manager->getMode() == station;
+    return manager.getMode() == station;
 }
 
 bool Config::isAccessPoint() {
-    return manager->getMode() == ap;
+    return manager.getMode() == ap;
 }
 
 void Config::loop() {
-    manager->loop();
+    manager.loop();
 }
 
 void Config::save() {
-    manager->save();
+    manager.save();
 }
 
 void Config::streamFile(const char* file, const char mime[]) {
-    manager->streamFile(file, mime);
+    manager.streamFile(file, mime);
 }
 
 uint32_t Config::timeinterval() const {
