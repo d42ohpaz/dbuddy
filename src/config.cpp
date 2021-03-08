@@ -43,10 +43,16 @@ Config::Config(const char * ap_name, uint16_t port) {
         sprintf(cal_name, "calendar_name_%d", i);
         sprintf(cal_url, "calendar_url_%d", i);
 
-        config_cal_t * calendar = &config.calendar[i];
-        manager->addParameter(cal_color, calendar->color, sizeof(calendar->color) + 1);
-        manager->addParameter(cal_name, calendar->name, sizeof(calendar->name) + 1);
-        manager->addParameter(cal_url, calendar->url, sizeof(calendar->url) + 1);
+        if (has_calendar(i)) {
+            config_cal_t calendar = get_calendar(i);
+            manager->addParameter(cal_color, calendar.color, sizeof(config_cal_t::color));
+            manager->addParameter(cal_name, calendar.name, sizeof(config_cal_t::name));
+            manager->addParameter(cal_url, calendar.url, sizeof(config_cal_t::url));
+        } else {
+            manager->addParameter(cal_color, (char *)"", sizeof(config_cal_t::color));
+            manager->addParameter(cal_name, (char *)"", sizeof(config_cal_t::name));
+            manager->addParameter(cal_url, (char *)"", sizeof(config_cal_t::url));
+        }
     }
 
     manager->addParameter("calendars", &config.calendars);
@@ -59,13 +65,13 @@ void Config::begin() {
     manager->begin(*config);
 }
 
-uint8_t Config::add_calendar(config_cal_t * calendar) {
+uint8_t Config::add_calendar(config_cal_t &calendar) {
     if (config.calendars >= CALENDARS) {
         throw std::out_of_range("Exceeded maximum number of calendars");
     }
 
-    memcpy(&config.calendar[config.calendars++], calendar, sizeof(config_cal_t));
-    return config.calendars;
+    config.calendar[config.calendars] = calendar;
+    return config.calendars++;
 }
 
 void Config::clear_calendars() {
@@ -75,14 +81,14 @@ void Config::clear_calendars() {
     }
 }
 
-config_cal_t * Config::get_calendar(uint8_t calendar) const {
+config_cal_t Config::get_calendar(uint8_t calendar) const {
     if (calendar >= CALENDARS) {
         char * message = new char();
         sprintf(message, "Only %d calendars are allowed", CALENDARS);
         throw std::out_of_range(message);
     }
 
-    return &config.calendar[calendar];
+    return config.calendar[calendar];
 }
 
 const config_cal_t * Config::get_calendars() const {

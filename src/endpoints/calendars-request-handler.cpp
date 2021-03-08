@@ -50,7 +50,7 @@ bool CalendarsRequestHandler::setup(WebServer &server, HTTPMethod requestMethod,
                         }
                     }
 
-                    config->add_calendar(&calendar);
+                    config->add_calendar(calendar);
                 }
 
                 config->save();
@@ -58,12 +58,12 @@ bool CalendarsRequestHandler::setup(WebServer &server, HTTPMethod requestMethod,
                 // Give back the configuration values to prove success.
                 String response = "[";
                 for (int i = 0; i < CALENDARS; i++) {
-                    config_cal_t * calendar = config->get_calendar(i);
+                    config_cal_t calendar = config->get_calendar(i);
                     char * r = new char();
                     sprintf(r, R"({"color": "%s", "name": "%s", "url": "%s"},)",
-                            calendar->color,
-                            calendar->name,
-                            calendar->url
+                            calendar.color,
+                            calendar.name,
+                            calendar.url
                     );
                     response += r;
                 }

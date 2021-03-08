@@ -41,10 +41,10 @@ namespace dbuddy {
         void timeinterval(uint32_t);
         void timezone(const char *);
 
-        uint8_t add_calendar(config_cal_t * config);
+        uint8_t add_calendar(config_cal_t &);
 
         void clear_calendars();
-        config_cal_t * get_calendar(uint8_t) const;
+        config_cal_t get_calendar(uint8_t) const;
         const config_cal_t * get_calendars() const;
         bool has_calendar(uint8_t) const;
         uint8_t length_calendars() const;
