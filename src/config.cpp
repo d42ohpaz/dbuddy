@@ -32,9 +32,9 @@ Config::Config(const char * ap_name, uint16_t port) {
 
     manager->setWebPort(port);
 
-    manager->addParameter("timeserver", config->timeserver, sizeof(config->timeserver));
-    manager->addParameter("timeinterval", &config->timeinterval);
-    manager->addParameter("timezone", config->timezone, sizeof(config->timezone));
+    manager->addParameter("timeserver", config.timeserver, sizeof(config.timeserver));
+    manager->addParameter("timeinterval", &config.timeinterval);
+    manager->addParameter("timezone", config.timezone, sizeof(config.timezone));
 
     for (int i = 0; i < CALENDARS; i++) {
         char cal_color[18], cal_name[18], cal_url[18];
@@ -43,15 +43,16 @@ Config::Config(const char * ap_name, uint16_t port) {
         sprintf(cal_name, "calendar_name_%d", i);
         sprintf(cal_url, "calendar_url_%d", i);
 
-        config_cal_t * calendar = &config->calendar[i];
+        config_cal_t * calendar = &config.calendar[i];
         manager->addParameter(cal_color, calendar->color, sizeof(calendar->color) + 1);
         manager->addParameter(cal_name, calendar->name, sizeof(calendar->name) + 1);
         manager->addParameter(cal_url, calendar->url, sizeof(calendar->url) + 1);
     }
-    manager->addParameter("calendars", &config->calendars);
-    manager->addParameter("version", &meta->version, get);
 
-    meta->version = 1;
+    manager->addParameter("calendars", &config.calendars);
+    manager->addParameter("version", &meta.version, get);
+
+    meta.version = 1;
 }
 
 void Config::begin() const {
@@ -59,12 +60,12 @@ void Config::begin() const {
 }
 
 uint Config::add_calendar(config_cal_t * calendar) {
-    if (config->calendars >= CALENDARS) {
+    if (config.calendars >= CALENDARS) {
         throw std::out_of_range("Exceeded maximum number of calendars");
     }
 
-    memcpy(&config->calendar[config->calendars++], calendar, sizeof(config_cal_t));
-    return config->calendars;
+    memcpy(&config.calendar[config.calendars++], calendar, sizeof(config_cal_t));
+    return config.calendars;
 }
 
 void Config::update_calendar(uint idx, config_cal_t * calendar) {
@@ -72,13 +73,13 @@ void Config::update_calendar(uint idx, config_cal_t * calendar) {
         throw std::out_of_range("Exceeded maximum number of calendars");
     }
 
-    memcpy(&config->calendar[idx], calendar, sizeof(config_cal_t));
+    memcpy(&config.calendar[idx], calendar, sizeof(config_cal_t));
 }
 
 void Config::clear_calendars() {
     for (int i = 0; i < CALENDARS; i++) {
-        memcpy(&config->calendar[i], new config_cal_t(), sizeof(config_cal_t));
-        config->calendars--;
+        memcpy(&config.calendar[i], new config_cal_t(), sizeof(config_cal_t));
+        config.calendars--;
     }
 }
 
@@ -89,20 +90,20 @@ config_cal_t * Config::get_calendar(uint calendar) const {
         throw std::out_of_range(message);
     }
 
-    return &config->calendar[calendar];
+    return &config.calendar[calendar];
 }
 
 const config_cal_t * Config::get_calendars() const {
     auto * calendars = new config_cal_t[CALENDARS];
     for (int i = 0; i < CALENDARS; i++) {
-        memcpy(&calendars[i], &config->calendar[i], sizeof(config_cal_t));
+        memcpy(&calendars[i], &config.calendar[i], sizeof(config_cal_t));
     }
 
     return calendars;
 }
 
 int Config::length_calendars() const {
-    return config->calendars;
+    return config.calendars;
 }
 
 bool Config::isAPIMode() const {
@@ -126,29 +127,29 @@ void Config::streamFile(const char* file, const char mime[]) const {
 }
 
 uint32_t Config::timeinterval() const {
-    return config->timeinterval;
+    return config.timeinterval;
 }
 
 void Config::timeinterval(uint32_t interval) {
-    config->timeinterval = interval;
+    config.timeinterval = interval;
 }
 
 char * Config::timeserver() const {
-    return config->timeserver;
+    return (char *)config.timeserver;
 }
 
 void Config::timeserver(const char * server) {
-    strncpy(config->timeserver, server, sizeof(config->timeserver) + 1);
+    strncpy(config.timeserver, server, sizeof(config.timeserver) + 1);
 }
 
 char * Config::timezone() const {
-    return config->timezone;
+    return (char *)config.timezone;
 }
 
 void Config::timezone(const char * timezone) {
-    strncpy(config->timezone, timezone, sizeof(config->timezone) + 1);
+    strncpy(config.timezone, timezone, sizeof(config.timezone) + 1);
 }
 
 int8_t Config::version() const {
-    return meta->version;
+    return meta.version;
 }
