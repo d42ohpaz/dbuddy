@@ -17,7 +17,11 @@ bool CalendarsRequestHandler::canHandle(HTTPMethod method, String uri) {
 
 bool CalendarsRequestHandler::setup(WebServer &server, HTTPMethod requestMethod, String requestUri) {
     if (requestMethod == HTTP_GET) {
-
+        if (requestUri.equals("/calendars")) {
+            char * output = handleGetCalendarsApi();
+            server.send(200, "application/json", output);
+            free(output);
+        }
     }
 
     if (requestMethod == HTTP_POST) {
@@ -78,4 +82,20 @@ bool CalendarsRequestHandler::setup(WebServer &server, HTTPMethod requestMethod,
 
     return_end:
     return true;
+}
+
+char * CalendarsRequestHandler::handleGetCalendarsApi() const {
+    const uint8_t eln = config->length_calendars() + 1;
+    const size_t capacity = JSON_ARRAY_SIZE(eln) + (eln * JSON_OBJECT_SIZE(3)) + 2;
+
+    DynamicJsonDocument doc(capacity);
+    JsonArray array;
+
+    array = (doc.size() <= 0) ? doc.to<JsonArray>() : doc.as<JsonArray>();
+
+    const size_t size = measureJson(array) + 1;
+    char * output = (char *)malloc(sizeof(char) * size);
+
+    serializeJson(array, output, size);
+    return output;
 }
