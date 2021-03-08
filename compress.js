@@ -63,7 +63,6 @@ inputPaths.forEach((file) => {
 
     compressing.gzip.compressFile(file, dest)
         .then(() => {
-            fs.renameSync(dest, file);
-            console.log(`    ${file} => ${dest.substring(0, dest.length - 3)}`);
+            fs.rmSync(file);
         })
 });

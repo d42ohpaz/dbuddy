@@ -4,7 +4,7 @@ using namespace dbuddy;
 
 bool AbstractRequestHandler::canHandle(HTTPMethod method, String uri) {
     SPIFFS.begin();
-    return SPIFFS.exists(uri);
+    return SPIFFS.exists(uri + ".gz");
 }
 
 bool AbstractRequestHandler::handle(WebServer &server, HTTPMethod requestMethod, String requestUri) {
@@ -14,7 +14,7 @@ bool AbstractRequestHandler::handle(WebServer &server, HTTPMethod requestMethod,
 
     server.enableCORS(true);
 
-    if (SPIFFS.exists(requestUri)) {
+    if (SPIFFS.exists(requestUri + ".gz")) {
         char mimeTYPE[255];
 
         if (requestUri.endsWith(".html")) {
@@ -31,7 +31,7 @@ bool AbstractRequestHandler::handle(WebServer &server, HTTPMethod requestMethod,
             strncpy(mimeTYPE, "text/plain", strlen("text/plain") + 1);
         }
 
-        config->streamFile(requestUri.c_str(), mimeTYPE);
+        config->streamFile((requestUri + ".gz").c_str(), mimeTYPE);
 
         return true;
     }
