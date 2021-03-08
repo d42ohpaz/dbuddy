@@ -55,7 +55,7 @@ Config::Config(const char * ap_name, uint16_t port) {
     meta.version = 1;
 }
 
-void Config::begin() const {
+void Config::begin() {
     manager->begin(*config);
 }
 
@@ -106,15 +106,15 @@ int Config::length_calendars() const {
     return config.calendars;
 }
 
-bool Config::isAPIMode() const {
+bool Config::isAPIMode() {
     return manager->getMode() == api;
 }
 
-bool Config::isAPMode() const {
+bool Config::isAPMode() {
     return manager->getMode() == ap;
 }
 
-void Config::loop() const {
+void Config::loop() {
     manager->loop();
 }
 
@@ -122,7 +122,7 @@ void Config::save() {
     manager->save();
 }
 
-void Config::streamFile(const char* file, const char mime[]) const {
+void Config::streamFile(const char* file, const char mime[]) {
     manager->streamFile(file, mime);
 }
 

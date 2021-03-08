@@ -49,13 +49,13 @@ namespace dbuddy {
         const config_cal_t * get_calendars() const;
         int length_calendars() const;
 
-        void begin() const;
-        bool isAPIMode() const;
-        bool isAPMode() const;
-        void loop() const;
+        void begin();
+        bool isAPIMode();
+        bool isAPMode();
+        void loop();
         void save();
 
-        void streamFile(const char* file, const char mime[]) const;
+        void streamFile(const char* file, const char mime[]);
     private:
         ConfigManager * manager{};
         config_t config{};
