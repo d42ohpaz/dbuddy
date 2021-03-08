@@ -36,7 +36,7 @@ Config::Config(const char * ap_name, uint16_t port) {
     manager->addParameter("timeinterval", &config.timeinterval);
     manager->addParameter("timezone", config.timezone, sizeof(config.timezone));
 
-    for (int i = 0; i < CALENDARS; i++) {
+    for (uint8_t i = 0; i < CALENDARS; i++) {
         char cal_color[18], cal_name[18], cal_url[18];
 
         sprintf(cal_color, "calendar_color_%d", i);
@@ -59,7 +59,7 @@ void Config::begin() {
     manager->begin(*config);
 }
 
-uint Config::add_calendar(config_cal_t * calendar) {
+uint8_t Config::add_calendar(config_cal_t * calendar) {
     if (config.calendars >= CALENDARS) {
         throw std::out_of_range("Exceeded maximum number of calendars");
     }
@@ -77,13 +77,13 @@ void Config::update_calendar(uint idx, config_cal_t * calendar) {
 }
 
 void Config::clear_calendars() {
-    for (int i = 0; i < CALENDARS; i++) {
+    for (uint8_t i = 0; i < CALENDARS; i++) {
         memcpy(&config.calendar[i], new config_cal_t(), sizeof(config_cal_t));
         config.calendars--;
     }
 }
 
-config_cal_t * Config::get_calendar(uint calendar) const {
+config_cal_t * Config::get_calendar(uint8_t calendar) const {
     if (calendar >= CALENDARS) {
         char * message = new char();
         sprintf(message, "Only %d calendars are allowed", CALENDARS);
@@ -95,14 +95,14 @@ config_cal_t * Config::get_calendar(uint calendar) const {
 
 const config_cal_t * Config::get_calendars() const {
     auto * calendars = new config_cal_t[CALENDARS];
-    for (int i = 0; i < CALENDARS; i++) {
+    for (uint8_t i = 0; i < CALENDARS; i++) {
         memcpy(&calendars[i], &config.calendar[i], sizeof(config_cal_t));
     }
 
     return calendars;
 }
 
-int Config::length_calendars() const {
+uint8_t Config::length_calendars() const {
     return config.calendars;
 }
 
@@ -150,6 +150,6 @@ void Config::timezone(const char * timezone) {
     strncpy(config.timezone, timezone, sizeof(config.timezone) + 1);
 }
 
-int8_t Config::version() const {
+uint8_t Config::version() const {
     return meta.version;
 }

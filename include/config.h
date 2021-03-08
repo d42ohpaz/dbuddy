@@ -24,7 +24,7 @@ namespace dbuddy {
     } config_t;
 
     typedef struct metadata_t {
-        int8_t version = 0;
+        uint8_t version;
     } meta_t;
 
     class Config {
@@ -35,19 +35,19 @@ namespace dbuddy {
         uint32_t timeinterval() const;
         char * timezone() const;
 
-        int8_t version() const;
+        uint8_t version() const;
 
         void timeserver(const char *);
         void timeinterval(uint32_t);
         void timezone(const char *);
 
-        uint add_calendar(config_cal_t * config);
         void update_calendar(uint calendar, config_cal_t * config);
+        uint8_t add_calendar(config_cal_t * config);
 
         void clear_calendars();
-        config_cal_t * get_calendar(uint) const;
+        config_cal_t * get_calendar(uint8_t) const;
         const config_cal_t * get_calendars() const;
-        int length_calendars() const;
+        uint8_t length_calendars() const;
 
         void begin();
         bool isStation();
