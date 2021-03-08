@@ -71,7 +71,7 @@ bool CalendarsRequestHandler::setup(WebServer &server, HTTPMethod requestMethod,
                 response = response.substring(0, response.length() - 1);
                 response += "]";
                 server.send(200, "application/json", response);
-            } catch (std::out_of_range & e) {
+            } catch (std::out_of_range &e) {
                 char response[14 + strlen(e.what())];
                 sprintf(response, R"(["error": "%s"])", e.what());
                 server.send(500, "application/json", response);
