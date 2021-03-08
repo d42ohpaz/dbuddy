@@ -7,8 +7,7 @@ bool CalendarsRequestHandler::canHandle(HTTPMethod method, String uri) {
         return true;
     }
 
-    if (method == HTTP_POST
-        && (uri.equals("/calendars.html"))) {
+    if (method == HTTP_POST && (uri.equals("/calendars"))) {
         return true;
     }
 
@@ -25,7 +24,7 @@ bool CalendarsRequestHandler::setup(WebServer &server, HTTPMethod requestMethod,
     }
 
     if (requestMethod == HTTP_POST) {
-        if (requestUri.equals("/calendars.html")) {
+        if (requestUri.equals("/calendars")) {
             try {
                 config->clear_calendars();
 
