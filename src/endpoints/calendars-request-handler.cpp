@@ -1,5 +1,7 @@
 #include "endpoints/calendars-request-handler.h"
 
+#include <ArduinoJson.h>
+
 using namespace dbuddy;
 
 bool CalendarsRequestHandler::canHandle(HTTPMethod method, String uri) {
