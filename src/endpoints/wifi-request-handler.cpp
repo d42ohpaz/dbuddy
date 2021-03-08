@@ -3,14 +3,7 @@
 using namespace dbuddy;
 
 bool WifiRequestHandler::canHandle(HTTPMethod method, String uri) {
-    if (method == HTTP_GET
-        && (uri.equals("/wifi.html")
-            || uri.equals("/css/wifi.css")
-            || uri.equals("/scripts/wifi.js"))) {
-        return true;
-    }
-
-    return false;
+    return method == HTTP_GET && AbstractRequestHandler::canHandle(method, uri);
 }
 
 bool WifiRequestHandler::setup(WebServer &server, HTTPMethod requestMethod, String requestUri) {

@@ -3,14 +3,7 @@
 using namespace dbuddy;
 
 bool TimeSyncRequestHandler::canHandle(HTTPMethod method, String uri) {
-    if (method == HTTP_GET
-        && (uri.equals("/timesync.html")
-            || uri.equals("/css/timesync.css")
-            || uri.equals("/scripts/timesync.js"))) {
-        return true;
-    }
-
-    return false;
+    return method == HTTP_GET && AbstractRequestHandler::canHandle(method, uri);
 }
 
 bool TimeSyncRequestHandler::setup(WebServer &server, HTTPMethod requestMethod, String requestUri) {

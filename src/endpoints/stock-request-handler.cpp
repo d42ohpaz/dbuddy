@@ -3,14 +3,7 @@
 using namespace dbuddy;
 
 bool StockRequestHandler::canHandle(HTTPMethod method, String uri) {
-    if (method == HTTP_GET
-        && (uri.equals("/stock.html")
-            || uri.equals("/css/stock.css")
-            || uri.equals("/scripts/stock.js"))) {
-        return true;
-    }
-
-    return false;
+    return method == HTTP_GET && AbstractRequestHandler::canHandle(method, uri);
 }
 
 bool StockRequestHandler::setup(WebServer &server, HTTPMethod requestMethod, String requestUri) {

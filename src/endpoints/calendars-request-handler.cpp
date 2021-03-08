@@ -3,10 +3,7 @@
 using namespace dbuddy;
 
 bool CalendarsRequestHandler::canHandle(HTTPMethod method, String uri) {
-    if (method == HTTP_GET
-        && (uri.equals("/calendars.html")
-            || uri.equals("/css/calendars.css")
-            || uri.equals("/scripts/calendars.js"))) {
+    if (method == HTTP_GET && (uri.equals("/calendars") || AbstractRequestHandler::canHandle(method, uri))) {
         return true;
     }
 

@@ -3,14 +3,7 @@
 using namespace dbuddy;
 
 bool AssetsRequestHandler::canHandle(HTTPMethod method, String uri) {
-    if (method == HTTP_GET
-        && (uri.equals("/scripts/global.js")
-            || uri.equals("/scripts/vendor.js")
-            || uri.equals("/fonts/icons.woff"))) {
-        return true;
-    }
-
-    return false;
+    return method == HTTP_GET && AbstractRequestHandler::canHandle(method, uri);
 }
 
 bool AssetsRequestHandler::setup(WebServer &server, HTTPMethod requestMethod, String requestUri) {

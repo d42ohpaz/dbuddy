@@ -3,15 +3,7 @@
 using namespace dbuddy;
 
 bool IndexRequestHandler::canHandle(HTTPMethod method, String uri) {
-    if (method == HTTP_GET
-        && (uri.equals("/")
-            || uri.equals("/index.html")
-            || uri.equals("/css/index.css")
-            || uri.equals("/scripts/index.js"))) {
-        return true;
-    }
-
-    return false;
+    return method == HTTP_GET && AbstractRequestHandler::canHandle(method, uri);
 }
 
 bool IndexRequestHandler::setup(WebServer &server, HTTPMethod requestMethod, String requestUri) {

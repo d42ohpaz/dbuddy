@@ -8,6 +8,7 @@ namespace dbuddy {
     public:
         explicit AbstractRequestHandler(Config * config) : config(config) {};
 
+        bool canHandle(HTTPMethod method, String uri) override;
         bool handle(WebServer &server, HTTPMethod requestMethod, String requestUri) final;
     protected:
         Config * config;

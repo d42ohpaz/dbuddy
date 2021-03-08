@@ -2,6 +2,11 @@
 
 using namespace dbuddy;
 
+bool AbstractRequestHandler::canHandle(HTTPMethod method, String uri) {
+    SPIFFS.begin();
+    return SPIFFS.exists(uri);
+}
+
 bool AbstractRequestHandler::handle(WebServer &server, HTTPMethod requestMethod, String requestUri) {
     if (!canHandle(requestMethod, requestUri)) {
         return false;
