@@ -17,13 +17,7 @@ bool CalendarsRequestHandler::canHandle(HTTPMethod method, String uri) {
 
 bool CalendarsRequestHandler::setup(WebServer &server, HTTPMethod requestMethod, String requestUri) {
     if (requestMethod == HTTP_GET) {
-        if (requestUri.equals("/calendars.html")) {
-            config->streamFile("/calendars.html", mimeHTML);
-        } else if (requestUri.equals("/css/calendars.css")) {
-            config->streamFile("/css/calendars.css", mimeCSS);
-        } else if (requestUri.equals("/scripts/calendars.js")) {
-            config->streamFile("/scripts/calendars.js", mimeCSS);
-        }
+
     }
 
     if (requestMethod == HTTP_POST) {
