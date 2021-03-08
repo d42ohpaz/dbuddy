@@ -106,11 +106,11 @@ int Config::length_calendars() const {
     return config.calendars;
 }
 
-bool Config::isAPIMode() {
-    return manager->getMode() == api;
+bool Config::isStation() {
+    return manager->getMode() == station;
 }
 
-bool Config::isAPMode() {
+bool Config::isAccessPoint() {
     return manager->getMode() == ap;
 }
 

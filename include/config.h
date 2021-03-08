@@ -50,8 +50,8 @@ namespace dbuddy {
         int length_calendars() const;
 
         void begin();
-        bool isAPIMode();
-        bool isAPMode();
+        bool isStation();
+        bool isAccessPoint();
         void loop();
         void save();
 
