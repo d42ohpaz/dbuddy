@@ -15,11 +15,11 @@ namespace dbuddy {
     } config_cal_t;
 
     typedef struct configuration_t {
-        char timeserver[200] = "time.nist.gov";
-        uint32_t timeinterval = 3600;
-        char timezone[32] = "America/New_York";
+        char timeserver[200];
+        char timezone[32];
+        unsigned int timeinterval;
 
-        uint8_t calendars = 0;
+        uint8_t calendars;
         config_cal_t calendar[CALENDARS];
     } config_t;
 
