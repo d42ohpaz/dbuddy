@@ -66,7 +66,7 @@ void Config::begin() {
 }
 
 uint8_t Config::add_calendar(config_cal_t &calendar) {
-    if (config.calendars >= CALENDARS) {
+    if (config.calendars > CALENDARS) {
         throw std::out_of_range("Exceeded maximum number of calendars");
     }
 
@@ -82,7 +82,7 @@ void Config::clear_calendars() {
 }
 
 config_cal_t Config::get_calendar(uint8_t idx) const {
-    if (idx >= CALENDARS) {
+    if (idx > CALENDARS) {
         char * message = new char();
         sprintf(message, "Only %d calendars are allowed", CALENDARS);
         throw std::out_of_range(message);
