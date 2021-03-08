@@ -19,8 +19,8 @@ namespace dbuddy {
         uint32_t timeinterval = 3600;
         char timezone[32] = "America/New_York";
 
-        config_cal_t * calendar = new config_cal_t[CALENDARS];
         uint8_t calendars = 0;
+        config_cal_t calendar[CALENDARS];
     } config_t;
 
     typedef struct metadata_t {
