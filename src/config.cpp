@@ -60,19 +60,7 @@ Config::Config(const char * ap_name, uint16_t port) {
 }
 
 void Config::begin() {
-    bool needs_save = false;
-
     manager.begin(config);
-
-    // Unwritten data comes back as either -1 or 255; if we have that value,
-    // then assume we need to write the default.
-    if (config.calendars < 0) {
-        config.calendars = 0;
-        needs_save = true;
-    }
-
-    if (needs_save)
-        manager.save();
 }
 
 uint8_t Config::add_calendar(config_cal_t &calendar) {
