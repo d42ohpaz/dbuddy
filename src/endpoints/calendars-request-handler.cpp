@@ -28,60 +28,20 @@ bool CalendarsRequestHandler::setup(WebServer &server, HTTPMethod requestMethod,
     if (requestMethod == HTTP_POST) {
         if (requestUri.equals("/calendars")) {
             try {
-                config->clear_calendars();
-
-                for (int i = 0; i < server.args(); i += 3) {
-                    config_cal_t calendar{};
-
-                    for (int j = 0; j < 3; j++) {
-                        String arg = server.argName(j);
-                        const char * val = server.arg(j).c_str();
-
-                        if (arg.startsWith("color")) {
-                            strncpy(calendar.color, val, sizeof(calendar.color));
-                        } else if (arg.startsWith("name")) {
-                            strncpy(calendar.name, val, sizeof(calendar.name));
-                        } else if (arg.startsWith("url")) {
-                            strncpy(calendar.url, val, sizeof(calendar.url));
-                        } else {
-                            char * error_message = new char();
-                            sprintf(error_message, R"(["error": "Bad parameter \"%s\" given."])", arg.c_str());
-
-                            server.send(400, "application/json", error_message);
-                            goto return_end;
-                        }
-                    }
-
-                    config->add_calendar(calendar);
-                }
-
-                config->save();
+                processCalendarPost(server);
 
                 // Give back the configuration values to prove success.
-                String response = "[";
-                for (int i = 0; i < CALENDARS; i++) {
-                    config_cal_t calendar = config->get_calendar(i);
-                    char * r = new char();
-                    sprintf(r, R"({"color": "%s", "name": "%s", "url": "%s"},)",
-                            calendar.color,
-                            calendar.name,
-                            calendar.url
-                    );
-                    response += r;
-                }
-
-                response = response.substring(0, response.length() - 1);
-                response += "]";
-                server.send(200, "application/json", response);
-            } catch (std::out_of_range &e) {
-                char response[14 + strlen(e.what())];
-                sprintf(response, R"(["error": "%s"])", e.what());
-                server.send(500, "application/json", response);
+                char * output = getCalendarsJson();
+                server.send(200, mimeJSON, output);
+                free(output);
+            } catch (const std::exception &e) {
+                Serial.println(e.what());
+                char * error = getResponseJson(e.what(), 500);
+                server.send(500, mimeJSON, error);
             }
         }
     }
 
-    return_end:
     return true;
 }
 
@@ -92,6 +52,15 @@ char * CalendarsRequestHandler::getCalendarsJson() const {
     DynamicJsonDocument doc(capacity);
     JsonArray array;
 
+    for (uint8_t i = 0; i < config->length_calendars(); i++) {
+        const config_cal_t calendar = config->get_calendar(i);
+        JsonObject row = doc.createNestedObject();
+
+        row["color"] = calendar.color;
+        row["name"] = calendar.name;
+        row["url"] = calendar.url;
+    }
+
     array = (doc.size() <= 0) ? doc.to<JsonArray>() : doc.as<JsonArray>();
 
     const size_t size = measureJson(array) + 1;
@@ -99,4 +68,58 @@ char * CalendarsRequestHandler::getCalendarsJson() const {
 
     serializeJson(array, output, size);
     return output;
+}
+
+char * CalendarsRequestHandler::getResponseJson(const char * message, const int code) {
+    const size_t capacity = JSON_OBJECT_SIZE(2) + 2;
+
+    StaticJsonDocument<capacity> doc;
+
+    doc["message"] = message;
+    doc["code"] = code;
+
+    const size_t size = measureJson(doc) + 1;
+    char * output = (char *)malloc(sizeof(char) * size);
+
+    serializeJson(doc, output, size);
+    return output;
+}
+
+void CalendarsRequestHandler::processCalendarPost(WebServer &server) {
+    config->clear_calendars();
+
+    JsonObject json = toJson(server);
+
+    for (int i = 0; i < json["color"].size(); i++) {
+        config_cal_t calendar = {};
+
+        strncpy(calendar.color, json["color"][i], sizeof(calendar.color));
+        strncpy(calendar.name, json["name"][i], sizeof(calendar.name));
+        strncpy(calendar.url, json["url"][i], sizeof(calendar.url));
+
+        config->add_calendar(calendar);
+    }
+
+    config->save();
+}
+
+JsonObject CalendarsRequestHandler::toJson(WebServer &server) {
+    const unsigned int capacity = JSON_ARRAY_SIZE(CONFIG_CALENDARS_PROPERTY_LENGTH * CALENDARS) + JSON_OBJECT_SIZE(CONFIG_CALENDARS_PROPERTY_LENGTH) + 2;
+    DynamicJsonDocument doc(capacity);
+    auto obj = doc.to<JsonObject>();
+
+    for (size_t i = 0; i < server.args(); i++) {
+        const String name = server.argName(i);
+        const String argn = server.argName(i).substring(0, name.indexOf("["));
+        const size_t argc = name.substring(name.indexOf("[") + 1, name.indexOf("]")).toInt();
+        const String argv = server.arg(i);
+
+        if (name.indexOf("[") == -1) {
+            obj[argn] = argv;
+        } else {
+            obj[argn][argc] = argv;
+        }
+    }
+
+    return obj;
 }

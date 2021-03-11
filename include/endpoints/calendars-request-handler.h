@@ -12,5 +12,9 @@ namespace dbuddy {
         bool setup(WebServer &, HTTPMethod, String) final;
     private:
         char * getCalendarsJson() const;
+        void processCalendarPost(WebServer &);
+
+        static char * getResponseJson(const char *, int);
+        static JsonObject toJson(WebServer &);
     };
 }
