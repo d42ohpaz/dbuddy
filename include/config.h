@@ -5,6 +5,10 @@
 #define CONFIG_DEFAULT_TIMESERVER ("time.nist.gov")
 #define CONFIG_DEFAULT_TIMEZONE ("America/New_York")
 
+// The property length is used by ArduinoJson when calculating the capacity.
+#define CONFIG_PROPERTY_LENGTH (5)
+#define CONFIG_CALENDARS_PROPERTY_LENGTH (3)
+
 namespace dbuddy {
     const uint8_t CALENDARS = 8;
 

@@ -87,7 +87,7 @@ bool CalendarsRequestHandler::setup(WebServer &server, HTTPMethod requestMethod,
 
 char * CalendarsRequestHandler::handleGetCalendarsApi() const {
     const uint8_t eln = config->length_calendars() + 1;
-    const size_t capacity = JSON_ARRAY_SIZE(eln) + (eln * JSON_OBJECT_SIZE(3)) + 2;
+    const size_t capacity = JSON_ARRAY_SIZE(eln) + (eln * JSON_OBJECT_SIZE(CONFIG_CALENDARS_PROPERTY_LENGTH)) + 2;
 
     DynamicJsonDocument doc(capacity);
     JsonArray array;
