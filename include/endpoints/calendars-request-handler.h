@@ -8,8 +8,8 @@ namespace dbuddy {
     public:
         explicit CalendarsRequestHandler(Config * config) : AbstractRequestHandler(config) {};
 
-        bool canHandle(HTTPMethod method, String uri) final;
-        bool setup(WebServer &server, HTTPMethod requestMethod, String requestUri) final;
+        bool canHandle(HTTPMethod, String) final;
+        bool setup(WebServer &, HTTPMethod, String) final;
     private:
         char * handleGetCalendarsApi() const;
     };
