@@ -73,10 +73,7 @@ uint8_t Config::add_calendar(config_cal_t &calendar) {
 }
 
 void Config::clear_calendars() {
-    for (uint8_t i = 0; i < config.calendars; i++) {
-        memcpy(&config.calendar[i], new config_cal_t(), sizeof(config_cal_t));
-        config.calendars--;
-    }
+    config.calendars = 0;
 }
 
 config_cal_t Config::get_calendar(uint8_t idx) const {
