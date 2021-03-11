@@ -10,7 +10,7 @@ namespace dbuddy {
 
     typedef struct configuration_calendar_t {
         char name[100];
-        char color[8];
+        char color[10];
         char url[200];
     } config_cal_t;
 
