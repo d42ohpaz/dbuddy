@@ -11,6 +11,6 @@ namespace dbuddy {
         bool canHandle(HTTPMethod, String) final;
         bool setup(WebServer &, HTTPMethod, String) final;
     private:
-        char * handleGetCalendarsApi() const;
+        char * getCalendarsJson() const;
     };
 }

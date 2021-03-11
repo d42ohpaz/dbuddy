@@ -20,7 +20,7 @@ bool CalendarsRequestHandler::setup(WebServer &server, HTTPMethod requestMethod,
     if (requestMethod == HTTP_GET) {
         if (requestUri.equals("/calendars")) {
             char * output = handleGetCalendarsApi();
-            server.send(200, "application/json", output);
+            server.send(200, mimeJSON, output);
             free(output);
         }
     }
