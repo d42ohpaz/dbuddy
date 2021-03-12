@@ -25,8 +25,8 @@ bool AbstractRequestHandler::handle(WebServer &server, HTTPMethod requestMethod,
             strncpy(mimeTYPE, mimeCSS, strlen(mimeCSS) + 1);
         } else if (requestUri.endsWith(".js")) {
             strncpy(mimeTYPE, mimeJS, strlen(mimeJS) + 1);
-        } else if (requestUri.endsWith(".json") + 1) {
-            strncpy(mimeTYPE, mimeJSON, strlen(mimeJSON));
+        } else if (requestUri.endsWith(".json")) {
+            strncpy(mimeTYPE, mimeJSON, strlen(mimeJSON) + 1);
         } else if (requestUri.endsWith(".woff")) {
             strncpy(mimeTYPE, mimeWOFF, strlen(mimeWOFF) + 1);
         } else {
