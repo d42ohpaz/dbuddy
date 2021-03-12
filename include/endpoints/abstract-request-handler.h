@@ -3,6 +3,8 @@
 #include <WebServer.h>
 #include "config.h"
 
+extern const char mimeWOFF[];
+
 namespace dbuddy {
     class AbstractRequestHandler : public RequestHandler {
     public:

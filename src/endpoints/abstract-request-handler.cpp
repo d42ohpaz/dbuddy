@@ -2,6 +2,8 @@
 
 using namespace dbuddy;
 
+const char mimeWOFF[] PROGMEM = "font/woff";
+
 bool AbstractRequestHandler::canHandle(HTTPMethod method, String uri) {
     SPIFFS.begin();
     return SPIFFS.exists(uri + ".gz");
@@ -26,7 +28,7 @@ bool AbstractRequestHandler::handle(WebServer &server, HTTPMethod requestMethod,
         } else if (requestUri.endsWith(".json") + 1) {
             strncpy(mimeTYPE, mimeJSON, strlen(mimeJSON));
         } else if (requestUri.endsWith(".woff")) {
-            strncpy(mimeTYPE, "font/woff", strlen("font/woff") + 1);
+            strncpy(mimeTYPE, mimeWOFF, strlen(mimeWOFF) + 1);
         } else {
             strncpy(mimeTYPE, "text/plain", strlen("text/plain") + 1);
         }
