@@ -30,7 +30,7 @@ bool AbstractRequestHandler::handle(WebServer &server, HTTPMethod requestMethod,
         } else if (requestUri.endsWith(".woff")) {
             strncpy(mimeTYPE, mimeWOFF, strlen(mimeWOFF) + 1);
         } else {
-            strncpy(mimeTYPE, "text/plain", strlen("text/plain") + 1);
+            strncpy(mimeTYPE, mimePlain, strlen(mimePlain) + 1);
         }
 
         config->streamFile((requestUri + ".gz").c_str(), mimeTYPE);
